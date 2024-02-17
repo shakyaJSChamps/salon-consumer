@@ -1,0 +1,18 @@
+.dropdownbtn{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+.arrowbtn{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-left: 15px;
+}
+.dropdownContent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    top: 20px;
+}

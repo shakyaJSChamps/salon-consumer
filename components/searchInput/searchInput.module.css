@@ -1,0 +1,12 @@
+.input{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 150px;
+    border: none;
+}
+.input::placeholder{
+    display: flex;
+    align-items:flex-start;
+    font-size: 20px;
+    width:max-content;
+}

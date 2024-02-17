@@ -1,0 +1,180 @@
+.container {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    /* background-image: url('../../assets/images/banner-img.jpg'); */
+    background-color: black;
+    
+    flex-direction: row-reverse;
+    position: relative;
+    padding: 50px 0px;
+}
+.img{
+    background-image: url('../../assets/images/banner-img.jpg');
+    position: absolute;
+    width: 50%;
+    height: fit-content;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container .content {
+    width: 45%;
+    /* background-color: black; */
+    padding: 80px 88px;
+    position: relative
+}
+
+.content .right {
+    position: absolute;
+    right: 42%;
+    bottom: 150px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.content h2 {
+    font-weight: 700;
+    line-height: 43px;
+}
+
+.content p {
+    font-size: 14px;
+}
+
+.content button {
+    padding: 7px 32px;
+    border-radius: 30px;
+    border: 3px solid white;
+    color: white;
+    background-color: black;
+    position: absolute;
+    top: 239px;
+    right: 30%;
+    font-weight: 600;
+}
+
+.container .line {
+    width: 52%;
+    background: white;
+    padding: 0px 0px;
+    height: 3px;
+    position: absolute;
+    left: -46%;
+    bottom: 40px;
+}
+
+.amet {
+    position: absolute;
+    bottom: 48px;
+    left: -81px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.container .offer {
+    position: absolute;
+    bottom: -14px;
+    left: -81px;
+    font-weight: 800;
+}
+
+.sliders {
+    position: relative;
+
+}
+
+.sliderDots {
+    display: flex;
+    width: 48%;
+    justify-content: flex-end;
+    position: absolute;
+    /* background-color: red !important; */
+    bottom: 0px;
+
+
+}
+
+
+
+.sliderDot {
+    width: 15px;
+    height: 15px;
+    background-color: #333;
+    border-radius: 50%;
+    margin: 0 5px;
+    /* Adjust as needed */
+    cursor: pointer;
+}
+
+.sliderDot.active {
+    background-color: white;
+}
+
+
+@media only screen and (max-width: 427px) {
+
+    .container {
+        background-size: cover;
+        background-image: url('../../assets/images/banner-img.jpg');
+        flex-direction: unset;
+        background-position: center;
+        padding: 65px 4px 75px 4px;
+    }
+
+
+    .container .content {
+        width: 100vw;
+        padding: 0px;
+    }
+
+    .container .line {
+        display: none;
+    }
+
+    .amet,
+    .container .offer {
+        display: none;
+    }
+
+
+    .content h2 {
+        font-weight: 800;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .content p {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .content .right {
+        /* position: absolute;
+        right: 51px;
+        bottom: 63px;
+        font-size: 40px;
+        cursor: pointer; */
+        display: none;
+
+    }
+
+
+    .sliderDots {
+        display: flex;
+        width: 100vw;
+        justify-content: center;
+        position: absolute;
+        /* background-color: red !important; */
+        bottom: -46%;
+        right: 0px;
+    }
+
+    .sliderDot {
+        width: 10px;
+        height: 10px;
+    }
+
+
+}

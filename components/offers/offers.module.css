@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 50px;
+}
+.offer h4{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.offer p{
+    font-size: 10px;
+    padding-right: 5px;
+}
+.offer span{
+    text-decoration-line: underline;
+}
