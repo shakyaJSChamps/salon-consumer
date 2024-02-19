@@ -1,0 +1,92 @@
+.container{
+   padding: 40px 180px;
+}
+.heading{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: black;
+    padding: 15px;
+    border-radius: 15px;
+    width: fit-content;
+    color: white;
+}
+.heading h4{
+    text-align: start;
+font-size: 10px;
+}
+.heading span{
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.headingIcons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.icon{
+    width: 30px;
+    height: 30px;
+}
+.salons{
+    display: flex;
+    gap: 10px;
+    padding: 20px 0px;
+}
+.paper{
+    display: flex;
+    gap: 10px;
+    /* width: 50%; */
+}
+.image{
+flex: 1;
+}
+/* .salonimg{
+    aspect-ratio: auto;
+} */
+.salonDetail{
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    padding:8px 10px;
+}
+.location{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+}
+.locIcon{
+    font-size: 12px;
+    align-items: center;
+}
+.salonRating{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.rating{
+    display: flex;
+    align-items: center;
+    font-size:10px;
+}
+.desc{
+    font-size: 8px;
+}
+.btn{
+    background-color: black;
+    color: white;
+    padding: 5px 8px;
+    /* width: fit-content; */
+}
+@media screen and (max-width:1200px) {
+    .paper{
+        width: 100%;
+    }
+    
+}

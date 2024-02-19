@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image';
 import styles from './navbar.module.css'
 import logo from '@/assets/images/logo.svg'
@@ -10,8 +11,40 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LocationSearch from '../locationSearch/locationSearch';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchInput from '../searchInput/searchInput';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from 'react';
+const navLinks = [
+    {
+        name: "Top salons",
+        url: "/salons",
+        imageUrl: salons
+
+    },
+    {
+        name: "Top services",
+        url: "/services",
+        imageUrl: services
+
+    },
+    {
+        name: "Stylrax for Business",
+        url: "/business",
+        imageUrl: business
+
+    },
+    {
+        name: "Sign in/Sign up",
+        url: "/login",
+        imageUrl: authUser
+
+    },
+]
 
 function Navbar() {
+    const [open, setOpen] = useState(false)
+    function handleClickClose(){
+        setOpen(!open);
+    }
     return (
         <div className={styles.container}>
             <div className={styles.links}>
@@ -19,40 +52,42 @@ function Navbar() {
                     <Image src={logo} alt='stylrax' />
                 </div>
                 <div className={styles.featuredlink}>
-                    <Link href="/#">
-                        <Image src={salons} width={25}
-                            height={25} alt='salons' />
-                        <span>Top salons</span>
-                    </Link>
-                    <Link href="/#">
-                        <Image src={services} width={25}
-                            height={25} alt='sevices' />
-                        <span>Top services</span>
-                    </Link>
-                    <Link href="/#">
-                        <Image src={business} width={25}
-                            height={25} alt='sevices' />
-                        <span>Stylrax for Business</span>
-                    </Link>
-                    <Link href="/#">
-                        <Image src={authUser} width={25}
-                            height={25} alt='authUser' />
-                        <span> Sign in/Sign up</span>
-                    </Link>
-
+                    {navLinks.map((item, index) => (
+                        <Link href={item.url}
+                            key={index}>
+                            <Image src={item.imageUrl} width={25}
+                                height={25} alt='salons' />
+                            <span>{item.name}</span>
+                        </Link>
+                    ))}
+                </div>
+                <div className={styles.hamburger}
+                onClick={()=>{setOpen(!open)}}>
+                    <MenuIcon className={styles.MenuIcon} />
                 </div>
             </div>
             <div className={styles.locSearchDiv}>
                 <div className={styles.location}>
-                    <MyLocationIcon />
+                    <MyLocationIcon className={styles.icon} />
                     <LocationSearch />
                 </div>
                 <div className={styles.searchDiv}>
-                    <SearchIcon />
+                    <SearchIcon className={styles.icon} />
                     <SearchInput />
                 </div>
 
             </div>
+            {open && (<div className={styles.mobileMenu}>
+                {navLinks.map((item, index) => (
+                    <Link href={item.url}
+                        key={index}
+                        onClick={handleClickClose}>
+                        <Image src={item.imageUrl} width={22}
+                            height={22} alt='salons' />
+                        <span>{item.name}</span>
+                    </Link>
+                ))}
+            </div>)}
 
 
         </div>

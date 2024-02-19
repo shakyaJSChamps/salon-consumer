@@ -88,9 +88,14 @@
 }
 
 .massageDiv {
+    
+    background-image: url("../../assets//images//massageMen.svg");
+    
+
+}
+.massageDiv, .facialsDiv{
     width: 280px;
     height: 170px;
-    background-image: url("../../assets//images//massageMen.svg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -100,7 +105,6 @@
     justify-content: end;
     color: white;
     padding-left: 30px;
-
 }
 
 .massageDiv h2 {
@@ -117,19 +121,7 @@
 }
 
 .facialsDiv {
-    width: 280px;
-    height: 170px;
     background-image: url("../../assets/images/facialMen.svg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    color: white;
-    padding-left: 30px;
-
 }
 
 .facialsDiv h2 {
@@ -148,8 +140,27 @@
 @media screen and (max-width:1024px) {}
 
 @media screen and (max-width:991px) {
-    .serviceIcons {
-        /* gap: 45px; */
+    .offers {
+        gap: 40px;
+    }
+
+    .haircutDiv {
+        width: 466px;
+        height: 320px;
+    }
+
+    .haircutDiv h1 {
+        font-size: 50px;
+    }
+
+    .haircutDiv span {
+        font-size: 35px;
+    }
+
+    .massageDiv, .facialsDiv {
+        width: 253px;
+        height: 145px;
+        padding-left: 19px;
     }
 
 }
@@ -164,6 +175,25 @@
         gap: 20px;
     }
 
+    .offers {
+        flex-direction: column;
+    }
+
+    .otherOffers {
+        flex-direction: row;
+    }
+
+    .haircutDiv {
+        width: 563px;
+        height: 315px
+    }
+
+    .massageDiv, .facialsDiv {
+        width: 270px;
+        height: 150px;
+    }
+
+
 }
 
 @media screen and (max-width:600px) {
@@ -175,6 +205,37 @@
 
     .description p {
         font-size: 9px;
+    }
+
+    .haircutDiv, .massageDiv, .facialsDiv {
+        width: 476px;
+        height: 293px
+    }
+    .otherOffers{
+        flex-direction: column;
+    }
+    .offers{
+        gap: 24px;
+    }
+    .massageDiv h2 {
+        font-size: 43px;
+    }
+
+    .massageDiv span {
+        font-size: 33px;
+    }
+    .massageDiv p{
+        font-size: 20px;
+    }
+    .facialsDiv h2 {
+        font-size: 43px;
+    }
+
+    .facialsDiv span {
+        font-size: 33px;
+    }
+    .facialsDiv p{
+        font-size: 20px;
     }
 }
 
@@ -195,6 +256,37 @@
     .imgDiv {
         gap: 20px;
     }
+    .haircutDiv,.facialsDiv,.massageDiv{
+        width: 341px;
+        height: 222px;
+    }
+    .haircutDiv h1{
+        font-size: 37px;
+    }
+    .haircutDiv span{
+        font-size: 26px;
+    }
+    .haircutDiv p{
+        font-size: 16px;
+    }
+    .massageDiv h2{
+        font-size: 30px;
+    }
+    .massageDiv span{
+        font-size: 25px;
+    }
+    .massageDiv p{
+        font-size: 16px;
+    }
+    .facialsDiv h2{
+        font-size: 30px;
+    }
+    .facialsDiv span{
+        font-size: 25px;
+    }
+    .facialsDiv p{
+        font-size: 16px;
+    }
 
 }
 
@@ -206,5 +298,37 @@
 
     .imgDiv {
         gap: 16px;
+    }
+    .haircutDiv,.facialsDiv,.massageDiv{
+        width: 250px;
+        height: 161px; 
+        padding-left: 15px;
+    }
+    .haircutDiv h1{
+        font-size: 30px;
+    }
+    .haircutDiv span{
+        font-size: 20px;
+    }
+    .haircutDiv p{
+        font-size: 14px;
+    }
+    .massageDiv h2{
+        font-size: 24px;
+    }
+    .massageDiv span{
+        font-size: 21px;
+    }
+    .massageDiv p{
+        font-size: 14px;
+    }
+    .facialsDiv h2{
+        font-size: 24px;
+    }
+    .facialsDiv span{
+        font-size: 21px;
+    }
+    .facialsDiv p{
+        font-size: 14px;
     }
 }

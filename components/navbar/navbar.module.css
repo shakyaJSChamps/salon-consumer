@@ -11,9 +11,6 @@
     display: flex;
     gap: 20px;
 }
-
-.logo {}
-
 .featuredlink {
     display: flex;
     align-items: center;
@@ -45,4 +42,132 @@
 .searchDiv{
     display: flex;
     gap: 10px;
+}
+.icon{
+    font-size: 28px;
+}
+.hamburger{
+    display: none;
+}
+.MenuIcon{
+     display: flex;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+}
+.mobileMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: absolute;
+    z-index: 1;
+    background-color: black;
+    top: 75px;
+    right: 0;
+    margin-right: 5px;
+    padding: 40px 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.mobileMenu a{
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+.mobileMenu span{
+    padding-left: 7px;
+}
+
+@media screen and (max-width:1280px) {
+    .featuredlink{
+        gap: 50px;
+    }
+    .featuredlink a{
+        font-size: 17px;
+    }
+    
+}
+@media screen and (max-width:1200px) {
+    .featuredlink{
+        gap: 20px;
+        padding-left: 0px;
+    }
+    .featuredlink a{
+        font-size: 14px;
+    }
+    
+}
+@media screen and (max-width:1024px) {
+    .featuredlink{
+        gap: 25px;
+    }
+    
+}
+@media screen and (max-width:991px) {
+    .featuredlink{
+        display: none;
+    }
+    .hamburger{
+        display:flex;
+    }
+    .links{
+        justify-content: space-between;
+        padding: 0px 70px;
+    }
+    .locSearchDiv{
+        gap: 24px;
+    }
+
+    
+}
+@media screen and (max-width:780px) {
+    .links{
+       
+        padding: 0px 60px;
+    }
+    
+}
+@media screen and (max-width:600px) {
+    .links{
+       
+        padding: 0px 20px;
+    }
+    
+}
+@media screen and (max-width:500px) {
+    .logo img{
+        background-color: transparent;
+        width: 230px;
+
+    }
+    .links{   
+        padding: 0px 10px;
+    }
+    .locSearchDiv{
+        gap: 18px;
+    }
+}
+@media screen and (max-width:380px) {
+    .links{   
+        padding: 0px 0px;
+    }
+    .logo img{
+        width: 170px;
+    }
+    .mobileMenu{
+        font-size: 30px;
+    }
+}
+@media screen and (max-width:280px) {
+    .logo img{
+        width: 150px;
+    }
+    .mobileMenu{
+        font-size: 20px;
+    }
+    .hamburger{
+        padding-top: 5px;
+    }
+    
 }

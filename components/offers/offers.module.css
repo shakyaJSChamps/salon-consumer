@@ -16,3 +16,52 @@
 .offer span{
     text-decoration-line: underline;
 }
+@media screen and (max-width:1200px) {
+    
+}
+@media screen and (max-width:1024px) {
+    
+}
+@media screen and (max-width:991px) {
+    .container{
+        flex-direction: column;
+        gap: 23px;
+        padding: 15px 0px;
+    }
+    .offer h4{
+        font-size: 35px;
+    }
+    .offer p{
+        font-size: 20px;
+        text-align: center;
+    }
+    
+}
+@media screen and (max-width:780px) {
+   
+    .offer h4{
+        font-size: 24px;
+    }
+    .offer p{
+        font-size: 16px;
+    }
+}
+@media screen and (max-width:500px) {
+    
+}
+@media screen and (max-width:375px) {
+    .offer h4{
+        font-size: 20px;
+    }
+    .offer p{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:280px) {
+    .offer h4{
+        font-size: 17px;
+    }
+    .offer p{
+        font-size: 10px;
+    }
+}

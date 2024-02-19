@@ -2,7 +2,7 @@
     color: white;
     display: flex;
     justify-content: space-between;
-    /* background-image: url('../../assets/images/banner-img.jpg'); */
+    /* background: linear-gradient(to left url('../../assets/images/banner-img.jpg') 50% black 50%) */
     background-color: black;
     
     flex-direction: row-reverse;

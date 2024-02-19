@@ -23,32 +23,13 @@ function Banner() {
         setSlideIndex(index);
     };
 
-  return (
-    <div className={styles.container}>
-    <div className={styles.content}>
-        <h2 dangerouslySetInnerHTML={{ __html: sliderContent[slideIndex].title }}></h2>
-        {/* <KeyboardArrowRightOutlinedIcon className={styles.right} onClick={handleNextSlide} /> */}
-        <p>{sliderContent[slideIndex].description}</p>
-        <span className={styles.amet}>amet consectetur.</span>
-        <div className={styles.line}></div>
-        <h2 className={styles.offer}>30% off</h2>
-        <button>Discover</button>
-        <div className={styles.sliderDots}>
-            {/* Render slider dots */}
-            {sliderContent.map((_, index) => (
-                <div
-                    key={index}
-                    className={`${styles.sliderDot} ${index === slideIndex ? styles.active : ''}`}
-                    onClick={() => handleDotClick(index)}
-                ></div>
-            ))}
-        </div>
-    </div>
-    <div className={styles.img}>
+    return (
+        <div className={styles.container}>
+            <div className={styles.content}>
 
-    </div>
-</div>
-  )
+            </div>
+        </div>
+    )
 }
 
 export default Banner

@@ -2,11 +2,23 @@
     padding-top: 7px;
     padding-bottom: 7px;
     padding-right: 150px;
+    font-size: 15px;
     border: none;
+    outline: none;
 }
 .input::placeholder{
     display: flex;
     align-items:flex-start;
     font-size: 20px;
     width:max-content;
+}
+@media screen and (max-width:991px){
+    .input{
+        padding-right: 20px;
+    }
+}
+@media screen and (max-width:500px){
+    .input{
+        padding-right: 0px;
+    }
 }
