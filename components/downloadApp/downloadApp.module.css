@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    height: 313px;
+}
+
+.mobileImage img {
+    width: 396px;
+}
+.downloadContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.downloadContainer h3{
+    font-size: 22px;
+    font-weight: bold;
+}
+.downloadContainer p{
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.downloadLink {
+    display: flex;
+    gap: 22px;
+}
+
+.downloadLink img {
+    width: 142px;
+}

@@ -1,7 +1,8 @@
-.container{
-   padding: 40px 180px;
+.container {
+    padding: 35px 200px;
 }
-.heading{
+
+.heading {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -12,81 +13,241 @@
     width: fit-content;
     color: white;
 }
-.heading h4{
+
+.heading h4 {
     text-align: start;
-font-size: 10px;
+    font-size: 10px;
 }
-.heading span{
+
+.heading span {
     font-size: 20px;
     font-weight: bold;
 
 }
-.headingIcons{
+
+.headingIcons {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.icon{
+
+.salons {
+    padding-top: 20px;
+}
+
+.icon {
     width: 30px;
     height: 30px;
 }
-.salons{
+
+.image img {
+    width: 200px;
+    height: 155px
+}
+
+.paper {
     display: flex;
-    gap: 10px;
-    padding: 20px 0px;
+    gap: 20px;
 }
-.paper{
-    display: flex;
-    gap: 10px;
-    /* width: 50%; */
-}
-.image{
-flex: 1;
-}
-/* .salonimg{
-    aspect-ratio: auto;
-} */
-.salonDetail{
+
+.details {
     display: flex;
     justify-content: space-evenly;
-    flex: 1;
+    /* flex: 1; */
     flex-direction: column;
-    gap: 5px;
-    padding:8px 10px;
+    gap: 3px;
+    display: flex;
+    justify-content: space-evenly;
+    /* flex: 1; */
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px 5px 8px 0px;
 }
-.location{
+
+.location {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 11px;
+    font-size: 12px;
 }
-.locIcon{
+
+.locIcon {
     font-size: 12px;
     align-items: center;
 }
-.salonRating{
+
+.salonType {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-right: 10px;
 }
-.rating{
+
+.rating {
     display: flex;
+    gap: 5px;
     align-items: center;
-    font-size:10px;
+    font-size: 12px;
 }
-.desc{
-    font-size: 8px;
+
+.type {
+    font-size: 12px;
 }
-.btn{
+
+.desc p {
+    font-size: 10px;
+}
+
+.btn {
     background-color: black;
     color: white;
     padding: 5px 8px;
     /* width: fit-content; */
 }
+
 @media screen and (max-width:1200px) {
-    .paper{
-        width: 100%;
+    .container {
+        padding: 35px 160px;
     }
-    
+}
+
+@media screen and (max-width:1024px) {
+    .container {
+        padding: 35px 66px;
+    }
+
+    .image img {
+        width: 209px;
+        height: 166px;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .container {
+        padding: 35px 114px;
+    }
+
+    .image img {
+        width: 205px;
+        height: 152px
+    }
+}
+
+@media screen and (max-width:780px) {
+    .container {
+        padding: 35px 64px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .container {
+        padding: 35px 26px;
+    }
+
+    .paper {
+        gap: 6px;
+    }
+
+    .image img {
+        width: 200px;
+        height: 150px;
+    }
+
+    .details {
+        gap: 10px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+    }
+
+    .desc p {
+        font-size: 7px;
+    }
+
+    .location {
+        font-size: 11px;
+    }
+
+    .rating {
+        font-size: 11x;
+    }
+
+    .type {
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 3px 7px;
+        font-size: 8px;
+    }
+
+
+}
+
+@media screen and (max-width:380px) {
+    .paper {
+        gap: 36px;
+    }
+
+    .image img {
+        width: 157px;
+        height: 117px;
+    }
+
+
+    .details h2 {
+        font-size: 25px;
+    }
+
+    .desc {
+        display: none;
+    }
+
+    .salonType {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+@media screen and (max-width:280px) {
+    .paper {
+        gap: 22px;
+    }
+
+    .image img {
+        width: 109px;
+        height: 85px;
+
+    }
+
+    .details {
+        gap: 3px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+
+    }
+
+    .location {
+        font-size: 11px;
+    }
+
+    .type {
+        font-size: 11px;
+
+    }
+
+    .salonType {
+        padding-right: 0px;
+    }
+
+    .rating {
+        gap: 1px;
+        font-size: 11px;
+    }
+
 }

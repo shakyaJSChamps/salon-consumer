@@ -1,32 +1,21 @@
-import styles from './findSalons.module.css'
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
+import styles from './common.module.css'
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/Star';
 import Image from 'next/image';
 import salonImage from '@/assets/images/salonImage.svg';
-import { salonData } from '@/components/data/data'
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-function FindSalons() {
-    return (
-        <div className={styles.container}>
-            <div className={styles.heading}>
-                <div className={styles.headingIcons}>
-                     <LocationOnIcon className={styles.icon}/>
-                    <CalendarViewMonthIcon className={styles.icon}/>
-                </div>
-                <div className={styles.text}>
-                    <h4>Find your </h4>
-                    <span>Salon</span>
-                </div>
-            </div>
+function Common(props) {
+    const {data}=props
 
-            <div className={styles.salons}>
+  return (
+    <div className={styles.container}>
+        <div className={styles.salons}>
                 <Grid container spacing={2}>
-                    {salonData.map((item, index) => (
+                    {data.map((item, index) => (
                         <Grid item xs={12} md={6} key={index}>
-                            <Paper elevation={3} className={styles.paper}>
+                            <Paper className={styles.paper}>
                                 <div className={styles.image}>
                                     <Image src={salonImage} alt='salonImage' />
                                 </div>
@@ -60,10 +49,9 @@ function FindSalons() {
                 </Grid>
             </div>
 
-
-
-        </div>
-    )
+      
+    </div>
+  )
 }
 
-export default FindSalons
+export default Common

@@ -1,0 +1,261 @@
+.container {
+    padding: 35px 200px;
+}
+
+.heading {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: black;
+    padding: 15px;
+    border-radius: 15px;
+    width: fit-content;
+    color: white;
+}
+
+.heading h4 {
+    text-align: start;
+    font-size: 10px;
+}
+
+.heading span {
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.headingIcons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.salons {
+    padding-top: 20px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.image img {
+    width: 200px;
+    height: 155px
+}
+
+.paper {
+    display: flex;
+    gap: 20px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-evenly;
+    /* flex: 1; */
+    flex-direction: column;
+    gap: 3px;
+    display: flex;
+    justify-content: space-evenly;
+    /* flex: 1; */
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px 5px 8px 0px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.locIcon {
+    font-size: 12px;
+    align-items: center;
+}
+
+.salonType {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.type {
+    font-size: 12px;
+}
+
+.desc p {
+    font-size: 10px;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    padding: 5px 8px;
+    /* width: fit-content; */
+}
+
+@media screen and (max-width:1200px) {
+    .container {
+        padding: 35px 160px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .container {
+        padding: 35px 66px;
+    }
+
+    .image img {
+        width: 209px;
+        height: 166px;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .container {
+        padding: 35px 114px;
+    }
+
+    .image img {
+        width: 205px;
+        height: 152px
+    }
+}
+
+@media screen and (max-width:780px) {
+    .container {
+        padding: 35px 64px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .container {
+        padding: 35px 26px;
+    }
+
+    .paper {
+        gap: 6px;
+    }
+
+    .image img {
+        width: 200px;
+        height: 150px;
+    }
+
+    .details {
+        gap: 10px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+    }
+
+    .desc p {
+        font-size: 7px;
+    }
+
+    .location {
+        font-size: 11px;
+    }
+
+    .rating {
+        font-size: 11x;
+    }
+
+    .type {
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 3px 7px;
+        font-size: 8px;
+    }
+
+
+}
+
+@media screen and (max-width:380px) {
+    .paper {
+        gap: 35px;
+    }
+
+    .image img {
+        width: 132px;
+        height: 115px;
+    }
+.details{
+    gap: 3px;
+}
+
+    .details h2 {
+        font-size: 18px;
+    }
+    .details p{
+        font-size: 10px;
+    }
+
+    .desc {
+        display: none;
+    }
+
+    .salonType {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+@media screen and (max-width:280px) {
+    .paper {
+        gap: 22px;
+    }
+
+    .image img {
+        width: 109px;
+        height: 85px;
+
+    }
+
+    .details {
+        gap: 3px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+
+    }
+    .details p{
+        font-size: 8px;
+    }
+
+    .location {
+        font-size: 11px;
+    }
+
+    .type {
+        font-size: 11px;
+
+    }
+
+    .salonType {
+        padding-right: 0px;
+    }
+
+    .rating {
+        gap: 1px;
+        font-size: 11px;
+    }
+
+}

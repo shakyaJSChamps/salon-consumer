@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+
+}
+
+.heading {
+    background-color: black;
+    color: white;
+    padding: 8px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    width: fit-content;
+    border-radius: 10px;
+}
+.content{
+    display: flex;
+    gap: 24px;
+    overflow: scroll;
+    overflow-y: hidden;
+}
+.content::-webkit-scrollbar {
+    display: none;
+  }
+
+.paper {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.type {
+    padding: 23px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.image img{
+    width: 200px;
+    height: auto;
+}
+.scrollbtn{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: fit-content;
+  
+}
+.icon{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white; 
+    padding: 9px 14px;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    border-radius: 11px;
+    cursor: pointer;
+}

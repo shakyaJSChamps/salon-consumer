@@ -1,26 +1,20 @@
 .container {
-    display: flex;
-    gap: 24px;
+    padding: 35px 200px;
+}
+.salons {
     padding-top: 20px;
-    overflow-x: scroll;
+   
 }
-.container::-webkit-scrollbar{
-    display: none;
-}
-.paper{
-    display: flex;
-    flex-direction: column;
-}
-
-.icon {
-    width: 30px;
-    height: 30px;
-}
-
 .image img {
     width: 200px;
     height: 155px
 }
+
+.paper {
+    display: flex;
+    gap: 20px;
+}
+
 .details {
     display: flex;
     justify-content: space-evenly;
@@ -32,7 +26,7 @@
     /* flex: 1; */
     flex-direction: column;
     gap: 3px;
-    padding: 8px 5px 8px 5px;
+    padding: 8px 5px 8px 0px;
 }
 
 .location {
@@ -75,22 +69,26 @@
     padding: 5px 8px;
     /* width: fit-content; */
 }
-
-@media screen and (max-width:1200px) {
-    .container {
-        padding: 35px 0px;
-    }
-}
-
 @media screen and (max-width:1024px) {
+    .container {
+        padding: 35px 66px;
+    }
 
     .image img {
         width: 209px;
         height: 166px;
     }
 }
+@media screen and (max-width:1200px) {
+    .container {
+        padding: 35px 160px;
+    }
+}
 
 @media screen and (max-width:991px) {
+    .container {
+        padding: 35px 114px;
+    }
 
     .image img {
         width: 205px;
@@ -99,12 +97,18 @@
 }
 
 @media screen and (max-width:780px) {
+    .container {
+        padding: 35px 64px;
+    }
 }
 
 @media screen and (max-width:500px) {
+    .container {
+        padding: 35px 26px;
+    }
 
     .paper {
-        gap: 0px;
+        gap: 6px;
     }
 
     .image img {
@@ -113,7 +117,7 @@
     }
 
     .details {
-        gap: 6px;
+        gap: 10px;
     }
 
     .details h2 {
@@ -145,18 +149,13 @@
 }
 
 @media screen and (max-width:380px) {
-    .container{
-        padding: 16px 0px;
+    .paper {
+        gap: 36px;
     }
-    .paper{
-        gap: 0px;
-    }
+
     .image img {
         width: 157px;
         height: 117px;
-    }
-    .details{
-        gap: 6px;
     }
 
 
