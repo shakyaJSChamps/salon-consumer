@@ -78,6 +78,11 @@
 .mobileMenu span{
     padding-left: 7px;
 }
+.mobilesearchDiv,.mobilelocation{
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
 
 @media screen and (max-width:1280px) {
     .featuredlink{
@@ -144,8 +149,17 @@
     .links{   
         padding: 0px 10px;
     }
+    .location{
+        display: none;
+    }
+    .searchDiv{
+        display: none;
+    }
+    .mobilesearchDiv,.mobilelocation{
+        display: flex;
+    }
     .locSearchDiv{
-        gap: 18px;
+        justify-content: space-between;
     }
 }
 @media screen and (max-width:380px) {
@@ -168,6 +182,9 @@
     }
     .hamburger{
         padding-top: 5px;
+    }
+    .locSearchDiv{
+        gap: 12px;
     }
     
 }

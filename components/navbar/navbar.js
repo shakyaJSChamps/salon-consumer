@@ -42,7 +42,8 @@ const navLinks = [
 
 function Navbar() {
     const [open, setOpen] = useState(false)
-    function handleClickClose(){
+    const [active, setActive] = useState(false)
+    function handleClickClose() {
         setOpen(!open);
     }
     return (
@@ -62,20 +63,35 @@ function Navbar() {
                     ))}
                 </div>
                 <div className={styles.hamburger}
-                onClick={()=>{setOpen(!open)}}>
+                    onClick={() => { setOpen(!open) }}>
                     <MenuIcon className={styles.MenuIcon} />
                 </div>
             </div>
             <div className={styles.locSearchDiv}>
                 <div className={styles.location}>
                     <MyLocationIcon className={styles.icon} />
-                    <LocationSearch />
+                    <div className={styles.locationSearch}>
+                        <LocationSearch />
+                    </div>
                 </div>
                 <div className={styles.searchDiv}>
                     <SearchIcon className={styles.icon} />
-                    <SearchInput />
+                    <div className={styles.searchInput}>
+                        <SearchInput />
+                    </div>
                 </div>
-
+                <div className={styles.mobilelocation}>
+                    <MyLocationIcon onClick={() => setActive(!active)} className={styles.icon} />
+                    {active && (<div className={styles.locationSearch}>
+                        <LocationSearch />
+                    </div>)}
+                </div>
+                <div className={styles.mobilesearchDiv}>
+                    {!active && (<div className={styles.searchInput}>
+                        <SearchInput />
+                    </div>)}
+                    <SearchIcon onClick={() => setActive(!active)} className={styles.icon} />
+                </div>
             </div>
             {open && (<div className={styles.mobileMenu}>
                 {navLinks.map((item, index) => (
