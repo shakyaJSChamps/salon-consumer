@@ -12,6 +12,7 @@ import LocationSearch from '../locationSearch/locationSearch';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchInput from '../searchInput/searchInput';
 import MenuIcon from '@mui/icons-material/Menu';
+import { RxCross1 } from "react-icons/rx";
 import { useState } from 'react';
 const navLinks = [
     {
@@ -41,9 +42,11 @@ const navLinks = [
 ]
 
 function Navbar() {
-    const [open, setOpen] = useState(false)
-    function handleClickClose(){
-        setOpen(!open);
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    function handleClickClose() {
+        setIsOpen(!isOpen);
     }
     return (
         <div className={styles.container}>
@@ -61,10 +64,10 @@ function Navbar() {
                         </Link>
                     ))}
                 </div>
-                <div className={styles.hamburger}
-                onClick={()=>{setOpen(!open)}}>
-                    <MenuIcon className={styles.MenuIcon} />
+                <div className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+                    {isOpen ? <RxCross1 className={styles.MenuIcon} /> : <MenuIcon className={styles.MenuIcon} />}
                 </div>
+
             </div>
             <div className={styles.locSearchDiv}>
                 <div className={styles.location}>
@@ -77,17 +80,17 @@ function Navbar() {
                 </div>
 
             </div>
-            {open && (<div className={styles.mobileMenu}>
-                {navLinks.map((item, index) => (
-                    <Link href={item.url}
-                        key={index}
-                        onClick={handleClickClose}>
-                        <Image src={item.imageUrl} width={22}
-                            height={22} alt='salons' />
-                        <span>{item.name}</span>
-                    </Link>
-                ))}
-            </div>)}
+            {isOpen && (
+                <div className={styles.mobileMenu}>
+                    {navLinks.map((item, index) => (
+                        <Link href={item.url} key={index} onClick={handleClickClose}>
+                            <Image src={item.imageUrl} width={22} height={22} alt='salons' />
+                            <span>{item.name}</span>
+                        </Link>
+                    ))}
+                </div>
+            )}
+
 
 
         </div>
