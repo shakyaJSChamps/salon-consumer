@@ -3,6 +3,7 @@
     gap: 24px;
     padding-top: 20px;
     overflow-x: scroll;
+    scroll-snap-type: x mandatory;
 }
 .container::-webkit-scrollbar{
     display: none;
@@ -10,6 +11,7 @@
 .paper{
     display: flex;
     flex-direction: column;
+    scroll-snap-align: center;
 }
 
 .icon {

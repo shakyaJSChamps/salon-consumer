@@ -159,7 +159,7 @@
         display: flex;
     }
     .locSearchDiv{
-        justify-content: space-between;
+       gap: 60px;
     }
 }
 @media screen and (max-width:380px) {
@@ -171,6 +171,9 @@
     }
     .mobileMenu{
         font-size: 30px;
+    }
+    .locSearchDiv{
+        gap: 39px;
     }
 }
 @media screen and (max-width:280px) {
@@ -185,6 +188,7 @@
     }
     .locSearchDiv{
         gap: 12px;
+        padding: 10px;
     }
     
 }

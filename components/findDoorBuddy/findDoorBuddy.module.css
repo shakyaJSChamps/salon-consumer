@@ -33,7 +33,13 @@
 }
 
 .salons {
+    height: 400px;
+    overflow-y: scroll;
     padding-top: 20px;
+}
+
+.salons::-webkit-scrollbar {
+    display: none;
 }
 
 .icon {
@@ -106,15 +112,71 @@
     /* width: fit-content; */
 }
 
+.linkdiv{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-top: 15px;
+}
+.linkdiv a{
+    display: flex;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+}
+.arrow{
+    font-size: 22px;
+}
+/* .link:visited{
+    color: rgba(191, 112, 255, 0.824);
+} */
+.link:hover{
+    text-decoration-line: underline;
+}
+
 @media screen and (max-width:1200px) {
     .container {
         padding: 35px 160px;
+    }
+
+    .salons {
+        margin-top: 20px;
+        height: 365px;
+    }
+
+    .paper {
+        gap: 6px;
+    }
+
+    .image img {
+        width: 178px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+    }
+
+    .specialist {
+        font-size: 13px;
+    }
+
+    .desc p {
+        font-size: 8px;
+    }
+
+    .btn {
+        padding: 3px 8px;
+        font-size: 10px;
     }
 }
 
 @media screen and (max-width:1024px) {
     .container {
         padding: 35px 66px;
+    }
+
+    .salons {
+        height: 388px;
     }
 
     .image img {
@@ -125,19 +187,56 @@
 
 @media screen and (max-width:991px) {
     .container {
-        padding: 35px 114px;
+        padding: 35px 64px;
+    }
+
+    .salons {
+        height: 412px;
+    }
+
+    .paper {
+        gap: 18px;
     }
 
     .image img {
-        width: 205px;
-        height: 152px
+        width: 203px;
+        height: 178px;
     }
 }
+
+/* .desc{
+        display: none;
+    } */
+
 
 @media screen and (max-width:780px) {
     .container {
         padding: 35px 64px;
     }
+
+    .salons {
+        height: 370px;
+    }
+
+    .image img {
+        width: 187px;
+        height: 159px
+    }
+
+    .details {
+        padding: 8px 26px 8px 0px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .desc p {
+        font-size: 9px;
+    }
+
+    .specialist {
+        font-size: 12px;
+    }
+
 }
 
 @media screen and (max-width:500px) {
@@ -145,17 +244,21 @@
         padding: 35px 26px;
     }
 
+    .salons {
+        height: 338px;
+    }
+
     .paper {
-        gap: 6px;
+        gap: 13px;
     }
 
     .image img {
-        width: 200px;
-        height: 150px;
+        width: 164px;
+        height: 145px;
     }
 
     .details {
-        gap: 10px;
+        gap: 0px;
     }
 
     .details h2 {
@@ -187,23 +290,41 @@
 }
 
 @media screen and (max-width:380px) {
+    .salons {
+        height: 250px;
+    }
+
     .paper {
-        gap: 35px;
+        gap: 16px;
     }
 
     .image img {
-        width: 132px;
-        height: 115px;
+        width: 110px;
+        height: 99px;
     }
-.details{
-    gap: 3px;
-}
+
+    .details {
+        gap: 3px;
+    }
 
     .details h2 {
-        font-size: 18px;
+        font-size: 12px;
     }
-    .details p{
+
+    .details p {
+        font-size: 9px;
+    }
+
+    .location {
         font-size: 10px;
+    }
+
+    .rating {
+        font-size: 9px;
+    }
+
+    .type {
+        font-size: 8px;
     }
 
     .desc {
@@ -218,14 +339,17 @@
 
 
 @media screen and (max-width:280px) {
+    .salons {
+        height: 235px;
+    }
+
     .paper {
-        gap: 22px;
+        gap: 14px;
     }
 
     .image img {
-        width: 109px;
-        height: 85px;
-
+        width: 102px;
+        height: 92px;
     }
 
     .details {
@@ -233,19 +357,20 @@
     }
 
     .details h2 {
-        font-size: 17px;
+        font-size: 12px;
 
     }
-    .details p{
+
+    .details p {
         font-size: 8px;
     }
 
     .location {
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .type {
-        font-size: 11px;
+        font-size: 9px;
 
     }
 
@@ -255,7 +380,7 @@
 
     .rating {
         gap: 1px;
-        font-size: 11px;
+        font-size: 9px;
     }
 
 }

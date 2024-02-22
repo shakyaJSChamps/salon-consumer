@@ -7,14 +7,16 @@ import StarIcon from '@mui/icons-material/Star';
 import Image from 'next/image';
 import salonImage from '@/assets/images/salonImage.svg';
 import { salonData } from '@/components/data/data'
+import Link from 'next/link';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function FindSalons() {
     return (
         <div className={styles.container}>
             <div className={styles.heading}>
                 <div className={styles.headingIcons}>
-                     <LocationOnIcon className={styles.icon}/>
-                    <CalendarViewMonthIcon className={styles.icon}/>
+                    <LocationOnIcon className={styles.icon} />
+                    <CalendarViewMonthIcon className={styles.icon} />
                 </div>
                 <div className={styles.text}>
                     <h4>Find your </h4>
@@ -58,6 +60,12 @@ function FindSalons() {
                         </Grid>
                     ))}
                 </Grid>
+
+            </div>
+            <div className={styles.linkDiv}>
+                <Link href={'/salonlist'} className={styles.link} >View All Salons
+                    <ArrowForwardIcon className={styles.arrow} />
+                </Link>
             </div>
 
 

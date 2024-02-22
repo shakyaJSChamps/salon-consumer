@@ -2,25 +2,26 @@ import styles from './findDoorBuddy.module.css'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Image from 'next/image';
 import doorbuddy from '@/assets/images/doorbuddy.svg'
-import Common from '../common/common';
-import { doorbuddyData, salonData } from '../data/data';
+import { doorbuddyData } from '../data/data';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/Star';
 import buddyImage from '@/assets/images/buddyImage.svg';
+import Link from 'next/link';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function FindDoorBuddy() {
-  return (
-    <div className={styles.container}>
-       <div className={styles.heading}>
+    return (
+        <div className={styles.container}>
+            <div className={styles.heading}>
                 <div className={styles.headingIcons}>
-                     <Image src={doorbuddy} alt='doorbuddy' className={styles.icon}/>
+                    <Image src={doorbuddy} alt='doorbuddy' className={styles.icon} />
                 </div>
                 <div className={styles.text}>
                     <h4>Find your </h4>
                     <span>Door Buddy</span>
                 </div>
-               
+
             </div>
             <div className={styles.salons}>
                 <Grid container spacing={2}>
@@ -33,7 +34,7 @@ function FindDoorBuddy() {
                                 <div className={styles.details}>
 
                                     <h2>{item.name}</h2>
-                                    <p>{item.specialist}</p>
+                                    <p className={styles.specialist}>{item.specialist}</p>
                                     <div className={styles.location}>
                                         <LocationOnIcon className={styles.locIcon} />
                                         {item.location}
@@ -60,9 +61,14 @@ function FindDoorBuddy() {
                     ))}
                 </Grid>
             </div>
-      
-    </div>
-  )
+            <div className={styles.linkdiv}>
+                <Link href={'/doorbuddylist'} className={styles.link} >View All DoorBuddy
+                    <ArrowForwardIcon className={styles.arrow} />
+                </Link>
+            </div>
+
+        </div>
+    )
 }
 
 export default FindDoorBuddy

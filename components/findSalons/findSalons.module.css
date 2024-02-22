@@ -34,6 +34,12 @@
 
 .salons {
     padding-top: 20px;
+    height: 359px;
+    overflow-y: overlay;
+}
+
+.salons::-webkit-scrollbar {
+    display: none;
 }
 
 .icon {
@@ -105,6 +111,27 @@
     padding: 5px 8px;
     /* width: fit-content; */
 }
+.linkDiv{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-top: 15px;
+}
+.linkDiv a{
+    display: flex;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+}
+.arrow{
+    font-size: 22px;
+}
+/* .link:visited{
+    color: rgba(191, 112, 255, 0.824);
+} */
+.link:hover{
+    text-decoration-line: underline;
+}
 
 @media screen and (max-width:1200px) {
     .container {
@@ -117,6 +144,10 @@
         padding: 35px 66px;
     }
 
+    .salons {
+        height: 382px;
+    }
+
     .image img {
         width: 209px;
         height: 166px;
@@ -125,7 +156,11 @@
 
 @media screen and (max-width:991px) {
     .container {
-        padding: 35px 114px;
+        padding: 35px 67px;
+    }
+
+    .salons {
+        height: 357px;
     }
 
     .image img {
@@ -140,7 +175,40 @@
     }
 }
 
+@media screen and (max-width:600px) {
+    .heading {
+        padding: 10px;
+    }
+
+    .desc p {
+        font-size: 9px;
+    }
+}
+
 @media screen and (max-width:500px) {
+    .heading {
+        gap: 14px;
+    }
+
+    .text h4 {
+        font-size: 8px;
+
+    }
+
+    .text span {
+        font-size: 16px;
+    }
+
+    .salons {
+        margin-top: 15px;
+        height: 290px;
+    }
+
+    .icon {
+        width: 24px;
+        height: auto;
+    }
+
     .container {
         padding: 35px 26px;
     }
@@ -188,17 +256,29 @@
 
 @media screen and (max-width:380px) {
     .paper {
-        gap: 36px;
+        gap: 20px;
+    }
+    .salons{
+        height: 234px;
     }
 
     .image img {
-        width: 157px;
-        height: 117px;
+        width: 122px;
+        height: 90px;
+    }
+    .details{
+        gap: 3px;
+    }
+    .location,.rating{
+        font-size: 9px;
+    }
+    .type{
+        font-size: 8px;
     }
 
 
     .details h2 {
-        font-size: 25px;
+        font-size: 18px;
     }
 
     .desc {
@@ -213,6 +293,15 @@
 
 
 @media screen and (max-width:280px) {
+    .container {
+        padding: 9px 26px;
+    }
+
+    .salons {
+
+        height: 232px;
+    }
+
     .paper {
         gap: 22px;
     }

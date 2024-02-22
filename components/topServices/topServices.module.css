@@ -17,8 +17,10 @@
 .content{
     display: flex;
     gap: 24px;
-    overflow: scroll;
-    overflow-y: hidden;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    
+
 }
 .content::-webkit-scrollbar {
     display: none;
@@ -28,6 +30,7 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
+    scroll-snap-align: center;
 }
 
 .type {
