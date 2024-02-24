@@ -1,5 +1,8 @@
 .container {
     padding: 35px 200px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .heading {
@@ -33,13 +36,22 @@
 }
 
 .salons {
-    height: 400px;
+    height: 375px;
     overflow-y: scroll;
-    padding-top: 20px;
 }
 
 .salons::-webkit-scrollbar {
-    display: none;
+    width: 6px;
+    background-color: rgba(177, 175, 175, 0.938);
+    border-radius: 15px;
+    position: absolute;
+    left: 0;
+}
+
+.salons::-webkit-scrollbar-thumb {
+    background-color: rgb(95, 94, 94);
+    /* border: 5px solid #CCEEF4; */
+    border-radius: 15px;
 }
 
 .icon {
@@ -48,8 +60,8 @@
 }
 
 .image img {
-    width: 200px;
-    height: 155px
+    width: 192px;
+    height: 170px;
 }
 
 .paper {
@@ -69,6 +81,31 @@
     flex-direction: column;
     gap: 3px;
     padding: 8px 5px 8px 0px;
+}
+.nameContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wishlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.wishlist p{
+    font-size: 10px;
+}
+.wishlistIcon{
+    font-size: 16px;
+}
+.details h2{
+    font-size: 20px;
+
+}
+.specialist{
+    font-size: 12px;
 }
 
 .location {
@@ -116,7 +153,6 @@
     display: flex;
     align-items: center;
     justify-content: end;
-    padding-top: 15px;
 }
 .linkdiv a{
     display: flex;
@@ -138,10 +174,22 @@
     .container {
         padding: 35px 160px;
     }
+    .heading{
+        padding: 13px;
+    }
+    .icon{
+        width: 25px;
+        height: 25px;
+    }
+    .text h4{
+        font-size: 8px;
+    }
+    .text span{
+        font-size: 17px;
+    }
 
     .salons {
-        margin-top: 20px;
-        height: 365px;
+        height: 342px;
     }
 
     .paper {
@@ -176,7 +224,7 @@
     }
 
     .salons {
-        height: 388px;
+        height: 365px;
     }
 
     .image img {
@@ -191,7 +239,7 @@
     }
 
     .salons {
-        height: 412px;
+        height: 390px;
     }
 
     .paper {
@@ -215,7 +263,7 @@
     }
 
     .salons {
-        height: 370px;
+        height: 348px;
     }
 
     .image img {
@@ -224,7 +272,7 @@
     }
 
     .details {
-        padding: 8px 26px 8px 0px;
+        padding: 8px 6px 8px 0px;
     }
 }
 
@@ -245,7 +293,7 @@
     }
 
     .salons {
-        height: 338px;
+        height: 321px;
     }
 
     .paper {
@@ -262,12 +310,20 @@
     }
 
     .details h2 {
-        font-size: 17px;
+        font-size: 15px;
+    }
+    .wishlistIcon{
+        font-size: 14px;
+    } 
+    .wishlist p{
+      font-size: 8px;
+
     }
 
     .desc p {
         font-size: 7px;
     }
+    
 
     .location {
         font-size: 11px;
@@ -285,17 +341,23 @@
         padding: 3px 7px;
         font-size: 8px;
     }
+    .linkdiv a{
+        font-size: 12px;
+    }
+    .arrow{
+        font-size: 16px;
+    }
 
 
 }
 
 @media screen and (max-width:380px) {
     .salons {
-        height: 250px;
+        height: 229px;
     }
 
     .paper {
-        gap: 16px;
+        gap: 14px;
     }
 
     .image img {
@@ -308,19 +370,19 @@
     }
 
     .details h2 {
-        font-size: 12px;
-    }
-
-    .details p {
-        font-size: 9px;
-    }
-
-    .location {
         font-size: 10px;
     }
 
+    .details p {
+        font-size: 8px;
+    }
+
+    .location {
+        font-size: 8px;
+    }
+
     .rating {
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .type {
@@ -335,16 +397,19 @@
         display: flex;
         justify-content: space-between;
     }
+    .btn{
+        font-size: 6px;
+    }
 }
 
 
 @media screen and (max-width:280px) {
     .salons {
-        height: 235px;
+        height: 214px;
     }
 
     .paper {
-        gap: 14px;
+        gap: 13px;
     }
 
     .image img {

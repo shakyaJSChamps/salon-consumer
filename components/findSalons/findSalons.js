@@ -9,6 +9,7 @@ import salonImage from '@/assets/images/salonImage.svg';
 import { salonData } from '@/components/data/data'
 import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function FindSalons() {
     return (
@@ -34,7 +35,13 @@ function FindSalons() {
                                 </div>
                                 <div className={styles.details}>
 
-                                    <h2>{item.name}</h2>
+                                    <div className={styles.nameContainer}>
+                                        <h2>{item.name}</h2>
+                                        <div className={styles.wishlist}>
+                                            <FavoriteBorderIcon className={styles.wishlistIcon} />
+                                            <p>wishlist</p>
+                                        </div>
+                                    </div>
                                     <div className={styles.location}>
                                         <LocationOnIcon className={styles.locIcon} />
                                         {item.location}

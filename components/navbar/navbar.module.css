@@ -152,6 +152,9 @@
     .location{
         display: none;
     }
+    .locSearchDiv{
+        padding: 11px;
+    }
     .searchDiv{
         display: none;
     }

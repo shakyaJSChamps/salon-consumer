@@ -1,5 +1,8 @@
 .container {
     padding: 35px 200px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .heading {
@@ -33,13 +36,22 @@
 }
 
 .salons {
-    padding-top: 20px;
-    height: 359px;
-    overflow-y: overlay;
+    height: 343px;
+    overflow-y: scroll;
 }
 
 .salons::-webkit-scrollbar {
-    display: none;
+    width: 6px;
+    background-color: rgba(177, 175, 175, 0.938);
+    border-radius: 15px;
+    position: absolute;
+    left: 0;
+}
+
+.salons::-webkit-scrollbar-thumb {
+    background-color: rgb(95, 94, 94);
+    /* border: 5px solid #CCEEF4; */
+    border-radius: 15px;
 }
 
 .icon {
@@ -69,6 +81,24 @@
     flex-direction: column;
     gap: 3px;
     padding: 8px 5px 8px 0px;
+}
+.nameContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wishlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.wishlist p{
+    font-size: 10px;
+}
+.wishlistIcon{
+    font-size: 16px;
 }
 
 .location {
@@ -111,31 +141,63 @@
     padding: 5px 8px;
     /* width: fit-content; */
 }
-.linkDiv{
+
+.linkDiv {
     display: flex;
     align-items: center;
     justify-content: end;
-    padding-top: 15px;
+   
 }
-.linkDiv a{
+
+.linkDiv a {
     display: flex;
     color: black;
     font-size: 15px;
     font-weight: 500;
 }
-.arrow{
+
+.arrow {
     font-size: 22px;
 }
+
 /* .link:visited{
     color: rgba(191, 112, 255, 0.824);
 } */
-.link:hover{
+.link:hover {
     text-decoration-line: underline;
 }
 
 @media screen and (max-width:1200px) {
     .container {
         padding: 35px 160px;
+    }
+    .heading{
+        padding: 10px;
+    }
+    .icon{
+        width: 24px;
+        height: 24px;
+    }
+    .text h4{
+        font-size: 8px;
+    }
+    .text span{
+        font-size: 17px;
+    }
+    .paper{
+        gap: 13px;
+    }
+    .details h2{
+        font-size: 18px;
+    }
+    .details p{
+        font-size: 7px;
+    }
+    .details{
+        gap: 2px;
+    }
+    .btn{
+        font-size: 10px;
     }
 }
 
@@ -145,7 +207,7 @@
     }
 
     .salons {
-        height: 382px;
+        height: 363px;
     }
 
     .image img {
@@ -160,7 +222,7 @@
     }
 
     .salons {
-        height: 357px;
+        height: 337px;
     }
 
     .image img {
@@ -200,8 +262,7 @@
     }
 
     .salons {
-        margin-top: 15px;
-        height: 290px;
+        height: 339px;
     }
 
     .icon {
@@ -250,29 +311,40 @@
         padding: 3px 7px;
         font-size: 8px;
     }
+    .linkDiv a{
+        font-size: 12px;
+    }
+    .arrow{
+        font-size: 16px;
+    }
 
 
 }
 
 @media screen and (max-width:380px) {
     .paper {
-        gap: 20px;
+        gap: 14px;
     }
-    .salons{
-        height: 234px;
+
+    .salons {
+        height: 212px;
     }
 
     .image img {
         width: 122px;
         height: 90px;
     }
-    .details{
+
+    .details {
         gap: 3px;
     }
-    .location,.rating{
+
+    .location,
+    .rating {
         font-size: 9px;
     }
-    .type{
+
+    .type {
         font-size: 8px;
     }
 
@@ -299,7 +371,7 @@
 
     .salons {
 
-        height: 232px;
+        height: 205px;
     }
 
     .paper {
