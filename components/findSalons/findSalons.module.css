@@ -44,13 +44,10 @@
     width: 6px;
     background-color: rgba(177, 175, 175, 0.938);
     border-radius: 15px;
-    position: absolute;
-    left: 0;
 }
 
 .salons::-webkit-scrollbar-thumb {
     background-color: rgb(95, 94, 94);
-    /* border: 5px solid #CCEEF4; */
     border-radius: 15px;
 }
 
@@ -145,7 +142,7 @@
 .linkDiv {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
    
 }
 

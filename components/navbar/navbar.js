@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchInput from '../searchInput/searchInput';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import Authlink from '../authlink/authlink';
 const navLinks = [
     {
         name: "Top salons",
@@ -32,20 +33,16 @@ const navLinks = [
         imageUrl: business
 
     },
-    {
-        name: "Sign in/Sign up",
-        url: "/login",
-        imageUrl: authUser
-
-    },
 ]
 
 function Navbar() {
     const [open, setOpen] = useState(false)
     const [active, setActive] = useState(false)
+    // const session="unauthenticated";
     function handleClickClose() {
         setOpen(!open);
     }
+   
     return (
         <div className={styles.container}>
             <div className={styles.links}>
@@ -61,6 +58,7 @@ function Navbar() {
                             <span>{item.name}</span>
                         </Link>
                     ))}
+                   <Authlink/>
                 </div>
                 <div className={styles.hamburger}
                     onClick={() => { setOpen(!open) }}>
@@ -103,6 +101,7 @@ function Navbar() {
                         <span>{item.name}</span>
                     </Link>
                 ))}
+                <Authlink/>
             </div>)}
 
 

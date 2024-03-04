@@ -7,12 +7,15 @@
 }
 
 .mobileImage img {
-    width: 396px;
+    width: 339px;
+    height: auto;
+    padding-top: 20px;
 }
 .downloadContainer{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 20px;
 }
 .downloadContainer h3{
     font-size: 22px;
@@ -68,6 +71,7 @@
 @media screen and (max-width:780px) {
     .container{
         gap: 3px;
+        height: 183px;
     }
     .mobileImage img{
         width: 200px;
@@ -76,10 +80,10 @@
         gap: 6px;
     }
     .downloadContainer h3{
-        font-size: 15px;
+        font-size: 13px;
     }
     .downloadContainer p{
-font-size: 9px;
+font-size: 8px;
     }
     .downloadLink{
 
