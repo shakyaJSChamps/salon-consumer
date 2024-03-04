@@ -12,7 +12,6 @@ import LocationSearch from '../locationSearch/locationSearch';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchInput from '../searchInput/searchInput';
 import MenuIcon from '@mui/icons-material/Menu';
-import { RxCross1 } from "react-icons/rx";
 import { useState } from 'react';
 import Authlink from '../authlink/authlink';
 const navLinks = [
@@ -43,8 +42,6 @@ function Navbar() {
     function handleClickClose() {
         setOpen(!open);
     }
-    const [isOpen, setIsOpen] = useState(false);
-
    
     return (
         <div className={styles.container}>
@@ -66,10 +63,7 @@ function Navbar() {
                 <div className={styles.hamburger}
                     onClick={() => { setOpen(!open) }}>
                     <MenuIcon className={styles.MenuIcon} />
-                <div className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <RxCross1 className={styles.MenuIcon} /> : <MenuIcon className={styles.MenuIcon} />}
                 </div>
-
             </div>
             <div className={styles.locSearchDiv}>
                 <div className={styles.location}>
@@ -109,7 +103,7 @@ function Navbar() {
                 ))}
                 <Authlink/>
             </div>)}
-</div>
+
 
         </div>
     )
