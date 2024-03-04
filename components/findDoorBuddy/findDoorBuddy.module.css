@@ -152,7 +152,7 @@
 .linkdiv{
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .linkdiv a{
     display: flex;

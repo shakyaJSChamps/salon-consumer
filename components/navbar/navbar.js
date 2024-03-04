@@ -14,6 +14,7 @@ import SearchInput from '../searchInput/searchInput';
 import MenuIcon from '@mui/icons-material/Menu';
 import { RxCross1 } from "react-icons/rx";
 import { useState } from 'react';
+import Authlink from '../authlink/authlink';
 const navLinks = [
     {
         name: "Top salons",
@@ -33,23 +34,19 @@ const navLinks = [
         imageUrl: business
 
     },
-    {
-        name: "Sign in/Sign up",
-        url: "/login",
-        imageUrl: authUser
-
-    },
 ]
 
 function Navbar() {
     const [open, setOpen] = useState(false)
     const [active, setActive] = useState(false)
+    // const session="unauthenticated";
     function handleClickClose() {
         setOpen(!open);
     }
     const [isOpen, setIsOpen] = useState(false);
 
-      return (
+   
+    return (
         <div className={styles.container}>
             <div className={styles.links}>
                 <div className={styles.logo}>
@@ -64,6 +61,7 @@ function Navbar() {
                             <span>{item.name}</span>
                         </Link>
                     ))}
+                   <Authlink/>
                 </div>
                 <div className={styles.hamburger}
                     onClick={() => { setOpen(!open) }}>
@@ -99,18 +97,19 @@ function Navbar() {
                     <SearchIcon onClick={() => setActive(!active)} className={styles.icon} />
                 </div>
             </div>
-            {isOpen && (
-                <div className={styles.mobileMenu}>
-                    {navLinks.map((item, index) => (
-                        <Link href={item.url} key={index} onClick={handleClickClose}>
-                            <Image src={item.imageUrl} width={22} height={22} alt='salons' />
-                            <span>{item.name}</span>
-                        </Link>
-                    ))}
-                </div>
-            )}
-
-
+            {open && (<div className={styles.mobileMenu}>
+                {navLinks.map((item, index) => (
+                    <Link href={item.url}
+                        key={index}
+                        onClick={handleClickClose}>
+                        <Image src={item.imageUrl} width={22}
+                            height={22} alt='salons' />
+                        <span>{item.name}</span>
+                    </Link>
+                ))}
+                <Authlink/>
+            </div>)}
+</div>
 
         </div>
     )

@@ -38,7 +38,7 @@ function TopSalons() {
             </button>
 
           </div>
-        </Paper>
+        </Paper> 
       ))}
 
     </div>

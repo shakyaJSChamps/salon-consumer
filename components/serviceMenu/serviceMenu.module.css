@@ -64,7 +64,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     color: white;
     padding-left: 30px;
 
@@ -106,7 +106,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     color: white;
     padding-left: 30px;
 }

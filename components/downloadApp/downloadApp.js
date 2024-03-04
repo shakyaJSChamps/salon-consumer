@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './downloadApp.module.css'
-import mobileImg from '@/assets/images/mobile.svg'
+import mobileImg from '@/assets/images/m.png'
 import playstore from '@/assets/images/img-gplay.svg'
 import appstore from '@/assets/images/img-appstore.svg'
 

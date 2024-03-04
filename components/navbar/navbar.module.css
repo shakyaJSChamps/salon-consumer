@@ -6,6 +6,9 @@
     padding: 15px 30px;
     gap: 20px;
 }
+.logo img{
+    mix-blend-mode:hard-light;
+}
 
 .links {
     display: flex;
