@@ -1,63 +1,73 @@
 export const SalonListData = [
     {
-        title: "Big Boss",
+        facility: "Pedicure",
         location: "Karol Bagh",
         rating: "4.0",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Male"
     },
     {
-        title: "Big Boss",
+        facility: "Massage",
         location: "Connaught Place",
         rating: "4.5",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Female"
     },
     {
-        title: "Big Boss",
+        facility: "Hair cut",
         location: "Saket",
         rating: "4.2",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
     },
     {
-        title: "Big Boss",
+        facility: "Make-up",
         location: "Rajouri Garden",
         rating: "4.7",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
     },
     {
-        title: "Big Boss",
+        facility: "Hairstyle",
         location: "Vasant Kunj",
         rating: "4.3",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Male"
     },
     {
-        title: "Big Boss",
+        facility: "Hairstyle",
         location: "Lajpat Nagar",
         rating: "4.6",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Female"
     },
     {
-        title: "Big Boss",
+        facility: "Make-up",
         location: "Dwarka",
         rating: "4.8",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
     },
     {
-        title: "Big Boss",
+        facility: "Massage",
         location: "Punjabi Bagh",
         rating: "4.1",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Male"
     },
     {
-        title: "Big Boss",
+        facility: "Pedicure",
         location: "Greater Kailash",
         rating: "4.4",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
     },
     {
-        title: "Big Boss",
+        facility: "Hair cut",
         location: "Rohini",
         rating: "4.9",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor"
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
     }
 ];
 
