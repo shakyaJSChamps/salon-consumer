@@ -58,9 +58,11 @@ function FindSalons() {
                                     <div className={styles.desc}>
                                         <p>{item.description}</p>
                                     </div>
+                                    <Link href={`/salonlist/${item._id}`}>
                                     <button className={styles.btn}>
                                         View Details
                                     </button>
+                                    </Link>
 
                                 </div>
                             </Paper>

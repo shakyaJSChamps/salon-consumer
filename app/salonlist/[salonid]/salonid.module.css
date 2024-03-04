@@ -1,0 +1,87 @@
+.container{}
+.salonSlider{
+    background-image: url('../../../assets/images/salonBanner.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 140px 79px;
+}
+.sliderTitle{
+    color: white;
+    padding-top: 25px;
+
+}
+.sliderTitle h3{
+    font-size: 38px;
+    font-weight: bold;
+    padding-bottom: 13px;
+}
+.sliderTitle p{
+    font-size: 15px;
+}
+.SalonDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 120px;
+}
+.aboutSalon{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.salonName{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wishlistIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.salonRating,.salonLocation{
+    display: flex;
+    align-items: center;
+    color: #777777;
+    font-size: 13px;
+    /* justify-content: center; */
+}
+.icon{
+    width: 15px;
+    height: auto;
+}
+
+.timing{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
+    color: #777777;
+}
+.timing h3{
+    font-size: 15px;
+}
+.button{
+    padding: 10px 120px;
+    display: flex;
+    gap: 30px;
+}
+.button button{
+    padding: 9px 22px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid grey;
+    background-color: transparent;
+    cursor: pointer;
+}
+.active{
+    background-color: black !important;
+    color: white;
+}
+.aboutContent,.servicesContent,.galleryContent{
+    padding: 10px 120px;
+}

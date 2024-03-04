@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { GoLocation } from "react-icons/go";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import Img from '@/assets/images/salonImage.svg'
+import Link from 'next/link';
 
 const SalonLists = () => {
 
@@ -125,7 +126,10 @@ const SalonLists = () => {
 
                                 </div>
                                 <p className={styles.description}>  {salon.description}</p>
-                                <button>View Details</button>
+                                <Link href={`/salonlist/1`}>
+                                    <button>View Details</button>
+                                </Link>
+
                             </div>
                         </div>
                     ))}</div>
