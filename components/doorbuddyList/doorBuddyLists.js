@@ -19,6 +19,7 @@ const DoorBuddyList = () => {
                 RiScissors2Line={RiScissors2Line}
                 GiComb={GiComb}
                 detailsLinkBase="/doorbuddyList"
+
             />
         </>
     )
