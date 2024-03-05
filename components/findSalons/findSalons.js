@@ -1,10 +1,15 @@
 import styles from './findSalons.module.css'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/Star';
-import { Paper } from '@mui/material';
 import Image from 'next/image';
-import salonImage from '@/assets/images/salonImage.svg'
+import salonImage from '@/assets/images/salonImage.svg';
+import { salonData } from '@/components/data/data'
+import Link from 'next/link';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function FindSalons() {
     return (
@@ -16,67 +21,63 @@ function FindSalons() {
                 </div>
                 <div className={styles.text}>
                     <h4>Find your </h4>
-                    <span>Salons</span>
+                    <span>Salon</span>
                 </div>
             </div>
 
             <div className={styles.salons}>
-                <Paper elevation={2} className={styles.paper}>
-                    <div className={styles.image}>
-                        <Image src={salonImage} alt='saloonImage'
-                            className={styles.salonimg} />
-                    </div>
-                    <div className={styles.salonDetail}>
-                        <h3>Big Boss</h3>
-                        <div className={styles.location}>
-                            <LocationOnIcon className={styles.locIcon} />
-                            <p> Karol Bagh</p>
-                        </div>
-                        <div className={styles.salonRating}>
-                            <div className={styles.rating}>
-                                <StarIcon className={styles.locIcon} />
-                                4.0
+                <Grid container spacing={2}>
+                    {salonData.map((item, index) => (
+                        <Grid item xs={12} md={6} key={index}>
+                            <Paper elevation={3} className={styles.paper}>
+                                <div className={styles.image}>
+                                    <Image src={salonImage} alt='salonImage' />
+                                </div>
+                                <div className={styles.details}>
 
-                            </div>
-                        </div>
-                        <div className={styles.desc}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        </div>
-                        <button className={styles.btn}>
-                            View Details
-                        </button>
-                    </div>
+                                    <div className={styles.nameContainer}>
+                                        <h2>{item.name}</h2>
+                                        <div className={styles.wishlist}>
+                                            <FavoriteBorderIcon className={styles.wishlistIcon} />
+                                            <p>wishlist</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.location}>
+                                        <LocationOnIcon className={styles.locIcon} />
+                                        {item.location}
+                                    </div>
+                                    <div className={styles.salonType}>
+                                        <div className={styles.rating}>
+                                            <StarIcon className={styles.locIcon} />
+                                            {item.rating}
+                                        </div>
+                                        <div className={styles.type}>
+                                            {item.type}
+                                        </div>
+                                    </div>
+                                    <div className={styles.desc}>
+                                        <p>{item.description}</p>
+                                    </div>
+                                    <Link href={`/salonlist/${item._id}`}>
+                                    <button className={styles.btn}>
+                                        View Details
+                                    </button>
+                                    </Link>
 
-                </Paper>
-                <Paper elevation={2} className={styles.paper}>
-                    <div className={styles.image}>
-                        <Image src={salonImage} alt='saloonImage'
-                            className={styles.salonimg} />
-                    </div>
-                    <div className={styles.salonDetail}>
-                        <h3>Big Boss</h3>
-                        <div className={styles.location}>
-                            <LocationOnIcon className={styles.locIcon} />
-                            <p> Karol Bagh</p>
-                        </div>
-                        <div className={styles.salonRating}>
-                            <div className={styles.rating}>
-                                <StarIcon className={styles.locIcon} />
-                                4.0
-
-                            </div>
-                        </div>
-                        <div className={styles.desc}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        </div>
-                        <button className={styles.btn}>
-                            View Details
-                        </button>
-                    </div>
-
-                </Paper>
+                                </div>
+                            </Paper>
+                        </Grid>
+                    ))}
+                </Grid>
 
             </div>
+            <div className={styles.linkDiv}>
+                <Link href={'/salonlist'} className={styles.link} >View All Salons
+                    <ArrowForwardIcon className={styles.arrow} />
+                </Link>
+            </div>
+
+
 
         </div>
     )

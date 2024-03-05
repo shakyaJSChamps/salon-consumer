@@ -6,6 +6,9 @@
     padding: 15px 30px;
     gap: 20px;
 }
+.logo img{
+    mix-blend-mode:hard-light;
+}
 
 .links {
     display: flex;
@@ -78,6 +81,11 @@
 .mobileMenu span{
     padding-left: 7px;
 }
+.mobilesearchDiv,.mobilelocation{
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
 
 @media screen and (max-width:1280px) {
     .featuredlink{
@@ -144,8 +152,20 @@
     .links{   
         padding: 0px 10px;
     }
+    .location{
+        display: none;
+    }
     .locSearchDiv{
-        gap: 18px;
+        padding: 11px;
+    }
+    .searchDiv{
+        display: none;
+    }
+    .mobilesearchDiv,.mobilelocation{
+        display: flex;
+    }
+    .locSearchDiv{
+       gap: 60px;
     }
 }
 @media screen and (max-width:380px) {
@@ -158,6 +178,9 @@
     .mobileMenu{
         font-size: 30px;
     }
+    .locSearchDiv{
+        gap: 39px;
+    }
 }
 @media screen and (max-width:280px) {
     .logo img{
@@ -168,6 +191,10 @@
     }
     .hamburger{
         padding-top: 5px;
+    }
+    .locSearchDiv{
+        gap: 12px;
+        padding: 10px;
     }
     
 }

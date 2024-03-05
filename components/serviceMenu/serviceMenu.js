@@ -21,14 +21,14 @@ function ServiceMenu() {
                 </div>
                 <div className={styles.serviceIcons}>
                     <div className={styles.imgDiv}>
-                        <Image src={facials} alt='facials' width={90} height={90} />
-                        <Image src={eyelashes} alt='facials' width={90} height={90} />
-                        <Image src={eyebrow} alt='facials' width={90} height={90} />
+                        <Image src={facials} alt='facials' />
+                        <Image src={eyelashes} alt='facials' />
+                        <Image src={eyebrow} alt='facials' />
                     </div>
                     <div className={styles.imgDiv}>
-                        <Image src={waxing} alt='facials' width={90} height={90} />
-                        <Image src={nails} alt='facials' width={90} height={90} />
-                        <Image src={makeup} alt='facials' width={90} height={90} />
+                        <Image src={waxing} alt='facials'  />
+                        <Image src={nails} alt='facials' />
+                        <Image src={makeup} alt='facials' />
                     </div>
                 </div>
                 <button className={styles.btn}>VIEW MORE MENU</button>

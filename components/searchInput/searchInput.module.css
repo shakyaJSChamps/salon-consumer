@@ -9,8 +9,8 @@
 .input::placeholder{
     display: flex;
     align-items:flex-start;
-    font-size: 20px;
-    width:max-content;
+    font-size: 18px;
+    width:fit-content;
 }
 @media screen and (max-width:991px){
     .input{
@@ -20,5 +20,15 @@
 @media screen and (max-width:500px){
     .input{
         padding-right: 0px;
+        font-size: 13px;
     }
+}
+@media screen and (max-width:280px) {
+    .input::placeholder{
+        font-size: 12px;
+    }
+    .input{
+        font-size:11px ;
+    }
+    
 }

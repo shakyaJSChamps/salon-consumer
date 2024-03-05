@@ -1,0 +1,91 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+
+
+}
+.loginForm{
+    display: flex;
+    border: 1px solid grey;
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: black;
+    color: white;
+    padding: 35px 18px;
+}
+.title h3{
+    font-size: 25px;
+    font-weight: bold;
+}
+.title p{
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 20px;
+}
+.formDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 130px;
+    padding: 33px 20px 130px 20px;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.form label{
+    font-size: 14px;
+    color: #7A7A7A;
+}
+.input{
+    border: none;
+    border-bottom: 1px solid #2874F0;
+    outline: none;
+    font-size: 18px;
+    padding-left: 4px;
+}
+.error{
+    color: red;
+}
+.form p{
+    padding: 20px 0px 10px 0px;
+    font-size: 8px;
+}
+.form span{
+    color:#2874F0;
+}
+.btn{
+    background-color: black;
+    font-size: 11px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.input-otp{
+    height: 70px;
+    width: 70px !important;
+    border-radius: 4px;
+    text-align: center;
+    margin: 0.5em;
+    font-size: 18px;
+    border: none;
+   }
+.link{
+    text-align: center;
+}
+
+.link a{
+    font-size: 10px;
+    color: #7A7A7A;
+    font-weight: 500;
+}
+.resend{
+    text-align: center;
+    cursor: pointer;
+}

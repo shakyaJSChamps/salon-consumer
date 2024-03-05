@@ -27,6 +27,10 @@
     gap: 41px;
     padding: 16px 0px;
 }
+.imgDiv img{
+    width: 90px;
+    height: auto;
+}
 
 .btn {
     padding: 10px 14px;
@@ -60,7 +64,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     color: white;
     padding-left: 30px;
 
@@ -102,7 +106,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     color: white;
     padding-left: 30px;
 }
@@ -330,5 +334,23 @@
     }
     .facialsDiv p{
         font-size: 14px;
+    }
+}
+@media screen and (max-width:280px){
+    .container{
+        gap: 6px;
+    }
+     .title h2{
+        font-size: 20px;
+
+     }
+     .imgDiv{
+        gap: 14px;
+     }
+     .imgDiv img{
+        width: 74px;
+    }
+    .serviceIcons{
+        gap: 10px;
     }
 }

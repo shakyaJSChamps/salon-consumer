@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.contact {
+    display: flex;
+    gap: 10px;
+}
+
+.dialIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contactNum p {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.contactNum span {
+    font-weight: bold;
+}
+
+.payment,
+.contactNum {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.partners {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.payment p {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.partners p {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.partner {
+    display: flex;
+    gap: 10px;
+}
+
+.partner span {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+@media screen and (max-width:500px) {
+    .container{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .payment p{
+        text-align: center;
+    }
+    .partners p{
+        text-align: center;
+    }
+
+}
+@media screen and (max-width:380px) {
+    .image {
+        width: 226px;
+        height: auto;
+    }
+
+}

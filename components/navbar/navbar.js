@@ -12,8 +12,8 @@ import LocationSearch from '../locationSearch/locationSearch';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchInput from '../searchInput/searchInput';
 import MenuIcon from '@mui/icons-material/Menu';
-import { RxCross1 } from "react-icons/rx";
 import { useState } from 'react';
+import Authlink from '../authlink/authlink';
 const navLinks = [
     {
         name: "Top salons",
@@ -33,21 +33,16 @@ const navLinks = [
         imageUrl: business
 
     },
-    {
-        name: "Sign in/Sign up",
-        url: "/login",
-        imageUrl: authUser
-
-    },
 ]
 
 function Navbar() {
-
-    const [isOpen, setIsOpen] = useState(false);
-
+    const [open, setOpen] = useState(false)
+    const [active, setActive] = useState(false)
+    // const session="unauthenticated";
     function handleClickClose() {
-        setIsOpen(!isOpen);
+        setOpen(!open);
     }
+   
     return (
         <div className={styles.container}>
             <div className={styles.links}>
@@ -63,34 +58,51 @@ function Navbar() {
                             <span>{item.name}</span>
                         </Link>
                     ))}
+                   <Authlink/>
                 </div>
-                <div className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <RxCross1 className={styles.MenuIcon} /> : <MenuIcon className={styles.MenuIcon} />}
+                <div className={styles.hamburger}
+                    onClick={() => { setOpen(!open) }}>
+                    <MenuIcon className={styles.MenuIcon} />
                 </div>
-
             </div>
             <div className={styles.locSearchDiv}>
                 <div className={styles.location}>
                     <MyLocationIcon className={styles.icon} />
-                    <LocationSearch />
+                    <div className={styles.locationSearch}>
+                        <LocationSearch />
+                    </div>
                 </div>
                 <div className={styles.searchDiv}>
                     <SearchIcon className={styles.icon} />
-                    <SearchInput />
+                    <div className={styles.searchInput}>
+                        <SearchInput />
+                    </div>
                 </div>
-
+                <div className={styles.mobilelocation}>
+                    <MyLocationIcon onClick={() => setActive(!active)} className={styles.icon} />
+                    {active && (<div className={styles.locationSearch}>
+                        <LocationSearch />
+                    </div>)}
+                </div>
+                <div className={styles.mobilesearchDiv}>
+                    {!active && (<div className={styles.searchInput}>
+                        <SearchInput />
+                    </div>)}
+                    <SearchIcon onClick={() => setActive(!active)} className={styles.icon} />
+                </div>
             </div>
-            {isOpen && (
-                <div className={styles.mobileMenu}>
-                    {navLinks.map((item, index) => (
-                        <Link href={item.url} key={index} onClick={handleClickClose}>
-                            <Image src={item.imageUrl} width={22} height={22} alt='salons' />
-                            <span>{item.name}</span>
-                        </Link>
-                    ))}
-                </div>
-            )}
-
+            {open && (<div className={styles.mobileMenu}>
+                {navLinks.map((item, index) => (
+                    <Link href={item.url}
+                        key={index}
+                        onClick={handleClickClose}>
+                        <Image src={item.imageUrl} width={22}
+                            height={22} alt='salons' />
+                        <span>{item.name}</span>
+                    </Link>
+                ))}
+                <Authlink/>
+            </div>)}
 
 
         </div>

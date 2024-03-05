@@ -1,7 +1,11 @@
-.container{
-   padding: 40px 180px;
+.container {
+    padding: 35px 200px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
-.heading{
+
+.heading {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -12,81 +16,396 @@
     width: fit-content;
     color: white;
 }
-.heading h4{
+
+.heading h4 {
     text-align: start;
-font-size: 10px;
+    font-size: 10px;
 }
-.heading span{
+
+.heading span {
     font-size: 20px;
     font-weight: bold;
 
 }
-.headingIcons{
+
+.headingIcons {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.icon{
+
+.salons {
+    height: 343px;
+    overflow-y: scroll;
+}
+
+.salons::-webkit-scrollbar {
+    width: 6px;
+    background-color: rgba(177, 175, 175, 0.938);
+    border-radius: 15px;
+}
+
+.salons::-webkit-scrollbar-thumb {
+    background-color: rgb(95, 94, 94);
+    border-radius: 15px;
+}
+
+.icon {
     width: 30px;
     height: 30px;
 }
-.salons{
+
+.image img {
+    width: 200px;
+    height: 155px
+}
+
+.paper {
     display: flex;
-    gap: 10px;
-    padding: 20px 0px;
+    gap: 20px;
 }
-.paper{
-    display: flex;
-    gap: 10px;
-    /* width: 50%; */
-}
-.image{
-flex: 1;
-}
-/* .salonimg{
-    aspect-ratio: auto;
-} */
-.salonDetail{
+
+.details {
     display: flex;
     justify-content: space-evenly;
-    flex: 1;
+    /* flex: 1; */
     flex-direction: column;
-    gap: 5px;
-    padding:8px 10px;
-}
-.location{
+    gap: 3px;
     display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
+    justify-content: space-evenly;
+    /* flex: 1; */
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px 5px 8px 0px;
 }
-.locIcon{
-    font-size: 12px;
-    align-items: center;
-}
-.salonRating{
+.nameContainer{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.rating{
+.wishlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.wishlist p{
+    font-size: 10px;
+}
+.wishlistIcon{
+    font-size: 16px;
+}
+
+.location {
     display: flex;
     align-items: center;
-    font-size:10px;
+    gap: 5px;
+    font-size: 12px;
 }
-.desc{
-    font-size: 8px;
+
+.locIcon {
+    font-size: 12px;
+    align-items: center;
 }
-.btn{
+
+.salonType {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.type {
+    font-size: 12px;
+}
+
+.desc p {
+    font-size: 10px;
+}
+
+.btn {
     background-color: black;
     color: white;
     padding: 5px 8px;
     /* width: fit-content; */
 }
+
+.linkDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+   
+}
+
+.linkDiv a {
+    display: flex;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.arrow {
+    font-size: 22px;
+}
+
+/* .link:visited{
+    color: rgba(191, 112, 255, 0.824);
+} */
+.link:hover {
+    text-decoration-line: underline;
+}
+
 @media screen and (max-width:1200px) {
-    .paper{
-        width: 100%;
+    .container {
+        padding: 35px 160px;
     }
-    
+    .heading{
+        padding: 10px;
+    }
+    .icon{
+        width: 24px;
+        height: 24px;
+    }
+    .text h4{
+        font-size: 8px;
+    }
+    .text span{
+        font-size: 17px;
+    }
+    .paper{
+        gap: 13px;
+    }
+    .details h2{
+        font-size: 18px;
+    }
+    .details p{
+        font-size: 7px;
+    }
+    .details{
+        gap: 2px;
+    }
+    .btn{
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .container {
+        padding: 35px 66px;
+    }
+
+    .salons {
+        height: 363px;
+    }
+
+    .image img {
+        width: 209px;
+        height: 166px;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .container {
+        padding: 35px 67px;
+    }
+
+    .salons {
+        height: 337px;
+    }
+
+    .image img {
+        width: 205px;
+        height: 152px
+    }
+}
+
+@media screen and (max-width:780px) {
+    .container {
+        padding: 35px 64px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .heading {
+        padding: 10px;
+    }
+
+    .desc p {
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .heading {
+        gap: 14px;
+    }
+
+    .text h4 {
+        font-size: 8px;
+
+    }
+
+    .text span {
+        font-size: 16px;
+    }
+
+    .salons {
+        height: 339px;
+    }
+
+    .icon {
+        width: 24px;
+        height: auto;
+    }
+
+    .container {
+        padding: 35px 26px;
+    }
+
+    .paper {
+        gap: 6px;
+    }
+
+    .image img {
+        width: 200px;
+        height: 150px;
+    }
+
+    .details {
+        gap: 10px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+    }
+
+    .desc p {
+        font-size: 7px;
+    }
+
+    .location {
+        font-size: 11px;
+    }
+
+    .rating {
+        font-size: 11x;
+    }
+
+    .type {
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 3px 7px;
+        font-size: 8px;
+    }
+    .linkDiv a{
+        font-size: 12px;
+    }
+    .arrow{
+        font-size: 16px;
+    }
+
+
+}
+
+@media screen and (max-width:380px) {
+    .paper {
+        gap: 14px;
+    }
+
+    .salons {
+        height: 212px;
+    }
+
+    .image img {
+        width: 122px;
+        height: 90px;
+    }
+
+    .details {
+        gap: 3px;
+    }
+
+    .location,
+    .rating {
+        font-size: 9px;
+    }
+
+    .type {
+        font-size: 8px;
+    }
+
+
+    .details h2 {
+        font-size: 18px;
+    }
+
+    .desc {
+        display: none;
+    }
+
+    .salonType {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+@media screen and (max-width:280px) {
+    .container {
+        padding: 9px 26px;
+    }
+
+    .salons {
+
+        height: 205px;
+    }
+
+    .paper {
+        gap: 22px;
+    }
+
+    .image img {
+        width: 109px;
+        height: 85px;
+
+    }
+
+    .details {
+        gap: 3px;
+    }
+
+    .details h2 {
+        font-size: 17px;
+
+    }
+
+    .location {
+        font-size: 11px;
+    }
+
+    .type {
+        font-size: 11px;
+
+    }
+
+    .salonType {
+        padding-right: 0px;
+    }
+
+    .rating {
+        gap: 1px;
+        font-size: 11px;
+    }
+
 }
