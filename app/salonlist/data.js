@@ -1,3 +1,6 @@
+
+
+
 export const SalonListData = [
     {
         facility: "Pedicure",

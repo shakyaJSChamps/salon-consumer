@@ -1,10 +1,9 @@
 "use client"
-import { SalonListData, ShopsCategory, Rating, Distance, Category } from './data';
 import { GoLocation } from "react-icons/go";
 import { FaRegCalendarDays } from "react-icons/fa6";
+import { SalonListData, ShopsCategory, Rating, Distance, Category, } from './data';
 import Img from '@/assets/images/salonImage.svg'
 import GenericComponent from '@/components/dynamic/generic/genericComponent';
-import { useState } from 'react';
 
 const SalonLists = () => {
 

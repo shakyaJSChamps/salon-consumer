@@ -1,3 +1,8 @@
+// import { GiComb } from "react-icons/gi";
+// import { RiScissors2Line } from "react-icons/ri";
+
+// export { GiComb, RiScissors2Line }
+
 export const DoorBuddyData = [
     {
         title: "Salman Khan",

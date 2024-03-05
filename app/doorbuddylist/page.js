@@ -1,10 +1,9 @@
-
-import { Rating, Distance, Category } from './data';
-import { RiScissors2Line } from "react-icons/ri";
-import Img from '@/assets/images/Rectangle 25156 (2).svg'
-import GenericComponent from '@/components/dynamic/generic/genericComponent';
-import { DoorBuddyData } from './data';
+"use client"
 import { GiComb } from "react-icons/gi";
+import { RiScissors2Line } from "react-icons/ri";
+import { DoorBuddyData, ShopsCategory, Rating, Distance, Category, } from './data';
+import Img from '@/assets/images/Rectangle 25156 (2).svg';
+import GenericComponent from '@/components/dynamic/generic/genericComponent';
 
 const DoorBuddyLists = () => {
     return (
@@ -19,10 +18,9 @@ const DoorBuddyLists = () => {
                 Category={Category}
                 RiScissors2Line={RiScissors2Line}
                 GiComb={GiComb}
-
             />
         </>
     )
 }
 
-export default DoorBuddyLists
+export default DoorBuddyLists;

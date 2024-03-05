@@ -7,10 +7,9 @@ import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const GenericComponent = (props) => {
-    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, GoLocation, FaRegCalendarDays, GiComb, RiScissors2Line, ShopsCategory } = props;
+    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, FaRegCalendarDays, GiComb, GoLocation, RiScissors2Line } = props;
 
     const [selectedCategories, setSelectedCategories] = useState([]);
-
     const [facilities, setFacilities] = useState([])
 
     const handleCategoryChange = (category) => {
@@ -30,13 +29,11 @@ const GenericComponent = (props) => {
         console.log("Updated facilities:", facilities);
     };
 
-    // Filter dataList based on selected categories and facilities
     const filteredData = dataList.filter(item => {
         const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(item.category);
         const facilityMatch = facilities.length === 0 || facilities.includes(item.facility);
         return categoryMatch && facilityMatch;
     });
-
 
     return (
         <>
@@ -46,7 +43,7 @@ const GenericComponent = (props) => {
                         <div className={styles.findsIcons}>
                             {GoLocation && <GoLocation className={styles.locationIcons} />}
                             {GiComb && <GiComb className={styles.combIcons} />}
-                            {RiScissors2Line && < RiScissors2Line className={styles.scissors} />}
+                            {RiScissors2Line && <RiScissors2Line className={styles.scissors} />}
                             {FaRegCalendarDays && <FaRegCalendarDays className={styles.calendra} />}
                         </div>
                         <div className={styles.findsDetails}>
