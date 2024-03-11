@@ -1,0 +1,257 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px 15px;
+}
+
+.wrapper {
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 22px 27px;
+}
+
+.serviceType {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.serviceType h3 {
+    font-size: 12px;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 3px;
+    gap: 5px;
+}
+
+.count span {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.countIcon {
+    width: 13px;
+    height: auto;
+}
+
+.serviceList ul {
+    padding: 5px 13px;
+    font-size: 10px;
+    color: grey;
+    line-height: 16px;
+}
+
+.serviceList button {
+    border: none;
+    background-color: transparent;
+    text-decoration-line: underline;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.frequentAdd {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    gap: 7px;
+}
+
+.frequentAdd h3 {
+    font-size: 10px;
+}
+
+.itemContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 4px 5px;
+    width: fit-content;
+    border: 1px solid grey;
+    border-radius: 12px;
+}
+
+.item {
+    font-size: 8px;
+    /* text-align: center; */
+    justify-content: center;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 7px;
+    padding-left: 9px;
+    font-weight: 600;
+}
+
+.image {
+    position: relative;
+}
+
+.addBtn {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* border: none; */
+    padding: 2px 4px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid grey;
+    cursor: pointer;
+    font-size: 8px;
+}
+
+.image img {
+    width: 41px;
+    height: auto;
+}
+
+.specialistContainer {
+    font-size: 9px;
+    padding: 5px;
+}
+
+.specialists {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0px;
+}
+
+.specialist {
+    width: 21% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.choice {
+    text-align: center;
+}
+
+.choice h4 {
+    padding-bottom: 4px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.specialists img {
+    width: 59px;
+    height: auto;
+}
+
+.bookingDate {
+    font-size: 13px;
+    padding: 10px 0px;
+}
+
+.dateContainer {
+    padding: 10px 0px;
+}
+
+.dateContainer input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    /* Example border for the bottom */
+    border-left: 1px solid #ccc;
+    /* Example border for the bottom */
+    border-right: 1px solid #ccc;
+    /* Example border for the bottom */
+    box-shadow:
+        -3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        0 5px 5px -3px rgba(0, 0, 0, 0.5);
+    padding: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+.itemContainer h3{
+    font-size: 12px;
+    
+}
+.timeslot{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0px;
+    gap: 10px;
+}
+.paper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: auto;
+    padding: 10px 0px;
+    box-shadow:
+        -3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        0 5px 5px -3px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+.paper p{
+    font-size: 9px;
+    font-weight: bold;
+}
+.address{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.address h3{
+    font-size: 12px;
+    font-weight: bold;
+}
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px 0px 15px 0px;
+}
+.inputContainer input{
+    width: 400px;
+    height: auto;
+    padding: 10px 7px;
+    box-shadow:
+        -3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        0 5px 5px -3px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+
+}
+.book{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 95px;
+}
+.book button{
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 14px;
+}

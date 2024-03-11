@@ -6,7 +6,7 @@
 .find {
     background-color: black;
     color: white;
-    width: 250px;
+    width: 320px;
     padding: 20px 30px;
     border-radius: 15px;
     margin: 30px 0px;
@@ -17,18 +17,38 @@
 
 .calendra {
     position: absolute;
-    font-size: 45px;
-    left: 38px;
-    top: 26px;
+    font-size: 43px;
+    left: 46px;
+    top: 37px;
     z-index: 45;
+
+
 }
 
 .locationIcons {
     position: absolute;
-    font-size: 39px;
-    left: 14px;
+    font-size: 34px;
+    left: 20px;
+    z-index: 999999999;
+    top: 43px;
+}
+
+.scissors {
+    position: absolute;
+    font-size: 28px;
+    left: 46px;
+    top: 48px;
+    z-index: 45;
+
+}
+
+.combIcons {
+    position: absolute;
+    font-size: 47px;
+    left: 19px;
     z-index: 111111;
-    top: 37px;
+    top: 23px;
+    rotate: 160deg;
 }
 
 .findsSalon {
@@ -96,7 +116,7 @@
 .details button {
     background-color: black;
     color: white;
-    padding: 13px 83px;
+    padding: 13px 68px;
     cursor: pointer;
     border: none;
     border-radius: 3px;
@@ -148,6 +168,7 @@
 
 .locations {
     line-height: 30px;
+
 }
 
 .wishlists svg {
@@ -212,6 +233,10 @@
     line-height: 40px;
 }
 
+.buddyType {
+    font-size: 10px;
+    font-weight: 700;
+}
 
 .categoryContainer {
     display: flex;
@@ -239,6 +264,12 @@
     .findsSalon {
         padding-left: 50px;
     }
+
+    .findsSalon {
+        /* border: 2px solid black; */
+        padding-left: 155px;
+
+    }
 }
 
 @media screen and (max-width:1024px) {
@@ -249,6 +280,12 @@
 
     .findsSalon {
         padding-left: 0px;
+    }
+
+
+    .details button {
+
+        padding: 13px 60px;
     }
 
 }
@@ -316,6 +353,11 @@
     .findsSalon {
         margin: 30px 0px;
     }
+
+    .details button {
+
+        padding: 13px 50px;
+    }
 }
 
 @media screen and (max-width:600px) {
@@ -364,6 +406,11 @@
 
     .find {
         padding-left: 0px;
+    }
+
+    .details button {
+
+        padding: 13px 70px;
     }
 
 }
