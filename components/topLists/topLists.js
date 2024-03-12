@@ -1,6 +1,6 @@
-import styles from './commonComponent.module.css'
+import styles from './topLists.module.css'
 
-function CommonComponent(props) {
+function TopLists(props) {
     const {title,data}=props
   return (
     <div className={styles.container} >
@@ -12,4 +12,4 @@ function CommonComponent(props) {
   )
 }
 
-export default CommonComponent
+export default TopLists

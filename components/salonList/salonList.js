@@ -3,13 +3,13 @@ import { GoLocation } from "react-icons/go";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { SalonListData, ShopsCategory, Rating, Distance, Category, } from './data';
 import Img from '@/assets/images/salonImage.svg'
-import GenericComponent from "../genericComponent/genericsComponent";
+import Lists from "../lists/lists";
 
 const SalonList = () => {
 
     return (
         <>
-            <GenericComponent
+            <Lists
                 title="Salon"
                 buttonLabel="View Details"
                 imageSrc={Img}
