@@ -1,38 +1,60 @@
 "use client"
 import { useState } from 'react';
-import styles from './generic.module.css';
+import styles from './generic.module.css'
 import Image from 'next/image';
 import { CiHeart } from 'react-icons/ci';
 import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Link from 'next/link';
 
 const GenericComponent = (props) => {
-    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, FaRegCalendarDays, GiComb, GoLocation, RiScissors2Line } = props;
+    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, FaRegCalendarDays, GoLocation, RiScissors2Line, GiComb } = props;
 
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [facilities, setFacilities] = useState([])
+    const [facilities, setFacilities] = useState([]);
+    const [selectedRatings, setSelectedRatings] = useState({});
 
     const handleCategoryChange = (category) => {
-        if (selectedCategories.includes(category)) {
-            setSelectedCategories(selectedCategories.filter(cat => cat !== category));
+        const newSelectedCategories = { ...selectedCategories };
+        if (newSelectedCategories[category]) {
+            delete newSelectedCategories[category];
         } else {
-            setSelectedCategories([...selectedCategories, category]);
+            newSelectedCategories[category] = true;
         }
+        setSelectedCategories(newSelectedCategories);
     };
 
     const handleFacilityChange = (facility) => {
-        if (facilities.includes(facility)) {
-            setFacilities(facilities.filter(f => f !== facility));
+        const newFacilities = { ...facilities };
+        if (newFacilities[facility]) {
+            delete newFacilities[facility];
         } else {
-            setFacilities([...facilities, facility]);
+            newFacilities[facility] = true;
         }
-        console.log("Updated facilities:", facilities);
+        setFacilities(newFacilities);
+    };
+
+    const handleRatingChange = (rating) => {
+        const newSelectedRatings = { ...selectedRatings };
+        if (newSelectedRatings[rating]) {
+            delete newSelectedRatings[rating];
+        } else {
+            newSelectedRatings[rating] = true;
+        }
+        setSelectedRatings(newSelectedRatings);
+    };
+
+    const handelClearFilters = () => {
+        setSelectedCategories([]);
+        setFacilities([]);
+        setSelectedRatings({});
     };
 
     const filteredData = dataList.filter(item => {
-        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(item.category);
-        const facilityMatch = facilities.length === 0 || facilities.includes(item.facility);
-        return categoryMatch && facilityMatch;
+        const categoryMatch = Object.keys(selectedCategories).length === 0 || selectedCategories[item.category];
+        const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
+        const ratingMatch = Object.keys(selectedRatings).length === 0 || selectedRatings[item.rating];
+        return categoryMatch && facilityMatch && ratingMatch;
     });
 
     return (
@@ -57,7 +79,8 @@ const GenericComponent = (props) => {
                         <div className={styles.applyConditions}>
                             <p>Search Filter</p>
                             <div className={styles.combine}>
-                                <button>Apply</button><button className={styles.clear}>Clear</button>
+                                <button>Apply</button>
+                                <button className={styles.clear} onClick={handelClearFilters}>Clear</button>
                             </div>
                         </div>
                         <div className={styles.categoryContainer}>
@@ -70,6 +93,7 @@ const GenericComponent = (props) => {
                                             id={categories}
                                             value={categories}
                                             className={styles.checkboxes}
+                                            checked={facilities[categories] || false}
                                             onChange={() => handleFacilityChange(categories)}
                                         />
                                         <label htmlFor={categories}>{categories}</label>
@@ -85,9 +109,10 @@ const GenericComponent = (props) => {
                                             id={category}
                                             value={category}
                                             className={styles.checkboxes}
+                                            checked={selectedCategories[category] || false}
                                             onChange={() => handleCategoryChange(category)}
                                         />
-                                        <label htmlFor={category}>{category}</label>
+                                        <label htmlFor={category}>{category.toUpperCase()}</label>
                                     </div>
                                 ))}
                             </div>
@@ -100,6 +125,8 @@ const GenericComponent = (props) => {
                                             id={rating}
                                             value={rating}
                                             className={styles.checkboxes}
+                                            checked={selectedRatings[rating] || false}
+                                            onChange={() => handleRatingChange(rating)}
                                         />
                                         <label htmlFor={rating}>{rating}-Star</label>
                                     </div>
@@ -119,6 +146,8 @@ const GenericComponent = (props) => {
                                     </div>
                                 ))}
                             </div>
+
+
                         </div>
                     </div>
                     <div className={styles.salonList}>
@@ -140,11 +169,13 @@ const GenericComponent = (props) => {
                                         </div>
                                     </div>
                                     <div className={styles.ratings}>
-                                        <p className={styles.locations}><StarIcon /> {salon.rating}</p>
+                                        <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
                                         <p>{salon.category}</p>
                                     </div>
                                     <p className={styles.description}>  {salon.description}</p>
-                                    <button>{buttonLabel}</button>
+                                    <Link href={`/salonlist/${salon._id}`}>
+                                        <button>{buttonLabel}</button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

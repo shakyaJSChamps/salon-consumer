@@ -1,88 +1,76 @@
-// import { GiComb } from "react-icons/gi";
-// import { RiScissors2Line } from "react-icons/ri";
 
-// export { GiComb, RiScissors2Line }
 
-export const DoorBuddyData = [
+
+export const SalonListData = [
     {
-        title: "Salman Khan",
+        facility: "Pedicure",
         location: "Karol Bagh",
-        rating: "4.0",
-        type: "Hairstylist",
+        rating: "2",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
-        category: "Unisex"
+        category: "Male"
     },
     {
-        title: "Salman Khan",
+        facility: "Massage",
         location: "Connaught Place",
-        rating: "4.5",
-        type: "Hairstylist",
+        rating: "3",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
-        category: "Male"
+        category: "Female"
     },
     {
-        title: "Salman Khan",
+        facility: "Hair cut",
         location: "Saket",
-        rating: "4.2",
-        type: "Hairstylist",
+        rating: "4",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
-        category: "Female"
+        category: "Unisex"
     },
     {
-        title: "Salman Khan",
+        facility: "Make-up",
         location: "Rajouri Garden",
-        rating: "4.7",
-        type: "Hairstylist",
+        rating: "1",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
         category: "Unisex"
     },
     {
-        title: "Salman Khan",
+        facility: "Hairstyle",
         location: "Vasant Kunj",
-        rating: "4.3",
-        type: "Hairstylist",
+        rating: "2",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
         category: "Male"
     },
     {
-        title: "Salman Khan",
+        facility: "Hairstyle",
         location: "Lajpat Nagar",
-        rating: "4.6",
-        type: "Hairstylist",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
-        category: "Male"
-    },
-    {
-        title: "Salman Khan",
-        location: "Dwarka",
-        rating: "4.8",
-        type: "Hairstylist",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
-        category: "Unisex"
-    },
-    {
-        title: "Salman Khan",
-        location: "Punjabi Bagh",
-        rating: "4.1",
-        type: "Hairstylist",
+        rating: "5",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
         category: "Female"
     },
     {
-        title: "Salman Khan",
-        location: "Greater Kailash",
-        rating: "4.4",
-        type: "Hairstylist",
+        facility: "Make-up",
+        location: "Dwarka",
+        rating: "3",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
         category: "Unisex"
     },
     {
-        title: "Salman Khan",
-        location: "Rohini",
-        rating: "4.9",
-        type: "Hairstylist",
+        facility: "Massage",
+        location: "Punjabi Bagh",
+        rating: "2",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
         category: "Male"
+    },
+    {
+        facility: "Pedicure",
+        location: "Greater Kailash",
+        rating: "1",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
+    },
+    {
+        facility: "Hair cut",
+        location: "Rohini",
+        rating: "4",
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi culpa quaerat repellat nesciunt Lorem ipsum dolor",
+        category: "Unisex"
     }
 ];
 

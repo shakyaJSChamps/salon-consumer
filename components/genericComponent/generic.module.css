@@ -17,9 +17,9 @@
 
 .calendra {
     position: absolute;
-    font-size: 43px;
-    left: 46px;
-    top: 37px;
+    font-size: 53px;
+    left: 44px;
+    top: 23px;
     z-index: 45;
 
 
@@ -27,10 +27,10 @@
 
 .locationIcons {
     position: absolute;
-    font-size: 34px;
-    left: 20px;
+    font-size: 40px;
+    left: 18px;
     z-index: 999999999;
-    top: 43px;
+    top: 36px;
 }
 
 .scissors {
@@ -116,7 +116,7 @@
 .details button {
     background-color: black;
     color: white;
-    padding: 13px 68px;
+    padding: 13px 83px;
     cursor: pointer;
     border: none;
     border-radius: 3px;
@@ -410,7 +410,7 @@
 
     .details button {
 
-        padding: 13px 70px;
+        padding: 13px 86px;
     }
 
 }
@@ -434,5 +434,10 @@
     .salonList {
         width: 280px;
         margin: auto;
+    }
+
+    .details button {
+
+        padding: 13px 76px;
     }
 }
