@@ -1,5 +1,6 @@
 import axios from 'axios';
-// import {PUBLIC_URLS} from '../constants/public-endpoint';
+import {PUBLIC_URLS} from '../constants/public-endpoints';
+import Session from './session';
 
 
 /*Setting up interceptors with axios*/
@@ -10,9 +11,9 @@ axios.interceptors.request.use(function (config) {
         'Content-Type': 'application/json'
     }
 
-    // if(isRequireToken(config.url)){
-    //     config.headers["Authorization"]= `Bearer ${session.get('token')}`;     
-    // } 
+    if(isRequireToken(config.url)){
+        config.headers["Authorization"]= `Bearer ${Session.get('token')}`;     
+    } 
     return config;
 
 
@@ -54,7 +55,7 @@ export default class HTTP {
             const request = {
                 method,
                 url,
-                [method.toUpperCase() === 'POST' ? "params" : "data"]: data,
+                [method.toUpperCase() === 'GET' ? "params" : "data"]: data,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -78,7 +79,7 @@ export default class HTTP {
     }
 }
 
-// function isRequireToken(url){
-//     const match = PUBLIC_URLS.filter(u=> url.endsWith(u));
-//     return  match.length === 0;
-// }
+function isRequireToken(url){
+    const match = PUBLIC_URLS.filter(u=> url.endsWith(u));
+    return  match.length === 0;
+}

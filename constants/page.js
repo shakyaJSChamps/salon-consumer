@@ -1,4 +1,4 @@
-export const endpoint = 'https://vib9ga62z0.execute-api.ap-southeast-1.amazonaws.com/DEV/';
+export const endpoint = 'https://devapi.stylrax.com/';
 
 
 export const methods = {

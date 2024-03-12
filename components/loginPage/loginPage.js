@@ -7,134 +7,127 @@ import OtpInput from 'react-otp-input';
 import { useFormik } from 'formik';
 // import * as yup  from "yup"
 import { redirect, useRouter } from 'next/navigation';
-import {LoginSchema} from '@/utils/schema.js'
-import { doLogin } from '@/api/account.api';
+import { LoginSchema } from '@/utils/schema.js'
+import { doLogin, verifyUser } from '@/api/account.api';
+import notify from '@/utils/notify';
 
-const initialValues={
-  phoneNumber:"",
-  otp:"",
+const initialValues = {
+  phoneNumber: "",
+  otp: "",
 }
 function LoginPage() {
-    const [sendOtp, setSendOtp] = useState(false);
-    // const [otp, setOtp] = useState('');
-    // const router=useRouter();
-    const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-      initialValues: initialValues,
-      validationSchema: LoginSchema,
-      onSubmit: async (values) => {
-        // if (sendOtp) {
-        //   // Verify OTP
-        //   try {
-        //     const response = await fetch('https://devapi.stylrax.com/account/otp/verify', {
-        //       method: 'POST',
-        //       headers: { 'Content-Type': 'application/json' },
-        //       body: JSON.stringify({
-        //         countryCode: '91',
-        //         phoneNumber: values.phoneNumber,
-        //         otp: values.otp,
-        //       }),
-        //     });
-        //     if (response.ok) {
-        //       // Handle successful OTP verification, e.g., redirect to dashboard
-        //       console.log('OTP verified successfully');
-        //       router.push("/"); // Redirect to the desired page
-        //     }  else {
-        //       // Handle OTP verification failure
-        //       console.error('OTP verification failed:', response.statusText);
-        //     }
-        //   } catch (error) {
-        //     console.error('OTP verification failed:', error);
-        //   }
-        // } else {
-        //   // Request OTP
-          try{
+  const [sendOtp, setSendOtp] = useState(false);
+  // const [otp, setOtp] = useState('');
+  const router=useRouter();
+  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      if (!sendOtp) {
+        try {
 
           console.log(values);
           const { phoneNumber } = values;
-          const data={
-            "countryCode":"91",
-            "phoneNumber":phoneNumber,
-            "deviceType":1,
-            "deviceToken":"fasfsadfsdf"
-        }
-          const res = await doLogin( {data});
-          console.log("response ::>", res);
+          const data = {
+            "countryCode": "91",
+            "phoneNumber": phoneNumber,
+            "deviceType": 1,
+            "deviceToken": "fasfsadfsdf"
+          }
+          const res = await doLogin(data);
+          console.log("response ::>", res.data.statusCode);
+          if(res.data.statusCode=="200"){
+            setSendOtp(true);   //for navigate to otp page
+          }
           
         } catch (error) {
-          // Notify.error(error.message);
-          console.log(error)
+          console.log(error);
         }
-      // };
+      }else{
+        try {
+          const {phoneNumber,otp}=values;
+          const verifyData={
+            "countryCode":"91",
+            "phoneNumber": phoneNumber,
+            "otp":"8754"
         }
-      // },
+          const response=await verifyUser(verifyData)
+          console.log("response----",response)
+          
+        } catch (error) {
+          notify.error(error.message);
+        }
+      }
+    }
     });
-    
-  
 
-    return (
-        <div className={styles.container}>
-            <div className={styles.loginForm}>
-                <div className={styles.title}>
-                    <h3>Login</h3>
-                    <p>Get access to your Orders, <br />Wishlist and Recommendations</p>
-                </div>
-                <div className={styles.formDiv}>
-                    {!sendOtp ? (<form className={styles.form}
-                    onSubmit={handleSubmit}>
-                        <label>Mobile Number</label>
-                        <input
-                            type="text"
-                            name='phoneNumber'
-                            className={styles.input}
-                            value={values.phoneNumber}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        <p className={styles.error}>{errors.phoneNumber}</p>
-                        <p>By continuing, you agree to Stylrax&apos;s <span>Terms of Use</span> and <span>Privacy Policy</span>.</p>
-                        <button type="submit" className={styles.btn}>
-                            Request OTP
-                        </button>
-                    </form>) : (<>
-                        <form className={styles.form}
-                        onSubmit={handleSubmit}>
-                            <OtpInput
-                                value={values.otp}
-                                onChange={(otp) => handleChange({ target: { name: 'otp', value: otp } })}
-                                numInputs={4}
-                                renderSeparator={
-                                    <span
-                                      style={{
-                                        fontSize: "15px",
-                                        color:"grey"
-                                      }}
-                                    >
-                                      {"|"}
-                                    </span>
-                                  }
-                                  renderInput={(props) => <input {...props} />}
-                                  inputStyle={{
-                                    width: "30px",
-                                    height: "30px",
-                                    border:"none",
-                                    backgroundColor: "transparent",
-                                    outline: "none",
-                                  }}
-                            />
-                            <hr/>
-                            <p className={styles.error}>{errors.otp}</p>
-                            <p className={styles.resend}>Resend Otp</p>
-                            <button type="submit" className={styles.btn}>
-                                Next
-                            </button>
-                        </form>
-                    </>
-                    )}
-                </div>
-            </div>
 
+
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.loginForm}>
+        <div className={styles.title}>
+          <h3>Login</h3>
+          <p>Get access to your Orders, <br />Wishlist and Recommendations</p>
         </div>
-    )
+        <div className={styles.formDiv}>
+          {!sendOtp ? (<form className={styles.form}
+            onSubmit={handleSubmit}>
+            <label>Mobile Number</label>
+            <input
+              type="text"
+              name='phoneNumber'
+              className={styles.input}
+              value={values.phoneNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <p className={styles.error}>{errors.phoneNumber}</p>
+            <p>By continuing, you agree to Stylrax&apos;s <span>Terms of Use</span> and <span>Privacy Policy</span>.</p>
+            <button type="submit" className={styles.btn}>
+              Request OTP
+            </button>
+          </form>) : (<>
+            <form className={styles.form}
+              onSubmit={handleSubmit}>
+              <OtpInput
+                value={values.otp}
+                onChange={(otp) => handleChange({ target: { name: 'otp', value: otp } })}
+                numInputs={4}
+                renderSeparator={
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      color: "grey"
+                    }}
+                  >
+                    {"|"}
+                  </span>
+                }
+                renderInput={(props) => <input {...props} />}
+                inputStyle={{
+                  width: "30px",
+                  height: "30px",
+                  border: "none",
+                  backgroundColor: "transparent",
+                  outline: "none",
+                }}
+              />
+              <hr />
+              <p className={styles.error}>{errors.otp}</p>
+              <p className={styles.resend}>Resend Otp</p>
+              <button type="submit" className={styles.btn}>
+                Next
+              </button>
+            </form>
+          </>
+          )}
+        </div>
+      </div>
+
+    </div>
+  )
 }
 
 export default LoginPage
