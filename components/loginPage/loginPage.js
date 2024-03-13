@@ -10,6 +10,8 @@ import { redirect, useRouter } from 'next/navigation';
 import { LoginSchema } from '@/utils/schema.js'
 import { doLogin, verifyUser } from '@/api/account.api';
 import notify from '@/utils/notify';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '@/app/Redux/Authslice';
 
 const initialValues = {
   phoneNumber: "",
@@ -18,6 +20,7 @@ const initialValues = {
 function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
   // const [otp, setOtp] = useState('');
+  const dispatch = useDispatch();
   const router = useRouter();
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
@@ -54,6 +57,7 @@ function LoginPage() {
           const response = await verifyUser(verifyData)
           console.log("response----", response)
           if (response.data.statusCode == "200") {
+            dispatch(loginUser(response.data));
             router.push('/');
           } else {
             notify.error(response.data.message);

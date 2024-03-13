@@ -7,8 +7,9 @@ import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 
+
 const Lists = (props) => {
-    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, FaRegCalendarDays, GoLocation, RiScissors2Line, GiComb } = props;
+    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, calendraImages, GoLocation, RiScissors2Line, GiComb, doorBuddyBtn, doorBuddyFind, doorbuddy } = props;
 
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [facilities, setFacilities] = useState([]);
@@ -61,12 +62,12 @@ const Lists = (props) => {
         <>
             <div className={styles.container}>
                 <div className={styles.findsSalon}>
-                    <div className={styles.find}>
+                    <div className={doorBuddyFind ? styles.doorBuddyFind : styles.find}>
                         <div className={styles.findsIcons}>
-                            {GoLocation && <GoLocation className={styles.locationIcons} />}
-                            {GiComb && <GiComb className={styles.combIcons} />}
-                            {RiScissors2Line && <RiScissors2Line className={styles.scissors} />}
-                            {FaRegCalendarDays && <FaRegCalendarDays className={styles.calendra} />}
+
+                            {doorbuddy && <Image src={doorbuddy} alt='doorbuddy' height={50} width={50} />}
+
+                            {calendraImages && <Image src={calendraImages} alt='calendra' height={55} width={65} />}
                         </div>
                         <div className={styles.findsDetails}>
                             <p>Find Your</p>
@@ -174,7 +175,7 @@ const Lists = (props) => {
                                     </div>
                                     <p className={styles.description}>  {salon.description}</p>
                                     <Link href={`/salonlist/${salon._id}`}>
-                                        <button>{buttonLabel}</button>
+                                        <button className={doorBuddyBtn ? styles.doorBuddyBtn : ""}>{buttonLabel}</button>
                                     </Link>
                                 </div>
                             </div>

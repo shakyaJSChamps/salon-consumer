@@ -5,7 +5,7 @@ import authUser from "@/assets/images/loginUser.svg"
 import { useDispatch, useSelector } from 'react-redux';
 import { use, useEffect, useState } from 'react';
 import styles from './authlink.module.css'
-import { loginUser, logoutUser, selectIsLoggedIn, selectUser } from '@/app/Redux/Authslice';
+import { loginUser, logoutUser, selectIsLoggedIn, selectLocation, selectUser } from '@/app/Redux/Authslice';
 import { CiHeart } from 'react-icons/ci';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
@@ -20,9 +20,8 @@ function Authlink() {
     const [menu, setMenu] = useState(false)
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
-    console.log("user is authlink", user)
-
-    const isLoggedIn = useSelector(selectIsLoggedIn);
+    // const location = useSelector(selectLocation)
+    // console.log("location auth link", location)  get location from every where
 
     useEffect(() => {
         const profile = Session.getObject('profile');
@@ -32,15 +31,13 @@ function Authlink() {
         }
     }, []);
 
-    const userName = user && user.profile ? user.profile.name : null;
+    const userName = user && user.name;
 
     const handleToggleMenu = () => {
         setMenu(!menu);
     };
     const handleLogout = () => {
         dispatch(logoutUser());
-        Session.remove('profile');
-        Session.remove('isLoggedIn');
         setMenu(false)
     };
 
@@ -61,16 +58,15 @@ function Authlink() {
                 </Link>
             </>
             )}
-            {
-                menu && user && (
-                    <div className={styles.profileMenu}>
-                        <Link href="" onClick={handleLinkClick}><FaRegCircleUser />My Profile</Link>
-                        <Link href="/appointment" onClick={handleLinkClick}><GrNotes />My Appointments</Link>
-                        <Link href=""><CiHeart onClick={handleLinkClick} />Wishlist</Link>
-                        <Link href="" onClick={handleLinkClick}><IoMdNotificationsOutline />Notification</Link>
-                        <Link href="" onClick={handleLogout}><TbLogout />Logout</Link>
-                    </div>
-                )
+            {menu && user && (
+                <div className={styles.profileMenu}>
+                    <Link href="" onClick={handleLinkClick}><FaRegCircleUser />My Profile</Link>
+                    <Link href="/appointment" onClick={handleLinkClick}><GrNotes />My Appointments</Link>
+                    <Link href="" onClick={handleLinkClick}><CiHeart />Wishlist</Link>
+                    <Link href="" onClick={handleLinkClick}><IoMdNotificationsOutline />Notification</Link>
+                    <Link href="" onClick={handleLogout}><TbLogout />Logout</Link>
+                </div>
+            )
             }
         </div>
     )
