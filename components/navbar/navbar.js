@@ -42,7 +42,8 @@ function Navbar() {
     function handleClickClose() {
         setOpen(!open);
     }
-   
+
+
     return (
         <div className={styles.container}>
             <div className={styles.links}>
@@ -58,7 +59,7 @@ function Navbar() {
                             <span>{item.name}</span>
                         </Link>
                     ))}
-                   <Authlink/>
+                    <Authlink />
                 </div>
                 <div className={styles.hamburger}
                     onClick={() => { setOpen(!open) }}>
@@ -101,7 +102,7 @@ function Navbar() {
                         <span>{item.name}</span>
                     </Link>
                 ))}
-                <Authlink/>
+                <Authlink />
             </div>)}
 
 

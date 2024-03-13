@@ -5,7 +5,19 @@ import { SalonListData, ShopsCategory, Rating, Distance, Category, } from './dat
 import Img from '@/assets/images/salonImage.svg'
 import Lists from "../lists/lists";
 
-const SalonList = () => {
+const SalonList = async () => {
+    try {
+        const salonResponse = await fetch('https://devapi.stylrax.com/consumer/salons');
+        if (salonResponse.ok) {
+            const salonData = await salonResponse.json();
+
+            console.log("salon data", salonData)
+        } else {
+            console.error('Failed to fetch salon list:', salonResponse.statusText);
+        }
+    } catch (error) {
+        console.error('Failed to fetch salon list:', error);
+    }
 
     return (
         <>

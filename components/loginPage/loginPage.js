@@ -1,7 +1,7 @@
 "use client"
 import { TextField } from '@mui/material'
 import styles from './loginPage.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link';
 import OtpInput from 'react-otp-input';
 import { useFormik } from 'formik';
@@ -18,7 +18,7 @@ const initialValues = {
 function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
   // const [otp, setOtp] = useState('');
-  const router=useRouter();
+  const router = useRouter();
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: LoginSchema,
@@ -36,18 +36,18 @@ function LoginPage() {
           }
           const res = await doLogin(data);
           console.log("response ::>", res.data.statusCode);
-          if(res.data.statusCode=="200"){
+          if (res.data.statusCode == "200") {
             setSendOtp(true);   //for navigate to otp page
           }
-          
+
         } catch (error) {
           console.log(error);
         }
-      }else{
+      } else {
         try {
-          const {phoneNumber,otp}=values;
-          const verifyData={
-            "countryCode":"91",
+          const { phoneNumber, otp } = values;
+          const verifyData = {
+            "countryCode": "91",
             "phoneNumber": phoneNumber,
             "otp":otp
         }
@@ -64,7 +64,7 @@ function LoginPage() {
         }
       }
     }
-    });
+  });
 
 
 
