@@ -1,0 +1,8 @@
+.user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.userName{
+    color: white;
+}

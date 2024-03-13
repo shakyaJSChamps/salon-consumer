@@ -49,10 +49,15 @@ function LoginPage() {
           const verifyData={
             "countryCode":"91",
             "phoneNumber": phoneNumber,
-            "otp":"8754"
+            "otp":otp
         }
           const response=await verifyUser(verifyData)
-          console.log("response----",response)
+          console.log("response----",response.data)
+          if(response.data.statusCode=="200"){
+            router.push('/');
+          }else{
+            notify.error(response.data.message);
+          }
           
         } catch (error) {
           notify.error(error.message);
