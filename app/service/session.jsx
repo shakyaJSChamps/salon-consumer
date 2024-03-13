@@ -1,0 +1,35 @@
+export default class Session {
+    static get(key) {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem(key);
+        }
+        return null;
+    }
+
+    static getObject(key) {
+        if (typeof window !== 'undefined') {
+            const data = localStorage.getItem(key);
+            return JSON.parse(data);
+        }
+        return null;
+    }
+
+    static set(key, value) {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(key, value);
+        }
+    }
+
+    static setObject(key, value) {
+        if (typeof window !== 'undefined') {
+            const data = JSON.stringify(value);
+            localStorage.setItem(key, data);
+        }
+    }
+
+    static remove(key) {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(key);
+        }
+    }
+}

@@ -1,0 +1,277 @@
+.container {
+    width: 830px;
+
+    margin: auto;
+}
+
+.userInputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #7A7A7A;
+    padding: 30px 0px;
+}
+
+.userInput input {
+    padding: 6px 6px;
+    border-radius: 8px;
+    border: 3px solid rgb(144, 142, 142);
+    color: #7A7A7A;
+    outline: none;
+}
+
+.titleAppointment {
+    padding-top: 40px;
+    color: #434343;
+}
+
+.title {
+    color: #434343;
+    padding: 13px;
+}
+
+.userInput p {
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.userInput {
+    position: relative;
+}
+
+.userInput svg {
+    position: absolute;
+    right: 5px;
+    top: 28px;
+    color: rgb(144, 142, 142);
+    cursor: pointer;
+
+}
+
+.userInput .searchIcon {
+    margin-top: 25px;
+}
+
+.userInput .selects {
+    padding: 6px 35px;
+    border-radius: 8px;
+    border: 3px solid rgb(144, 142, 142);
+    color: rgb(144, 142, 142);
+    outline: none;
+
+
+}
+
+.upcomingScheduleContainer {}
+
+
+.upcomingSchedule {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid rgb(144, 142, 142);
+    border-radius: 7px;
+    align-items: center;
+    padding: 22px 0px;
+    margin-bottom: 10px;
+}
+
+.pastSchedule {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid rgb(144, 142, 142);
+    border-radius: 7px;
+    align-items: center;
+    padding: 22px 0px;
+    margin-bottom: 10px;
+    background-color: #D9D9D9;
+}
+
+.upcomingSchedule .buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.buttons button {
+    padding: 4px 11px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.buttons button:first-child {
+    border: 2px solid rgb(144, 142, 142);
+    color: #7A7A7A;
+
+}
+
+.buttons button:last-child {
+    border: 2px solid #DC4216;
+    color: #DC4216;
+
+}
+
+.upcomingDetails p {
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #7A7A7A;
+}
+
+.upcomingDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pastScheduleContainer {}
+
+.buttonsPast {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttonsPast button {
+    padding: 4px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.buttonsPast button:first-child {
+    border: 2px solid rgb(144, 142, 142);
+    color: #7A7A7A;
+
+}
+
+
+.buttonsPast a {
+    color: #7A7A7A;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.circles {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.completed {
+    background-color: green;
+}
+
+.cancelled {
+    background-color: red;
+}
+
+
+@media screen and (max-width:780px) {
+
+    .container {
+        width: 650px;
+    }
+
+    .userInput input {
+        padding: 6px 2px;
+    }
+
+    .userInput .selects {
+        padding: 6px 16px;
+    }
+
+    .upcomingSchedule .buttons {
+        gap: 5px;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .container {
+        width: 550px;
+    }
+
+    .upcomingDetails p {
+        font-size: 13px;
+
+    }
+
+    .buttons button {
+        padding: 4px;
+    }
+
+}
+
+@media screen and (max-width:500px) {
+    .container {
+        width: 450px;
+    }
+
+    .upcomingSchedule,
+    .pastSchedule {
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .upcomingDetails {
+        text-align: center;
+    }
+
+    .upcomingDetails p {
+        font-size: 15px;
+        justify-content: center;
+
+    }
+}
+
+
+@media screen and (max-width:475px) {
+    .container {
+        width: 430px;
+    }
+
+    .upcomingDetails p {
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width:425px) {
+    .container {
+        width: 380px;
+    }
+
+}
+
+@media screen and (max-width:375px) {
+    .container {
+        width: 340px;
+    }
+
+}
+
+
+@media screen and (max-width:350px) {
+    .container {
+        width: 300px !important;
+    }
+
+}
+
+
+@media screen and (max-width:300px) {
+    .container {
+        width: 260px !important;
+    }
+
+}
+
+@media screen and (max-width:250px) {
+    .container {
+        width: 210px !important;
+    }
+
+}

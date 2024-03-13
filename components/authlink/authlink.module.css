@@ -1,0 +1,23 @@
+.authLink {
+    position: relative;
+}
+
+.profileMenu {
+    background-color: black;
+    height: 200px;
+    width: 250px;
+    color: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 99999;
+    border-radius: 10px;
+    gap: 20px;
+    justify-content: center;
+    padding: 0px 20px;
+    top: 50px;
+}
+
+.profileMenu a {
+    gap: 15px;
+}

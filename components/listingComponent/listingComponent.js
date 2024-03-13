@@ -1,13 +1,13 @@
 "use client"
 import { useState } from 'react';
-import styles from './generic.module.css'
+import styles from './listingComponent.module.css'
 import Image from 'next/image';
 import { CiHeart } from 'react-icons/ci';
 import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 
-const GenericComponent = (props) => {
+const ListingComponent = (props) => {
     const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, FaRegCalendarDays, GoLocation, RiScissors2Line, GiComb } = props;
 
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -186,4 +186,4 @@ const GenericComponent = (props) => {
     );
 };
 
-export default GenericComponent;
+export default ListingComponent;

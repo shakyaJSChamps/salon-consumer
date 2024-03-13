@@ -3,7 +3,7 @@ import { GiComb } from "react-icons/gi";
 import { RiScissors2Line } from "react-icons/ri";
 import { DoorBuddyData, ShopsCategory, Rating, Distance, Category, } from './data';
 import Img from '@/assets/images/Rectangle 25156 (2).svg';
-import GenericComponent from '@/components/genericComponent/genericsComponent';
+import GenericComponent from '@/components/listingComponent/listingComponent';
 
 const DoorBuddyList = () => {
     return (
