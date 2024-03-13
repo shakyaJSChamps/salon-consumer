@@ -5,84 +5,65 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link';
 import OtpInput from 'react-otp-input';
 import { useFormik } from 'formik';
-import * as yup from "yup"
+// import * as yup  from "yup"
 import { redirect, useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '@/app/Redux/Authslice';
+import { LoginSchema } from '@/utils/schema.js'
+import { doLogin, verifyUser } from '@/api/account.api';
+import notify from '@/utils/notify';
 
-
-const phoneRegex = RegExp(
-  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-);
-
-const signInSchema = yup.object().shape({
-  phoneNumber: yup.string().matches(phoneRegex, "Please enter valid mobile number").required("Mobile number is required"),
-  // otp: yup.string().length(4, 'OTP must be exactly 4 digits').required('OTP is required'),?
-});
 const initialValues = {
   phoneNumber: "",
   otp: "",
 }
 function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
-  const [otp, setOtp] = useState('');
+  // const [otp, setOtp] = useState('');
   const router = useRouter();
-  const dispatch = useDispatch()
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
-    validationSchema: signInSchema,
+    validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      if (sendOtp) {
-        // Verify OTP
+      if (!sendOtp) {
         try {
-          const response = await fetch('https://devapi.stylrax.com/account/otp/verify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              countryCode: '91',
-              phoneNumber: values.phoneNumber,
-              otp: values.otp,
-            }),
-          });
-          if (response.ok) {
-            // Handle successful OTP verification, e.g., redirect to dashboard
-            console.log('OTP verified successfully');
-            const data = await response.json();
-            console.log("data in response", data)
-            dispatch(loginUser(data));
-            router.push("/"); // Redirect to the desired page
-          } else {
-            // Handle OTP verification failure
-            console.error('OTP verification failed:', response.statusText);
+
+          console.log(values);
+          const { phoneNumber } = values;
+          const data = {
+            "countryCode": "91",
+            "phoneNumber": phoneNumber,
+            "deviceType": 1,
+            "deviceToken": "fasfsadfsdf"
           }
+          const res = await doLogin(data);
+          console.log("response ::>", res.data.statusCode);
+          if (res.data.statusCode == "200") {
+            setSendOtp(true);   //for navigate to otp page
+          }
+
         } catch (error) {
-          console.error('OTP verification failed:', error);
+          console.log(error);
         }
       } else {
-        // Request OTP
         try {
-          const response = await fetch('https://devapi.stylrax.com/account/otp/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              countryCode: '91',
-              phoneNumber: values.phoneNumber,
-              deviceType: 1,
-              deviceToken: 'fasfsadfsdf',
-            }),
-          });
-          if (response.ok) {
-            // Set sendOtp to true to show OTP input field
-            setSendOtp(true);
-          } else {
-            // Handle login failure
-            console.error('Login failed:', response.statusText);
+          const { phoneNumber, otp } = values;
+          const verifyData = {
+            "countryCode": "91",
+            "phoneNumber": phoneNumber,
+            "otp": otp
           }
+          const response = await verifyUser(verifyData)
+          console.log("response----", response)
+          if (response.data.statusCode == "200") {
+            router.push('/');
+          } else {
+            notify.error(response.data.message);
+          }
+
         } catch (error) {
-          console.error('Login failed:', error);
+          notify.error(error.message);
         }
       }
-    },
+    }
   });
 
 

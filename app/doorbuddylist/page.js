@@ -1,4 +1,3 @@
-
 import DoorBuddyList from "@/components/doorbuddyList/doorBuddyLists";
 
 const DoorBuddyLists = () => {

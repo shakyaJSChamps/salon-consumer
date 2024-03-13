@@ -1,7 +1,7 @@
 // authSlice.js
 
+import Session from "@/service/session";
 import { createSlice } from "@reduxjs/toolkit";
-import Session from "../service/session";
 
 export const authSlice = createSlice({
     name: 'auth',

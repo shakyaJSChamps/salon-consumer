@@ -1,4 +1,4 @@
-.title{
+.title {
     border: 1px solid grey;
     border-radius: 10px;
     padding: 30px 10px;
@@ -9,22 +9,26 @@
     font-size: 20px;
     color: #777777;
 }
-.specialistContainer{
+
+.specialistContainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px 0px;
 }
-.heading{
+
+.heading {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
 }
-.specialist{
+
+.specialist {
     display: flex;
     gap: 50px;
 }
-.specialistDetails{
+
+.specialistDetails {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,81 +38,305 @@
     padding: 12px;
     border-radius: 15px;
 }
-.content{
+
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
 }
-.content h3{
+
+.content h3 {
     font-size: 15px;
     font-weight: bold;
 }
-.content p{
+
+.content p {
     font-size: 11px;
 
 }
-.specialistRating{
+
+.specialistRating {
     display: flex;
     align-items: center;
     gap: 3px;
 }
-.icons{
+
+.icons {
     width: 11px;
     height: auto;
 }
-.specialist p{
+
+.specialist p {
     font-size: 10px;
 }
-.reviewRating{
+
+.reviewRating {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 15px 0px;
 }
-.div{
+
+.div {
     display: flex;
     gap: 10px;
 }
-.reviewsContainer{
+
+.reviewsContainer {
     width: 50%;
     border: 1px solid grey;
     padding: 10px;
     border-radius: 10px;
 }
-.aboutUser{
+
+.aboutUser {
     display: flex;
     align-items: center;
     gap: 6px;
 }
-.userImage{
-   
+
+.userImage {
+
     text-align: center;
 }
-.userImage img{
+
+.userImage img {
     width: 53px;
     height: auto;
     border-radius: 50%;
 }
-.userName h3{
+
+.userName h3 {
     font-size: 20px;
     font-weight: 500;
 }
-.userName p{
+
+.userName p {
     color: #777777;
     font-size: 15px;
 }
-.userDetails{
+
+.userDetails {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.userRating{
+
+.userRating {
     display: flex;
     align-items: center;
     color: #777777;
 }
-.userReview p{
+
+.userReview p {
     font-size: 16px;
     color: grey;
+}
+
+@media screen and (max-width:1200px) {
+    .title {
+        font-size: 17px;
+    }
+
+    .specialist {
+        gap: 14px;
+        justify-content: center;
+    }
+
+    .image img {
+        width: 120px;
+        height: auto;
+    }
+
+    .content h3 {
+        font-size: 14px;
+    }
+
+    .userReview p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .title {
+        font-size: 16px;
+    }
+
+    .specialist {
+        gap: 14px;
+    }
+
+    .image img {
+        width: 103px;
+    }
+
+    .content {
+        gap: 5px;
+    }
+
+    .content h3 {
+        font-size: 13px;
+    }
+
+    .specialistRating p {
+        font-size: 9px;
+    }
+
+    .userReview p {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .title {
+        font-size: 12px;
+        padding: 21px 12px
+    }
+
+    .image img {
+        width: 77px;
+    }
+
+    .content h3 {
+        font-size: 9px;
+    }
+
+    .specialist {
+        justify-content: center;
+    }
+
+    .specialist p {
+        font-size: 8px;
+    }
+
+    .specialistRating p {
+        font-size: 6px;
+    }
+
+    .userReview p {
+        font-size: 9px;
+    }
+
+    .userImage img {
+        width: 40px;
+    }
+
+    .userName h3 {
+        font-size: 15px;
+    }
+
+    .userName p {
+        font-size: 12px;
+    }
+
+    .userRating p {
+        font-size: 12px;
+    }
+
+    .Ricons {
+        width: 15px;
+        height: auto;
+    }
+
+}
+
+@media screen and (max-width:800px) {}
+
+@media screen and (max-width:780px) {}
+
+@media screen and (max-width:600px) {
+    .title {
+        font-size: 9px;
+        padding: 10px 12px;
+    }
+
+    .heading {
+        font-size: 18px;
+    }
+
+    .specialistDetails {
+        padding: 6px;
+    }
+
+    .image img {
+        width: 62px;
+    }
+
+    .content h3 {
+        font-size: 7px;
+    }
+
+    .specialist p {
+        font-size: 4px;
+    }
+
+    .content {
+        gap: 2px
+    }
+
+    .icons {
+        width: 8px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .title {
+        font-size: 6px;
+        padding: 5px 12px;
+    }
+
+    .specialist {
+        justify-content: flex-start;
+        overflow-x: scroll;
+        gap: 8px;
+    }
+
+    .specialist::-webkit-scrollbar {
+        display: none;
+        width: 10px;
+        background-color: white;
+        border-radius: 8px;
+    }
+
+    .specialist::-webkit-scrollbar-thumb {
+        background-color: #a19b9b;
+        width: 10px;
+    }
+
+    .reviewsContainer {
+        padding: 5px;
+    }
+
+    .userReview p {
+        font-size: 5px;
+    }
+
+    .userImage img {
+        width: 35px;
+    }
+
+    .userName h3 {
+        font-size: 11px;
+        padding-bottom: 4px;
+    }
+
+    .userName p {
+        font-size: 9px;
+    }
+
+    .userRating p {
+        font-size: 12px;
+    }
+
+    .Ricons {
+        width: 12px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .title {
+        font-size: 5px;
+    }
 }

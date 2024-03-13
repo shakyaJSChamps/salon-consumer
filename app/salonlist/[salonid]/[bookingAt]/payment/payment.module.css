@@ -1,0 +1,118 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px 15px;
+}
+
+.wrapper {
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 22px 27px;
+}
+
+.serviceType {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.serviceType h3 {
+    font-size: 12px;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 3px;
+    gap: 5px;
+}
+
+.count span {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.countIcon {
+    width: 13px;
+    height: auto;
+}
+
+.serviceList ul,.offerlist ul {
+    padding: 5px 13px;
+    font-size: 10px;
+    color: grey;
+    line-height: 16px;
+}
+
+.serviceList button {
+    border: none;
+    background-color: transparent;
+    text-decoration-line: underline;
+    font-size: 10px;
+    font-weight: bold;
+}
+.offers{
+    padding: 23px 0px;
+}
+.offers h3,.paymentSummary h3{
+    font-size: 12px;
+}
+.paymentSummary{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.total,.tax,.grandTotal{
+    font-size: 9px;
+    color: grey;
+    display: flex;
+    gap: 25px;
+}
+.total span{
+    padding-left: 16px;
+}
+.tax h4{
+    text-decoration-line: underline;
+}
+.grandTotal h4{
+    color: black;
+    font-weight: bold;
+}
+.grandTotal span{
+    color: black;
+    padding-left: 38px;
+    font-weight: bold;
+}
+.hr{
+    width: 112px;
+}
+.payment{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding-right: 15px; */
+    padding-top: 13px;
+}
+.payment button{
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 7px;
+}

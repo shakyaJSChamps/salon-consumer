@@ -1,14 +1,14 @@
 import Banner from '@/components/banner/banner'
 import BookAppointment from '@/components/bookAppointment/bookAppointment'
-import FindDoorBuddy from '@/components/findDoorBuddy/findDoorBuddy'
-import FindSalons from '@/components/findSalons/findSalons'
 import Offers from '@/components/offers/offers'
 import ServiceMenu from '@/components/serviceMenu/serviceMenu'
 import TopSalons from '@/components/topSalons/topSalons'
 import TopServices from '@/components/topServices/topServices'
-import CommonComponent from '@/components/commonComponent/commonComponent'
 import DownloadApp from '@/components/downloadApp/downloadApp'
 import Support from '@/components/support/support'
+import TopLists from '@/components/topLists/topLists'
+import NearDoorBuddy from '@/components/nearDoorBuddy/nearDoorBuddy'
+import NearSalons from '@/components/nearSalons/nearSalons'
 
 function HomePage() {
   return (
@@ -16,11 +16,11 @@ function HomePage() {
       <Offers/>
       <Banner/>
       <ServiceMenu/>
-      <FindSalons/>
-      <FindDoorBuddy/>
+      <NearSalons/>
+      <NearDoorBuddy/>
       <BookAppointment/>
-      <CommonComponent title="Top Services" data={<TopServices/>}/>
-      <CommonComponent title="Top Salons" data={<TopSalons/>}/>
+      <TopLists title="Top Services" data={<TopServices/>}/>
+      <TopLists title="Top Salons" data={<TopSalons/>}/>
       <DownloadApp/>
       <Support/>
     </div>

@@ -32,8 +32,8 @@ function SalonDetail() {
                     <div className={styles.salonName}>
                         <h2>Blue Heaven</h2>
                         <div className={styles.wishlistIcon}>
-                            <ShareIcon />
-                            <FavoriteBorderIcon />
+                            <ShareIcon className={styles.wIcon} />
+                            <FavoriteBorderIcon className={styles.wIcon}/>
                         </div>
                     </div>
                     <div className={styles.salonRating}>

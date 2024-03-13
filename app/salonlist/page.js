@@ -5,7 +5,7 @@ const SalonLists = () => {
 
     return (
         <>
-            <SalonList />
+            <SalonList/>
         </>
     )
 }

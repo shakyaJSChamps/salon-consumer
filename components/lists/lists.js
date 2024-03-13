@@ -1,21 +1,13 @@
 "use client"
 import { useState } from 'react';
-<<<<<<<< HEAD:components/listingComponent/listingComponent.js
-import styles from './listingComponent.module.css'
-========
 import styles from './lists.module.css'
->>>>>>>> ebc889dc9908c59541f72b1670a796e9084f2c51:components/lists/lists.js
 import Image from 'next/image';
 import { CiHeart } from 'react-icons/ci';
 import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 
-<<<<<<<< HEAD:components/listingComponent/listingComponent.js
-const ListingComponent = (props) => {
-========
 const Lists = (props) => {
->>>>>>>> ebc889dc9908c59541f72b1670a796e9084f2c51:components/lists/lists.js
     const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, FaRegCalendarDays, GoLocation, RiScissors2Line, GiComb } = props;
 
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -194,8 +186,4 @@ const Lists = (props) => {
     );
 };
 
-<<<<<<<< HEAD:components/listingComponent/listingComponent.js
-export default ListingComponent;
-========
 export default Lists;
->>>>>>>> ebc889dc9908c59541f72b1670a796e9084f2c51:components/lists/lists.js
