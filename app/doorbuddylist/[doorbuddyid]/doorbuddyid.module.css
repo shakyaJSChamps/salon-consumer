@@ -1,7 +1,11 @@
+.container{
+    padding: 10px 150px;
+}
 .details{
     display: flex;
-    gap: 15px;
-    padding: 15px 71px;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 100px;
 }
 .image img{
     width: 190px;
@@ -68,7 +72,7 @@
     padding-left: 26px;
 }
 .button {
-    padding: 10px 120px;
+    padding: 10px 0px;
     display: flex;
     gap: 30px;
 }
