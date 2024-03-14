@@ -59,10 +59,10 @@ function LoginPage() {
           if (response.data.statusCode == "200") {
             dispatch(loginUser(response.data));
             router.push('/');
-          }else{
+          } else {
             notify.error(response.data.message);
           }
-          
+
         } catch (error) {
           notify.error(error.message);
         }
