@@ -1,0 +1,89 @@
+.details{
+    display: flex;
+    gap: 15px;
+    padding: 15px 71px;
+}
+.image img{
+    width: 190px;
+    height: auto;
+}
+.SalonDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 17px;
+}
+
+.aboutSalon {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.salonName {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wishlistIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.salonRating,
+.salonLocation {
+    display: flex;
+    align-items: center;
+    color: #777777;
+    font-size: 13px;
+    /* justify-content: center; */
+}
+
+.icon {
+    width: 15px;
+    height: auto;
+}
+
+.timing {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
+    color: #777777;
+}
+
+.salonTiming h4 {
+    font-size: 15px;
+}
+
+.timing h3 {
+    font-size: 15px;
+}
+
+.timing span {
+    padding-left: 26px;
+}
+.button {
+    padding: 10px 120px;
+    display: flex;
+    gap: 30px;
+}
+
+.button button {
+    padding: 9px 22px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid grey;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.active {
+    background-color: black !important;
+    color: white;
+}

@@ -10,6 +10,9 @@ import { redirect, useRouter } from 'next/navigation';
 import { LoginSchema } from '@/utils/schema.js'
 import { doLogin, verifyUser } from '@/api/account.api';
 import notify from '@/utils/notify';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '@/app/Redux/Authslice';
+import Session from '@/service/session';
 
 const initialValues = {
   phoneNumber: "",
@@ -19,6 +22,7 @@ function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
   // const [otp, setOtp] = useState('');
   const router = useRouter();
+  const dispatch = useDispatch();
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: LoginSchema,
@@ -52,7 +56,17 @@ function LoginPage() {
             "otp":otp
         }
           const response=await verifyUser(verifyData)
-          console.log("response----",response.data)
+          console.log("response----",response.data.statusCode)
+          const token = response.data.data.authToken;
+          const userInfo=response.data.data.profile;
+           // Dispatch login action to store token and userInfo in Redux store
+          //  dispatch(loginUser({ token, userInfo }));
+           // Set token in Session
+           Session.set('token', token);
+           Session.set('userInfo', userInfo);
+          
+          // console.log("profile----",userInfo)
+          // console.log("token----",token);
           if(response.data.statusCode=="200"){
             router.push('/');
           }else{

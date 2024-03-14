@@ -12,7 +12,9 @@ export const authSlice = createSlice({
     reducers: {
         loginUser: (state, action) => {
             console.log("loginUser action payload:", action.payload.data);
-            state.user = action.payload.data;
+             state.user = action.payload.data;
+            state.token = action.payload.token;
+            state.userInfo = action.payload.userInfo;
             state.isLoggedIn = true;
             Session.set('authToken', action.payload.data.authToken);
             Session.setObject('profile', action.payload.data.profile);

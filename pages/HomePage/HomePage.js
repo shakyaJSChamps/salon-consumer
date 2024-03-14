@@ -19,8 +19,8 @@ function HomePage() {
       <NearSalons/>
       <NearDoorBuddy/>
       <BookAppointment/>
-      <TopLists title="Top Services" data={<TopServices/>}/>
-      <TopLists title="Top Salons" data={<TopSalons/>}/>
+      <TopLists title="Services" data={<TopServices/>}/>
+      <TopLists title="Salons" data={<TopSalons/>}/>
       <DownloadApp/>
       <Support/>
     </div>
