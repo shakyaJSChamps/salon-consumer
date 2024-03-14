@@ -4,7 +4,7 @@
 
 .profileMenu {
     background-color: black;
-    height: 200px;
+    height: 250px;
     width: 250px;
     color: white;
     position: absolute;
@@ -15,9 +15,31 @@
     gap: 20px;
     justify-content: center;
     padding: 0px 20px;
-    top: 50px;
+    top: 44px;
 }
 
 .profileMenu a {
     gap: 15px;
+}
+
+
+@media screen and (max-width:1024px) {
+
+    .profileMenu {
+        width: 248px;
+        right: -15px;
+    }
+
+
+}
+
+@media screen and (max-width:1400px) {
+
+    .profileMenu {
+        width: 253px;
+        right: -22px;
+        top: 64px;
+    }
+
+
 }

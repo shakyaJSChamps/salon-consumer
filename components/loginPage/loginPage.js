@@ -12,7 +12,6 @@ import { doLogin, verifyUser } from '@/api/account.api';
 import notify from '@/utils/notify';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '@/app/Redux/Authslice';
-import Session from '@/service/session';
 
 const initialValues = {
   phoneNumber: "",
@@ -21,8 +20,8 @@ const initialValues = {
 function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
   // const [otp, setOtp] = useState('');
-  const router = useRouter();
   const dispatch = useDispatch();
+  const router = useRouter();
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: LoginSchema,
@@ -53,21 +52,12 @@ function LoginPage() {
           const verifyData = {
             "countryCode": "91",
             "phoneNumber": phoneNumber,
-            "otp":otp
-        }
-          const response=await verifyUser(verifyData)
-          console.log("response----",response.data.statusCode)
-          const token = response.data.data.authToken;
-          const userInfo=response.data.data.profile;
-           // Dispatch login action to store token and userInfo in Redux store
-          //  dispatch(loginUser({ token, userInfo }));
-           // Set token in Session
-           Session.set('token', token);
-           Session.set('userInfo', userInfo);
-          
-          // console.log("profile----",userInfo)
-          // console.log("token----",token);
-          if(response.data.statusCode=="200"){
+            "otp": otp
+          }
+          const response = await verifyUser(verifyData)
+          console.log("response----", response)
+          if (response.data.statusCode == "200") {
+            dispatch(loginUser(response.data));
             router.push('/');
           }else{
             notify.error(response.data.message);

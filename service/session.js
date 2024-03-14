@@ -1,29 +1,35 @@
 export default class Session {
-
-    static get(key){
-    
-        return localStorage.getItem(key);
-
-    }
-    static getObject(key){
-    
-        const  data = localStorage.getItem(key);
-        // console.log("Data in session ::>", data);
-        return JSON.parse(data);
-
-    }
-    
-    static set(key, value){
-        localStorage.setItem(key, value);
+    static get(key) {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem(key);
+        }
+        return null;
     }
 
-    static setObject(key, value){
-        const data = JSON.stringify(value)
-        localStorage.setItem(key, data);
+    static getObject(key) {
+        if (typeof window !== 'undefined') {
+            const data = localStorage.getItem(key);
+            return JSON.parse(data);
+        }
+        return null;
     }
 
+    static set(key, value) {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(key, value);
+        }
+    }
 
-    static remove(key){
-        localStorage.removeItem(key);
+    static setObject(key, value) {
+        if (typeof window !== 'undefined') {
+            const data = JSON.stringify(value);
+            localStorage.setItem(key, data);
+        }
+    }
+
+    static remove(key) {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(key);
+        }
     }
 }

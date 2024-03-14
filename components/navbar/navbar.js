@@ -48,7 +48,7 @@ function Navbar() {
         <div className={styles.container}>
             <div className={styles.links}>
                 <div className={styles.logo}>
-                    <Image src={logo} alt='stylrax' />
+                    <Link href="/"> <Image src={logo} alt='stylrax' /></Link>
                 </div>
                 <div className={styles.featuredlink}>
                     {navLinks.map((item, index) => (

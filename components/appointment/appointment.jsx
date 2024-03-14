@@ -58,7 +58,7 @@ const Appointments = () => {
                     </div>
                     <div className={styles.upcomingDetails}>
                         <h5>{data.title}</h5>
-                        <p><RxCalendar /><span>{data.date}</span><HiOutlineLocationMarker /><span>{data.location}</span></p>
+                        <p><p><RxCalendar /><span>{data.date}</span></p><p><HiOutlineLocationMarker /><span>{data.location}</span></p></p>
                         <p>Services- {data.services}</p>
                         <p>Status-<span className={styles.circles}></span>{data.status}</p>
                     </div>
@@ -80,7 +80,8 @@ const Appointments = () => {
                     </div>
                     <div className={styles.upcomingDetails}>
                         <h5>{data.title}</h5>
-                        <p><RxCalendar /><span>{data.date}</span><HiOutlineLocationMarker /><span>{data.location}</span></p>
+                        <p><p><RxCalendar /><span>{data.date}</span></p>
+                            <p><HiOutlineLocationMarker /><span>{data.location}</span></p></p>
                         <p>Services- {data.services}</p>
                         <p>
                             <span className={`${styles.circles} ${data.status === 'completed' ? styles.completed : styles.cancelled}`}></span>

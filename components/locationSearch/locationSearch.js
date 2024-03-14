@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 import styles from './locationSearch.module.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useDispatch } from 'react-redux';
+import { userLocations } from '@/app/Redux/Authslice';
+import axios from 'axios';
 
 function LocationSearch() {
     const [isActive, setIsActive] = useState(false);
     const [userLocation, setUserLocation] = useState(null);
-
+    const dispatch = useDispatch()
 
     useEffect(() => {
         // Geolocation API is used to get the geographical position of a user
@@ -17,22 +20,26 @@ function LocationSearch() {
                 async (position) => {
                     try {
                         // Fetch the location details using the Nominatim API
-                        const response = await fetch(`https:nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`);
-                        const data = await response.json();
+                        const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`);
+                        const data = await response.data;
+                        // Set the location details in the state
                         console.log("data from users", data)
+                        console.log("latitude", data.lat)
+                        console.log("longitude", data.lon)
                         setUserLocation(`${data.address.city}, ${data.address.country}`);
+                        dispatch(userLocations(`${data.address.city}, ${data.address.country}`));
                     } catch (error) {
-                        setError('Failed to fetch location details');
+                        console.log('Failed to fetch location details');
                     }
                 },
                 (error) => {
                     // Handle geolocation errors
-                    setError(error.message);
+                    console.log(error.message);
                 }
             );
         } else {
             // Browser doesn't support geolocation
-            setError('Browser does not support geolocation');
+            console.log('Browser does not support geolocation');
         }
     }, []);
     return (
