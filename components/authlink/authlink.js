@@ -1,10 +1,10 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
+import styles from './authlink.module.css'
 import authUser from "@/assets/images/loginUser.svg"
 import { useDispatch, useSelector } from 'react-redux';
 import { use, useEffect, useState } from 'react';
-import styles from './authlink.module.css'
 import { loginUser, logoutUser, selectIsLoggedIn, selectLocation, selectUser } from '@/app/Redux/Authslice';
 import { CiHeart } from 'react-icons/ci';
 import { IoMdNotificationsOutline } from "react-icons/io";
