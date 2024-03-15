@@ -1,0 +1,588 @@
+.container {
+    margin-top: 10px;
+    padding: 50px 110px;
+
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.profileInfo {
+    width: 560px;
+
+}
+
+.profileMenu {
+    border: 1px solid #B4B4B4;
+    width: 250px;
+    padding: 30px 0px;
+    height: max-content;
+    border-radius: 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.profileDetails {
+    border: 1px solid #B4B4B4;
+    padding: 12px 44px 62px 29px;
+    border-radius: 5px;
+}
+
+.profileDetails img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.details {
+    display: flex;
+    position: relative;
+    gap: 55px;
+}
+
+.edits {
+    position: absolute;
+    right: 15px;
+    font-size: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+
+.form input {
+    color: #858585;
+}
+
+.otherDetails {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.otherDetails .edits {
+    left: 84px;
+    top: 2px;
+}
+
+.details input,
+.select {
+    padding: 9px 12px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #858585;
+}
+
+.select {
+    padding: 9px 15px;
+
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 38%;
+}
+
+.infoNumber {
+    display: flex;
+    flex-direction: column;
+    width: 23%;
+
+}
+
+.otherDetails input {
+    width: 89%;
+    padding: 9px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #858585;
+}
+
+.otherDetails .saves {
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    padding: 4px 20px;
+    border-radius: 3px;
+    position: absolute;
+    top: -9px;
+}
+
+.details .edits {
+    position: absolute !important;
+    right: 5px !important;
+    top: -8px !important;
+}
+
+.details .saves {
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    padding: 4px 20px;
+    border-radius: 3px;
+
+}
+
+.address {
+    width: 58%;
+}
+
+.label {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.editsGender {
+    position: absolute;
+    left: 42%;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.editsNumber {
+    position: absolute;
+    left: 35%;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.number {
+    padding: 10px 5px !important;
+}
+
+
+.profileInfo {
+    color: #1C1C1C !important;
+}
+
+.profileInfo svg {
+    color: #1C1C1C !important;
+}
+
+.menuItem {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    color: #717171;
+    text-align: justify !important;
+    padding-left: 37px;
+
+}
+
+.menuItemAccount {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    color: #717171;
+    text-align: center;
+
+}
+
+.menuItem p {
+    margin-left: 20px;
+}
+
+.menuItemAccount a {
+    color: #717171;
+}
+
+.profileBtn {
+
+    padding: 18px 15px;
+    cursor: pointer;
+    color: #717171;
+    border: unset !important;
+    background-color: unset !important;
+    font-size: 14px;
+}
+
+.activeLink {
+
+    background-color: black;
+    color: white !important;
+    padding: 18px 15px;
+    cursor: pointer;
+    font-size: 14px;
+
+}
+
+.lastBtn .profileBtn {
+    padding: unset !important;
+}
+
+
+.lastBtn .activeLink {
+    width: 250px;
+    margin-left: -38px;
+    background: black;
+    text-align: start;
+    padding-left: 55px;
+}
+
+.menuItem h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.logout {
+    cursor: pointer;
+}
+
+.profileMenu svg {
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.menuItem p {
+    font-size: 14px;
+}
+
+.profileInfo p {
+    color: #9B9B9B;
+    font-size: 13px;
+    line-height: 29px;
+}
+
+.profileInfo h6 {
+    color: #9B9B9B;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 18px 0px;
+}
+
+.manageAddress {
+    width: 560px;
+    border-radius: 1px;
+
+}
+
+
+.manageDetails {
+    border: 1px solid #B4B4B4;
+    padding: 12px 44px 62px 29px;
+    border-radius: 5px;
+
+}
+
+.manageDetails button {
+    width: 100%;
+    text-align: left;
+    padding: 9px 14px;
+    border: 1px solid #B4B4B4;
+    background-color: white;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.addressDetails {
+    border: 1px solid #B4B4B4;
+    padding: 20px 25px;
+    margin-top: 10px;
+    position: relative;
+
+}
+
+.addressDetails p {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.addressDetails .home {
+    width: unset !important;
+    padding: 5px;
+    color: #7D7D7D;
+    border: none !important;
+    font-size: 12px;
+    /* background-color: #B4B4B4; */
+    cursor: pointer;
+}
+
+.manageDetails h5 {
+    font-weight: 600;
+    padding: 15px 0px;
+}
+
+.manageDetails svg {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dotted {
+    position: absolute;
+    right: 21px !important;
+    top: 22px !important;
+    font-size: 26px !important;
+    color: #7D7D7D !important;
+}
+
+
+@media screen and (min-width: 1600px) and (max-width: 2500px) {
+    .profile {
+        gap: 80px;
+    }
+
+    .profileMenu {
+        width: 420px;
+    }
+
+    .profileInfo {
+        width: 900px;
+    }
+
+    .form {
+        gap: 50px;
+    }
+}
+
+@media screen and (max-width:1400px) {}
+
+
+@media screen and (max-width:1024px) {
+    .container {
+        margin-top: 10px;
+        padding: 50px 10px;
+
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .infoNumber {
+        width: 39%;
+    }
+
+    .details .edits {
+        position: absolute !important;
+        right: 1px !important;
+    }
+}
+
+
+@media screen and (max-width:660px) {
+    .profileInfo {
+        width: 470px;
+
+
+    }
+
+    .manageDetails {
+        padding: 14px 34px 55px 19px;
+    }
+
+    .menuItem {
+        padding-left: 5px !important;
+    }
+
+    .menuItemAccount h4 {
+        font-size: 10px;
+    }
+
+    .activeLink,
+    .profileBtn {
+        padding: 18px 8px;
+    }
+
+
+}
+
+
+@media screen and (max-width:555px) {
+    .profile {
+        flex-direction: column;
+    }
+
+    .profileInfo {
+        margin: auto;
+
+
+    }
+
+    .infoNumber {
+        width: 38%;
+    }
+
+    .manageAddress {
+        width: 475px;
+        margin: auto;
+    }
+
+    .manageDetails {
+        padding: 14px 20px 55px 19px;
+    }
+
+    .lastBtn .activeLink {
+        margin-left: -5px;
+    }
+
+
+
+}
+
+@media screen and (max-width:475px) {
+    .manageAddress {
+        width: 400px;
+        margin: auto;
+    }
+
+    .wishLists {
+        width: 400px;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .profileInfo {
+        width: 424px;
+
+
+    }
+
+    .details {
+        display: flex;
+        position: relative;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .otherDetails input {
+        width: 100%;
+    }
+
+    .info {
+        width: 100%;
+    }
+
+    .infoNumber {
+        width: 100%;
+    }
+
+    .otherDetails .edits,
+    .editsGender,
+    .editsNumber {
+        right: 0px;
+        left: unset !important;
+    }
+
+    .details .saves,
+    .otherDetails .saves {
+        right: 0px;
+        left: unset !important;
+
+    }
+
+    .details .saves {
+        position: absolute;
+        top: -9px !important;
+    }
+
+    .otherDetails .saves {
+        top: -9px;
+    }
+
+    .wishLists {
+        width: 350px;
+        margin: auto;
+    }
+
+    .details .edits {
+        position: absolute !important;
+        right: 1px !important;
+    }
+
+}
+
+@media screen and (max-width:380px) {
+
+    .manageAddress {
+        width: 355px;
+        margin: auto;
+    }
+
+    .profileInfo {
+        width: 355px;
+        margin: auto;
+    }
+
+    .profileDetails {
+        padding: 12px 25px 62px 20px;
+    }
+
+    .wishLists {
+        width: 300px;
+        margin: auto;
+    }
+
+    .details .edits {
+        position: absolute !important;
+        right: 1px !important;
+    }
+}
+
+@media screen and (max-width:350px) {
+    .manageAddress {
+        width: 300px;
+        margin: auto;
+    }
+
+    .profileInfo {
+        width: 300px;
+        margin: auto;
+    }
+
+    .manageDetails {
+        padding: 14px 20px 24px 19px;
+    }
+
+    .profileDetails {
+        padding: 12px 25px 24px 20px;
+    }
+
+    .container {
+        margin-top: 10px;
+        padding: 30px 10px;
+
+    }
+
+    .wishLists {
+        width: 300px;
+        margin: auto;
+    }
+
+    .wishListItems {
+        padding: 14px 21px;
+    }
+
+    .details .edits {
+        position: absolute !important;
+        right: 1px !important;
+    }
+}
