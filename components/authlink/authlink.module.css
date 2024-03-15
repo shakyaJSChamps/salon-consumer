@@ -4,6 +4,7 @@
 
 .profileMenu {
     background-color: black;
+    border: 1px solid white;
     height: 250px;
     width: 250px;
     color: white;
@@ -37,8 +38,8 @@
 
     .profileMenu {
         width: 253px;
-        right: -22px;
-        top: 64px;
+        right: -57px;
+        top: 42px;
     }
 
 

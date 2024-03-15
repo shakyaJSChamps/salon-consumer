@@ -7,6 +7,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarsIcon from '@mui/icons-material/Stars';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useState } from 'react';
+import AboutDoorbuddy from '@/components/aboutDoorbuddy/aboutDoorbuddy';
+import DoorbuddyService from '@/components/doorbuddyService/doorbuddyService';
 
 function DoorbuddyDetailPage() {
     const [activeButton, setActiveButton] = useState('about');
@@ -58,15 +60,13 @@ function DoorbuddyDetailPage() {
             {/* Content */}
             {activeButton === 'about' && (
                 <div className={styles.aboutContent}>
-                    {/* <AboutSalon /> */}
-                    About
+                    <AboutDoorbuddy/>
                 </div>
 
             )}
             {activeButton === 'services' && (
                 <div className={styles.servicesContent}>
-                    {/* <SalonService /> */}
-                    Service
+                    <DoorbuddyService/>
                 </div>
             )}
       

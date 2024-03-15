@@ -1,9 +1,9 @@
-import styles from './booking.module.css'
+import Booking from '@/components/booking/booking'
 
 function DoorbuddyBookingPage() {
   return (
-    <div className={styles.container}>
-        DoorbuddyBookingPage
+    <div>
+        <Booking/>
       
     </div>
   )
