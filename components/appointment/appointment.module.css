@@ -140,6 +140,14 @@
     cursor: pointer;
 }
 
+.buttonsPast .rating {
+    padding: unset !important;
+    border: unset !important;
+    background-color: #D9D9D9;
+    color: #7A7A7A;
+    text-decoration: underline;
+}
+
 .buttonsPast button:first-child {
     border: 2px solid rgb(144, 142, 142);
     color: #7A7A7A;

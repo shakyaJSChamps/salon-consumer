@@ -60,7 +60,7 @@ function Authlink() {
             )}
             {menu && user && (
                 <div className={styles.profileMenu}>
-                    <Link href="" onClick={handleLinkClick}><FaRegCircleUser />My Profile</Link>
+                    <Link href="/profile" onClick={handleLinkClick}><FaRegCircleUser />My Profile</Link>
                     <Link href="/appointment" onClick={handleLinkClick}><GrNotes />My Appointments</Link>
                     <Link href="" onClick={handleLinkClick}><CiHeart />Wishlist</Link>
                     <Link href="" onClick={handleLinkClick}><IoMdNotificationsOutline />Notification</Link>

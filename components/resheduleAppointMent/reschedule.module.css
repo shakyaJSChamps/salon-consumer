@@ -1,0 +1,141 @@
+.container {
+    width: 500px;
+    margin: auto;
+}
+
+.schedule {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.schedule h4 {
+    font-weight: bold;
+    font-size: 15px;
+    padding: 15px 0px;
+}
+
+.schedule input {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.schedule input[type="text"]::placeholder {
+    color: black !important;
+    font-weight: 500;
+}
+
+.enterInput {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.enterInput input,
+.reschedule input {
+    color: black !important;
+    padding: 6px 20px;
+    width: 100%;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    box-shadow: 2px 3px 7px #a1acb0;
+}
+
+
+
+
+
+.btn {
+    width: 70%;
+    margin: auto;
+    padding: 14px 3px;
+    border-radius: 7px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.chooseTime {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+}
+
+.chooseTime button {
+    width: 47%;
+    padding: 9px 0px;
+    border-radius: 8px;
+    background: white;
+    color: #525252;
+    border: none;
+    cursor: pointer;
+    box-shadow: 2px 3px 7px #a1acb0;
+
+
+}
+
+
+.chooseTime button.clicked {
+    background-color: black;
+    color: white;
+}
+
+
+
+@media screen and (max-width:500px) {
+    .container {
+        width: 400px;
+        margin: auto;
+    }
+
+
+}
+
+
+
+@media screen and (max-width:450px) {
+    .container {
+        width: 350px;
+        margin: auto;
+    }
+
+    .chooseTime button {
+        width: 100%;
+        padding: 13px 0px !important;
+    }
+
+    .chooseTime {
+        gap: 16px !important;
+    }
+
+}
+
+
+
+@media screen and (max-width:375px) {
+    .container {
+        width: 330px;
+        margin: auto;
+
+    }
+
+
+    .chooseTime button {
+        width: 100%;
+        padding: 13px 0px !important;
+    }
+}
+
+
+@media screen and (max-width:330px) {
+    .container {
+        width: 290px;
+        margin: auto;
+
+    }
+
+}
