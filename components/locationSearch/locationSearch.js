@@ -27,7 +27,7 @@ function LocationSearch() {
                         console.log("latitude", data.lat)
                         console.log("longitude", data.lon)
                         setUserLocation(`${data.address.city}, ${data.address.country}`);
-                        dispatch(userLocations(`${data.address.city}, ${data.address.country}`));
+                        dispatch(userLocations(data));
                     } catch (error) {
                         console.log('Failed to fetch location details');
                     }
