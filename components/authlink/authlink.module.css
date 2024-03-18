@@ -37,9 +37,11 @@
 @media screen and (max-width:1400px) {
 
     .profileMenu {
-        width: 253px;
-        right: -57px;
-        top: 42px;
+        width: 260px;
+        right: -25px;
+        top: 60px;
+        border-top: unset !important;
+        border: 2px solid white !important;
     }
 
 

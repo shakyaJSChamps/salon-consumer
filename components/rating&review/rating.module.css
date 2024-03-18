@@ -1,0 +1,146 @@
+.container {}
+
+.ratingContainer {
+    width: 400px;
+    margin: auto;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.ratingContainer h4 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ratingContainer h5 {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.ratingContainer h6 {
+    color: #8B8B8B;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+.stars {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stars .starIcons {
+    padding: 8px 10px;
+    border: 2px solid #9A9A9A !important;
+    border-radius: 8px;
+    cursor: pointer;
+
+
+}
+
+.starIcons svg {
+    font-size: 30px;
+    color: #E87052;
+}
+
+
+.ratingContainer button {
+    padding: 15px 8px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    width: 25%;
+    font-size: 10px;
+}
+
+.ratingContainer textarea {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    border: 2px solid #9A9A9A !important;
+    padding: 20px;
+    margin-top: -10px;
+    color: #9A9A9A !important;
+    font-size: 12px;
+}
+
+
+
+@media screen and (max-width:1400px) {}
+
+@media screen and (max-width:1024px) {}
+
+@media screen and (max-width:768px) {}
+
+@media screen and (max-width:600px) {}
+
+@media screen and (max-width:550px) {}
+
+@media screen and (max-width:475px) {}
+
+@media screen and (max-width:400px) {
+
+    .ratingContainer {
+        width: 320px;
+    }
+
+    .ratingContainer button {
+        width: 30%;
+    }
+
+    .starIcons {
+        padding: 2px 5px !important;
+    }
+
+    .starIcons svg {
+        font-size: 20px;
+    }
+
+    .ratingContainer textarea {
+        height: 106px;
+        padding: 14px;
+        width: 280px;
+    }
+
+    .starIcons {
+        justify-content: space-evenly;
+    }
+}
+
+@media screen and (max-width:350px) {
+    .ratingContainer {
+        width: 280px;
+    }
+
+    .ratingContainer button {
+        width: 30%;
+    }
+
+    .starIcons {
+        padding: 2px 5px !important;
+    }
+
+    .starIcons svg {
+        font-size: 20px;
+    }
+
+    .ratingContainer textarea {
+        height: 106px;
+        padding: 14px;
+        width: 220px;
+    }
+}
+
+@media screen and (max-width:330px) {
+    .ratingContainer button {
+        width: 40% !important;
+        padding: 10px 8px;
+    }
+}

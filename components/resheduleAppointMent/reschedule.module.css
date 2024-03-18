@@ -19,6 +19,7 @@
 .schedule input {
     font-size: 14px;
     font-weight: 500;
+
 }
 
 .schedule input[type="text"]::placeholder {
@@ -38,7 +39,6 @@
     padding: 6px 20px;
     width: 100%;
     border-radius: 7px;
-    outline: none;
     border: none;
     box-shadow: 2px 3px 7px #a1acb0;
 }
