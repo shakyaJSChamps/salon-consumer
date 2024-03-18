@@ -414,8 +414,8 @@
         top: 10px;
         z-index: 11111111 !important;
         font-size: 18px !important;
-        top: -125px !important;
-        left: 130px !important;
+        top: -142px !important;
+        left: 185px !important;
 
     }
 
@@ -428,7 +428,7 @@
         top: 0;
         left: -300px;
         /* Initially off-screen */
-        width: 180px;
+        width: 230px;
         height: 100vh;
         background-color: #fff;
         z-index: 1000;
@@ -439,7 +439,7 @@
 
     .visible {
         left: 0;
-        top: 0px;
+        top: 0px !important;
     }
 
     .profile {
@@ -450,7 +450,7 @@
     }
 
     .menuItem {
-        padding-left: 20px;
+        padding-left: 45px;
     }
 
     .menuItemAccount h4 {
@@ -485,12 +485,13 @@
     }
 
     .menuItem {
-        padding-left: 5px !important;
+        padding-left: 20px !important;
     }
 
     .menuItemAccount h4 {
-        font-size: 10px;
+        font-size: 14px;
         display: flex;
+        justify-content: center;
     }
 
     .activeLink,
@@ -621,7 +622,7 @@
 
     .profileMenu {
 
-        width: 169px !important;
+        width: 214px !important;
     }
 
 }
@@ -654,7 +655,8 @@
 
     .humburgerCross {
         font-size: 30px;
-        top: -4px;
+        top: -130px !important;
+
     }
 }
 

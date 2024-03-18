@@ -38,8 +38,8 @@ const Appointments = () => {
     }
 
 
-    const [menuVisible, setMenuVisible] = useState(true);
-    const [scheduleShowVisible, setShowScheduleVisible] = useState(true)
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [scheduleShowVisible, setShowScheduleVisible] = useState(false)
 
 
     useEffect(() => {

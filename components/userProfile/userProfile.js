@@ -114,6 +114,7 @@ const UserProfie = () => {
                 )}
                 {(profileVisible || menuVisible) && (
                     <div className={`${styles.profileMenu} ${menuVisible ? styles.visible : ''}`}>
+
                         <div className={styles.menuItemAccount} onClick={handleMenuItemClick}>
                             <h4 className={styles.account}>  <CiUser />ACCOUNT SETTINGS</h4>
                             <button
