@@ -33,6 +33,7 @@
 
 .downloadLink img {
     width: 142px;
+    cursor: pointer;
 }
 @media screen and (max-width:1200px) {
     .container{

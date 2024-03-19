@@ -46,6 +46,7 @@
     font-size: 13px;
     font-weight: bold;
     width: fit-content;
+    cursor: pointer;
 }
 @media screen and (max-width:1280px) {
     .textContainer{

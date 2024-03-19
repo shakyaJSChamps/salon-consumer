@@ -1,37 +1,19 @@
 "use client"
-import { TextField } from '@mui/material'
 import styles from './loginPage.module.css'
-import { useEffect, useState } from 'react'
-import Link from 'next/link';
-import OtpInput from 'react-otp-input';
-import { useFormik } from 'formik';
-// import * as yup  from "yup"
-import { redirect, useRouter } from 'next/navigation';
+import { useState } from 'react'
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { LoginSchema } from '@/utils/schema.js'
-import { doLogin, verifyUser } from '@/api/account.api';
-import notify from '@/utils/notify';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '@/app/Redux/Authslice';
-
-
-
+import { doLogin} from '@/api/account.api';
+import OtpVerify from './otpVerify';
 
 const initialValues = {
   phoneNumber: "",
-  otp: "",
 }
 function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
-  // const [otp, setOtp] = useState('');
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
-    validationSchema: LoginSchema,
-    onSubmit: async (values) => {
-      if (!sendOtp) {
+  const [phoneNumber, setPhoneNumber] = useState('');
+    const onSubmit= async (values) => {
         try {
-
           console.log(values);
           const { phoneNumber } = values;
           const data = {
@@ -42,45 +24,13 @@ function LoginPage() {
           }
           const res = await doLogin(data);
           console.log("response ::>", res.data.statusCode);
-          if (res.data.statusCode == "200") {
+          setPhoneNumber(phoneNumber)
             setSendOtp(true);   //for navigate to otp page
-          }
 
         } catch (error) {
           console.log(error);
         }
-      } else {
-        try {
-          const { phoneNumber, otp } = values;
-          const verifyData = {
-            "countryCode": "91",
-            "phoneNumber": phoneNumber,
-            "otp": otp
-          }
-          const response = await verifyUser(verifyData)
-          console.log("response----", response)
-          if (response.data.statusCode == "200") {
-            const authToken = response.data.data.authToken;
-            const userInfo = {
-              profile: response.data.data.profile,
-              role: response.data.data.role,
-            }
-            dispatch(loginUser({ authToken, userInfo }));
-            router.push('/');
-          } else {
-            notify.error(response.data.message);
-          }
-
-        } catch (error) {
-          notify.error(error.message);
-        }
       }
-    }
-  });
-
-
-
-
   return (
     <div className={styles.container}>
       <div className={styles.loginForm}>
@@ -89,56 +39,31 @@ function LoginPage() {
           <p>Get access to your Orders, <br />Wishlist and Recommendations</p>
         </div>
         <div className={styles.formDiv}>
-          {!sendOtp ? (<form className={styles.form}
-            onSubmit={handleSubmit}>
+          {!sendOtp ? (
+            <Formik
+            initialValues={initialValues}
+            validationSchema={LoginSchema}
+            onSubmit={onSubmit}
+            >
+              <Form className={styles.form}>
             <label>Mobile Number</label>
-            <input
+            <Field
               type="text"
               name='phoneNumber'
               className={styles.input}
-              value={values.phoneNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
             />
-            <p className={styles.error}>{errors.phoneNumber}</p>
+            <ErrorMessage
+                  component="div"
+                  name="phoneNumber"
+                  className={styles.error}
+                />
             <p>By continuing, you agree to Stylrax&apos;s <span>Terms of Use</span> and <span>Privacy Policy</span>.</p>
             <button type="submit" className={styles.btn}>
               Request OTP
             </button>
-          </form>) : (<>
-            <form className={styles.form}
-              onSubmit={handleSubmit}>
-              <OtpInput
-                value={values.otp}
-                onChange={(otp) => handleChange({ target: { name: 'otp', value: otp } })}
-                numInputs={4}
-                renderSeparator={
-                  <span
-                    style={{
-                      fontSize: "15px",
-                      color: "grey"
-                    }}
-                  >
-                    {"|"}
-                  </span>
-                }
-                renderInput={(props) => <input {...props} />}
-                inputStyle={{
-                  width: "30px",
-                  height: "30px",
-                  border: "none",
-                  backgroundColor: "transparent",
-                  outline: "none",
-                }}
-              />
-              <hr />
-              <p className={styles.error}>{errors.otp}</p>
-              <p className={styles.resend}>Resend Otp</p>
-              <button type="submit" className={styles.btn}>
-                Next
-              </button>
-            </form>
-          </>
+          </Form>
+          </Formik>) : (
+              <OtpVerify phoneNumber={phoneNumber}/>
           )}
         </div>
       </div>
