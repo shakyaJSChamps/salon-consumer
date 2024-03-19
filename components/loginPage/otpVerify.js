@@ -11,12 +11,12 @@ const initialValues = {
     otp: "",
 }
 
-function OtpVerify({phoneNumber}) {
+function OtpVerify({ phoneNumber }) {
     const dispatch = useDispatch();
     const router = useRouter();
     const onSubmit = async (values) => {
         try {
-            const {otp } = values;
+            const { otp } = values;
             console.log("phoneNumber", phoneNumber);
             const verifyData = {
                 "countryCode": "91",
@@ -25,7 +25,12 @@ function OtpVerify({phoneNumber}) {
             }
             const response = await verifyUser(verifyData)
             console.log("response----", response)
-            dispatch(loginUser(response.data));
+            const authToken = response.data.data.authToken;
+            const userInfo = {
+                profile: response.data.data.profile,
+                role: response.data.data.role,
+            }
+            dispatch(loginUser({ authToken, userInfo }));
             router.push('/');
 
         } catch (error) {
