@@ -5,24 +5,23 @@ import Img from '@/assets/images/salonImage.svg'
 import calendraImages from '@/assets/images/Group 1000003690.svg'
 import Lists from "../lists/lists";
 import { useEffect, useState } from "react";
-
 import { getSalonLists } from "@/api/account.api";
 
 
 const SalonList = () => {
     const [salonData, setSalonData] = useState([]);
     useEffect(() => {
-        const getSalonLists = async () => {
+        const getSalonList = async () => {
             try {
                 const response = await getSalonLists()
                 setSalonData(response.data); // Assuming response.data is the list of salons
-                console.log("response in salon list", response.data)
+                console.log("response in salon list", response?.data)
             } catch (error) {
                 console.error('Error fetching salon data:', error);
                 // Handle error, show error message, etc.
             }
         };
-        getSalonLists();
+        getSalonList();
     }, []);
     return (
         <>
@@ -30,7 +29,7 @@ const SalonList = () => {
                 title="Salon"
                 buttonLabel="View Details"
                 imageSrc={Img}
-                dataList={SalonListData}
+                dataList={salonData}
                 ShopsCategory={ShopsCategory}
                 Rating={Rating}
                 Distance={Distance}
