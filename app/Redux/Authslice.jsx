@@ -6,6 +6,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // Load user data from localStorage
 const initialUser = Session.getObject('profile') || null;
 const initialIsLoggedIn = Session.get('isLoggedIn') || false;
+const initialAuthToken=Session.get("authToken")||null;
 
 
 export const authSlice = createSlice({
@@ -13,7 +14,8 @@ export const authSlice = createSlice({
     initialState: {
         user: initialUser,
         isLoggedIn: initialIsLoggedIn,
-        location: null
+        location: null,
+        authToken: initialAuthToken,
     },
     reducers: {
         loginUser: (state, action) => {
@@ -21,6 +23,8 @@ export const authSlice = createSlice({
             const { authToken, profile } = action.payload.data;
             state.user = profile;
             state.isLoggedIn = true;
+            state.authToken = authToken;
+            console.log("user authToken::>",authToken);
             Session.set('authToken', authToken);
             Session.setObject('profile', profile);
             Session.set('isLoggedIn', true);
@@ -28,6 +32,7 @@ export const authSlice = createSlice({
         logoutUser: (state) => {
             state.user = null;
             state.isLoggedIn = false;
+            state.authToken=null;
             Session.remove('authToken');
             Session.remove('profile');
             Session.remove('isLoggedIn');
