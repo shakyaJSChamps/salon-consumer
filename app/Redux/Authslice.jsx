@@ -25,9 +25,9 @@ export const authSlice = createSlice({
             state.user = userInfo?.profile;
             state.authToken = authToken;
             state.isLoggedIn = true;
+            Session.set('isLoggedIn', true);
             Session.set('authToken', authToken);
             Session.setObject('profile', userInfo?.profile);
-            Session.set('isLoggedIn', true);
         },
         logoutUser: (state) => {
             state.user = null;
