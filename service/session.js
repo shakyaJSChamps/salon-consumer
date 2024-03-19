@@ -1,6 +1,7 @@
 export default class Session {
     static get(key) {
         if (typeof window !== 'undefined') {
+
             return localStorage.getItem(key);
         }
         return null;
@@ -9,10 +10,19 @@ export default class Session {
     static getObject(key) {
         if (typeof window !== 'undefined') {
             const data = localStorage.getItem(key);
-            return JSON.parse(data);
+
+            if (data !== null && data !== undefined) {
+                try {
+                    return JSON.parse(data);
+                } catch (error) {
+                    console.error("Error parsing JSON data:", error);
+                    return null;
+                }
+            }
         }
         return null;
     }
+
 
     static set(key, value) {
         if (typeof window !== 'undefined') {

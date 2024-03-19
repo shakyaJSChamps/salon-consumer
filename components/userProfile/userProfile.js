@@ -166,12 +166,12 @@ const UserProfie = () => {
                                     <div className={styles.name}>
                                         <label className={styles.label}>First Name</label>
                                         <input type="text"
-                                            placeholder={userInfo?.name.split(' ')[0]}
+                                            placeholder={userInfo?.name?.split(' ')[0]}
                                             disabled={!editModes.firstName} />
                                     </div>
                                     <div className={styles.name}>
                                         <labe className={styles.label}>Last Name</labe>
-                                        <input type="text" placeholder={userInfo?.name.split(' ').slice(-1)[0]} disabled={!editModes.lastName} />
+                                        <input type="text" placeholder={userInfo?.name?.split(' ').slice(-1)[0]} disabled={!editModes.lastName} />
                                     </div>
                                     <span className={styles.edits} onClick={handleEditNameClick}>  {editModes.firstName || editModes.lastName ? (
                                         <span className={styles.saves}>SAVE</span>
@@ -255,15 +255,15 @@ const UserProfie = () => {
                         </div>
                         <h6>FAQs</h6>
                         <p>What happens when I update my email address (or mobile number)? </p>
-                        <p> Your login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).
+                        <p> Your login email id (or mobile number) changes, likewise. Youll receive all your account related communication on your updated email address (or mobile number).
                         </p>
                         <p> When will my Stylrax account be updated with the new email address (or mobile number)? </p>
                         <p>It happens as soon as you confirm the verification code sent to your email (or mobile) and save the changes.</p>
 
                         <p> What happens to my existing Stylrax account when I update my email address (or mobile number)?</p>
-                        <p>  Updating your email address (or mobile number) doesn't invalidate your account. Your account remains fully functional. You'll continue seeing your Order history, saved information and personal details.</p>
+                        <p>  Updating your email address (or mobile number) doesnt invalidate your account. Your account remains fully functional. Youll continue seeing your Order history, saved information and personal details.</p>
                         <p> Does my business account get affected when I update my email address? </p>
-                        <p>Stylrax has a 'single sign-on' policy. Any changes will reflect in your Business account also.</p>
+                        <p>Stylrax has a single sign-on policy. Any changes will reflect in your Business account also.</p>
                     </div>
                 )}
 

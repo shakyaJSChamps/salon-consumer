@@ -23,9 +23,9 @@ function LocationSearch() {
                         const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`);
                         const data = await response.data;
                         // Set the location details in the state
-                        console.log("data from users", data)
-                        console.log("latitude", data.lat)
-                        console.log("longitude", data.lon)
+                        // console.log("data from users", data)
+                        // console.log("latitude", data.lat)
+                        // console.log("longitude", data.lon)
                         setUserLocation(`${data.address.city}, ${data.address.country}`);
                         dispatch(userLocations(data));
                     } catch (error) {
