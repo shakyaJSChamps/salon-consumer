@@ -5,16 +5,16 @@ import Img from '@/assets/images/salonImage.svg'
 import calendraImages from '@/assets/images/Group 1000003690.svg'
 import Lists from "../lists/lists";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+import { getSalonLists } from "@/api/account.api";
 
 
 const SalonList = () => {
     const [salonData, setSalonData] = useState([]);
-
     useEffect(() => {
-        const fetchData = async () => {
+        const getSalonLists = async () => {
             try {
-                const response = await axios.get('https://devapi.stylrax.com/consumer/salons');
+                const response = await getSalonLists()
                 setSalonData(response.data); // Assuming response.data is the list of salons
                 console.log("response in salon list", response.data)
             } catch (error) {
@@ -22,8 +22,7 @@ const SalonList = () => {
                 // Handle error, show error message, etc.
             }
         };
-
-        fetchData();
+        getSalonLists();
     }, []);
     return (
         <>
@@ -31,7 +30,7 @@ const SalonList = () => {
                 title="Salon"
                 buttonLabel="View Details"
                 imageSrc={Img}
-                dataList={salonData}
+                dataList={SalonListData}
                 ShopsCategory={ShopsCategory}
                 Rating={Rating}
                 Distance={Distance}
