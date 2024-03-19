@@ -123,13 +123,21 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    position: relative;
+
+}
+
+.pastSchedule .upcomingDetails {
+    position: relative;
+    left: -29px !important;
+
 }
 
 .pastScheduleContainer {}
 
 .buttonsPast {
     display: flex;
-    gap: 5px;
+    gap: 12px;
     flex-direction: column;
     align-items: center;
 }
@@ -176,6 +184,10 @@
     background-color: red;
 }
 
+.humburger,
+.humburgerCross {
+    display: none;
+}
 
 @media screen and (max-width:780px) {
 
@@ -194,8 +206,97 @@
     .upcomingSchedule .buttons {
         gap: 5px;
     }
+
+    .pastSchedule .upcomingDetails {
+        position: relative;
+        left: -3px !important;
+
+    }
+
+    .humbargor {
+        display: block;
+    }
+
+
+
 }
 
+@media screen and (max-width:768px) {
+    .container {
+        position: relative;
+    }
+
+    .userInputs {
+        flex-direction: column;
+        align-items: flex-start;
+
+
+    }
+
+    .userInput .selects {
+        padding: 6px 16px;
+        width: 174px !important;
+    }
+
+    .userInput input[type="date"] {
+        width: 174px !important;
+    }
+
+    .userInputs {
+        position: fixed;
+        top: 60;
+        left: -5px;
+        display: block !important;
+        width: 200px;
+        /* height: 100vh; */
+        position: absolute;
+        background-color: #fff;
+        z-index: 1000;
+        transition: left 0.5s ease;
+        overflow-x: auto;
+    }
+
+    .userInput svg {
+        position: absolute;
+        right: 35px;
+
+    }
+
+    .userInput {
+        position: relative;
+    }
+
+    .humburger {
+        position: absolute;
+        display: block !important;
+        font-size: 24px;
+        cursor: pointer;
+        align-self: flex-start;
+        left: 1px;
+        top: 40px;
+    }
+
+    .humburgerCross {
+        display: block;
+        font-size: 20px;
+        cursor: pointer;
+        align-self: flex-start;
+        position: absolute;
+        z-index: 11111111 !important;
+        left: 0px;
+        top: 40px;
+
+    }
+
+    .title {
+        text-align: center !important;
+    }
+
+
+    .titleAppointment {
+        margin-left: 35px;
+    }
+}
 
 @media screen and (max-width:600px) {
     .container {
@@ -208,7 +309,7 @@
     }
 
     .buttons button {
-        padding: 4px;
+        padding: 4px 8px;
     }
 
 }
@@ -238,13 +339,27 @@
 
 @media screen and (max-width:475px) {
     .container {
-        width: 430px;
+        width: 400px;
     }
 
     .upcomingDetails p {
         flex-wrap: wrap;
     }
 
+    .humburgerCross {
+        left: 0px !important;
+        top: 42px !important;
+        font-size: 16px;
+
+    }
+
+    .humburger {
+        left: 0px !important;
+        top: 42px !important;
+        font-size: 20px;
+    }
+
+    .titleAppointment {}
 }
 
 @media screen and (max-width:425px) {
@@ -266,6 +381,7 @@
     .container {
         width: 300px !important;
     }
+
 
 }
 

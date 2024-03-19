@@ -1,11 +1,31 @@
 
 import styles from './rating.module.css'
+import { IoStarSharp } from "react-icons/io5";
 
 const Ratings = ({ handelShowAppointMent }) => {
     return (
         <>
-            <h1>Rating</h1>
-            <button onClick={handelShowAppointMent}>Appointment go</button>
+            <div className={styles.container}>
+                <div className={styles.ratingContainer}>
+                    <h4>Rating</h4>
+                    <div className={styles.stars}>
+                        <div className={styles.starIcons}><IoStarSharp /></div>
+                        <div className={styles.starIcons}><IoStarSharp /></div>
+                        <div className={styles.starIcons}><IoStarSharp /></div>
+                        <div className={styles.starIcons}><IoStarSharp /></div>
+                        <div className={styles.starIcons}><IoStarSharp /></div>
+
+
+                    </div>
+                    <h6>Click To Rotate</h6>
+                    <h5>Your Review</h5>
+                    <textarea defaultValue={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'}>
+
+                    </textarea>
+                    <button onClick={handelShowAppointMent}>Submit</button>
+                </div>
+            </div>
+
         </>
     )
 }

@@ -8,9 +8,11 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, selectLocation, selectUser } from '@/app/Redux/Authslice';
 import Img from '@/assets/images/salonImage.svg'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IoMdAdd } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { ImMenu } from "react-icons/im";
+import { ImCross } from "react-icons/im";
 
 import WishLists from '../userwishLists/wishLists';
 
@@ -75,49 +77,84 @@ const UserProfie = () => {
         setShowWishLists(true)
     }
 
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [profileVisible, setProfileVisible] = useState(true)
+
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setProfileVisible(false);
+            } else {
+                setProfileVisible(true);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const handleToggleMenu = () => {
+        setMenuVisible(!menuVisible);
+    };
+
+    const handleMenuItemClick = () => {
+        setMenuVisible(false);
+    };
+
     return (
 
         <div className={styles.container}>
             <div className={styles.profile}>
-                <div className={styles.profileMenu}>
-                    <div className={styles.menuItemAccount}>
-                        <h4>  <CiUser />ACCOUNT SETTINGS</h4>
-                        <button
-                            className={` ${showProfileInfo ? styles.activeLink : styles.profileBtn}`}
-                            onClick={handleProfileInfoClick} >
-                            Profile Information
-                        </button>
-                        <button
-                            className={`${showManageAddress ? styles.activeLink : styles.profileBtn}`}
-                            onClick={handleManageAddressClick}
-                        >Manage Addresses</button>
-                    </div>
-                    {/* <hr /> */}
-                    <div className={styles.menuItem}>
-                        <h4><BsWallet2 />PAYMENTS</h4>
-                        <p>Wallet</p>
-                        <p>Gift Cards</p>
-                        <p>Saved UPI</p>
-                        <p>Saved Cards</p>
+                {menuVisible ? (
+                    <ImCross className={styles.humburgerCross} onClick={handleToggleMenu} />
+                ) : (
+                    <> <ImMenu className={styles.humburger} onClick={handleToggleMenu} /><h4 className={styles.accountSetting}>  <CiUser />ACCOUNT SETTINGS</h4></>
+                )}
+                {(profileVisible || menuVisible) && (
+                    <div className={`${styles.profileMenu} ${menuVisible ? styles.visible : ''}`}>
 
-                    </div>
-                    <hr />
-                    <div className={`${styles.menuItem} ${styles.lastBtn}`}>
-                        <h4><BsWallet2 />MY STUFF</h4>
-                        <p>My Coupons</p>
-                        <p>My Reviews & Rating</p>
-                        <p>All Notification</p>
-                        <p className={` ${showWishLists ? styles.activeLink : styles.profileBtn}`}
-                            onClick={handelWishLists}>My Wishlist</p>
+                        <div className={styles.menuItemAccount} onClick={handleMenuItemClick}>
+                            <h4 className={styles.account}>  <CiUser />ACCOUNT SETTINGS</h4>
+                            <button
+                                className={` ${showProfileInfo ? styles.activeLink : styles.profileBtn}`}
+                                onClick={handleProfileInfoClick} >
+                                Profile Information
+                            </button>
+                            <button
+                                className={`${showManageAddress ? styles.activeLink : styles.profileBtn}`}
+                                onClick={handleManageAddressClick}
+                            >Manage Addresses</button>
+                        </div>
 
-                    </div>
-                    <hr />
-                    <div className={styles.menuItem}>
-                        <h4 onClick={handleLogOut} className={styles.logout}><IoLogOutOutline />LOGOUT</h4>
+                        {/* <hr /> */}
+                        <div className={styles.menuItem} onClick={handleMenuItemClick}>
+                            <h4><BsWallet2 />PAYMENTS</h4>
+                            <p>Wallet</p>
+                            <p>Gift Cards</p>
+                            <p>Saved UPI</p>
+                            <p>Saved Cards</p>
+
+                        </div>
+                        <hr />
+                        <div className={`${styles.menuItem} ${styles.lastBtn}`} onClick={handleMenuItemClick}>
+                            <h4><BsWallet2 />MY STUFF</h4>
+                            <p>My Coupons</p>
+                            <p>My Reviews & Rating</p>
+                            <p>All Notification</p>
+                            <p className={` ${showWishLists ? styles.activeLink : styles.profileBtn}`}
+                                onClick={handelWishLists}>My Wishlist</p>
+
+                        </div>
+                        <hr />
+                        <div className={styles.menuItem} onClick={handleMenuItemClick}>
+                            <h4 onClick={handleLogOut} className={styles.logout}><IoLogOutOutline />LOGOUT</h4>
 
 
+                        </div>
                     </div>
-                </div>
+                )}
                 {showProfileInfo && (
                     <div className={styles.profileInfo}>
                         <div className={styles.profileDetails}>
