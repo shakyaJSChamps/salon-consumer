@@ -13,6 +13,9 @@ import notify from '@/utils/notify';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '@/app/Redux/Authslice';
 
+
+
+
 const initialValues = {
   phoneNumber: "",
   otp: "",
@@ -57,7 +60,12 @@ function LoginPage() {
           const response = await verifyUser(verifyData)
           console.log("response----", response)
           if (response.data.statusCode == "200") {
-            dispatch(loginUser(response.data));
+            const authToken = response.data.data.authToken;
+            const userInfo = {
+              profile: response.data.data.profile,
+              role: response.data.data.role,
+            }
+            dispatch(loginUser({ authToken, userInfo }));
             router.push('/');
           } else {
             notify.error(response.data.message);
