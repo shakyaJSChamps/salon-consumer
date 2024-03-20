@@ -15,6 +15,7 @@ import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
 
 import WishLists from '../userwishLists/wishLists';
+import { useRouter } from 'next/navigation';
 
 
 const UserProfie = () => {
@@ -34,6 +35,7 @@ const UserProfie = () => {
         phoneNumber: false,
         city: false
     });
+    const router=useRouter();
     // Function to toggle edit mode for a specific input field
     const handleEditClick = (field) => {
         setEditModes(prevState => ({
@@ -52,6 +54,7 @@ const UserProfie = () => {
 
     const handleLogOut = () => {
         dispatch(logoutUser())
+        router.push('/')
     }
     const [showProfileInfo, setShowProfileInfo] = useState(true);
     const [showManageAddress, setShowManageAddress] = useState(false);

@@ -23,8 +23,8 @@ function checkAuthentication(request) {
   // request.authToken
   // const authToken = request.authToken.get('authToken');
   // const {authToken}=useSelector()
-  // const authToken = Session.get('authToken');
-  // console.log("authToken-->",authToken);
+  const authToken = Session.get('authToken');
+  console.log("authToken-->",authToken);
   return authToken !== undefined; // Return true if authenticated, false otherwise
 }
 

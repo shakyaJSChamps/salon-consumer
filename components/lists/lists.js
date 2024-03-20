@@ -160,7 +160,7 @@ const Lists = (props) => {
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
                                         <div className={styles.titles}>
-                                            <h2>{salon.title || salon.facility}</h2>
+                                            <h2>{salon.firstName || salon.facility}</h2>
                                             <p className={styles.buddyType}>{salon.type}</p>
                                             <p className={styles.locations}><LocationOnIcon /> {salon.location}</p>
                                         </div>
@@ -171,7 +171,7 @@ const Lists = (props) => {
                                     </div>
                                     <div className={styles.ratings}>
                                         <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
-                                        <p>{salon.category}</p>
+                                        <p>{salon.serviceType}</p>
                                     </div>
                                     <p className={styles.description}>  {salon.description}</p>
                                     <Link href={`/salonlist/${salon._id}`}>
