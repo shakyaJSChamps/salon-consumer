@@ -178,7 +178,7 @@ const Lists = (props) => {
                                     </div>
                                     <div className={styles.ratings}>
                                         <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
-                                        <p>{salon.serviceType}</p>
+                                        <p>{salon.category}</p>
                                     </div>
                                     <p className={styles.description}>  {salon.address}</p>
                                     <Link href={`/salonlist/${salon.id}`}>
