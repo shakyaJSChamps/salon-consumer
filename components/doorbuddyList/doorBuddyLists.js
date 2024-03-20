@@ -13,7 +13,7 @@ const DoorBuddyList = () => {
                 title="Door Buddy"
                 buttonLabel="Set Appointment"
                 imageSrc={Img}
-                dataList={DoorBuddyData}
+                lists={DoorBuddyData}
                 Rating={Rating}
                 Distance={Distance}
                 Category={Category}

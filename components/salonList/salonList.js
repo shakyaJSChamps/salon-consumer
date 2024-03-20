@@ -9,13 +9,13 @@ import { getSalonLists } from "@/api/account.api";
 
 
 const SalonList = () => {
-    const [salonData, setSalonData] = useState([]);
+    const [lists, setLists] = useState([]);
     useEffect(() => {
         const getSalonList = async () => {
             try {
                 const response = await getSalonLists()
-                setSalonData(response.data); // Assuming response.data is the list of salons
-                console.log("response in salon list", response?.data)
+                setLists(response?.data?.data?.items); // Assuming response.data is the list of salons
+
             } catch (error) {
                 console.error('Error fetching salon data:', error);
                 // Handle error, show error message, etc.
@@ -29,7 +29,7 @@ const SalonList = () => {
                 title="Salon"
                 buttonLabel="View Details"
                 imageSrc={Img}
-                dataList={salonData}
+                lists={lists}
                 ShopsCategory={ShopsCategory}
                 Rating={Rating}
                 Distance={Distance}
