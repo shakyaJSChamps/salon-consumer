@@ -8,55 +8,79 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 
 
-const Lists = (props) => {
-    const { title, buttonLabel, imageSrc, dataList, Rating, Distance, Category, ShopsCategory, calendraImages, GoLocation, RiScissors2Line, GiComb, doorBuddyBtn, doorBuddyFind, doorbuddy } = props;
 
-    const [selectedCategories, setSelectedCategories] = useState([]);
+const FilterServices = ({ title, options, selectedOptions, onChange, formatOption, getUniqueValues }) => {
+    return (
+        <div className={styles.shopCategory}>
+            <h5>{title}</h5>
+            {options?.map((option, index) => (
+                <div key={index} className={styles.checkboxContainer}>
+                    <input
+                        type="checkbox"
+                        id={option}
+                        value={option}
+                        className={styles.checkboxes}
+                        checked={selectedOptions[option] || false}
+                        onChange={() => onChange(option)}
+                    />
+                    <label htmlFor={option}>{formatOption ? formatOption(option) : option}</label>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+
+
+
+const Lists = (props) => {
+    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy } = props;
+
+    const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [selectedRatings, setSelectedRatings] = useState({});
 
-    const handleCategoryChange = (category) => {
-        const newSelectedCategories = { ...selectedCategories };
-        if (newSelectedCategories[category]) {
-            delete newSelectedCategories[category];
-        } else {
-            newSelectedCategories[category] = true;
+    const handleFilterChange = (option, type) => {
+        switch (type) {
+            case 'serviceType':
+                setSelectedServiceTypes(prevFacilities => ({
+                    ...prevFacilities,
+                    [option]: !prevFacilities[option]
+                }));
+                break;
+            case 'facility':
+                setFacilities(prevFacilities => ({
+                    ...prevFacilities,
+                    [option]: !prevFacilities[option]
+                }));
+                break;
+            case 'rating':
+                setSelectedRatings(prevSelectedRatings => ({
+                    ...prevSelectedRatings,
+                    [option]: !prevSelectedRatings[option]
+                }));
+                break;
+            default:
+                break;
         }
-        setSelectedCategories(newSelectedCategories);
-    };
-
-    const handleFacilityChange = (facility) => {
-        const newFacilities = { ...facilities };
-        if (newFacilities[facility]) {
-            delete newFacilities[facility];
-        } else {
-            newFacilities[facility] = true;
-        }
-        setFacilities(newFacilities);
-    };
-
-    const handleRatingChange = (rating) => {
-        const newSelectedRatings = { ...selectedRatings };
-        if (newSelectedRatings[rating]) {
-            delete newSelectedRatings[rating];
-        } else {
-            newSelectedRatings[rating] = true;
-        }
-        setSelectedRatings(newSelectedRatings);
     };
 
     const handelClearFilters = () => {
-        setSelectedCategories([]);
+        setSelectedServiceTypes([]);
         setFacilities([]);
         setSelectedRatings({});
     };
 
-    const filteredData = dataList.filter(item => {
-        const categoryMatch = Object.keys(selectedCategories).length === 0 || selectedCategories[item.category];
+    const listFilter = lists.filter(item => {
         const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
         const ratingMatch = Object.keys(selectedRatings).length === 0 || selectedRatings[item.rating];
-        return categoryMatch && facilityMatch && ratingMatch;
+        const serviceTypeMatch = selectedServiceTypes.length === 0 || selectedServiceTypes[item.serviceType];
+        return facilityMatch && ratingMatch && serviceTypeMatch
     });
+    const getUniqueServices = (array, property) => {
+        return [...new Set(array.map(item => item[property]))];
+    };
+
 
     return (
         <>
@@ -64,9 +88,7 @@ const Lists = (props) => {
                 <div className={styles.findsSalon}>
                     <div className={doorBuddyFind ? styles.doorBuddyFind : styles.find}>
                         <div className={styles.findsIcons}>
-
                             {doorbuddy && <Image src={doorbuddy} alt='doorbuddy' height={50} width={50} />}
-
                             {calendraImages && <Image src={calendraImages} alt='calendra' height={55} width={65} />}
                         </div>
                         <div className={styles.findsDetails}>
@@ -85,55 +107,36 @@ const Lists = (props) => {
                             </div>
                         </div>
                         <div className={styles.categoryContainer}>
-                            {ShopsCategory && <div className={styles.shopCategory}>
-                                <h5>Shops Category</h5>
-                                {ShopsCategory.map((categories, index) => (
-                                    <div key={index} className={styles.checkboxContainer}>
-                                        <input
-                                            type="checkbox"
-                                            id={categories}
-                                            value={categories}
-                                            className={styles.checkboxes}
-                                            checked={facilities[categories] || false}
-                                            onChange={() => handleFacilityChange(categories)}
-                                        />
-                                        <label htmlFor={categories}>{categories}</label>
-                                    </div>
-                                ))}
-                            </div>}
+                            <FilterServices
+                                title="Shops Category"
+                                options={ShopsCategory}
+                                selectedOptions={facilities}
+                                onChange={(option) => handleFilterChange(option, 'facility')}
+                            />
+
+                            <FilterServices
+                                title="Category"
+                                options={getUniqueServices(lists, 'serviceType')}
+                                selectedOptions={selectedServiceTypes}
+                                onChange={(option) => handleFilterChange(option, 'serviceType')}
+                            />
+
+                            <FilterServices
+                                title="Rating"
+                                options={getUniqueServices(lists, 'rating')}
+                                selectedOptions={selectedRatings}
+                                onChange={(option) => handleFilterChange(option, 'rating')}
+                                formatOption={(option) => `${option}.0`}
+                            />
+
+
                             <div className={styles.shopCategory}>
-                                <h5>Category</h5>
-                                {Category.map((category, index) => (
-                                    <div key={index} className={styles.checkboxContainer}>
-                                        <input
-                                            type="checkbox"
-                                            id={category}
-                                            value={category}
-                                            className={styles.checkboxes}
-                                            checked={selectedCategories[category] || false}
-                                            onChange={() => handleCategoryChange(category)}
-                                        />
-                                        <label htmlFor={category}>{category.toUpperCase()}</label>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className={styles.shopCategory}>
-                                <h5>Rating</h5>
-                                {Rating.map((rating, index) => (
-                                    <div key={index} className={styles.checkboxContainer}>
-                                        <input
-                                            type="checkbox"
-                                            id={rating}
-                                            value={rating}
-                                            className={styles.checkboxes}
-                                            checked={selectedRatings[rating] || false}
-                                            onChange={() => handleRatingChange(rating)}
-                                        />
-                                        <label htmlFor={rating}>{rating}-Star</label>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className={styles.shopCategory}>
+                                {/* <FilterServices
+                                    title="Distance"
+                                    options={Rating}
+                                    selectedOptions={selectedRatings}
+                                    onChange={(option) => handleFilterChange(option, 'distance')}
+                                /> */}
                                 <h5>Distance</h5>
                                 {Distance.map((distance, index) => (
                                     <div key={index} className={styles.checkboxContainer}>
@@ -152,19 +155,23 @@ const Lists = (props) => {
                         </div>
                     </div>
                     <div className={styles.salonList}>
-                        {filteredData.map((salon, index) => (
+                        {listFilter.map((salon, index) => (
+
                             <div key={index} className={styles.salonDetails}>
+                                {console.log("Salon:", salon)}
                                 <div className={styles.img}>
+                                    {/* <Image src={salon.mainGateImageUrl} alt="image" style={{ width: "100%", height: "100%" }} fill={true} /> */}
                                     <Image src={imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
                                 </div>
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
                                         <div className={styles.titles}>
-                                            <h2>{salon.firstName || salon.facility}</h2>
-                                            <p className={styles.buddyType}>{salon.type}</p>
-                                            <p className={styles.locations}><LocationOnIcon /> {salon.location}</p>
+                                            <h2>{salon.title || salon.name}</h2>
+                                            <p className={styles.buddyType}>
+                                                {salon.serviceType}</p>
+                                            <p className={styles.locations}><LocationOnIcon /> {salon.city}</p>
                                         </div>
-                                        <div className={styles.wishlists}>
+                                        <div className={styles.wishlists} style={{ backgroundColor: salon.isFavorite ? 'red' : 'transparent' }}>
                                             <CiHeart />
                                             <p>wishList</p>
                                         </div>
@@ -173,8 +180,8 @@ const Lists = (props) => {
                                         <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
                                         <p>{salon.serviceType}</p>
                                     </div>
-                                    <p className={styles.description}>  {salon.description}</p>
-                                    <Link href={`/salonlist/${salon._id}`}>
+                                    <p className={styles.description}>  {salon.address}</p>
+                                    <Link href={`/salonlist/${salon.id}`}>
                                         <button className={doorBuddyBtn ? styles.doorBuddyBtn : ""}>{buttonLabel}</button>
                                     </Link>
                                 </div>
