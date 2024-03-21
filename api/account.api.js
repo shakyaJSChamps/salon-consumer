@@ -1,7 +1,6 @@
 import HTTP from '@/service/http';
 import { methods } from '../constants/page'
 import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList } from '@/constants/endpoints'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_verify } from '@/constants/endpoints'
 
 
 
