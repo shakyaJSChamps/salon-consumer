@@ -35,6 +35,7 @@ const FilterServices = ({ title, options, selectedOptions, onChange, formatOptio
 
 const Lists = (props) => {
     const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy } = props;
+    console.log("list doorbuddy", lists)
 
     const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
@@ -71,14 +72,14 @@ const Lists = (props) => {
         setSelectedRatings({});
     };
 
-    const listFilter = lists.filter(item => {
+    const listFilter = lists?.filter(item => {
         const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
         const ratingMatch = Object.keys(selectedRatings).length === 0 || selectedRatings[item.rating];
         const serviceTypeMatch = selectedServiceTypes.length === 0 || selectedServiceTypes[item.serviceType];
         return facilityMatch && ratingMatch && serviceTypeMatch
     });
     const getUniqueServices = (array, property) => {
-        return [...new Set(array.map(item => item[property]))];
+        return [...new Set(array?.map(item => item[property]))];
     };
 
 
@@ -155,7 +156,7 @@ const Lists = (props) => {
                         </div>
                     </div>
                     <div className={styles.salonList}>
-                        {listFilter.map((salon, index) => (
+                        {listFilter?.map((salon, index) => (
 
                             <div key={index} className={styles.salonDetails}>
                                 {console.log("Salon:", salon)}
