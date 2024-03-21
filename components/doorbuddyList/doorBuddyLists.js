@@ -25,6 +25,7 @@ const DoorBuddyList = () => {
         };
         fetchList();
     }, []);
+
     return (
         <>
             <Lists

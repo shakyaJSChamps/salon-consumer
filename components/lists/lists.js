@@ -168,7 +168,8 @@ const Lists = (props) => {
                             <div key={index} className={styles.salonDetails}>
                                 {console.log("Salon:", salon)}
                                 <div className={styles.img}>
-                                    {/* <Image src={salon.mainGateImageUrl} alt="image" style={{ width: "100%", height: "100%" }} fill={true} /> */}
+                                    {console.log("imges", salon.mainGateImageUrl)}
+                                    {/* <Image src={salon.mainGateImageUrl} alt="ima" style={{ width: "100%", height: "100%" }} fill={true} /> */}
                                     <Image src={imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
                                 </div>
                                 <div className={styles.details}>
@@ -186,6 +187,7 @@ const Lists = (props) => {
                                     </div>
                                     <div className={styles.ratings}>
                                         <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
+                                        <p>{salon.serviceType}</p>
                                         <p>{salon.serviceType}</p>
                                     </div>
                                     <p className={styles.description}>  {salon.address}</p>
