@@ -73,10 +73,10 @@ const Lists = (props) => {
     };
 
     const listFilter = lists?.filter(item => {
-        const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
-        const ratingMatch = Object.keys(selectedRatings).length === 0 || selectedRatings[item.rating];
-        const serviceTypeMatch = selectedServiceTypes.length === 0 || selectedServiceTypes[item.serviceType];
-        return facilityMatch && ratingMatch && serviceTypeMatch
+        //const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
+        const ratingMatch = Object.values(selectedRatings).some(val => val === true) ? selectedRatings[item.rating] : true;
+        const serviceTypeMatch = Object.values(selectedServiceTypes).some(val => val === true) ? selectedServiceTypes[item.serviceType] : true;
+        return ratingMatch && serviceTypeMatch;
     });
     const getUniqueServices = (array, property) => {
         return [...new Set(array?.map(item => item[property]))];
@@ -161,25 +161,38 @@ const Lists = (props) => {
                             <div key={index} className={styles.salonDetails}>
                                 {console.log("Salon:", salon)}
                                 <div className={styles.img}>
-                                    {/* <Image src={salon.mainGateImageUrl} alt="image" style={{ width: "100%", height: "100%" }} fill={true} /> */}
+                                    {console.log("imges", salon.mainGateImageUrl)}
+                                    {/* <Image src={salon.mainGateImageUrl} alt="ima" style={{ width: "100%", height: "100%" }} fill={true} /> */}
                                     <Image src={imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
                                 </div>
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
                                         <div className={styles.titles}>
-                                            <h2>{salon.title || salon.name}</h2>
+                                            <h6>{salon.title || salon.name}</h6>
                                             <p className={styles.buddyType}>
-                                                {salon.serviceType}</p>
+                                                {/* {salon.serviceType} */}
+                                            </p>
                                             <p className={styles.locations}><LocationOnIcon /> {salon.city}</p>
                                         </div>
-                                        <div className={styles.wishlists} style={{ backgroundColor: salon.isFavorite ? 'red' : 'transparent' }}>
-                                            <CiHeart />
+                                        <div className={styles.wishlists} >
+                                            {salon.isFavorite ?
+
+                                                (<div className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}></div>)
+                                                : (
+                                                    <CiHeart />
+                                                )
+
+
+
+                                            }
+
+
                                             <p>wishList</p>
                                         </div>
                                     </div>
                                     <div className={styles.ratings}>
                                         <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
-                                        <p>{salon.category}</p>
+                                        <p>{salon.serviceType}</p>
                                     </div>
                                     <p className={styles.description}>  {salon.address}</p>
                                     <Link href={`/salonlist/${salon.id}`}>

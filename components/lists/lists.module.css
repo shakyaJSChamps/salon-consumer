@@ -7,7 +7,7 @@
     background-color: black;
     color: white;
     width: 320px;
-    padding: 20px 20px;
+    padding: 20px 40px;
     border-radius: 15px;
     margin: 30px 0px;
     display: flex;
@@ -70,9 +70,57 @@
 
 }
 
+
+.heart {
+    width: 12px;
+    height: 12px;
+    position: relative;
+    transform: rotate(-48deg);
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    background-color: rgb(211, 37, 37);
+    border-radius: 58%;
+}
+
+.heart::before {
+    top: -7px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 7px;
+}
+
+.heart.nonFavorite::before,
+.heart.nonFavorite::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.heart.favorite {
+    background-color: rgb(211, 37, 37);
+}
+
+.heart.nonFavorite {
+    background-color: black;
+}
+
 .find p {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .find h1 {
@@ -84,6 +132,12 @@
     display: flex;
     justify-content: center;
     gap: 40px;
+}
+
+
+.titles h6 {
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .salonListFilter {
@@ -148,7 +202,7 @@
 }
 
 .wishlists p {
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .ratings {
@@ -172,7 +226,7 @@
 }
 
 .ratings p {
-    line-height: 25px;
+    /* line-height: 25px; */
 }
 
 .salonDetails svg {
@@ -182,19 +236,24 @@
 .locations {
     line-height: 30px;
     display: flex;
-    gap: 18px;
+    gap: 3px;
     align-items: center;
 
 }
 
 .wishlists svg {
-    font-size: 20px;
+    font-size: 24px;
     text-align: center;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .wishlists {
     text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
 }
 
 
@@ -245,8 +304,8 @@
 }
 
 .locations {
-    font-size: 13px;
-    line-height: 40px;
+    font-size: 17px;
+    /* line-height: 40px; */
 }
 
 .buddyType {
