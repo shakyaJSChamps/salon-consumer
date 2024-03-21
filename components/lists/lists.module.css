@@ -264,6 +264,20 @@
 .doorBuddyBtn {
     padding: 13px 69px !important;
 }
+.showMoreButton{
+    margin: 0px 0px 10px 54%;
+}
+.showMoreButton button{
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.showMoreButton button:hover{
+    color: blue;
+}
 
 @media screen and (max-width:1400px) {
 

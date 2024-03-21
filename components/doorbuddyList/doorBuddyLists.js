@@ -5,29 +5,33 @@ import { DoorBuddyData, Rating, Distance, Category, } from './data';
 import Img from '@/assets/images/Rectangle 25156 (2).svg';
 import Lists from "@/components/lists/lists";
 import doorbuddy from '@/assets/images/doorbuddy.svg'
-import { getDoorBuddList } from "@/api/account.api";
 import { useEffect, useState } from "react";
+import { getDoorBuddyList } from "@/api/account.api";
 
 const DoorBuddyList = () => {
-    const [list,setList]=useState([])
-    console.log("list=======>",list);
-    useEffect(()=>{
-        async function fetchList(){
-            const listData=await getDoorBuddList();
-            // console.log(list);
-            const data=await listData.data.data.items;
-            setList(data);
+    const [lists, setLists] = useState([])
+    console.log("list=======>", lists);
+    useEffect(() => {
+        async function fetchList() {
+            try {
+                const listData = await getDoorBuddyList();
+                // console.log(list);
+                const data = await listData?.data?.data?.items;
+                setLists(await data);
+            } catch (error) {
+                console.log(error)
+            }
 
         };
         fetchList();
-    },[]);
+    }, []);
     return (
         <>
             <Lists
                 title="Door Buddy"
                 buttonLabel="Set Appointment"
                 imageSrc={Img}
-                dataList={list}
+                lists={lists}
                 Rating={Rating}
                 Distance={Distance}
                 Category={Category}
