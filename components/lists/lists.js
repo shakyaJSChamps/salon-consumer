@@ -72,10 +72,10 @@ const Lists = (props) => {
     };
 
     const listFilter = lists.filter(item => {
-        const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
-        const ratingMatch = Object.keys(selectedRatings).length === 0 || selectedRatings[item.rating];
-        const serviceTypeMatch = selectedServiceTypes.length === 0 || selectedServiceTypes[item.serviceType];
-        return facilityMatch && ratingMatch && serviceTypeMatch
+        // const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
+        const ratingMatch = Object.values(selectedRatings).some(val => val === true) ? selectedRatings[item.rating] : true;
+        const serviceTypeMatch = Object.values(selectedServiceTypes).some(val => val === true) ? selectedServiceTypes[item.serviceType] : true;
+        return ratingMatch && serviceTypeMatch;
     });
     const getUniqueServices = (array, property) => {
         return [...new Set(array.map(item => item[property]))];
