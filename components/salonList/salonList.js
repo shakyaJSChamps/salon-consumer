@@ -14,11 +14,11 @@ const SalonList = () => {
         const getSalonList = async () => {
             try {
                 const response = await getSalonLists()
-                setLists(response?.data?.data?.items); // Assuming response.data is the list of salons
+                setLists(response?.data?.data?.items);
 
             } catch (error) {
                 console.error('Error fetching salon data:', error);
-                // Handle error, show error message, etc.
+
             }
         };
         getSalonList();
