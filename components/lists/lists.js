@@ -87,6 +87,7 @@ const Lists = (props) => {
     });
     const getUniqueServices = (array, property) => {
         return [...new Set(array?.map(item => item[property]))];
+
     };
 
 
@@ -200,7 +201,7 @@ const Lists = (props) => {
                     </div>
 
                 </div>
-                {lists.length > visibleItems && (
+                {lists?.length > visibleItems && (
                     <div className={styles.showMoreButton}>
                         <button className={styles.showMoreButton} onClick={handleShowMore}>Show More</button>
                     </div>
