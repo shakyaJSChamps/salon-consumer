@@ -4,20 +4,35 @@ import ShareIcon from '@mui/icons-material/Share';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarsIcon from '@mui/icons-material/Stars';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import SalonService from '@/components/salonService/salonService';
 import SalonGallery from '@/components/salonGallery/salonGallery';
 import AboutSalon from '@/components/aboutSalon/aboutSalon';
+import { getDetailPageData } from '@/api/account.api';
 
 function SalonDetail() {
     // State to keep track of active button
     const [activeButton, setActiveButton] = useState('about');
-
+    const [data, setData]=useState([]);
+    console.log("data----->",data);
     // Function to handle button click and update active button
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
     };
+
+    useEffect(()=>{
+        async function  getsalonData(){
+           try {
+            const detailPageData=await getDetailPageData();
+            setData(detailPageData);
+           } catch (error) {
+            console.log(error);
+           }
+
+        }
+        getsalonData();
+    },[])
     return (
         <div className={styles.container}>
             <div className={styles.salonSlider}>
