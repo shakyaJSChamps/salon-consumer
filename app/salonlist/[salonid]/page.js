@@ -11,7 +11,9 @@ import SalonGallery from '@/components/salonGallery/salonGallery';
 import AboutSalon from '@/components/aboutSalon/aboutSalon';
 import { getDetailPageData } from '@/api/account.api';
 
-function SalonDetail() {
+function SalonDetail({params}) {
+    const salonid=params.salonid
+    console.log("params-----",salonid);
     // State to keep track of active button
     const [activeButton, setActiveButton] = useState('about');
     const [data, setData]=useState([]);
@@ -21,18 +23,18 @@ function SalonDetail() {
         setActiveButton(buttonName);
     };
 
-    useEffect(()=>{
-        async function  getsalonData(){
-           try {
-            const detailPageData=await getDetailPageData();
-            setData(detailPageData);
-           } catch (error) {
-            console.log(error);
-           }
-
+    useEffect(() => {
+        async function getSalonData() {
+            try {
+                // Call getDetailPageData with salonid
+                const detailPageData = await getDetailPageData(salonid);
+                setData(detailPageData);
+            } catch (error) {
+                console.log(error);
+            }
         }
-        getsalonData();
-    },[])
+        getSalonData();
+    }, [salonid]);
     return (
         <div className={styles.container}>
             <div className={styles.salonSlider}>

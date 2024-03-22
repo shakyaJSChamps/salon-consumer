@@ -1,6 +1,6 @@
 import HTTP from '@/service/http';
 import { methods } from '../constants/page'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData } from '@/constants/endpoints'
+import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData} from '@/constants/endpoints'
 
 
 
@@ -13,5 +13,5 @@ export const getSalonLists = () =>
   HTTP.Request(methods.GET, __endpoint_getSaloonList);
   export const getDoorBuddyList = (payload)=>
   HTTP.Request(methods.GET,__endpoint_getDoorBuddyList,payload);
-  export const getDetailPageData = (payload)=>
-  HTTP.Request(methods.GET,__endpoint_getDetailPageData,payload);
+  export const getDetailPageData = (salonid)=>
+  HTTP.Request(methods.GET,`${__endpoint_getDetailPageData}/${salonid}`);

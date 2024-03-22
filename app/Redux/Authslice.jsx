@@ -37,7 +37,7 @@ export const authSlice = createSlice({
             Session.remove('isLoggedIn');
         },
         userLocations: (state, action) => {
-            //  console.log("location reducer", action.payload)
+            console.log("location reducer", action.payload)
             state.location = action.payload;
         },
     },

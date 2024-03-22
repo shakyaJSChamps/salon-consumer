@@ -6,6 +6,7 @@ import { CiHeart } from 'react-icons/ci';
 import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
+import nextConfig from '@/next.config.mjs';
 
 
 
@@ -168,9 +169,12 @@ const Lists = (props) => {
 
                             <div key={index} className={styles.salonDetails}>
                                 {console.log("Salon:", salon)}
+                                {console.log("next config",
+                                    nextConfig.images.domains[0].salon)}
                                 <div className={styles.img}>
-                                    {console.log("imges", salon.mainGateImageUrl)}
-                                    {/* <Image src={salon.mainGateImageUrl} alt="ima" style={{ width: "100%", height: "100%" }} fill={true} /> */}
+                                    {/* {console.log("imges", salon.mainGateImageUrl)}
+                                    <Image src={salon.mainGateImageUrl}
+                                        alt="salonImage" style={{ width: "100%", height: "100%" }} fill={true} /> */}
                                     <Image src={imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
                                 </div>
                                 <div className={styles.details}>
