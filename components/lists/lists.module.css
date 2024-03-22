@@ -171,6 +171,12 @@
 
 .img {
     flex: 1;
+    height: 180px;
+    overflow: hidden;
+}
+
+.img img {
+    object-fit: cover !important;
 }
 
 .details {
@@ -388,6 +394,12 @@
     .doorBuddyBtn {
         padding: 13px 56px !important;
     }
+
+    .img {
+
+        height: 184px;
+    }
+
 }
 
 @media screen and (max-width:768px) {
@@ -462,6 +474,10 @@
     .doorBuddyBtn {
         padding: 13px 69px !important;
     }
+
+    /* .img {
+        flex: unset !important;
+    } */
 }
 
 @media screen and (max-width:600px) {
@@ -521,6 +537,18 @@
         padding: 13px 71px !important;
     }
 
+    .find {
+        width: 300px;
+        margin: auto;
+        justify-content: center;
+        gap: 25px;
+
+    }
+
+    .img {
+        flex: unset !important;
+    }
+
 }
 
 @media screen and (max-width:475px) {
@@ -552,5 +580,11 @@
 
     .doorBuddyBtn {
         padding: 13px 60px !important;
+    }
+
+    .find {
+        width: 285px;
+        margin: auto;
+        justify-content: center;
     }
 }

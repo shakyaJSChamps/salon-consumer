@@ -19,7 +19,7 @@ function Authlink() {
     const user = useSelector(selectUser);
     // const location = useSelector(selectLocation)
     // console.log("location auth link", location)  get location from every where
-    const userName = user ? user.name : "Signin/Signup"; // Set default value if user is not available
+    const userName = user?.name
 
     const handleToggleMenu = () => {
         setMenu(!menu);

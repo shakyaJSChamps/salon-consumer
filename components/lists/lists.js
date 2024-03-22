@@ -37,7 +37,6 @@ const FilterServices = ({ title, options, selectedOptions, onChange, formatOptio
 const Lists = (props) => {
     const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy } = props;
 
-
     const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [selectedRatings, setSelectedRatings] = useState({});
@@ -168,14 +167,13 @@ const Lists = (props) => {
                         {listFilter?.slice(0, visibleItems).map((salon, index) => (
 
                             <div key={index} className={styles.salonDetails}>
-                                {console.log("Salon:", salon)}
-                                {console.log("next config",
-                                    nextConfig.images.domains[0].salon)}
                                 <div className={styles.img}>
-                                    {/* {console.log("imges", salon.mainGateImageUrl)}
-                                    <Image src={salon.mainGateImageUrl}
-                                        alt="salonImage" style={{ width: "100%", height: "100%" }} fill={true} /> */}
-                                    <Image src={imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
+                                    <Image
+                                        src={salon.mainGateImageUrl}
+                                        alt="image"
+                                        style={{ width: "100%", height: "100%" }}
+                                        width={10} height={10}
+                                    />
                                 </div>
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
