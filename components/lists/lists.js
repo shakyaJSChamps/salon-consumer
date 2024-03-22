@@ -165,7 +165,7 @@ const Lists = (props) => {
                                     nextConfig.images.domains[0].salon)}
                                 <div className={styles.img}>
                                     {/* {console.log("imges", salon.mainGateImageUrl)}
-                                    <Image src={nextConfig.images.domains[0].salon.mainGateImageUrl}
+                                    <Image src={salon.mainGateImageUrl}
                                         alt="salonImage" style={{ width: "100%", height: "100%" }} fill={true} /> */}
                                     <Image src={imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
                                 </div>
