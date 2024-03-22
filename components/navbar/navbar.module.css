@@ -6,8 +6,13 @@
     padding: 15px 30px;
     gap: 20px;
 }
+.logo{
+    display: flex;
+    align-items: center;
+}
 .logo img{
-    mix-blend-mode:hard-light;
+    width: 270px;
+    height: auto;
 }
 
 .links {

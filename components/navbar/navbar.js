@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image';
 import styles from './navbar.module.css'
-import logo from '@/assets/images/logo.svg'
+import logo from '@/assets/images/stylrax_brand.png'
 import Link from 'next/link';
 import salons from "@/assets/images/saloon.svg"
 import services from "@/assets/images/services.svg"

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styles from './footer.module.css'
 import Image from 'next/image';
-import Stylrax from '@/assets/images/Group 1000003838.svg'
+import Stylrax from '@/assets/images/stylrax_brand.png'
 import AppStore from '@/assets/images/Group.svg'
 import GooglePlays from '@/assets/images/Google Play.svg'
 import { MdFacebook } from "react-icons/md";
@@ -14,7 +14,7 @@ function Footer() {
     <div className={styles.container}>
       <div className={styles.links}>
         <div className={styles.footerItem}>
-          <Image src={Stylrax} />
+          <Image src={Stylrax} alt='Stylrax_brand' />
           <i className={styles.designs}>Lorem Impsum Sit Dot emet</i>
         </div>
         <div className={styles.footerItem}>

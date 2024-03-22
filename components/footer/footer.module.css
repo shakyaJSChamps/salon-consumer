@@ -23,6 +23,10 @@
     line-height: 21px;
     width: 10%;
 }
+.footerItem img{
+    width: 262px;
+    height: auto;
+}
 
 .footerItem:nth-child(1) {
     flex-basis: 20%;

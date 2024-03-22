@@ -41,6 +41,13 @@ const Lists = (props) => {
     const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [selectedRatings, setSelectedRatings] = useState({});
+    const [visibleItems, setVisibleItems] = useState(5); // State to manage number of visible items
+
+    const handleShowMore = () => {
+        setVisibleItems(prevVisibleItems => prevVisibleItems + 5); // Increase visible items count by 5
+    };
+
+    // listFilter = lists?.slice(0, visibleItems);
 
     const handleFilterChange = (option, type) => {
         switch (type) {
@@ -74,13 +81,14 @@ const Lists = (props) => {
     };
 
     const listFilter = lists?.filter(item => {
-        //const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
+        // const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
         const ratingMatch = Object.values(selectedRatings).some(val => val === true) ? selectedRatings[item.rating] : true;
         const serviceTypeMatch = Object.values(selectedServiceTypes).some(val => val === true) ? selectedServiceTypes[item.serviceType] : true;
         return ratingMatch && serviceTypeMatch;
     });
     const getUniqueServices = (array, property) => {
         return [...new Set(array?.map(item => item[property]))];
+
     };
 
 
@@ -157,7 +165,7 @@ const Lists = (props) => {
                         </div>
                     </div>
                     <div className={styles.salonList}>
-                        {listFilter?.map((salon, index) => (
+                        {listFilter?.slice(0, visibleItems).map((salon, index) => (
 
                             <div key={index} className={styles.salonDetails}>
                                 {console.log("Salon:", salon)}
@@ -172,10 +180,9 @@ const Lists = (props) => {
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
                                         <div className={styles.titles}>
-                                            <h6>{salon.title || salon.name}</h6>
+                                            <h2>{salon.title || salon.name || `${`${salon.firstName} ${salon.lastName} `}`}</h2>
                                             <p className={styles.buddyType}>
-                                                {/* {salon.serviceType} */}
-                                            </p>
+                                                {salon.specialization}</p>
                                             <p className={styles.locations}><LocationOnIcon /> {salon.city}</p>
                                         </div>
                                         <div className={styles.wishlists} >
@@ -192,6 +199,7 @@ const Lists = (props) => {
                                     <div className={styles.ratings}>
                                         <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
                                         <p>{salon.serviceType}</p>
+                                        <p>{salon.serviceType}</p>
                                     </div>
                                     <p className={styles.description}>  {salon.address}</p>
                                     <Link href={`/salonlist/${salon.id}`}>
@@ -201,7 +209,13 @@ const Lists = (props) => {
                             </div>
                         ))}
                     </div>
+
                 </div>
+                {lists?.length > visibleItems && (
+                    <div className={styles.showMoreButton}>
+                        <button className={styles.showMoreButton} onClick={handleShowMore}>Show More</button>
+                    </div>
+                )}
             </div>
         </>
     );
