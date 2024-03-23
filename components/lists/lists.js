@@ -168,12 +168,26 @@ const Lists = (props) => {
 
                             <div key={index} className={styles.salonDetails}>
                                 <div className={styles.img}>
-                                    <Image
-                                        src={salon.mainGateImageUrl}
-                                        alt="image"
-                                        style={{ width: "100%", height: "100%" }}
-                                        width={10} height={10}
-                                    />
+                                    <picture>
+                                        <img
+                                            src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc}
+                                            alt="image"
+                                            style={{ width: "100%", height: "100%" }}
+
+                                            fill={true}
+                                        />
+                                    </picture>
+
+
+                                    {/* <Image
+                                        src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc}
+                                        alt="images"
+                                        width={10}
+                                        height={10}
+                                        quality={75}
+                                        priority={true}
+                                    /> */}
+
                                 </div>
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
