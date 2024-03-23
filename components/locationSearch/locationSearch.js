@@ -33,13 +33,31 @@ function LocationSearch() {
         fetchLocation();
     }, [dispatch]);
 
+
     const handleSelectLocation = async (location) => {
-        const locationParts = await HandleSelectLocation(location, setDeniedUserLocation);
-        console.log("location parts import denide", locationParts)
-        if (locationParts) {
-            dispatch(userLocations(locationParts));
+        if (location === "Current Location") {
+            try {
+                // Prompt the browser to ask for permission
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+                console.log("position", position)
+                const location = await GetUserLocation(); // Call GetUserLocation without passing latitude and longitude
+                setUserLocation(location);
+                setPermissionDenied(false);
+                dispatch(userLocations(location));
+            } catch (error) {
+                console.error('Failed to fetch user location:==>', error);
+                setPermissionDenied(true);
+            }
+        } else {
+            const locationParts = await HandleSelectLocation(location, setDeniedUserLocation);
+            if (locationParts) {
+                dispatch(userLocations(locationParts));
+            }
         }
     };
+
 
     return (
         <div className={styles.dropdown}>
@@ -58,6 +76,7 @@ function LocationSearch() {
                     onChange={(e) => handleSelectLocation(e.target.value)}
                 >
                     <option value="Select Location">Select Location</option>
+                    <option value="Current Location">Current Location</option>
                     <option value="Delhi">Delhi</option>
                     <option value="Noida">Noida</option>
                     <option value="Gurugram">Gurugram</option>

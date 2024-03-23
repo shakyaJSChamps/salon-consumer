@@ -24,12 +24,12 @@ function checkAuthentication(request) {
   // const authToken = request.authToken.get('authToken');
   // const {authToken}=useSelector()
   const authToken = Session.get('authToken');
-  console.log("authToken-->",authToken);
+  console.log("authToken-->", authToken);
   return authToken !== undefined; // Return true if authenticated, false otherwise
 }
 
 // Specify the type of middleware and paths to match
 export const config = {
   type: 'function', // Specify the type of middleware
-  matcher: ['/salonlist/salonid/salon', '/my-appointment', '/wishlist'],
+  matcher: ['/salonlist/salonid/salon', '/my-appointment', '/wishlist', '/profile'],
 };

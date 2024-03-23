@@ -9,6 +9,7 @@ export async function GetUserLocation() {
             });
             const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.latitude}&lon=${coords.longitude}`);
             const data = response.data;
+
             const locationParts = data.display_name.split(',').slice(0, 2);
             console.log("location parts", locationParts)
             return locationParts.join(',');

@@ -22,7 +22,7 @@ const UserProfie = () => {
     const userInfo = useSelector(selectUser)
     console.log("user info", userInfo)
     const cityDetails = useSelector(selectLocation)
-    // console.log("city d", cityDetails)
+    console.log("city d", cityDetails)
 
     const dispatch = useDispatch()
     // State to manage edit mode for each input field
@@ -35,7 +35,7 @@ const UserProfie = () => {
         phoneNumber: false,
         city: false
     });
-    const router=useRouter();
+    const router = useRouter();
     // Function to toggle edit mode for a specific input field
     const handleEditClick = (field) => {
         setEditModes(prevState => ({
@@ -242,7 +242,7 @@ const UserProfie = () => {
                                 <div className={styles.details}>
                                     <div className={styles.info}>
                                         <labe className={styles.label}>City</labe>
-                                        <input type="text" placeholder={cityDetails?.address?.city} disabled={!editModes.city} />
+                                        <input type="text" placeholder={cityDetails} disabled={!editModes.city} />
                                         <span className={styles.editsGender} onClick={() => handleEditClick('city')}> {editModes.city ? (
                                             <span className={styles.saves}>SAVE</span>
 

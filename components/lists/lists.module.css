@@ -72,8 +72,8 @@
 
 
 .heart {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     position: relative;
     transform: rotate(-48deg);
     margin-left: 20px;
@@ -83,10 +83,10 @@
 .heart::before,
 .heart::after {
     content: '';
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     position: absolute;
-    background-color: rgb(211, 37, 37);
+    background-color: rgb(228, 75, 75);
     border-radius: 58%;
 }
 
@@ -103,15 +103,15 @@
 .heart.nonFavorite::before,
 .heart.nonFavorite::after {
     content: '';
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     position: absolute;
     background-color: black;
     border-radius: 50%;
 }
 
 .heart.favorite {
-    background-color: rgb(211, 37, 37);
+    background-color: rgb(228, 75, 75);
 }
 
 .heart.nonFavorite {
@@ -171,8 +171,9 @@
 
 .img {
     flex: 1;
-    height: 180px;
+    height: 182px;
     overflow: hidden;
+    position: relative;
 }
 
 .img img {
@@ -329,10 +330,12 @@
 .doorBuddyBtn {
     padding: 13px 69px !important;
 }
-.showMoreButton{
+
+.showMoreButton {
     margin: 0px 0px 10px 54%;
 }
-.showMoreButton button{
+
+.showMoreButton button {
     font-size: 20px;
     border: none;
     background-color: transparent;
@@ -340,9 +343,28 @@
     text-decoration: underline;
     cursor: pointer;
 }
-.showMoreButton button:hover{
+
+.showMoreButton button:hover {
     color: blue;
 }
+
+@media screen and (max-width:2000px) {
+
+    .findsSalon {
+        padding-left: 24%;
+
+    }
+}
+
+
+@media screen and (max-width:1600px) {
+
+    .findsSalon {
+        padding-left: 15%;
+
+    }
+}
+
 
 @media screen and (max-width:1400px) {
 
