@@ -6,6 +6,9 @@ export const __endpoint_verifyUser = endpoint + "account/otp/verify";
 export const __endpoint_getSaloonList = endpoint + "consumer/salons";
 export const __endpoint_getDoorBuddyList = endpoint + "consumer/freelancers";
 export const __endpoint_getDetailPageData = endpoint + "consumer/salons";
+export const __endpoint_getService = (salonid) => {
+    return `${endpoint}consumer/salons/${salonid}/services`;
+};
 // export const __endpoint_putServiceType = endpoint + "admin/services/categories";
 // export const __endpoint_getSaloon = endpoint + "admin/salon ";
 // export const __endpoint_getUser = endpoint + "admin/users";

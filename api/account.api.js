@@ -15,3 +15,5 @@ export const getSalonLists = () =>
   HTTP.Request(methods.GET,__endpoint_getDoorBuddyList,payload);
   export const getDetailPageData = (salonid)=>
   HTTP.Request(methods.GET,`${__endpoint_getDetailPageData}/${salonid}`);
+export const getSalonService= (salonid) =>
+HTTP.Request(methods.GET, `${__endpoint_getServices(salonid)}`);

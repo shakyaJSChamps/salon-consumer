@@ -1,12 +1,13 @@
 "use client"
 import { Grid, Paper } from '@mui/material'
 import styles from './salonService.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import haircut from '@/assets/images/haircolorMen.svg'
 import StarsIcon from '@mui/icons-material/Stars';
 import Divider from '@mui/material/Divider';
 import {useRouter} from 'next/navigation';
+import { getSalonService } from '@/api/account.api';
 
 
 function SalonService() {
@@ -20,10 +21,20 @@ function SalonService() {
   };
   const router=useRouter();
   const handleSalonClick= ()=>{
-    router.push('salonid/salon')
-         
+    router.push('salonid/salon')  
 
   };
+  useEffect(()=>{
+    async  function fetchService(){
+      try {
+        const res=await getSalonService(salonid);
+        console.log("res------->",res);
+      } catch (error) {
+        
+      }
+    }
+    fetchService()
+},[])   
   return (
     <div className={styles.container}>
       <div className={styles.service}>

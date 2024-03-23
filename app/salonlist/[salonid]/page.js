@@ -11,13 +11,13 @@ import SalonGallery from '@/components/salonGallery/salonGallery';
 import AboutSalon from '@/components/aboutSalon/aboutSalon';
 import { getDetailPageData } from '@/api/account.api';
 
-function SalonDetail({params}) {
-    const salonid=params.salonid
-    console.log("params-----",salonid);
+function SalonDetail({ params }) {
+    const salonid = params.salonid
+    console.log("params-----", salonid);
     // State to keep track of active button
     const [activeButton, setActiveButton] = useState('about');
-    const [data, setData]=useState([]);
-    console.log("data----->",data);
+    const [data, setData] = useState([]);
+    console.log("data----->", data);
     // Function to handle button click and update active button
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
@@ -28,7 +28,7 @@ function SalonDetail({params}) {
             try {
                 // Call getDetailPageData with salonid
                 const detailPageData = await getDetailPageData(salonid);
-                setData(detailPageData);
+                setData(detailPageData?.data?.data);
             } catch (error) {
                 console.log(error);
             }
@@ -37,20 +37,21 @@ function SalonDetail({params}) {
     }, [salonid]);
     return (
         <div className={styles.container}>
-            <div className={styles.salonSlider}>
+            <div className={styles.salonSlider} style={{backgroundImage: `url(${data?.mainGateImageUrl})`}}>
                 <div className={styles.sliderTitle}>
-                    <h3>Blue Heaven</h3>
-                    <p>LOrem Ipsum sit Dot Amet</p>
+                    <h3>{data?.name}</h3>
                 </div>
 
             </div>
             <div className={styles.SalonDetails}>
                 <div className={styles.aboutSalon}>
                     <div className={styles.salonName}>
-                        <h2>Blue Heaven</h2>
+                        <h2>{data?.name}</h2>
                         <div className={styles.wishlistIcon}>
                             <ShareIcon className={styles.wIcon} />
-                            <FavoriteBorderIcon className={styles.wIcon}/>
+                            <FavoriteBorderIcon className={styles.wIcon} style={{
+                                color: data?.isFavorite ? "red" : ""
+                            }} />
                         </div>
                     </div>
                     <div className={styles.salonRating}>
@@ -59,15 +60,19 @@ function SalonDetail({params}) {
                     </div>
                     <div className={styles.salonLocation}>
                         <LocationOnIcon className={styles.icon} />
-                        <p>San Salvador Ohio</p>
+                        <p>{`${data?.address},${data?.city}`}</p>
                     </div>
 
                 </div>
                 <div className={styles.salonTiming}>
                     <h4>Working hours</h4>
                     <div className={styles.timing}>
-                        <h3>Monday-Friday<span>10:00AM - 05:00PM</span></h3>
-                        <h3>Saturday-Sunday<span>12:00PM - 03:00PM</span></h3>
+                        {data && data.workingHours && data.workingHours.map((day, index) => (
+                            <h3 key={index}>
+                                {day.day}<span>{`${day.openTime}-${day.closeTime}`}</span>
+                            </h3>
+                        ))}
+
 
                     </div>
                 </div>
@@ -91,7 +96,7 @@ function SalonDetail({params}) {
             )}
             {activeButton === 'gallery' && (
                 <div className={styles.galleryContent}>
-                    <SalonGallery />
+                    <SalonGallery data={data?.gallaryImages} />
                 </div>
             )}
         </div>
