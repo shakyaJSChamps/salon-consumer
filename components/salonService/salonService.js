@@ -10,9 +10,12 @@ import {useRouter} from 'next/navigation';
 import { getSalonService } from '@/api/account.api';
 
 
-function SalonService() {
+function SalonService({id}) {
+  console.log("id::::>",id);
   const [activeButton, setActiveButton] = useState('male');
   const [activeservice, setActiveService] = useState('haircut')
+  const [serviceData, setServiceData] = useState([]);
+  console.log("serviceData:::>",serviceData);
   const handleServiceClick = (serviceName) => {
     setActiveService(serviceName);
   };
@@ -27,14 +30,16 @@ function SalonService() {
   useEffect(()=>{
     async  function fetchService(){
       try {
-        const res=await getSalonService(salonid);
-        console.log("res------->",res);
+        const res=await getSalonService(id);
+        const data= res?.data?.data;
+        setServiceData(data);
+        // console.log("res------->",res);
       } catch (error) {
-        
+        console.log("error:::>",error);
       }
     }
     fetchService()
-},[])   
+},[id])   
   return (
     <div className={styles.container}>
       <div className={styles.service}>
@@ -46,48 +51,16 @@ function SalonService() {
           </div>
           {activeButton === 'male' && (<div className={styles.serviceType}>
             <Grid container spacing={2}>
-              <Grid item xs={5} md={4} className={styles.grid}>
+            {serviceData.map((item, index) => (
+              <Grid item xs={5} md={4} key={index} className={styles.grid}>
                 <button onClick={() => handleServiceClick('haircut')}
                   className={activeservice === 'haircut' ? styles.serviceactive : ''} >
                   <Image src={haircut} alt='haircut' />
-                  <p>Haircut</p>
+                  <p>{item.serviceName}</p>
                 </button>
               </Grid>
-              <Grid item xs={5} md={4} className={styles.grid}>
-                <button onClick={() => handleServiceClick('hair color')}
-                  className={activeservice === 'hair color' ? styles.serviceactive : ''} >
-                  <Image src={haircut} alt='hair color' />
-                  <p>Hair color</p>
-                </button>
-              </Grid>
-              <Grid item xs={5} md={4} className={styles.grid}>
-                <button onClick={() => handleServiceClick('Facial')}
-                  className={activeservice === 'Facial' ? styles.serviceactive : ''} >
-                  <Image src={haircut} alt='haircut' />
-                  <p>Facial</p>
-                </button>
-              </Grid>
-              <Grid item xs={5} md={4} className={styles.grid}>
-                <button onClick={() => handleServiceClick('Massage')}
-                  className={activeservice === 'Massage' ? styles.serviceactive : ''} >
-                  <Image src={haircut} alt='haircut' />
-                  <p>Massage</p>
-                </button>
-              </Grid>
-              <Grid item xs={5} md={4} className={styles.grid}>
-                <button onClick={() => handleServiceClick('Facewash')}
-                  className={activeservice === 'Facewash' ? styles.serviceactive : ''} >
-                  <Image src={haircut} alt='haircut' />
-                  <p>Facewash</p>
-                </button>
-              </Grid>
-              <Grid item xs={5} md={4} className={styles.grid}>
-                <button onClick={() => handleServiceClick('Packege')}
-                  className={activeservice === 'Packege' ? styles.serviceactive : ''} >
-                  <Image src={haircut} alt='haircut' />
-                  <p>Packege</p>
-                </button>
-              </Grid>
+            ))}
+                
 
 
             </Grid>
