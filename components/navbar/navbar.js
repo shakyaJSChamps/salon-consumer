@@ -92,7 +92,7 @@ function Navbar() {
                     <SearchIcon onClick={() => setActive(!active)} className={styles.icon} />
                 </div>
             </div>
-            {open && (<div className={styles.mobileMenu}>
+            {open && (<div className={styles.mobileMenu} onClick={handleClickClose}>
                 {navLinks.map((item, index) => (
                     <Link href={item.url}
                         key={index}
