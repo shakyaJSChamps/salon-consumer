@@ -85,13 +85,13 @@ function SalonDetail({ params }) {
             {/* Content */}
             {activeButton === 'about' && (
                 <div className={styles.aboutContent}>
-                    <AboutSalon />
+                    <AboutSalon id={salonid} />
                 </div>
 
             )}
             {activeButton === 'services' && (
                 <div className={styles.servicesContent}>
-                    <SalonService />
+                    <SalonService id ={salonid}/>
                 </div>
             )}
             {activeButton === 'gallery' && (
