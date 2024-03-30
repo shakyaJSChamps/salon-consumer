@@ -23,7 +23,6 @@ function LoginPage() {
             "deviceToken": "fasfsadfsdf"
           }
           const res = await doLogin(data);
-          console.log("response ::>", res.data.statusCode);
           setPhoneNumber(phoneNumber)
             setSendOtp(true);   //for navigate to otp page
 

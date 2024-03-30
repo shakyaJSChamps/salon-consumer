@@ -1,11 +1,12 @@
+import TopSalons from '@/components/topSalons/topSalons'
 import React from 'react'
 
-function TopSalons() {
+function Salons() {
   return (
     <div>
-     TopSalons
+     <TopSalons />
     </div>
   )
 }
 
-export default TopSalons
+export default Salons

@@ -89,3 +89,19 @@
     text-align: center;
     cursor: pointer;
 }
+@media screen and (max-width: 500px) {
+    .loginForm{
+        flex-direction: column;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background-color: black;
+        color: white;
+        padding: 8px 18px;
+    }
+    .formDiv{
+        padding: 24px 20px 29px 20px;
+    }
+}

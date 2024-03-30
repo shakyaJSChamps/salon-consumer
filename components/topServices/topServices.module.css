@@ -14,17 +14,19 @@
     width: fit-content;
     border-radius: 10px;
 }
-.content{
+
+.content {
     display: flex;
     gap: 24px;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    
+
 
 }
+
 .content::-webkit-scrollbar {
     display: none;
-  }
+}
 
 .paper {
     display: flex;
@@ -39,28 +41,41 @@
     font-weight: bold;
 }
 
-.image img{
+.image img {
     width: 200px;
     height: auto;
 }
-.scrollbtn{
+
+.scrollbtn {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     width: fit-content;
-  
+
 }
-.icon{
+
+.icon {
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
     background-color: black;
-    color: white; 
+    color: white;
     padding: 9px 14px;
     width: 20px;
     height: 20px;
     font-weight: bold;
     border-radius: 11px;
     cursor: pointer;
+}
+
+@media screen and (max-width:280px) {
+    .image img {
+        width: 120px;
+    }
+
+    .type {
+        padding: 23px 11px;
+        font-size: 16px;
+    }
 }

@@ -88,5 +88,14 @@
     .container{
         gap: 8px;
     }
+    .heading{
+        font-size: 11px;
+    }
+    .linkDiv a{
+        font-size: 11px;
+    }
+    .arrow{
+        font-size: 14px;
+    }
     
 }

@@ -1,12 +1,13 @@
+import TopServices from '@/components/topServices/topServices'
 import React from 'react'
 
-function TopServices() {
+function Services() {
   return (
     <div>
-      TopServices
+      <TopServices/>
     </div>
   )
 }
 
-export default TopServices
+export default Services
 TopServices
