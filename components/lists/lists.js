@@ -1,14 +1,13 @@
-"use client"
-import { useEffect, useRef, useState } from 'react';
-import styles from './lists.module.css'
-import Image from 'next/image';
-import { CiHeart } from 'react-icons/ci';
-import StarIcon from '@mui/icons-material/Star';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Link from 'next/link';
-import CircularProgress from '@mui/material/CircularProgress';
+"use client";
 
-
+import { useEffect, useRef, useState } from "react";
+import styles from "./lists.module.css";
+import Image from "next/image";
+import { CiHeart } from "react-icons/ci";
+import StarIcon from "@mui/icons-material/Star";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Link from "next/link";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const FilterServices = ({ title, options, selectedOptions, onChange, formatOption, getUniqueValues }) => {
     return (
@@ -31,35 +30,31 @@ const FilterServices = ({ title, options, selectedOptions, onChange, formatOptio
     );
 };
 
-
-
-
 const Lists = (props) => {
-    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy, page, isLoading, loadMoreItems, lazyLoadingThreshold } = props;
+    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy, page, isLoading, loadMoreItems, lazyLoadingThreshold, hasMoreData } = props;
     const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [selectedRatings, setSelectedRatings] = useState({});
     const listRef = useRef(null);
 
-
     const handleFilterChange = (option, type) => {
         switch (type) {
-            case 'serviceType':
-                setSelectedServiceTypes(prevFacilities => ({
+            case "serviceType":
+                setSelectedServiceTypes((prevFacilities) => ({
                     ...prevFacilities,
-                    [option]: !prevFacilities[option]
+                    [option]: !prevFacilities[option],
                 }));
                 break;
-            case 'facility':
-                setFacilities(prevFacilities => ({
+            case "facility":
+                setFacilities((prevFacilities) => ({
                     ...prevFacilities,
-                    [option]: !prevFacilities[option]
+                    [option]: !prevFacilities[option],
                 }));
                 break;
-            case 'rating':
-                setSelectedRatings(prevSelectedRatings => ({
+            case "rating":
+                setSelectedRatings((prevSelectedRatings) => ({
                     ...prevSelectedRatings,
-                    [option]: !prevSelectedRatings[option]
+                    [option]: !prevSelectedRatings[option],
                 }));
                 break;
             default:
@@ -72,11 +67,12 @@ const Lists = (props) => {
         setFacilities([]);
         setSelectedRatings({});
     };
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
-                if (entries[0].isIntersecting && lists.length > 0) {
-                    loadMoreItems();
+                if (entries[0].isIntersecting && lists.length > 0 && !isLoading && hasMoreData) {
+                    loadMoreItems(); // Load more items only if not already loading and more data is available
                 }
             },
             { threshold: lazyLoadingThreshold }
@@ -89,33 +85,16 @@ const Lists = (props) => {
                 observer.unobserve(listRef.current);
             }
         };
-    }, [listRef, loadMoreItems, lists.length, lazyLoadingThreshold]);
+    }, [listRef, loadMoreItems, lists.length, lazyLoadingThreshold, isLoading, hasMoreData]);
 
-    useEffect(() => {
-        const loadInitialData = async () => {
-            try {
-                const response = await loadMoreItems();
-                setLists(response.data.data.items);
-            } catch (error) {
-                console.error('Error fetching initial data:', error);
-            }
-        };
-
-        if (lists.length === 0) {
-            loadInitialData();
-        }
-    }, [lists.length, loadMoreItems]);
-
-    const listFilter = lists?.filter(item => {
-        const ratingMatch = Object.values(selectedRatings).some(val => val === true) ? selectedRatings[item.rating] : true;
-        const serviceTypeMatch = Object.values(selectedServiceTypes).some(val => val === true) ? selectedServiceTypes[item.serviceType] : true;
+    const listFilter = lists?.filter((item) => {
+        const ratingMatch = Object.values(selectedRatings).some((val) => val === true) ? selectedRatings[item.rating] : true;
+        const serviceTypeMatch = Object.values(selectedServiceTypes).some((val) => val === true) ? selectedServiceTypes[item.serviceType] : true;
         return ratingMatch && serviceTypeMatch;
     });
 
-
-
     const getUniqueServices = (array, property) => {
-        return [...new Set(array?.map(item => item[property]))];
+        return [...new Set(array?.map((item) => item[property]))];
     };
 
     return (
@@ -124,8 +103,8 @@ const Lists = (props) => {
                 <div className={styles.findsSalon}>
                     <div className={doorBuddyFind ? styles.doorBuddyFind : styles.find}>
                         <div className={styles.findsIcons}>
-                            {doorbuddy && <Image src={doorbuddy} alt='doorbuddy' height={50} width={50} />}
-                            {calendraImages && <Image src={calendraImages} alt='calendra' height={55} width={65} />}
+                            {doorbuddy && <Image src={doorbuddy} alt="doorbuddy" height={50} width={50} />}
+                            {calendraImages && <Image src={calendraImages} alt="calendra" height={55} width={65} />}
                         </div>
                         <div className={styles.findsDetails}>
                             <p>Find Your</p>
@@ -139,7 +118,9 @@ const Lists = (props) => {
                             <p>Search Filter</p>
                             <div className={styles.combine}>
                                 <button>Apply</button>
-                                <button className={styles.clear} onClick={handelClearFilters}>Clear</button>
+                                <button className={styles.clear} onClick={handelClearFilters}>
+                                    Clear
+                                </button>
                             </div>
                         </div>
                         <div className={styles.categoryContainer}>
@@ -147,21 +128,21 @@ const Lists = (props) => {
                                 title="Shops Category"
                                 options={ShopsCategory}
                                 selectedOptions={facilities}
-                                onChange={(option) => handleFilterChange(option, 'facility')}
+                                onChange={(option) => handleFilterChange(option, "facility")}
                             />
 
                             <FilterServices
                                 title="Category"
-                                options={getUniqueServices(lists, 'serviceType')}
+                                options={getUniqueServices(lists, "serviceType")}
                                 selectedOptions={selectedServiceTypes}
-                                onChange={(option) => handleFilterChange(option, 'serviceType')}
+                                onChange={(option) => handleFilterChange(option, "serviceType")}
                             />
 
                             <FilterServices
                                 title="Rating"
-                                options={getUniqueServices(lists, 'rating')}
+                                options={getUniqueServices(lists, "rating")}
                                 selectedOptions={selectedRatings}
-                                onChange={(option) => handleFilterChange(option, 'rating')}
+                                onChange={(option) => handleFilterChange(option, "rating")}
                                 formatOption={(option) => `${option}.0`}
                             />
 
@@ -169,12 +150,7 @@ const Lists = (props) => {
                                 <h5>Distance</h5>
                                 {Distance.map((distance, index) => (
                                     <div key={index} className={styles.checkboxContainer}>
-                                        <input
-                                            type="checkbox"
-                                            id={distance}
-                                            value={distance}
-                                            className={styles.checkboxes}
-                                        />
+                                        <input type="checkbox" id={distance} value={distance} className={styles.checkboxes} />
                                         <label htmlFor={distance}>{distance}</label>
                                     </div>
                                 ))}
@@ -183,36 +159,34 @@ const Lists = (props) => {
                     </div>
                     <div className={styles.salonList}>
                         {listFilter?.map((salon, index) => (
-
                             <div key={index} className={styles.salonDetails}>
                                 <div className={styles.img}>
-
                                     <picture>
-                                        <img
-                                            src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc}
-                                            alt="image"
-                                            style={{ width: "100%", height: "100%" }}
-                                            fill={true}
-                                        />
+                                        <img src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" style={{ width: "100%", height: "100%" }} fill={true} />
                                     </picture>
                                 </div>
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
                                         <div className={styles.titles}>
-                                            <h2>{salon.title || salon.name || `${`${salon.firstName} ${salon.lastName} `}`}</h2>
+                                            <h2>{salon.title || salon.name || `${salon.firstName} ${salon.lastName} `}</h2>
                                             <p className={styles.buddyType}>{salon.specialization}</p>
-                                            <p className={styles.locations}><LocationOnIcon /> {salon.city}</p>
+                                            <p className={styles.locations}>
+                                                <LocationOnIcon /> {salon.city}
+                                            </p>
                                         </div>
                                         <div className={styles.wishlists}>
-                                            {salon.isFavorite ?
-                                                (<div className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}></div>)
-                                                : (<CiHeart />)
-                                            }
+                                            {salon.isFavorite ? (
+                                                <div className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}></div>
+                                            ) : (
+                                                <CiHeart />
+                                            )}
                                             <p>wishList</p>
                                         </div>
                                     </div>
                                     <div className={styles.ratings}>
-                                        <p className={styles.locations}><StarIcon /> {salon.rating}.0</p>
+                                        <p className={styles.locations}>
+                                            <StarIcon /> {salon.rating}.0
+                                        </p>
                                         <p>{salon.serviceType}</p>
                                         <p>{salon.serviceType}</p>
                                     </div>
@@ -223,7 +197,11 @@ const Lists = (props) => {
                                 </div>
                             </div>
                         ))}
-                        {isLoading && <div style={{ margin: "auto", textAlign: "center" }} > <CircularProgress className={styles.loadingIndicator} /></div>}
+                        {isLoading && (
+                            <div style={{ margin: "auto", textAlign: "center" }}>
+                                <CircularProgress className={styles.loadingIndicator} />
+                            </div>
+                        )}
                         <div ref={listRef} className={styles.listBottomMarker}></div>
                     </div>
                 </div>

@@ -14,6 +14,30 @@ const SalonList = () => {
     const [pageSize, setPageSize] = useState(10);
     const [isLoading, setIsLoading] = useState(false);
     const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false);
+    const [hasMoreData, setHasMoreData] = useState(true);
+
+    const loadMoreItems = async () => {
+        if (isLoading || !isInitialDataLoaded || !hasMoreData) return;
+        setIsLoading(true);
+        try {
+            const response = await getSalonLists(page, pageSize);
+            const responseData = response?.data?.data?.items;
+            if (responseData.length > 0) {
+                // Filter out duplicates before appending to the existing list
+                const filteredData = responseData.filter(item => !lists.some(existingItem => existingItem.id === item.id));
+                console.log("filtered data", filteredData)
+                setPage(page + 1);
+                setLists(prevLists => [...prevLists, ...filteredData]);
+            } else {
+                console.log("No more data available.");
+                setHasMoreData(false);
+            }
+        } catch (error) {
+            console.error("Error fetching salon data:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
         const loadInitialData = async () => {
@@ -33,35 +57,7 @@ const SalonList = () => {
         }
     }, [page, pageSize, isInitialDataLoaded]);
 
-    // const handleScroll = () => {
-    //     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    //     if (scrollTop + clientHeight >= scrollHeight) {
-    //         loadMoreItems();
-    //     }
-    // };
-
-    const loadMoreItems = async () => {
-        if (isLoading || !isInitialDataLoaded || lists.length % pageSize !== 0) return;
-        setIsLoading(true);
-        try {
-            const response = await getSalonLists(page + 1, pageSize);
-            const responseData = response?.data?.data?.items;
-            if (responseData.length > 0) {
-                setPage(page + 1);
-                const filteredData = responseData.filter(item => !lists.some(existingItem => existingItem.id === item.id));
-                setLists(prevLists => [...prevLists, ...filteredData]);
-            } else {
-                console.log("No more data available.");
-            }
-        } catch (error) {
-            console.error("Error fetching salon data:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     return (
-        // <div onScroll={handleScroll}>
         <Lists
             title="Salon"
             buttonLabel="View Details"
@@ -82,8 +78,8 @@ const SalonList = () => {
             isLoading={isLoading}
             loadMoreItems={loadMoreItems}
             lazyLoadingThreshold={0.5}
+            hasMoreData={hasMoreData}
         />
-
     );
 };
 
