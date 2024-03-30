@@ -38,6 +38,7 @@ function OtpVerify({ phoneNumber }) {
             console.log(error);
         }
     };
+    
     return (
         <Formik
             initialValues={initialValues}
@@ -47,6 +48,7 @@ function OtpVerify({ phoneNumber }) {
             {(props) => (
                 <Form className={styles.form}>
                     <OTPInput
+                    
                         value={props.values.otp}
                         onChange={(otp) => props.handleChange({ target: { name: 'otp', value: otp } })}
                         numInputs={4}
@@ -60,7 +62,7 @@ function OtpVerify({ phoneNumber }) {
                                 {"|"}
                             </span>
                         }
-                        renderInput={(props) => <input {...props} />}
+                        renderInput={(props,index) => <input {...props}  autoFocus={index === 0}/>}
                         inputStyle={{
                             width: "30px",
                             height: "30px",

@@ -179,7 +179,7 @@
 
 @media screen and (max-width:280px) {
     .paper {
-        gap: 22px;
+        gap: 0px;
     }
 
     .image img {

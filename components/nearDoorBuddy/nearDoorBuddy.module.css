@@ -82,29 +82,35 @@
     gap: 3px;
     padding: 8px 5px 8px 0px;
 }
-.nameContainer{
+
+.nameContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.wishlist{
+
+.wishlist {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
-.wishlist p{
+
+.wishlist p {
     font-size: 10px;
 }
-.wishlistIcon{
+
+.wishlistIcon {
     font-size: 16px;
 }
-.details h2{
+
+.details h2 {
     font-size: 20px;
 
 }
-.specialist{
+
+.specialist {
     font-size: 12px;
 }
 
@@ -150,24 +156,27 @@
     /* width: fit-content; */
 }
 
-.linkdiv{
+.linkdiv {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
-.linkdiv a{
+
+.linkdiv a {
     display: flex;
     color: black;
     font-size: 15px;
     font-weight: 500;
 }
-.arrow{
+
+.arrow {
     font-size: 22px;
 }
+
 /* .link:visited{
     color: rgba(191, 112, 255, 0.824);
 } */
-.link:hover{
+.link:hover {
     text-decoration-line: underline;
 }
 
@@ -175,17 +184,21 @@
     .container {
         padding: 35px 160px;
     }
-    .heading{
+
+    .heading {
         padding: 13px;
     }
-    .icon{
+
+    .icon {
         width: 25px;
         height: 25px;
     }
-    .text h4{
+
+    .text h4 {
         font-size: 8px;
     }
-    .text span{
+
+    .text span {
         font-size: 17px;
     }
 
@@ -302,29 +315,31 @@
     }
 
     .image img {
-        width: 164px;
-        height: 145px;
+        width: 155px;
+        height: 134px;
     }
 
     .details {
-        gap: 0px;
+        gap: 2px;
     }
 
     .details h2 {
         font-size: 15px;
     }
-    .wishlistIcon{
+
+    .wishlistIcon {
         font-size: 14px;
-    } 
-    .wishlist p{
-      font-size: 8px;
+    }
+
+    .wishlist p {
+        font-size: 8px;
 
     }
 
     .desc p {
         font-size: 7px;
     }
-    
+
 
     .location {
         font-size: 11px;
@@ -342,10 +357,12 @@
         padding: 3px 7px;
         font-size: 8px;
     }
-    .linkdiv a{
+
+    .linkdiv a {
         font-size: 12px;
     }
-    .arrow{
+
+    .arrow {
         font-size: 16px;
     }
 
@@ -362,8 +379,8 @@
     }
 
     .image img {
-        width: 110px;
-        height: 99px;
+        width: 146px;
+        height: 132px;
     }
 
     .details {
@@ -390,15 +407,16 @@
         font-size: 8px;
     }
 
-    .desc {
+    /* .desc {
         display: none;
-    }
+    } */
 
     .salonType {
         display: flex;
         justify-content: space-between;
     }
-    .btn{
+
+    .btn {
         font-size: 6px;
     }
 }
@@ -442,6 +460,9 @@
 
     .salonType {
         padding-right: 0px;
+    }
+      .desc {
+        display: none;
     }
 
     .rating {

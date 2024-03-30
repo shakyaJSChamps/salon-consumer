@@ -290,12 +290,12 @@
     }
 
     .image img {
-        width: 200px;
-        height: 150px;
+        width: 165px;
+        height: 120px;
     }
 
     .details {
-        gap: 10px;
+        gap: 2px;
     }
 
     .details h2 {
@@ -344,10 +344,9 @@
     }
 
     .image img {
-        width: 122px;
-        height: 90px;
+        width: 164px;
+        height: 121px;
     }
-
     .details {
         gap: 3px;
     }
@@ -366,9 +365,9 @@
         font-size: 18px;
     }
 
-    .desc {
+    /* .desc {
         display: none;
-    }
+    } */
 
     .salonType {
         display: flex;
@@ -418,6 +417,9 @@
     .salonType {
         padding-right: 0px;
     }
+      .desc {
+        display: none;
+    } 
 
     .rating {
         gap: 1px;
