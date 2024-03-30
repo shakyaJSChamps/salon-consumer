@@ -23,7 +23,8 @@
     line-height: 21px;
     width: 10%;
 }
-.footerItem img{
+
+.footerItem img {
     width: 262px;
     height: auto;
 }
@@ -62,6 +63,10 @@
 
 }
 
+.footerItem img {
+    cursor: pointer;
+}
+
 .socialMediaItems {}
 
 .socialMediaItems:nth-child(1) {
@@ -88,6 +93,11 @@
     border-radius: 5px;
     border: none;
     outline: none;
+}
+
+.formBtn {
+    color: rgb(44, 43, 43);
+    font-weight: 500 !important;
 }
 
 .socialMediaItems button {
@@ -134,6 +144,10 @@
 
     .container .footerItem {
         width: 13%;
+    }
+
+    .socialMediaItems form {
+        gap: 10px;
     }
 
 }

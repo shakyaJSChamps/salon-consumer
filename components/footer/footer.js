@@ -73,7 +73,7 @@ function Footer() {
           <p>Subscribe to Our Newsletter</p>
           <form onSubmit={handleOnSubmit}>
             <input type="text" placeholder='Enter Mobile Number' />
-            <button>Submit</button>
+            <button className={styles.formBtn}>Submit</button>
           </form>
         </div>
         <div className={styles.socialMediaItems}>
