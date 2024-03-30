@@ -1,12 +1,12 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './lists.module.css'
 import Image from 'next/image';
 import { CiHeart } from 'react-icons/ci';
 import StarIcon from '@mui/icons-material/Star';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
-import nextConfig from '@/next.config.mjs';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -35,18 +35,12 @@ const FilterServices = ({ title, options, selectedOptions, onChange, formatOptio
 
 
 const Lists = (props) => {
-    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy } = props;
-
+    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy, page, isLoading, loadMoreItems, lazyLoadingThreshold } = props;
     const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [selectedRatings, setSelectedRatings] = useState({});
-    const [visibleItems, setVisibleItems] = useState(5); // State to manage number of visible items
+    const listRef = useRef(null);
 
-    const handleShowMore = () => {
-        setVisibleItems(prevVisibleItems => prevVisibleItems + 5); // Increase visible items count by 5
-    };
-
-    // listFilter = lists?.slice(0, visibleItems);
 
     const handleFilterChange = (option, type) => {
         switch (type) {
@@ -78,18 +72,51 @@ const Lists = (props) => {
         setFacilities([]);
         setSelectedRatings({});
     };
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && lists.length > 0) {
+                    loadMoreItems();
+                }
+            },
+            { threshold: lazyLoadingThreshold }
+        );
+        if (listRef.current) {
+            observer.observe(listRef.current);
+        }
+        return () => {
+            if (listRef.current) {
+                observer.unobserve(listRef.current);
+            }
+        };
+    }, [listRef, loadMoreItems, lists.length, lazyLoadingThreshold]);
+
+    useEffect(() => {
+        const loadInitialData = async () => {
+            try {
+                const response = await loadMoreItems();
+                setLists(response.data.data.items);
+            } catch (error) {
+                console.error('Error fetching initial data:', error);
+            }
+        };
+
+        if (lists.length === 0) {
+            loadInitialData();
+        }
+    }, [lists.length, loadMoreItems]);
 
     const listFilter = lists?.filter(item => {
-        // const facilityMatch = Object.keys(facilities).length === 0 || facilities[item.facility];
         const ratingMatch = Object.values(selectedRatings).some(val => val === true) ? selectedRatings[item.rating] : true;
         const serviceTypeMatch = Object.values(selectedServiceTypes).some(val => val === true) ? selectedServiceTypes[item.serviceType] : true;
         return ratingMatch && serviceTypeMatch;
     });
+
+
+
     const getUniqueServices = (array, property) => {
         return [...new Set(array?.map(item => item[property]))];
-
     };
-
 
     return (
         <>
@@ -138,14 +165,7 @@ const Lists = (props) => {
                                 formatOption={(option) => `${option}.0`}
                             />
 
-
                             <div className={styles.shopCategory}>
-                                {/* <FilterServices
-                                    title="Distance"
-                                    options={Rating}
-                                    selectedOptions={selectedRatings}
-                                    onChange={(option) => handleFilterChange(option, 'distance')}
-                                /> */}
                                 <h5>Distance</h5>
                                 {Distance.map((distance, index) => (
                                     <div key={index} className={styles.checkboxContainer}>
@@ -159,51 +179,34 @@ const Lists = (props) => {
                                     </div>
                                 ))}
                             </div>
-
-
                         </div>
                     </div>
                     <div className={styles.salonList}>
-                        {listFilter?.slice(0, visibleItems).map((salon, index) => (
+                        {listFilter?.map((salon, index) => (
 
                             <div key={index} className={styles.salonDetails}>
                                 <div className={styles.img}>
+
                                     <picture>
                                         <img
                                             src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc}
                                             alt="image"
                                             style={{ width: "100%", height: "100%" }}
-
                                             fill={true}
                                         />
                                     </picture>
-
-
-                                    {/* <Image
-                                        src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc}
-                                        alt="images"
-                                        width={10}
-                                        height={10}
-                                        quality={75}
-                                        priority={true}
-                                    /> */}
-
                                 </div>
                                 <div className={styles.details}>
                                     <div className={styles.titlesDetails}>
                                         <div className={styles.titles}>
                                             <h2>{salon.title || salon.name || `${`${salon.firstName} ${salon.lastName} `}`}</h2>
-                                            <p className={styles.buddyType}>
-                                                {salon.specialization}</p>
+                                            <p className={styles.buddyType}>{salon.specialization}</p>
                                             <p className={styles.locations}><LocationOnIcon /> {salon.city}</p>
                                         </div>
-                                        <div className={styles.wishlists} >
+                                        <div className={styles.wishlists}>
                                             {salon.isFavorite ?
-
                                                 (<div className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}></div>)
-                                                : (
-                                                    <CiHeart />
-                                                )
+                                                : (<CiHeart />)
                                             }
                                             <p>wishList</p>
                                         </div>
@@ -213,21 +216,17 @@ const Lists = (props) => {
                                         <p>{salon.serviceType}</p>
                                         <p>{salon.serviceType}</p>
                                     </div>
-                                    <p className={styles.description}>  {salon.address}</p>
+                                    <p className={styles.description}>{salon.address}</p>
                                     <Link href={`/salonlist/${salon.id}`}>
                                         <button className={doorBuddyBtn ? styles.doorBuddyBtn : ""}>{buttonLabel}</button>
                                     </Link>
                                 </div>
                             </div>
                         ))}
+                        {isLoading && <div style={{ margin: "auto", textAlign: "center" }} > <CircularProgress className={styles.loadingIndicator} /></div>}
+                        <div ref={listRef} className={styles.listBottomMarker}></div>
                     </div>
-
                 </div>
-                {lists?.length > visibleItems && (
-                    <div className={styles.showMoreButton}>
-                        <button className={styles.showMoreButton} onClick={handleShowMore}>Show More</button>
-                    </div>
-                )}
             </div>
         </>
     );

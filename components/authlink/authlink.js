@@ -11,6 +11,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { GrNotes } from "react-icons/gr";
+import { FaRegUserCircle } from "react-icons/fa";
 
 
 function Authlink() {
@@ -45,7 +46,9 @@ function Authlink() {
                 <>
                     <Link href="" onClick={handleToggleMenu}>
                         <Image src={authUser} width={25} height={25} alt="authUser" />
-                        <span>{userName}</span>
+                        <span>{userName}
+                            {/* // ? userName : <FaRegUserCircle />} */}
+                        </span>
                     </Link>
                 </>
             )}

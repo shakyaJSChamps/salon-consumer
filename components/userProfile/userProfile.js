@@ -278,9 +278,9 @@ const UserProfie = () => {
                             <button><IoMdAdd />ADD A NEW ADDRESS</button>
                             <div className={styles.addressDetails}>
                                 <button className={styles.home}>HOME</button><HiOutlineDotsVertical className={styles.dotted} />
-                                <p>City:{cityDetails?.address.city}</p>
-                                <p>State/province/area:{cityDetails?.address?.state}</p>
-                                <p>{cityDetails?.display_name}</p>
+                                <p>City:{cityDetails}</p>
+                                <p>State/province/area:{cityDetails}</p>
+                                <p>{cityDetails}</p>
                             </div>
                         </div>
                     </div>

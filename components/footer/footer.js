@@ -1,3 +1,4 @@
+"use client"
 import Link from 'next/link'
 import styles from './footer.module.css'
 import Image from 'next/image';
@@ -10,6 +11,13 @@ import { FaXTwitter } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
 import { FaYoutube } from "react-icons/fa6";
 function Footer() {
+
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+    console.log("footer", e.target.value)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -31,7 +39,6 @@ function Footer() {
           <Link href="">Stylrax Anti-Aging Treatment Clinic</Link>
           <Link href="">Stylrax Cosmetic Treatment Clinic</Link>
           <Link href="">Stylrax Clinic</Link>
-
         </div>
         <div className={styles.footerItem}>
           <Link href="">Pricing</Link>
@@ -64,7 +71,7 @@ function Footer() {
         </div>
         <div className={styles.socialMediaItems}>
           <p>Subscribe to Our Newsletter</p>
-          <form>
+          <form onSubmit={handleOnSubmit}>
             <input type="text" placeholder='Enter Mobile Number' />
             <button>Submit</button>
           </form>
@@ -78,7 +85,7 @@ function Footer() {
 
         </div>
       </div>
-      </div>
+    </div>
   )
 }
 
