@@ -108,7 +108,7 @@ const Lists = (props) => {
                         </div>
                         <div className={styles.findsDetails}>
                             <p>Find Your</p>
-                            <h1>{title}</h1>
+                            <h3>{title}</h3>
                         </div>
                     </div>
                 </div>
@@ -161,8 +161,8 @@ const Lists = (props) => {
                         {listFilter?.map((salon, index) => (
                             <div key={index} className={styles.salonDetails}>
                                 <div className={styles.img}>
-                                    <picture>
-                                        <img src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" style={{ width: "100%", height: "100%" }} fill={true} />
+                                    <picture style={{ width: "100%", height: "100%" }}>
+                                        <img src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" style={{ width: "100%", height: "100%" }} />
                                     </picture>
                                 </div>
                                 <div className={styles.details}>
@@ -188,7 +188,7 @@ const Lists = (props) => {
                                             <StarIcon /> {salon.rating}.0
                                         </p>
                                         <p>{salon.serviceType}</p>
-                                        <p>{salon.serviceType}</p>
+
                                     </div>
                                     <p className={styles.description}>{salon.address}</p>
                                     <Link href={`/salonlist/${salon.id}`}>

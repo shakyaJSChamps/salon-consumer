@@ -1,26 +1,45 @@
 "use client"
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from './authlink.module.css'
-import authUser from "@/assets/images/loginUser.svg"
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './authlink.module.css';
+import authUser from '@/assets/images/loginUser.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { loginUser, logoutUser, selectIsLoggedIn, selectLocation, selectUser } from '@/app/Redux/Authslice';
+import { useState, useEffect, useRef } from 'react';
+import {
+    loginUser,
+    logoutUser,
+    selectIsLoggedIn,
+    selectLocation,
+    selectUser,
+} from '@/app/Redux/Authslice';
 import { CiHeart } from 'react-icons/ci';
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { TbLogout } from "react-icons/tb";
-import { FaRegCircleUser } from "react-icons/fa6";
-import { GrNotes } from "react-icons/gr";
-import { FaRegUserCircle } from "react-icons/fa";
-
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { TbLogout } from 'react-icons/tb';
+import { FaRegCircleUser } from 'react-icons/fa6';
+import { GrNotes } from 'react-icons/gr';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 function Authlink() {
     const [menu, setMenu] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const user = useSelector(selectUser);
-    // const location = useSelector(selectLocation)
-    // console.log("location auth link", location)  get location from every where
-    const userName = user?.name
+    const authLinkRef = useRef(null);
+
+    const userName = user?.name;
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (authLinkRef.current && !authLinkRef.current.contains(event.target)) {
+                setMenu(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
 
     const handleToggleMenu = () => {
         setMenu(!menu);
@@ -36,7 +55,7 @@ function Authlink() {
     };
 
     return (
-        <div className={styles.authLink}>
+        <div className={styles.authLink} ref={authLinkRef}>
             {!user ? (
                 <Link href="/login">
                     <Image src={authUser} width={25} height={25} alt="authUser" />
@@ -46,9 +65,7 @@ function Authlink() {
                 <>
                     <Link href="" onClick={handleToggleMenu}>
                         <Image src={authUser} width={25} height={25} alt="authUser" />
-                        <span>{userName}
-                            {/* // ? userName : <FaRegUserCircle />} */}
-                        </span>
+                        <span>{userName}</span>
                     </Link>
                 </>
             )}

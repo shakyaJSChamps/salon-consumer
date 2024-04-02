@@ -83,20 +83,17 @@ const UserProfie = () => {
     const [menuVisible, setMenuVisible] = useState(false);
     const [profileVisible, setProfileVisible] = useState(true)
 
-
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth <= 768) {
-                setProfileVisible(false);
-            } else {
-                setProfileVisible(true);
+        const handleClickOutside = (event) => {
+            if (menuVisible && !event.target.closest(`.${styles.profileMenu}`)) {
+                setMenuVisible(false);
             }
         };
-        window.addEventListener('resize', handleResize);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            window.removeEventListener('resize', handleResize);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, []);
+    }, [menuVisible]);
 
     const handleToggleMenu = () => {
         setMenuVisible(!menuVisible);
@@ -256,17 +253,20 @@ const UserProfie = () => {
 
                             </form>
                         </div>
-                        <h6>FAQs</h6>
-                        <p>What happens when I update my email address (or mobile number)? </p>
-                        <p> Your login email id (or mobile number) changes, likewise. Youll receive all your account related communication on your updated email address (or mobile number).
-                        </p>
-                        <p> When will my Stylrax account be updated with the new email address (or mobile number)? </p>
-                        <p>It happens as soon as you confirm the verification code sent to your email (or mobile) and save the changes.</p>
+                        <div className={styles.faq}>
 
-                        <p> What happens to my existing Stylrax account when I update my email address (or mobile number)?</p>
-                        <p>  Updating your email address (or mobile number) doesnt invalidate your account. Your account remains fully functional. Youll continue seeing your Order history, saved information and personal details.</p>
-                        <p> Does my business account get affected when I update my email address? </p>
-                        <p>Stylrax has a single sign-on policy. Any changes will reflect in your Business account also.</p>
+                            <h6>FAQs</h6>
+                            <p>What happens when I update my email address (or mobile number)? </p>
+                            <p> Your login email id (or mobile number) changes, likewise. Youll receive all your account related communication on your updated email address (or mobile number).
+                            </p>
+                            <p> When will my Stylrax account be updated with the new email address (or mobile number)? </p>
+                            <p>It happens as soon as you confirm the verification code sent to your email (or mobile) and save the changes.</p>
+
+                            <p> What happens to my existing Stylrax account when I update my email address (or mobile number)?</p>
+                            <p>  Updating your email address (or mobile number) doesnt invalidate your account. Your account remains fully functional. Youll continue seeing your Order history, saved information and personal details.</p>
+                            <p> Does my business account get affected when I update my email address? </p>
+                            <p>Stylrax has a single sign-on policy. Any changes will reflect in your Business account also.</p>
+                        </div>
                     </div>
                 )}
 
@@ -277,7 +277,8 @@ const UserProfie = () => {
                             <h5>Manage Addresses</h5>
                             <button><IoMdAdd />ADD A NEW ADDRESS</button>
                             <div className={styles.addressDetails}>
-                                <button className={styles.home}>HOME</button><HiOutlineDotsVertical className={styles.dotted} />
+                                <button className={styles.home}>HOME</button>
+                                <HiOutlineDotsVertical className={styles.dotted} />
                                 <p>City:{cityDetails}</p>
                                 <p>State/province/area:{cityDetails}</p>
                                 <p>{cityDetails}</p>

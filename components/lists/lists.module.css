@@ -119,13 +119,13 @@
 }
 
 .find p {
-    font-size: 16px;
+    font-size: 0.8875em;
     font-weight: 400;
 }
 
-.find h1 {
-    font-size: 33px;
-    font-weight: bold;
+.find h3 {
+    font-size: 1.81875em;
+    font-weight: bolder;
 }
 
 .salonLists {
@@ -184,18 +184,22 @@
     padding: 20px 35px;
     flex: 1;
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
 }
 
 .details button {
     background-color: black;
     color: white;
-    padding: 13px 83px;
+    padding: 10px 82px;
     cursor: pointer;
     border: none;
     border-radius: 3px;
     font-weight: 600;
     margin-top: 10px;
+    font-size: 0.85em;
 }
 
 .wishList {
@@ -209,7 +213,17 @@
 }
 
 .wishlists p {
-    font-size: 11px;
+    font-size: 0.8125em;
+}
+
+.titles h2 {
+    font-size: 1.185em;
+    font-weight: 800;
+}
+
+.locations {
+    font-size: 1.78125em;
+
 }
 
 .ratings {
@@ -227,7 +241,7 @@
 
 .description,
 .ratings p {
-    font-size: 10px;
+    font-size: 0.74625em;
     font-weight: 700;
     line-height: 15px;
 }
@@ -243,7 +257,7 @@
 .locations {
     line-height: 30px;
     display: flex;
-    gap: 3px;
+    gap: 10px;
     align-items: center;
 
 }
@@ -270,23 +284,25 @@
 }
 
 .applyConditions button {
-    padding: 4px 13px;
+    padding: 4px 16px;
     background-color: black;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    font-weight: 600;
-    font-size: 10px;
+    font-weight: 500;
+    font-size: 0.664em;
 }
 
 .applyConditions .clear {
     background-color: white;
     color: black;
+    font-size: 0.725em;
+    font-weight: 500;
 }
 
 .applyConditions p {
-    font-size: 13px;
+    font-size: 1em;
 
 }
 
@@ -295,7 +311,7 @@
 }
 
 .shopCategory h5 {
-    font-size: 16px;
+    font-size: 0.845em;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -305,7 +321,7 @@
 }
 
 .shopCategory label {
-    font-size: 14px;
+    font-size: 0.745em;
     margin-left: 5px;
     font-weight: 500;
 }
@@ -348,22 +364,8 @@
     color: blue;
 }
 
-@media screen and (max-width:2000px) {
-
-    .findsSalon {
-        padding-left: 24%;
-
-    }
-}
 
 
-@media screen and (max-width:1600px) {
-
-    .findsSalon {
-        padding-left: 15%;
-
-    }
-}
 
 
 @media screen and (max-width:1400px) {
@@ -378,8 +380,6 @@
         justify-content: center;
         gap: 20px;
 
-
-        /* background-color: red; */
     }
 
     .findsSalon {
@@ -387,15 +387,15 @@
     }
 
     .findsSalon {
-        /* border: 2px solid black; */
         padding-left: 155px;
-
     }
 
     .doorBuddyBtn {
         padding: 13px 69px !important;
     }
 }
+
+@media screen and (max-width:1200px) {}
 
 @media screen and (max-width:1024px) {
     .salonLists {
@@ -404,13 +404,13 @@
     }
 
     .findsSalon {
-        padding-left: 0px;
+        padding-left: 2%;
     }
 
 
     .details button {
 
-        padding: 13px 60px;
+        padding: 13px 76px;
     }
 
     .doorBuddyBtn {
@@ -424,6 +424,8 @@
 
 }
 
+@media screen and (max-width:992px) {}
+
 @media screen and (max-width:768px) {
     .container {
 
@@ -435,14 +437,10 @@
         object-fit: cover;
     }
 
-    /* .salonDetails {
-        flex-direction: column;
-    } */
 
 
     .salonLists {
         flex-direction: row
-            /* width: 100vw; */
     }
 
     .salonList {
@@ -458,9 +456,14 @@
         padding: 0px 10px;
     }
 
-    /* .shopCategory {
-        width: 45vw;
-    } */
+    .find {
+        width: 230px;
+        padding: 20px 22px;
+    }
+
+    .findsSalon {
+        padding-left: 0%;
+    }
 
     .applyConditions {
         flex-direction: column;
@@ -490,7 +493,7 @@
 
     .details button {
 
-        padding: 13px 87px;
+        padding: 13px 80px;
     }
 
     .doorBuddyBtn {
@@ -502,7 +505,7 @@
     } */
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:576px) {
 
 
     .salonDetails {
@@ -552,7 +555,7 @@
 
     .details button {
 
-        padding: 13px 86px;
+        padding: 13px 103px;
     }
 
     .doorBuddyBtn {
@@ -573,6 +576,7 @@
 
 }
 
+/* 
 @media screen and (max-width:475px) {
 
     .salonList {
@@ -586,7 +590,7 @@
     }
 
 
-}
+} */
 
 @media screen and (max-width:350px) {
     .salonList {
@@ -596,7 +600,7 @@
 
     .details button {
 
-        padding: 13px 76px;
+        padding: 13px 68px;
     }
 
 

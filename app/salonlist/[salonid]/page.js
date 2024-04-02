@@ -37,7 +37,7 @@ function SalonDetail({ params }) {
     }, [salonid]);
     return (
         <div className={styles.container}>
-            <div className={styles.salonSlider} style={{backgroundImage: `url(${data?.mainGateImageUrl})`}}>
+            <div className={styles.salonSlider} style={{ backgroundImage: `url(${data?.mainGateImageUrl})` }}>
                 <div className={styles.sliderTitle}>
                     <h3>{data?.name}</h3>
                 </div>
@@ -91,7 +91,7 @@ function SalonDetail({ params }) {
             )}
             {activeButton === 'services' && (
                 <div className={styles.servicesContent}>
-                    <SalonService id ={salonid}/>
+                    <SalonService id={salonid} />
                 </div>
             )}
             {activeButton === 'gallery' && (

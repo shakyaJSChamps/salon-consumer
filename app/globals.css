@@ -10,6 +10,7 @@ body {
   max-height: 100vh;
   overflow-x: hidden;
 }
-a{
-  text-decoration-line: none;
+
+a {
+  text-decoration: none !important;
 }
