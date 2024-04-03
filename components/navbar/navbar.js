@@ -45,8 +45,8 @@ function Navbar() {
 
 
     return (
-        <div className={styles.container}>
-            <div className={styles.links}>
+    <div className={`d-flex justify-content-center flex-direction-column ${styles.container}`}>
+            <div className={` ${styles.links}`}>
                 <div className={styles.logo}>
                     <Link href="/"> <Image src={logo} alt='stylrax' /></Link>
                 </div>
@@ -92,7 +92,7 @@ function Navbar() {
                     <SearchIcon onClick={() => setActive(!active)} className={styles.icon} />
                 </div>
             </div>
-            {open && (<div className={styles.mobileMenu} onClick={handleClickClose}>
+            {open && (<div className={styles.mobileMenu}>
                 {navLinks.map((item, index) => (
                     <Link href={item.url}
                         key={index}

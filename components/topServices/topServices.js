@@ -4,10 +4,22 @@ import Image from 'next/image'
 import haircut from '@/assets/images/haircutService.svg'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 function TopServices() {
   return (
     <div className={styles.container}>
+      <div className={styles.headingContainer}>
+        <div className={styles.heading}>
+          Top Services
+        </div>
+        <div className={styles.linkDiv}>
+          <Link href={'#'} className={styles.link} >View All services
+            <ArrowForwardIcon className={styles.arrow} />
+          </Link>
+        </div>
+
+      </div>
       <div className={styles.content}>
         <Paper elevation={3} className={styles.paper}>
           <div className={styles.type}>
@@ -65,9 +77,9 @@ function TopServices() {
           <ArrowForwardIcon  />
           </div>
         </div> */}
-        
+
       </div>
-      
+
 
     </div>
   )

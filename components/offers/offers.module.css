@@ -22,7 +22,7 @@
 @media screen and (max-width:1024px) {
     
 }
-@media screen and (max-width:991px) {
+@media screen and (max-width:992px) {
     .container{
         flex-direction: column;
         gap: 23px;
@@ -37,7 +37,7 @@
     }
     
 }
-@media screen and (max-width:780px) {
+@media screen and (max-width:768px) {
    
     .offer h4{
         font-size: 24px;
@@ -46,16 +46,16 @@
         font-size: 16px;
     }
 }
-@media screen and (max-width:500px) {
+@media screen and (max-width:576px) {
     .offer h4{
-        font-size: 20px;
+        font-size: 18px;
     }
     .offer p{
-        font-size: 12px;
+        font-size: 11px;
     }
     
 }
-@media screen and (max-width:375px) {
+/* @media screen and (max-width:375px) {
     .offer h4{
         font-size: 18px;
     }
@@ -70,4 +70,4 @@
     .offer p{
         font-size: 10px;
     }
-}
+} */

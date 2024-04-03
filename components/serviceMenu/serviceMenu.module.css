@@ -143,9 +143,9 @@
 
 @media screen and (max-width:1024px) {}
 
-@media screen and (max-width:991px) {
+@media screen and (max-width:992px) {
     .offers {
-        gap: 40px;
+        gap: 20px;
     }
 
     .haircutDiv {
@@ -169,38 +169,7 @@
 
 }
 
-@media screen and (max-width:780px) {
-    .description p {
-        font-size: 11px;
-    }
-
-    .serviceIcons {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .offers {
-        flex-direction: column;
-    }
-
-    .otherOffers {
-        flex-direction: row;
-    }
-
-    .haircutDiv {
-        width: 563px;
-        height: 315px
-    }
-
-    .massageDiv, .facialsDiv {
-        width: 270px;
-        height: 150px;
-    }
-
-
-}
-
-@media screen and (max-width:600px) {
+@media screen and (max-width:768px) {
     .title h2 {
         font-size: 27px;
         padding-bottom: 5px;
@@ -208,7 +177,10 @@
     }
 
     .description p {
-        font-size: 9px;
+        font-size: 11px;
+    } 
+    .serviceIcons{
+        flex-direction:column;
     }
 
     .haircutDiv, .massageDiv, .facialsDiv {
@@ -220,6 +192,7 @@
     }
     .offers{
         gap: 24px;
+        flex-direction: column;
     }
     .massageDiv h2 {
         font-size: 43px;
@@ -243,58 +216,51 @@
     }
 }
 
-@media screen and (max-width:500px) {
+  
+@media screen and (max-width:576px) {
     .title h2 {
-        font-size: 27px;
+        font-size: 23px;
 
-    }
-
-    .description p {
-        display: none;
-    }
-
-    .serviceIcons {
-        padding-top: 0px;
     }
 
     .imgDiv {
-        gap: 20px;
+        gap: 16px;
     }
     .haircutDiv,.facialsDiv,.massageDiv{
-        width: 341px;
-        height: 222px;
+        width: 318px;
+        height: 199px;
+        padding-left: 15px;
     }
     .haircutDiv h1{
-        font-size: 37px;
+        font-size: 30px;
     }
     .haircutDiv span{
-        font-size: 26px;
+        font-size: 20px;
     }
     .haircutDiv p{
-        font-size: 16px;
+        font-size: 14px;
     }
     .massageDiv h2{
-        font-size: 30px;
+        font-size: 24px;
     }
     .massageDiv span{
-        font-size: 25px;
+        font-size: 21px;
     }
     .massageDiv p{
-        font-size: 16px;
+        font-size: 14px;
     }
     .facialsDiv h2{
-        font-size: 30px;
+        font-size: 24px;
     }
     .facialsDiv span{
-        font-size: 25px;
+        font-size: 21px;
     }
     .facialsDiv p{
-        font-size: 16px;
+        font-size: 14px;
     }
-
 }
 
-@media screen and (max-width:368px) {
+/* @media screen and (max-width:368px) {
     .title h2 {
         font-size: 23px;
 
@@ -353,4 +319,4 @@
     .serviceIcons{
         gap: 10px;
     }
-}
+} */

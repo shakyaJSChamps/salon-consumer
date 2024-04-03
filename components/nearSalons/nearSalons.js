@@ -58,11 +58,13 @@ function NearSalons() {
                                     <div className={styles.desc}>
                                         <p>{item.description}</p>
                                     </div>
-                                    <Link href={`/salonlist/${item._id}`}>
                                     <button className={styles.btn}>
-                                        View Details
+                                        <Link href={`/salonlist/${item._id}`}>
+
+                                            View Details
+
+                                        </Link>
                                     </button>
-                                    </Link>
 
                                 </div>
                             </Paper>

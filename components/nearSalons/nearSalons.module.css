@@ -63,6 +63,7 @@
 
 .paper {
     display: flex;
+    width: fit-content;
     gap: 20px;
 }
 
@@ -138,10 +139,12 @@
 
 .btn {
     background-color: black;
-    color: white;
     padding: 5px 8px;
     cursor: pointer;
     /* width: fit-content; */
+}
+.btn a{
+    color: white;
 }
 
 .linkDiv {
@@ -162,9 +165,6 @@
     font-size: 22px;
 }
 
-/* .link:visited{
-    color: rgba(191, 112, 255, 0.824);
-} */
 .link:hover {
     text-decoration-line: underline;
 }
@@ -195,6 +195,11 @@
         gap: 13px;
     }
 
+    .image img {
+        width: 166px;
+        height: 123px;
+    }
+
     .details h2 {
         font-size: 18px;
     }
@@ -212,22 +217,7 @@
     }
 }
 
-@media screen and (max-width:1024px) {
-    .container {
-        padding: 35px 66px;
-    }
-
-    .salons {
-        height: 363px;
-    }
-
-    .image img {
-        width: 209px;
-        height: 166px;
-    }
-}
-
-@media screen and (max-width:991px) {
+@media screen and (max-width:992px) {
     .container {
         padding: 35px 67px;
     }
@@ -237,28 +227,18 @@
     }
 
     .image img {
-        width: 205px;
-        height: 152px
+        width: 157px;
+        height: 116px;
     }
 }
 
-@media screen and (max-width:780px) {
+@media screen and (max-width:768px) {
     .container {
         padding: 35px 64px;
     }
 }
 
-@media screen and (max-width:600px) {
-    .heading {
-        padding: 10px;
-    }
-
-    .desc p {
-        font-size: 9px;
-    }
-}
-
-@media screen and (max-width:500px) {
+@media screen and (max-width:576px) {
     .heading {
         gap: 14px;
     }
@@ -272,10 +252,6 @@
         font-size: 16px;
     }
 
-    .salons {
-        height: 339px;
-    }
-
     .icon {
         width: 24px;
         height: auto;
@@ -286,37 +262,44 @@
     }
 
     .paper {
-        gap: 6px;
+        gap: 14px;
+    }
+
+    .salons {
+        height: 212px;
     }
 
     .image img {
-        width: 165px;
-        height: 120px;
-    }
-
-    .details {
-        gap: 2px;
+        width: 175px;
+        height: 130px;
     }
 
     .details h2 {
-        font-size: 17px;
+        font-size: 18px;
     }
 
     .desc p {
         font-size: 7px;
     }
 
-    .location {
-        font-size: 11px;
+    .details {
+        gap: 3px;
     }
 
+    .location,
     .rating {
-        font-size: 11x;
+        font-size: 9px;
     }
 
     .type {
-        font-size: 11px;
+        font-size: 8px;
     }
+
+    .salonType {
+        display: flex;
+        justify-content: space-between;
+    }
+
 
     .btn {
         padding: 3px 7px;
@@ -331,99 +314,5 @@
         font-size: 16px;
     }
 
-
-}
-
-@media screen and (max-width:380px) {
-    .paper {
-        gap: 14px;
-    }
-
-    .salons {
-        height: 212px;
-    }
-
-    .image img {
-        width: 164px;
-        height: 121px;
-    }
-    .details {
-        gap: 3px;
-    }
-
-    .location,
-    .rating {
-        font-size: 9px;
-    }
-
-    .type {
-        font-size: 8px;
-    }
-
-
-    .details h2 {
-        font-size: 18px;
-    }
-
-    /* .desc {
-        display: none;
-    } */
-
-    .salonType {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-
-@media screen and (max-width:280px) {
-    .container {
-        padding: 9px 26px;
-    }
-
-    .salons {
-
-        height: 205px;
-    }
-
-    .paper {
-        gap: 22px;
-    }
-
-    .image img {
-        width: 109px;
-        height: 85px;
-
-    }
-
-    .details {
-        gap: 3px;
-    }
-
-    .details h2 {
-        font-size: 17px;
-
-    }
-
-    .location {
-        font-size: 11px;
-    }
-
-    .type {
-        font-size: 11px;
-
-    }
-
-    .salonType {
-        padding-right: 0px;
-    }
-      .desc {
-        display: none;
-    } 
-
-    .rating {
-        gap: 1px;
-        font-size: 11px;
-    }
 
 }
