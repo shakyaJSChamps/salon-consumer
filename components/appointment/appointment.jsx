@@ -38,7 +38,7 @@ const Appointments = () => {
     }
 
 
-    const [menuVisible, setMenuVisible] = useState(false);
+    const [menuVisible, setMenuVisible] = useState(true);
     const [scheduleShowVisible, setShowScheduleVisible] = useState(false)
 
 
@@ -46,8 +46,10 @@ const Appointments = () => {
         const handleResize = () => {
             if (window.innerWidth <= 768) {
                 setShowScheduleVisible(false);
+                setMenuVisible(false);
             } else {
                 setShowScheduleVisible(true);
+                setMenuVisible(true);
             }
         };
         window.addEventListener('resize', handleResize);

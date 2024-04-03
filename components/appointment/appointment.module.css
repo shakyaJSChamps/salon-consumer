@@ -76,6 +76,10 @@
     margin-bottom: 10px;
 }
 
+.upcomingDetails h5 {
+    font-size: 0.875em;
+}
+
 .pastSchedule {
     display: flex;
     border: 2px solid #D9D9D9;
@@ -96,6 +100,7 @@
     padding: 4px 11px;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 0.8167em;
 }
 
 
@@ -112,7 +117,7 @@
 }
 
 .upcomingDetails p {
-    font-size: 12px;
+    font-size: 0.8267em !important;
     display: flex;
     gap: 10px;
     align-items: center;

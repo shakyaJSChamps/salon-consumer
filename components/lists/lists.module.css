@@ -97,7 +97,7 @@
 
 .heart::after {
     top: 0;
-    left: 7px;
+    left: 6px;
 }
 
 .heart.nonFavorite::before,
@@ -263,10 +263,10 @@
 }
 
 .wishlists svg {
-    font-size: 24px;
+    font-size: 23px;
     text-align: center;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 13px;
 }
 
 .wishlists {
@@ -592,7 +592,7 @@
 
 } */
 
-@media screen and (max-width:350px) {
+@media screen and (max-width:360px) {
     .salonList {
         width: 280px;
         margin: auto;

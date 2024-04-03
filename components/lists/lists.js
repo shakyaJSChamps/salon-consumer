@@ -8,6 +8,7 @@ import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Link from "next/link";
 import CircularProgress from "@mui/material/CircularProgress";
+import { favoriteSalon } from "@/api/account.api";
 
 const FilterServices = ({ title, options, selectedOptions, onChange, formatOption, getUniqueValues }) => {
     return (
@@ -31,7 +32,7 @@ const FilterServices = ({ title, options, selectedOptions, onChange, formatOptio
 };
 
 const Lists = (props) => {
-    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy, page, isLoading, loadMoreItems, lazyLoadingThreshold, hasMoreData } = props;
+    const { title, buttonLabel, imageSrc, lists, Distance, ShopsCategory, calendraImages, doorBuddyBtn, doorBuddyFind, doorbuddy, page, isLoading, loadMoreItems, lazyLoadingThreshold, hasMoreData, setLists } = props;
     const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [selectedRatings, setSelectedRatings] = useState({});
@@ -97,6 +98,18 @@ const Lists = (props) => {
         return [...new Set(array?.map((item) => item[property]))];
     };
 
+
+    const handleSelecteFavourites = async (salonId, isFavorite) => {
+        try {
+            // Call the favoriteSalon function
+            await favoriteSalon(salonId, isFavorite);
+            setLists(prevLists => prevLists.map(salon => salon.id === salonId ? { ...salon, isFavorite } : salon));
+            console.log("fav clicks", isFavorite)
+        } catch (error) {
+            console.error('Error favoriting salon:', error);
+            // Handle error
+        }
+    };
     return (
         <>
             <div className={styles.container}>
@@ -176,9 +189,12 @@ const Lists = (props) => {
                                         </div>
                                         <div className={styles.wishlists}>
                                             {salon.isFavorite ? (
-                                                <div className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}></div>
+                                                <div className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}
+                                                    onClick={() => handleSelecteFavourites(salon.id, false)}></div>
+                                                // <CiHeart className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}
+                                                //     onClick={() => handleSelecteFavourites(salon.id, false)} />
                                             ) : (
-                                                <CiHeart />
+                                                <CiHeart onClick={() => handleSelecteFavourites(salon.id, true)} />
                                             )}
                                             <p>wishList</p>
                                         </div>
