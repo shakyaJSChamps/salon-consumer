@@ -70,6 +70,8 @@ const Lists = (props) => {
     };
 
     useEffect(() => {
+        const currentListRef = listRef.current;
+
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting && lists.length > 0 && !isLoading && hasMoreData) {
@@ -78,12 +80,13 @@ const Lists = (props) => {
             },
             { threshold: lazyLoadingThreshold }
         );
-        if (listRef.current) {
-            observer.observe(listRef.current);
+        if (currentListRef) {
+            observer.observe(currentListRef);
         }
+
         return () => {
-            if (listRef.current) {
-                observer.unobserve(listRef.current);
+            if (currentListRef) {
+                observer.unobserve(currentListRef);
             }
         };
     }, [listRef, loadMoreItems, lists.length, lazyLoadingThreshold, isLoading, hasMoreData]);
