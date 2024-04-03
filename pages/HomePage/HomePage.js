@@ -6,7 +6,6 @@ import TopSalons from '@/components/topSalons/topSalons'
 import TopServices from '@/components/topServices/topServices'
 import DownloadApp from '@/components/downloadApp/downloadApp'
 import Support from '@/components/support/support'
-import TopLists from '@/components/topLists/topLists'
 import NearDoorBuddy from '@/components/nearDoorBuddy/nearDoorBuddy'
 import NearSalons from '@/components/nearSalons/nearSalons'
 
@@ -19,8 +18,8 @@ function HomePage() {
       <NearSalons/>
       <NearDoorBuddy/>
       <BookAppointment/>
-      <TopLists title="Services" data={<TopServices/>}/>
-      <TopLists title="Salons" data={<TopSalons/>}/>
+      <TopServices/>
+      <TopSalons/>
       <DownloadApp/>
       <Support/>
     </div>

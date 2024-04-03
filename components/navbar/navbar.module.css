@@ -1,7 +1,4 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     background-color: black;
     padding: 15px 30px;
     gap: 20px;
@@ -20,6 +17,7 @@
 .links {
     display: flex;
     gap: 20px;
+    padding: 18px 0px;
 }
 
 .featuredlink {
@@ -116,20 +114,9 @@
     justify-content: center;
 }
 
-@media screen and (max-width:1280px) {
-    .featuredlink {
-        gap: 50px;
-    }
-
-    .featuredlink a {
-        font-size: 17px;
-    }
-
-}
-
 @media screen and (max-width:1200px) {
     .featuredlink {
-        gap: 45px;
+        gap: 28px;
         padding-left: 0px;
     }
 
@@ -139,14 +126,7 @@
 
 }
 
-@media screen and (max-width:1024px) {
-    .featuredlink {
-        gap: 25px;
-    }
-
-}
-
-@media screen and (max-width:991px) {
+@media screen and (max-width:992px) {
     .featuredlink {
         display: none;
     }
@@ -158,6 +138,7 @@
     .links {
         justify-content: space-between;
         padding: 0px 70px;
+        align-items: center;
     }
 
     .locSearchDiv {
@@ -167,7 +148,7 @@
 
 }
 
-@media screen and (max-width:780px) {
+@media screen and (max-width:768px) {
     .links {
 
         padding: 0px 60px;
@@ -175,15 +156,8 @@
 
 }
 
-@media screen and (max-width:600px) {
-    .links {
 
-        padding: 0px 20px;
-    }
-
-}
-
-@media screen and (max-width:500px) {
+@media screen and (max-width:576px) {
     .logo img {
         background-color: transparent;
         width: 230px;

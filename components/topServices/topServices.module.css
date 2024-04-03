@@ -2,7 +2,13 @@
     display: flex;
     flex-direction: column;
     gap: 37px;
+    padding: 30px 185px;
 
+}
+.headingContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .heading {
@@ -13,6 +19,23 @@
     font-weight: bold;
     width: fit-content;
     border-radius: 10px;
+}
+.linkDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+.linkDiv a {
+    display: flex;
+    color: black;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.arrow {
+    font-size: 20px;
 }
 
 .content {
@@ -68,8 +91,47 @@
     border-radius: 11px;
     cursor: pointer;
 }
+@media screen and (max-width:1200px) {
+    .container{
+        padding: 30px 57px;
+        gap: 15px;
+    }
 
-@media screen and (max-width:280px) {
+    
+}
+@media screen and (max-width:992px) {
+    .container{
+        padding: 30px 66px;
+        gap: 14px;
+    }
+
+    
+}
+@media screen and (max-width:768px) {
+    .container{
+        padding: 21px 54px;
+        gap: 14px;
+    }
+
+    
+}
+@media screen and (max-width:576px) {
+    .container{
+        padding: 30px 25px;
+        gap: 14px;
+    }
+    .content{
+        gap: 16px;
+    }
+    .heading{
+        font-size: 11px;
+    }
+    .linkDiv a{
+        font-size: 11px;
+    }
+    .arrow{
+        font-size: 14px;
+    }
     .image img {
         width: 120px;
     }
@@ -77,5 +139,5 @@
     .type {
         padding: 23px 11px;
         font-size: 16px;
-    }
+    }    
 }

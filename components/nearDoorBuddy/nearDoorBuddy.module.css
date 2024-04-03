@@ -44,13 +44,10 @@
     width: 6px;
     background-color: rgba(177, 175, 175, 0.938);
     border-radius: 15px;
-    position: absolute;
-    left: 0;
 }
 
 .salons::-webkit-scrollbar-thumb {
     background-color: rgb(95, 94, 94);
-    /* border: 5px solid #CCEEF4; */
     border-radius: 15px;
 }
 
@@ -60,12 +57,13 @@
 }
 
 .image img {
-    width: 192px;
-    height: 170px;
+    width: 200px;
+    height: 155px
 }
 
 .paper {
     display: flex;
+    width: fit-content;
     gap: 20px;
 }
 
@@ -186,12 +184,12 @@
     }
 
     .heading {
-        padding: 13px;
+        padding: 10px;
     }
 
     .icon {
-        width: 25px;
-        height: 25px;
+        width: 24px;
+        height: 24px;
     }
 
     .text h4 {
@@ -207,11 +205,12 @@
     }
 
     .paper {
-        gap: 6px;
+        gap: 13px;
     }
 
     .image img {
-        width: 178px;
+        width: 166px;
+        height: 123px;
     }
 
     .details h2 {
@@ -231,25 +230,9 @@
         font-size: 10px;
     }
 }
-
-@media screen and (max-width:1024px) {
+@media screen and (max-width:992px) {
     .container {
-        padding: 35px 66px;
-    }
-
-    .salons {
-        height: 365px;
-    }
-
-    .image img {
-        width: 209px;
-        height: 166px;
-    }
-}
-
-@media screen and (max-width:991px) {
-    .container {
-        padding: 35px 64px;
+        padding: 35px 67px;
     }
 
     .salons {
@@ -261,8 +244,8 @@
     }
 
     .image img {
-        width: 203px;
-        height: 178px;
+        width: 157px;
+        height: 116px;
     }
 }
 
@@ -271,7 +254,7 @@
     } */
 
 
-@media screen and (max-width:780px) {
+@media screen and (max-width:768px) {
     .container {
         padding: 35px 64px;
     }
@@ -290,18 +273,7 @@
     }
 }
 
-@media screen and (max-width:600px) {
-    .desc p {
-        font-size: 9px;
-    }
-
-    .specialist {
-        font-size: 12px;
-    }
-
-}
-
-@media screen and (max-width:500px) {
+@media screen and (max-width:576px) {
     .container {
         padding: 35px 26px;
     }
@@ -369,7 +341,7 @@
 
 }
 
-@media screen and (max-width:380px) {
+/* @media screen and (max-width:380px) {
     .salons {
         height: 229px;
     }
@@ -406,10 +378,6 @@
     .type {
         font-size: 8px;
     }
-
-    /* .desc {
-        display: none;
-    } */
 
     .salonType {
         display: flex;
@@ -470,4 +438,4 @@
         font-size: 9px;
     }
 
-}
+} */
