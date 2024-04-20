@@ -1,0 +1,58 @@
+.title{
+    display: flex;
+    justify-content: center;
+    margin: 20px 20px;
+    text-decoration: underline;
+}
+.mainList li{
+    margin: 20px 20px;
+}
+
+.subSubList li{
+    margin: 20px 20px;
+}
+
+.subList p{
+    margin: 20px 20px;
+}
+
+.subList h5{
+        font-size: large;
+}
+
+.subSubList h5{
+    font-size: large;
+}
+
+.subList ol{
+    list-style-type: lower-roman;
+    font-size: large;
+}
+
+.subSubList ol{
+    list-style-type: lower-alpha;}
+
+.mainList{    
+    font-size: large;     
+}
+
+.heading mark { 
+    background-color: yellow;
+    color: black;
+  }
+
+.title mark{
+        background-color: rgb(211, 211, 242);
+        color: black;
+      
+}
+  
+@media screen and (max-width:992px) {
+    .second-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      align-content:center ;
+    }
+  }

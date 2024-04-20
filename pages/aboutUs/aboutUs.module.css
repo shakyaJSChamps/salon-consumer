@@ -1,0 +1,45 @@
+  .main-section p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+  .section-customer p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+  .section-customer ul li {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+  .sectionCustomer ul,.saloonService ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sectionCustomer ul li,.saloonService ul li {
+    padding-left: 1em;
+    text-indent: -1em;
+  }
+  
+  .sectionCustomer ul li::before,.saloonService ul li::before {
+    content: "-";
+    padding-right: 0.5em;
+  }
+  .section-customer ul li {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+  .saloon-service p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+  .saloon-service ul li {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }

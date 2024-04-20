@@ -1,0 +1,52 @@
+  .main-section {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    text-align: justify;
+  }
+  .para-section{
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    text-align: justify;
+  }
+  .menu{
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+  .sub-menu {
+    list-style-type: none;
+    counter-reset: item;
+  }
+  .sub-menu > li::before {
+    content: counters(item, ".") " ";
+    counter-increment: item;
+    font-weight: 400;
+  }
+  
+  .sub-menu-nav {
+    list-style-type: none;
+    counter-reset: sub-item;
+  }
+  
+  .sub-menu-nav > li::before {
+    font-weight: 500;
+    content: counter(item) "." counter(sub-item) "\00a0";
+    counter-increment: sub-item;
+  }
+  
+  
+  
+  
+  
+  
+  .roman-list {
+    list-style-type: none;
+    counter-reset: roman-counter;
+  }
+  
+  .roman-list li:before {
+    content: "(" counter(roman-counter, lower-roman) ") ";
+    counter-increment: roman-counter;
+  }

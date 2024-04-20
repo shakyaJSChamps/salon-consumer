@@ -3,13 +3,13 @@ import styles from './aboutSalon.module.css'
 import Image from 'next/image';
 import specialist from '@/assets/images/specialist.svg'
 import StarsIcon from '@mui/icons-material/Stars';
-import { getSalonReviews, getSalonStaff } from '@/api/account.api';
+import {getSalonReviews, getSalonStaff } from '@/api/account.api';
 import { useEffect, useState } from 'react';
 
 
 function AboutSalon({ id }) {
     const [staff, setStaff] = useState([]);
-    const [reviews, setReviws] = useState([]);
+    const [reviews, setReviews] = useState([]);
     // console.log("staff:::> ", staff)
     // console.log("Reviws::::>",reviews)
 
