@@ -1,45 +1,65 @@
-  .main-section p {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  .section-customer p {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  .section-customer ul li {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  .sectionCustomer ul,.saloonService ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sectionCustomer ul li,.saloonService ul li {
-    padding-left: 1em;
-    text-indent: -1em;
-  }
-  
-  .sectionCustomer ul li::before,.saloonService ul li::before {
-    content: "-";
-    padding-right: 0.5em;
-  }
-  .section-customer ul li {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  .saloon-service p {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  .saloon-service ul li {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
+.mainSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  padding: 20px;
+}
+
+.sectionCustomer {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  text-align: justify;
+}
+.customerTag{
+  padding-left: 20px;
+}
+.customerSubMenu{
+  list-style: none;
+  padding: 0 20px;
+}
+.customerSubMenu  li{
+  padding-left: 1em;
+  text-indent: -1em;
+}
+.customerSubMenu li::before{
+  content: "-";
+  padding-right: 0.5em;
+}
+.sectionSalon{
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  text-align: justify; 
+  margin-top: 10px;
+}
+.salonTag{
+  padding-left: 20px;
+  font-size: 20px;
+}
+.salonSubMenu{
+  list-style: none;
+  padding: 5px 25px;
+}
+.salonSubMenu  li{
+  padding-left: 1em;
+  text-indent: -1em;
+}
+.salonSubMenu li::before{
+  content: "-";
+  padding-right: 1em;
+}
+.mainMeet {
+  padding: 20px;
+}
+.meetTag{
+  padding-left: 20px;
+  font-size: 20px;
+}
+.meetSection{
+  padding-left: 45px;
+}
+.meetSpan {
+ font-weight: 600;
+}

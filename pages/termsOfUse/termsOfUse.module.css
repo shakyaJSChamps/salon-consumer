@@ -1,52 +1,82 @@
-  .main-section {
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-    text-align: justify;
-  }
-  .para-section{
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-    text-align: justify;
-  }
-  .menu{
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  .sub-menu {
-    list-style-type: none;
-    counter-reset: item;
-  }
-  .sub-menu > li::before {
-    content: counters(item, ".") " ";
-    counter-increment: item;
-    font-weight: 400;
-  }
-  
-  .sub-menu-nav {
-    list-style-type: none;
-    counter-reset: sub-item;
-  }
-  
-  .sub-menu-nav > li::before {
-    font-weight: 500;
-    content: counter(item) "." counter(sub-item) "\00a0";
-    counter-increment: sub-item;
-  }
-  
-  
-  
-  
-  
-  
-  .roman-list {
-    list-style-type: none;
-    counter-reset: roman-counter;
-  }
-  
-  .roman-list li:before {
-    content: "(" counter(roman-counter, lower-roman) ") ";
-    counter-increment: roman-counter;
-  }
+.mainHeading{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+.firstSection{
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  text-align: justify;
+  padding:5px 20px;
+}
+.termCondition{
+  padding: 10px 20px;
+}
+.paraSection{
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  text-align: justify;
+  padding: 15px;
+}
+.subMenu{
+  padding: 20px;
+  counter-reset: item;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  text-align: justify
+}
+.mainMenu{
+  padding: 10px;
+  font-weight: 700;
+}
+.subMenuNav{
+  counter-reset: sub-item;
+  padding-left: 10px;
+}
+.lowerAlpha{
+  padding-left: 20px;
+}
+.romanList{
+  padding-left: 15px;
+}
+.spanTag{
+  font-weight: 600;
+}
+/* .menu{
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+} */
+/* .subMenu {
+
+}
+.subMenu > li::before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+  font-weight: 400;
+}
+
+.subMenuNav {
+  list-style-type: none;
+  counter-reset: sub-item;
+}
+
+.subMenuNav > li::before {
+  font-weight: 500;
+  content: counter(item) "." counter(sub-item) "";
+  counter-increment: sub-item;
+}
+.romanList {
+  list-style-type: none;
+  counter-reset: roman-counter;
+}
+
+.romanList li:before {
+  content: "(" counter(roman-counter, lower-roman) ") ";
+  counter-increment: roman-counter;
+} */
