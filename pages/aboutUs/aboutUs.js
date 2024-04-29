@@ -122,7 +122,7 @@ const AboutUs = () => {
                   </span>
                   Our lead developer, Srivastava, ensures a seamless user
                   experience on our app. Their technical knowledge and
-                  commitment to innovation drive our platform's success.
+                  commitment to innovation drive our platform<span>&apos;</span>s success.
                 </li>
                 <li>
                   <span className={`${styles.meetSpan} fw-bold`}>
