@@ -35,7 +35,7 @@ function PaymentPage() {
             </div>
         </div>
         <div className={styles.paymentSummary}>
-            <h3>Payment Summary</h3>
+            <h3>Payment summary</h3>
             <div className={styles.total}>
                 <h4>Item Total</h4>
                 <span>499</span>

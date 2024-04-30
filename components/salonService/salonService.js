@@ -44,7 +44,7 @@ function SalonService({id}) {
     <div className={styles.container}>
       <div className={styles.service}>
         <Paper className={styles.paper}>
-          <h3>Select a Service <hr /></h3>
+          <h3>Select Service <hr /></h3>
           <div className={styles.serviceFor}>
             <button onClick={() => handleButtonClick('male')} className={activeButton === 'male' ? styles.active : ''}>Male</button>
             <button onClick={() => handleButtonClick('female')} className={activeButton === 'female' ? styles.active : ''}>Female</button>
@@ -164,7 +164,7 @@ function SalonService({id}) {
         <div className={styles.booking}>
           <h4>Book At</h4>
           <button onClick={handleSalonClick}>Salon</button>
-          <button onClick={handleSalonClick}>Home Service</button>
+          <button onClick={handleSalonClick}>Home</button>
         </div>
       </div>
 

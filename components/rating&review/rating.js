@@ -17,8 +17,8 @@ const Ratings = ({ handelShowAppointMent }) => {
 
 
                     </div>
-                    <h6>Click To Rotate</h6>
-                    <h5>Your Review</h5>
+                    <h6>Choose a star to rate</h6>
+                    <h5>Your review</h5>
                     <textarea defaultValue={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'}>
 
                     </textarea>

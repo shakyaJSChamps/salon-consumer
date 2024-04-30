@@ -20,7 +20,7 @@ function NearDoorBuddy() {
                 </div>
                 <div className={styles.text}>
                     <h4>Find your </h4>
-                    <span>Door Buddy</span>
+                    <span>Doorbuddy</span>
                 </div>
 
             </div>
@@ -68,7 +68,7 @@ function NearDoorBuddy() {
                 </Grid>
             </div>
             <div className={styles.linkdiv}>
-                <Link href={'/doorbuddylist'} className={styles.link} >View All DoorBuddy
+                <Link href={'/doorbuddylist'} className={styles.link} >View all doorbuddies
                     <ArrowForwardIcon className={styles.arrow} />
                 </Link>
             </div>
