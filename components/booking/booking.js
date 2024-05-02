@@ -43,7 +43,7 @@ function Booking() {
           <button>Edit items</button>
         </div>
         <div className={styles.frequentAdd}>
-          <h3>Frequently Added Together</h3>
+          <h3>Frequently added together</h3>
           <div className={styles.itemContainer}>
             <div className={styles.item}>
               <p>Hair Color <br /> (only application)</p>
@@ -56,7 +56,7 @@ function Booking() {
           </div>
         </div>
         <div className={styles.specialistContainer}>
-          <h3>Select Specialist</h3>
+          <h3>Select specialist</h3>
           <div className={styles.specialists}>
             <div className={styles.specialist}>
               <Image src={haircut} alt='haircut-image' />
@@ -110,13 +110,13 @@ function Booking() {
           </div>
         </div>
         <div className={styles.bookingDate}>
-          <h3>Booking Date</h3>
+          <h3>Booking date</h3>
           <div className={styles.dateContainer}>
             <input type='date' />
           </div>
         </div>
         <div className={styles.timeslotContainer}>
-          <h3>Select Time Slots</h3>
+          <h3>Select time slot</h3>
           <div className={styles.timeslot}>
             <div className={styles.paper}>
               <p>10:00 AM-10:00 AM</p>
@@ -136,7 +136,7 @@ function Booking() {
           </div>
         </div>
         <div className={styles.address}>
-          <h3>Add Address</h3>
+          <h3>Add address</h3>
           <div className={styles.inputContainer}>
             <input type='text' placeholder='Address'/>
             <input type='text' placeholder='Landmark'/>

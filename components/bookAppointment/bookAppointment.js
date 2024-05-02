@@ -4,9 +4,10 @@ function BookAppointment() {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        <p>This Week Only</p>
-        <h3>Get <span>30% OFF</span></h3>
-        <h4>Custom Color Service</h4>
+        {/* <p>This Week Only</p>
+        <h3>Get <span>30% OFF</span></h3> */}
+        {/* <h4>Custom Color Service</h4> */}
+        <h4>Discover Your Perfect<br />Shade with Us</h4>
         <button className={styles.btn}>BOOK AN APPOINTMENT</button>
       </div>
 

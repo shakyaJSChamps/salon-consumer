@@ -23,7 +23,7 @@ function Footer() {
       <div className={styles.links}>
         <div className={styles.footerItem}>
           <Image src={Stylrax} alt='Stylrax_brand' />
-          <i className={styles.designs}>Lorem Impsum Sit Dot emet</i>
+          {/* <i className={styles.designs}>Lorem Impsum Sit Dot emet</i> */}
         </div>
         <div className={styles.footerItem}>
           <Link href="">Hair Salon</Link>
@@ -42,7 +42,7 @@ function Footer() {
         </div>
         <div className={styles.footerItem}>
           <Link href="">Pricing</Link>
-          <Link href="">Refer A Friend</Link>
+          <Link href="">Refer a Friend</Link>
           <Link href="">Packages</Link>
           <Link href="">Offers</Link>
           <Link href="">Gift Card</Link>

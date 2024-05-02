@@ -17,17 +17,17 @@ function Support() {
                 </div>
             </div>
             <div className={styles.payment}>
-                <p>Payment Supports</p>
+                <p>Payment Options</p>
                 <div className={styles.paymentOption}>
                     <Image src={cards} alt='cards' className={styles.image}/>
                 </div>
 
             </div>
             <div className={styles.partners}>
-                <p>Partner with</p>
+                <p>Partner With Us</p>
                 <div className={styles.partner}>
                     <WorkIcon/>
-                    <span>Lorem Now</span>
+                    <span>Register as a professional</span>
                 </div>
 
             </div>

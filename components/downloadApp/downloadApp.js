@@ -11,8 +11,8 @@ function DownloadApp() {
         <Image src={mobileImg} alt='mobile-Image' />
       </div>
       <div className={styles.downloadContainer}>
-        <h3>Lorem Ipsum Sit Dot Stylrax App</h3>
-        <p>Download the App NOW! it’s smart easy and fast</p>
+        <h3>Make Your Salon Bookings Online</h3>
+        <p>Simple, easy and fast. Download the app now!</p>
         <div className={styles.downloadLink}>
           <Image src={playstore} alt='playstore' className={styles.gplay} />
           <Image src={appstore} alt='playstore'

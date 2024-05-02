@@ -13,10 +13,10 @@ function TopSalons() {
     <div className={styles.container}>
       <div className={styles.headingContainer}>
         <div className={styles.heading}>
-          Top Salons
+        Trending Salons
         </div>
         <div className={styles.linkDiv}>
-          <Link href={'#'} className={styles.link} >View All services
+          <Link href={'#'} className={styles.link} >View all salons
             <ArrowForwardIcon className={styles.arrow} />
           </Link>
         </div>

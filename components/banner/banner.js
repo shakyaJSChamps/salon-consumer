@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { GrNext } from "react-icons/gr";
 
 const sliderContent = [
-    { title: `Lorem Ipsum  <br> is a Dummy Text<br> in Design Industry`, description: 'Lorem ipsum is a Dummy Text in Design Industry' },
+    { title: `Bespoke Cuts, <br>Effortless Style`, description: 'Professional haircut and grooming services' },
     { title: `Stylrax Sallon  <br> is a Dummy Text<br> in Design Industry`, description: 'Stylrax Sallon is a Dummy Text in Design Industry' },
     { title: `Salon Management <br> is a Dummy Text<br> in Design Industry`, description: 'Salon Management is a Dummy Text in Design Industry' },
     { title: `Service Management  <br> is a Dummy Text<br> in Design Industry`, description: 'Service Management is a Dummy Text in Design Industry' },
@@ -93,11 +93,11 @@ function Banner() {
                             />
                         ))}
                     </div>
-                    <div className={styles.midOffer}>
+                    {/* <div className={styles.midOffer}>
                         <p>amet consectetur</p>
                         <div className={styles.border}></div>
                         <h1>30% off</h1>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

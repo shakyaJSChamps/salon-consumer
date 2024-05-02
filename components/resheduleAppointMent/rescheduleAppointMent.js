@@ -17,12 +17,12 @@ const RescheduleAppointment = ({ handelShowAppointMent }) => {
             <div className={styles.schedule}>
 
                 <div className={styles.reschedule}>
-                    <h4>Booking Date</h4>
+                    <h4>Booking date</h4>
                     <input type="date" placeholder='14 January 2024' />
 
                 </div>
                 <div className={styles.reschedule}>
-                    <h4>Select Time Slots</h4>
+                    <h4>Select time slot</h4>
                     <div className={styles.chooseTime}>
                         {[...Array(5).keys()].map((_, index) => (
                             <button
@@ -46,7 +46,7 @@ const RescheduleAppointment = ({ handelShowAppointMent }) => {
                     </div>
 
                 </div>
-                <button onClick={handelShowAppointMent} className={styles.btn}>Re Schedule</button>
+                <button onClick={handelShowAppointMent} className={styles.btn}>Reschedule</button>
             </div>
         </div>
     )

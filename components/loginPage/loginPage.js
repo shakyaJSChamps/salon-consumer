@@ -45,7 +45,7 @@ function LoginPage() {
             onSubmit={onSubmit}
             >
               <Form className={styles.form}>
-            <label>Mobile Number</label>
+            <label>Enter your mobile number</label>
             <Field
               type="text"
               name='phoneNumber'

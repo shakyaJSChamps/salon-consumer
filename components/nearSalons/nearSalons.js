@@ -17,7 +17,7 @@ function NearSalons() {
             <div className={styles.heading}>
                 <div className={styles.headingIcons}>
                     <LocationOnIcon className={styles.icon} />
-                    <CalendarViewMonthIcon className={styles.icon} />
+                    {/* <CalendarViewMonthIcon className={styles.icon} /> */}
                 </div>
                 <div className={styles.text}>
                     <h4>Find your </h4>
@@ -74,7 +74,7 @@ function NearSalons() {
 
             </div>
             <div className={styles.linkDiv}>
-                <Link href={'/salonlist'} className={styles.link} >View All Salons
+                <Link href={'/salonlist'} className={styles.link} >View all salons
                     <ArrowForwardIcon className={styles.arrow} />
                 </Link>
             </div>
