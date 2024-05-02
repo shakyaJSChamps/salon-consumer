@@ -3,14 +3,17 @@ import styles from "./aboutUs.module.css";
 const AboutUs = () => {
   return (
     <>
-      <div className={styles.mainSection} >
+      <div className={styles.mainSection}>
         <div className="container">
           <div className="row">
+            <div className={styles.titleName}>
+              <h3>
+                <u>About-Us</u>
+              </h3>
+            </div>
             <div className="col ">
               <h5>Who We Are:</h5>
-              <p>
-                Groom yourself to your best self! Anywhere –Anytime!!
-              </p>
+              <p>Groom yourself to your best self! Anywhere –Anytime!!</p>
               <p>
                 Welcome to the STYLRAX, where we are passionate about
                 revolutionizing the salon services industry. We observed the gap
@@ -66,7 +69,7 @@ const AboutUs = () => {
       <div className={styles.sectionSalon}>
         <div className="container">
           <div className={`${styles.salonTag} row`}>
-            <h5 >For Salon Service Providers:</h5>
+            <h5>For Salon Service Providers:</h5>
           </div>
           <div className="row">
             <div className="col">
@@ -108,23 +111,21 @@ const AboutUs = () => {
             <div className="col">
               <ol className={styles.meetSection}>
                 <li>
-                  <span className={`${styles.meetSpan}`}>
-                    Raghav Jain:
-                  </span>{" "}
-                  As the visionary founder, Raghav Jain leads our team with a
-                  deep passion for revolutionizing the salon services industry.
-                  With their expertise, we continuously develop and grow the
-                  Salon App.
+                  <span className={`${styles.meetSpan}`}>Raghav Jain:</span> As
+                  the visionary founder, Raghav Jain leads our team with a deep
+                  passion for revolutionizing the salon services industry. With
+                  their expertise, we continuously develop and grow the Salon
+                  App.
                 </li>
-                {/* <li>
+                <li>
                   <span className={`${styles.meetSpan} fw-bold`}>
-                    Maneesh Srivastava:
+                  Raghav Jain:
                   </span>
                   Our lead developer, Srivastava, ensures a seamless user
                   experience on our app. Their technical knowledge and
                   commitment to innovation drive our platform<span>&apos;</span>s success.
-                </li> */}
-                {/* <li>
+                </li>
+                <li>
                   <span className={`${styles.meetSpan} fw-bold`}>
                     Raghav Jain:
                   </span>
@@ -132,7 +133,7 @@ const AboutUs = () => {
                   awareness and promote the Salon App through strategic
                   campaigns, reaching a wider audience and driving growth.
                   Transform your salon experience. Download the STYLRAX now!
-                </li> */}
+                </li>
               </ol>
               <p>
                 Take your salon business to new heights. Partner with us today!
