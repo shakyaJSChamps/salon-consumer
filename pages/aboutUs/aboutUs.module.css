@@ -1,3 +1,8 @@
+.titleName {
+  text-align: center;
+  margin-top: 10px;
+}
+
 .mainSection {
   display: flex;
   justify-content: center;
@@ -12,54 +17,54 @@
   color: #000000;
   text-align: justify;
 }
-.customerTag{
+.customerTag {
   padding-left: 20px;
 }
-.customerSubMenu{
+.customerSubMenu {
   list-style: none;
   padding: 0 20px;
 }
-.customerSubMenu  li{
+.customerSubMenu li {
   padding-left: 1em;
   text-indent: -1em;
 }
-.customerSubMenu li::before{
+.customerSubMenu li::before {
   content: "-";
   padding-right: 0.5em;
 }
-.sectionSalon{
+.sectionSalon {
   font-size: 18px;
   font-weight: 400;
   color: #000000;
-  text-align: justify; 
+  text-align: justify;
   margin-top: 10px;
 }
-.salonTag{
+.salonTag {
   padding-left: 20px;
   font-size: 20px;
 }
-.salonSubMenu{
+.salonSubMenu {
   list-style: none;
   padding: 5px 25px;
 }
-.salonSubMenu  li{
+.salonSubMenu li {
   padding-left: 1em;
   text-indent: -1em;
 }
-.salonSubMenu li::before{
+.salonSubMenu li::before {
   content: "-";
   padding-right: 1em;
 }
 .mainMeet {
   padding: 20px;
 }
-.meetTag{
+.meetTag {
   padding-left: 20px;
   font-size: 20px;
 }
-.meetSection{
+.meetSection {
   padding-left: 45px;
 }
 .meetSpan {
- font-weight: 600;
+  font-weight: 600;
 }

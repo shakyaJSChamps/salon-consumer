@@ -7,9 +7,9 @@ function PrivacyPolicy() {
       <div className="row">
         <div className="col-lg-12">
           <div className={styles.title}>
-            <h5>
-              <mark>Privacy Policy</mark>
-            </h5>
+            <h3>
+              <u>Privacy Policy</u>
+            </h3>
           </div>
           <div className={styles.heading}>
             <h5>Updated on</h5>
