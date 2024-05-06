@@ -1,24 +1,40 @@
 .title {
   display: flex;
   justify-content: center;
-  margin: 10px 20px;
+  margin: 10px 60px;
   text-decoration: underline;
 }
+.updateOn{
+  padding: 0 30px;
+  font-weight: 700;
+  font-size: 20px;
+}
 .mainList li {
-  margin: 10px 15px;
+  margin: 10px 5px;
 }
 .subList h5 {
-  font-size: large;
+  font-size: 17px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
 }
 
 .subSubList h5 {
-  font-size: large;
-  padding-left: 10px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 30px;
+  text-align: justify;
+  padding: 5px 0px;
 }
 
 .subList ol {
   list-style-type: lower-roman;
-  font-size: large;
+  font-size: 17px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
 }
 
 .subSubList ol {
@@ -26,15 +42,26 @@
 }
 
 .mainList {
-  font-size: large;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 30px;
   text-align: justify;
-  padding-left: 20px;
+  padding: 5px 30px;
 }
-
+.mainList ol li h5{
+  font-weight: 700;
+  font-size: 17px;
+}
 .heading {
+ font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 30px;
   text-align: justify;
-  padding: 5px 20px;
-  color: black;
+  padding: 5px 30px;
 }
 
 @media screen and (max-width: 992px) {

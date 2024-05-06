@@ -11,21 +11,23 @@ function PrivacyPolicy() {
               <u>Privacy Policy</u>
             </h3>
           </div>
+          <div className={styles.updateOn}><h5>Updated on</h5></div>
           <div className={styles.heading}>
-            <h5>Updated on</h5>
+            
             <p>
-              STYLRAX SOLUTIONS INDIA PRIVATE LIMITED, (Company, we, our, us)
+              STYLRAX SOLUTIONS INDIA PRIVATE LIMITED, (<strong>Company, we, our, us</strong>)
               values your privacy and is committed to ensuring that your privacy
               is protected. The purpose of this “Privacy Policy” is to describe
               what information we collect about you, why we collect it, how we
               use your information, how we protect and share your Information
               (as defined below), the choices we offer you, including your
-              ability to access and update information about yourself (“User” or
-              “your” or “you”) in course of your use of the Website/Application.
+              ability to access and update information about yourself (<strong>“User”</strong> or
+              <strong> “your” </strong> or <strong>“you”</strong>)in course of your use of the Website/Application.
               This Privacy Policy must be read in conjunction with the{" "}
               <Link href="/termsOfUse">
-                <b>“Terms of Use”</b>
-              </Link>{" "}
+                <b>“Terms of Use for user”</b>
+              </Link>{" "}/
+              <Link href="https://business.stylrax.in/home/terms-condition"><b>“Terms of Use for Vendor”</b></Link>
               and all the terms and conditions therein. If you do not agree with
               Privacy Policy and the Terms of Use, do not access or use the
               Website/Application.
