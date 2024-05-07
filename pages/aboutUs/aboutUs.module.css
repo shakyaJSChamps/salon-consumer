@@ -10,19 +10,49 @@
   text-align: justify;
   padding: 20px;
 }
-
-.sectionCustomer {
+.updateOn {
+  font-weight: 700;
   font-size: 18px;
+}
+.groomSelf {
+  padding: 5px 5px 5px 0;
+  font-size: 17px;
+}
+.heading {
+  font-family: sans-serif monospace;
   font-weight: 400;
-  color: #000000;
+  color: #000;
+  font-size: 17px;
+  line-height: 25px;
   text-align: justify;
+  padding: 5px 0;
+}
+.sectionCustomer {
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 25px;
+  text-align: justify;
+  padding: 5px 0;
 }
 .customerTag {
   padding-left: 20px;
 }
+.forCustomer{
+  font-weight: 700;
+  font-size: 17px;
+  padding: 5px 5px 5px 0;
+}
 .customerSubMenu {
   list-style: none;
   padding: 0 20px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 25px;
+  text-align: justify;
 }
 .customerSubMenu li {
   padding-left: 1em;
@@ -33,19 +63,28 @@
   padding-right: 0.5em;
 }
 .sectionSalon {
-  font-size: 18px;
+  font-family: sans-serif monospace;
   font-weight: 400;
-  color: #000000;
+  color: #000;
+  font-size: 17px;
+  line-height: 25px;
   text-align: justify;
-  margin-top: 10px;
+  padding: 5px 0;
 }
 .salonTag {
   padding-left: 20px;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 17px;
 }
 .salonSubMenu {
   list-style: none;
   padding: 5px 25px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 25px;
+  text-align: justify;
 }
 .salonSubMenu li {
   padding-left: 1em;
@@ -59,11 +98,17 @@
   padding: 20px;
 }
 .meetTag {
-  padding-left: 20px;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 17px;
 }
 .meetSection {
-  padding-left: 45px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
+  font-size: 17px;
+  line-height: 25px;
+  text-align: justify;
+  padding: 5px 20px;
 }
 .meetSpan {
   font-weight: 600;

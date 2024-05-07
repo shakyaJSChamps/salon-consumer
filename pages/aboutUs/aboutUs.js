@@ -12,9 +12,9 @@ const AboutUs = () => {
               </h3>
             </div>
             <div className="col ">
-              <h5>Who We Are:</h5>
-              <p>Groom yourself to your best self! Anywhere –Anytime!!</p>
-              <p>
+              <h5 className={styles.updateOn}>Who We Are:</h5>
+              <p className={styles.groomSelf}>Groom yourself to your best self! Anywhere –Anytime!!</p>
+              <p className={styles.heading}>
                 Welcome to the STYLRAX, where we are passionate about
                 revolutionizing the salon services industry. We observed the gap
                 in the salon industry, especially during COVID related to
@@ -31,8 +31,8 @@ const AboutUs = () => {
       <div className={styles.sectionCustomer}>
         <div className="container">
           <div className={`${styles.customerTag} row`}>
-            <h5 className="">How We Do It:</h5>
-            <p className="px-3 fw-bold mt-3">For Customers:</p>
+            <h5 className={styles.updateOn}>How We Do It:</h5>
+            <p className={styles.forCustomer}>For Customers:</p>
             <div className="row">
               <div className="col">
                 <ul className={styles.customerSubMenu}>
@@ -69,7 +69,7 @@ const AboutUs = () => {
       <div className={styles.sectionSalon}>
         <div className="container">
           <div className={`${styles.salonTag} row`}>
-            <h5>For Salon Service Providers:</h5>
+            <p >For Salon Service Providers:</p>
           </div>
           <div className="row">
             <div className="col">
@@ -105,7 +105,7 @@ const AboutUs = () => {
       <div className={styles.mainMeet}>
         <div className="container">
           <div className={`${styles.meetTag} row`}>
-            <h5 className="px-3 fw-bold">Meet Our Core Members:</h5>
+            <p>Meet Our Core Members:</p>
           </div>
           <div className="row">
             <div className="col">
@@ -118,17 +118,11 @@ const AboutUs = () => {
                   App.
                 </li>
                 <li>
-                  <span className={`${styles.meetSpan} fw-bold`}>
-                  Raghav Jain:
-                  </span>
-                  Our lead developer, Srivastava, ensures a seamless user
+                  Our lead developer, ensures a seamless user
                   experience on our app. Their technical knowledge and
                   commitment to innovation drive our platform<span>&apos;</span>s success.
                 </li>
                 <li>
-                  <span className={`${styles.meetSpan} fw-bold`}>
-                    Raghav Jain:
-                  </span>
                   Leading our marketing efforts is Raghav Jain. They create
                   awareness and promote the Salon App through strategic
                   campaigns, reaching a wider audience and driving growth.
