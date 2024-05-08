@@ -15,7 +15,7 @@ function TermsOfUse() {
         </div>
         <div className="row">
           <div className="col">
-            <div className={styles.firstSection}>
+            <div className={styles.heading}>
               Thank you for using Stylrax. These Terms and Conditions of Use
               (the Terms) are intended to make you aware of your legal rights
               and responsibilities with respect to your access to and use of the
@@ -30,7 +30,7 @@ function TermsOfUse() {
                 <Link href="/privacyPolicy">Privacy Policy</Link>. You can
                 accept the Terms by:
               </p>
-              <ul className={styles.termCondition}>
+              <ul className={styles.heading}>
                 <li>
                   Clicking to accept or agree to the Terms, where it is made
                   available to you by Company on the Platform for any particular
@@ -47,17 +47,17 @@ function TermsOfUse() {
         </div>
       </div>
       <div>
-        <p className={styles.paraSection}>
+        <p className={styles.heading}>
           This Agreement sets out the Terms under which the User(s) (hereinafter
           defined) is/are permitted to use the Platform and the Services
           (hereinafter defined) available thereunder.
         </p>
-        <p className={styles.paraSection}>
+        <p className={styles.heading}>
           The terms ‘You’ or ‘Your’ refer to You as a User, and the terms
           ‘Stylrax, ‘We’, ‘Us’, ‘Company’, and ‘Our’ refer to Stylrax E-Retail
           Private Limited.
         </p>
-        <p className={styles.paraSection}>
+        <p className={styles.heading}>
           We may change, modify or otherwise amend these Terms at any time by
           posting an updated version of these Terms on the Platform (defined
           hereunder). The updated version of these Terms shall take effect
@@ -69,7 +69,7 @@ function TermsOfUse() {
           not agree to abide by these or any future Terms, please do not use or
           access the Platform.
         </p>
-        <p className={styles.paraSection}>
+        <p className={styles.heading}>
           You have the right to opt-out of agreeing to these Terms, and
           therefore also using the Platform. If you are not comfortable with any
           of the Terms or do not wish to be bound by the same, you are at
@@ -81,7 +81,7 @@ function TermsOfUse() {
           non-transferable, limited and revocable license to use the Services
           (as defined below).
         </p>
-        <p className={styles.paraSection}>
+        <p className={styles.heading}>
           The Terms are published in accordance with the provisions laid down
           under Rule 3(1) of the Information Technology (Intermediaries
           Guidelines and Digital Media Ethics Code) Rules, 2021 and the same
@@ -91,7 +91,7 @@ function TermsOfUse() {
           limited to Indian Contract Act, 1872. These Terms being an electronic
           record does not require any signature.
         </p>
-        <p className={styles.paraSection}>
+        <p className={styles.heading}>
           It is hereby clarified that, for the purposes of these Terms, the
           Company shall be considered as an “Intermediary” as defined under the
           Information Technology Act, 2002 and the Information Technology
@@ -465,8 +465,8 @@ function TermsOfUse() {
                 </li>
               </ol>
 
-              <li className="mb-3">
-                <span className={styles.spanTag}>RELATIONSHIP</span>
+              <li className={`${styles.mainMenu} fw-bold mt-3 mb-2`}>
+                RELATIONSHIP
               </li>
               <ol className={styles.subMenuNav}>
                 <li className="mb-2">
@@ -480,7 +480,7 @@ function TermsOfUse() {
                   User understands and agrees that Stylrax will not be liable
                   for:
                 </li>
-                <ol className={styles.lowerAlpha} type="a">
+                <ol className={styles.lowerAlphal} type="a">
                   <li>
                     User interactions and associated issues User has with the
                     Salon/Specialist.
@@ -521,7 +521,7 @@ function TermsOfUse() {
                     Salon/Specialist for deleting the same.
                   </li>
                 </ol>
-                <li className={`${styles.mainMenu} fw-bold mt-3 mb-2`}>
+                <li className={styles.lA}>
                   LINKS TO THIRD PARTIES
                 </li>
                 <p>
@@ -538,7 +538,7 @@ function TermsOfUse() {
                   such third-party websites. If you decide to access any such
                   linked third party website, you do so at your own risk.
                 </p>
-                <li className={`${styles.mainMenu} fw-bold mt-3 mb-2`}>
+                <li className={styles.lA}>
                   INFORMATION OWNERSHIP
                 </li>
                 <ol className={styles.subMenuNav}>
@@ -555,7 +555,7 @@ function TermsOfUse() {
                     modified by us from time to time.
                   </li>
                 </ol>
-                <li className={`${styles.mainMenu} fw-bold mt-3 mb-2`}>
+                <li className={styles.lA}>
                   VIOLATION OF TERMS OF USE / SUSPICIOUS ACTIVITY
                 </li>
                 If we believe that you have violated any of the conditions as
@@ -569,7 +569,7 @@ function TermsOfUse() {
                 out to the Company’s support team at support@stylrax.com to
                 assist you with any query or question arising as a result of the
                 afore-mentioned suspension/ deletion to resolve the same.
-                <li className={`${styles.mainMenu} fw-bold mt-3 mb-2`}>
+                <li className={styles.lA}>
                   USE AND PROTECTION OF INTELLECTUAL PROPERTY RIGHTS
                 </li>
                 <ol className={styles.subMenuNav}>
@@ -602,7 +602,7 @@ function TermsOfUse() {
                     and may invite legal action.
                   </li>
                 </ol>
-                <li className={`${styles.mainMenu} fw-bold mt-3 mb-2`}>INDEMNIFICATION</li>
+                <li className={styles.lA}>INDEMNIFICATION</li>
                 <ol className={styles.subMenuNav}>
                   <li className="mb-3">
                     You agree to defend, indemnify and hold harmless Stylrax,

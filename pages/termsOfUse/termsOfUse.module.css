@@ -1,50 +1,51 @@
-.mainHeading{
+.mainHeading {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 10px auto;
 }
-.firstSection{
-  font-size: 18px;
+.heading {
+  font-family: sans-serif monospace;
   font-weight: 400;
-  color: #000000;
+  color: #000;
+  font-size: 17px;
+  line-height: 30px;
   text-align: justify;
-  padding:5px 20px;
+  padding: 5px 30px;
 }
-.termCondition{
-  padding: 10px 20px;
-}
-.paraSection{
-  font-size: 18px;
+.subMenu {
+  font-family: sans-serif monospace;
   font-weight: 400;
-  color: #000000;
-  text-align: justify;
-  padding: 15px;
-}
-.subMenu{
-  padding: 20px;
+  color: #000;
   counter-reset: item;
-  font-size: 18px;
-  font-weight: 400;
-  color: #000000;
-  text-align: justify
+  font-size: 17px;
+  line-height: 30px;
+  text-align: justify;
+  padding: 5px 45px;
 }
-.mainMenu{
-  padding: 10px;
+.mainMenu {
   font-weight: 700;
+  font-size: 17px;
 }
-.subMenuNav{
+.subMenuNav {
   counter-reset: sub-item;
-  padding-left: 10px;
+  font-size: 17px;
+  font-family: sans-serif monospace;
+  font-weight: 400;
+  color: #000;
 }
-.lowerAlpha{
+.lowerAlpha {
   padding-left: 20px;
 }
-.romanList{
+.lA{
+  font-weight: 600;
+  font-size: 17px;
+}
+.romanList {
   padding-left: 15px;
 }
-.spanTag{
+.spanTag {
   font-weight: 600;
 }
 /* .menu{
