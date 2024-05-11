@@ -14,3 +14,7 @@ body {
 a {
   text-decoration: none !important;
 }
+.phone-container .flag-dropdown,
+.phone-container .flag-dropdown > div {
+  border-radius: 20px !important;
+}

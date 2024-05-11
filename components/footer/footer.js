@@ -1,28 +1,26 @@
-"use client"
-import Link from 'next/link'
-import styles from './footer.module.css'
-import Image from 'next/image';
-import Stylrax from '@/assets/images/stylrax_brand.png'
-import AppStore from '@/assets/images/Group.svg'
-import GooglePlays from '@/assets/images/Google Play.svg'
+"use client";
+import Link from "next/link";
+import styles from "./footer.module.css";
+import Image from "next/image";
+import Stylrax from "@/assets/images/stylrax_brand.png";
+import AppStore from "@/assets/images/Group.svg";
+import GooglePlays from "@/assets/images/Google Play.svg";
 import { MdFacebook } from "react-icons/md";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
 import { FaYoutube } from "react-icons/fa6";
 function Footer() {
-
-
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    console.log("footer", e.target.value)
-  }
+    e.preventDefault();
+    console.log("footer", e.target.value);
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.links}>
         <div className={styles.footerItem}>
-          <Image src={Stylrax} alt='Stylrax_brand' />
+          <Image src={Stylrax} alt="Stylrax_brand" />
           {/* <i className={styles.designs}>Lorem Impsum Sit Dot emet</i> */}
         </div>
         <div className={styles.footerItem}>
@@ -53,10 +51,9 @@ function Footer() {
           <Link href="privacyPolicy">Privacy Policy</Link>
           <Link href="termsOfUse">Terms of use</Link>
         </div>
-
       </div>
       <div className={styles.socialMedia}>
-        <div className={styles.socialMediaItems}>
+        {/* <div className={styles.socialMediaItems}>
           <p className={styles.social}>Get Social</p>
           <div className={styles.socialIcons}>
             <MdFacebook />
@@ -65,25 +62,24 @@ function Footer() {
             <CiLinkedin />
             <FaYoutube />
           </div>
-        </div>
-        <div className={styles.socialMediaItems}>
+        </div> */}
+        {/* <div className={styles.socialMediaItems}>
           <p>Subscribe to Our Newsletter</p>
           <form onSubmit={handleOnSubmit}>
             <input type="text" placeholder='Enter Mobile Number' />
             <button className={styles.formBtn}>Submit</button>
           </form>
-        </div>
-        <div className={styles.socialMediaItems}>
+        </div> */}
+        {/* <div className={styles.socialMediaItems}>
           <p>Download Our App </p>
           <div className={styles.downloadsLogo}>
             <Image src={AppStore} alt="Apple store" />
             <Image src={GooglePlays} alt="Google play store" />
           </div>
-
-        </div>
+        </div> */}
       </div>
     </div>
-  )
+  );
 }
 
 export default Footer;
