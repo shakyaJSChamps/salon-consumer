@@ -19,17 +19,20 @@ const navLinks = [
     {
         name: "Top salons",
         url: "/salons",
-        imageUrl: salons
+        imageUrl: salons,
+        target:""
     },
     {
         name: "Top services",
         url: "/services",
-        imageUrl: services
+        imageUrl: services,
+        target:""
     },
     {
         name: "Stylrax for Business",
-        url: "/business",
-        imageUrl: business
+        url: "https://business.stylrax.in/home",
+        imageUrl: business,
+        target: "_blank" 
     },
 ];
 
@@ -64,7 +67,7 @@ function Navbar() {
                 </div>
                 <div className={styles.featuredlink}>
                     {navLinks.map((item, index) => (
-                        <Link href={item.url} key={index}>
+                        <Link href={item.url} key={index} target={item.target}>
                             <Image src={item.imageUrl} width={25} height={25} alt='salons' />
                             <span>{item.name}</span>
                         </Link>

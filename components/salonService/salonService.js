@@ -1,175 +1,141 @@
 "use client"
-import { Grid, Paper } from '@mui/material'
-import styles from './salonService.module.css'
+import { Grid, Paper } from '@mui/material';
+import styles from './salonService.module.css';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import haircut from '@/assets/images/haircolorMen.svg'
 import StarsIcon from '@mui/icons-material/Stars';
 import Divider from '@mui/material/Divider';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Changed from 'next/navigation'
 import { getSalonService } from '@/api/account.api';
+import Notify from '@/utils/notify'
+import { useDispatch } from 'react-redux';
+import { storeSelectedService } from '@/app/Redux/selectedServiceSlice';
 
-
-function SalonService({id}) {
-  console.log("id::::>",id);
-  const [activeButton, setActiveButton] = useState('male');
-  const [activeservice, setActiveService] = useState('haircut')
+function SalonService({ id }) {
+  const [activeCategory, setActiveCategory] = useState(''); // Set default active category
+  const [activeServiceIndexes, setActiveServiceIndexes] = useState([]); // Indexes of the selected services
   const [serviceData, setServiceData] = useState([]);
-  console.log("serviceData:::>",serviceData);
-  const handleServiceClick = (serviceName) => {
-    setActiveService(serviceName);
-  };
-  const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName);
-  };
-  const router=useRouter();
-  const handleSalonClick= ()=>{
-    router.push('salonid/salon')  
+  const [selectedCategoryServices, setSelectedCategoryServices] = useState([]);
+  const [selectedServicesDetails, setSelectedServicesDetails] = useState([]);
+  console.log("selectedServicesDetails",selectedServicesDetails);
+  const router = useRouter();
+  const dispatch=useDispatch();
 
-  };
-  useEffect(()=>{
-    async  function fetchService(){
+  useEffect(() => {
+    async function fetchService() {
       try {
-        const res=await getSalonService(id);
-        const data= res?.data?.data;
-        setServiceData(data);
-        // console.log("res------->",res);
+        const res = await getSalonService(id);
+        const data = res?.data?.data;
+        if (data && data.length > 0) {
+          setActiveCategory(data[0].name); // Set first service as default active category
+          setSelectedCategoryServices(data[0].services);
+          setServiceData(data);
+        }
       } catch (error) {
-        console.log("error:::>",error);
+        console.log("error:::>", error);
       }
     }
-    fetchService()
-},[id])   
+    fetchService();
+  }, [id]);
+
+  const handleServiceClick = (serviceName, index) => {
+    const currentIndex = activeServiceIndexes.indexOf(index);
+    const newActiveServiceIndexes = [...activeServiceIndexes];
+    if (currentIndex === -1) {
+      // Service is not selected, add it to the selected services
+      newActiveServiceIndexes.push(index);
+    } else {
+      // Service is already selected, remove it from the selected services
+      newActiveServiceIndexes.splice(currentIndex, 1);
+    }
+    setActiveServiceIndexes(newActiveServiceIndexes);
+    setActiveCategory(serviceName);
+    const selectedCategory = serviceData.find(category => category.name === serviceName);
+    setSelectedCategoryServices(selectedCategory.services);
+  };
+
+  const handleSalonClick = () => {
+    if(selectedServicesDetails.length>0){
+      router.push('salonid/salon');
+    }
+    Notify.error("please Select service")
+   
+  };
+
+  const handleAddButtonClick = (serviceDetails) => {
+    const selectedIndex = selectedServicesDetails.findIndex(service => service === serviceDetails);
+    const newSelectedServicesDetails = [...selectedServicesDetails];
+    if (selectedIndex === -1) {
+      // Service is not selected, add it to the selected services
+      newSelectedServicesDetails.push(serviceDetails);
+    } else {
+      // Service is already selected, remove it from the selected services
+      newSelectedServicesDetails.splice(selectedIndex, 1);
+    }
+    setSelectedServicesDetails(newSelectedServicesDetails);
+    dispatch(storeSelectedService(newSelectedServicesDetails));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.service}>
         <Paper className={styles.paper}>
-          <h3>Select Service <hr /></h3>
+          <h3>Select Service</h3>
+          <hr />
           <div className={styles.serviceFor}>
-            <button onClick={() => handleButtonClick('male')} className={activeButton === 'male' ? styles.active : ''}>Male</button>
-            <button onClick={() => handleButtonClick('female')} className={activeButton === 'female' ? styles.active : ''}>Female</button>
-          </div>
-          {activeButton === 'male' && (<div className={styles.serviceType}>
-            <Grid container spacing={2}>
-            {serviceData.map((item, index) => (
-              <Grid item xs={5} md={4} key={index} className={styles.grid}>
-                <button onClick={() => handleServiceClick('haircut')}
-                  className={activeservice === 'haircut' ? styles.serviceactive : ''} >
-                  <Image src={haircut} alt='haircut' />
-                  <p>{item.serviceName}</p>
-                </button>
-              </Grid>
+            {serviceData.map((category, index) => (
+              <button 
+                key={index} 
+                onClick={() => handleServiceClick(category.name, index)} 
+                className={activeCategory === category.name ? styles.active : ''}
+              >
+                {category.name}
+              </button>
             ))}
-                
-
-
-            </Grid>
-
-          </div>)}
-          {activeButton === 'female' && (<div className={styles.serviceType}>
-            For Female
-
-          </div>)}
+          </div>
         </Paper>
       </div>
       <div className={styles.bestSeller}>
         <h3>BestSeller Haircut</h3>
         <div className={styles.serviceTypeDetails}>
-        <div className={styles.details}>
-            <div className={styles.aboutService}>
-              <h3>Haircut for men</h3>
-              <p>
-                <StarsIcon className={styles.LIcon}/>
-                <soan>4.88 (584.5K reviews)</soan>
-              </p>
-              <p className={styles.price}>
-                ₹259
-                &nbsp;
-                <span className={styles.duration}>&bull;30 mins</span>
-              </p>
-              <hr />
-              <p>Professional haircut that suits your face shape</p>
+          {selectedCategoryServices.map((item, index) => (
+            <div className={styles.details} key={index}>
+              <div className={styles.aboutService}>
+                <h3>{item.serviceName}</h3>
+                <p>
+                  <StarsIcon className={styles.LIcon} />
+                  <span>4.88 (584.5K reviews)</span>
+                </p>
+                <p className={styles.price}>
+                  ₹{item.servicePrice}
+                  &nbsp;
+                  <span className={styles.duration}>&bull; {item.serviceDuration} mins</span>
+                </p>
+                <hr />
+                <p>Professional {item.serviceName.toLowerCase()} service</p>
+              </div>
+              <div className={styles.image}>
+                <Image src={item.imageUrl} alt={item.serviceName} />
+                <button 
+                  className={`${styles.sellerBtn} ${activeServiceIndexes.includes(index) ? styles.selected : ''}`} 
+                  onClick={() => handleAddButtonClick(item)}
+                >
+                  {selectedServicesDetails.includes(item) ? "unselect" : "add"}
+                </button>
+              </div>
             </div>
-            <div className={styles.image}>
-              <Image src={haircut} alt='haircut-for-men' />
-              <button className={styles.sellerBtn}>add</button>
-            </div>
-          </div>
+          ))}
           <Divider className={styles.divider} />
-          <div className={styles.details}>
-            <div className={styles.aboutService}>
-              <h3>Haircut for men</h3>
-              <p>
-                <StarsIcon className={styles.LIcon}/>
-                <soan>4.88 (584.5K reviews)</soan>
-              </p>
-              <p className={styles.price}>
-                ₹259
-                &nbsp;
-                <span className={styles.duration}>&bull;30 mins</span>
-              </p>
-              <hr />
-              <p>Professional haircut that suits your face shape</p>
-            </div>
-            <div className={styles.image}>
-              <Image src={haircut} alt='haircut-for-men' />
-              <button className={styles.sellerBtn}>add</button>
-            </div>
-          </div>
-          <Divider className={styles.divider} />
-          <div className={styles.details}>
-            <div className={styles.aboutService}>
-              <h3>Haircut for men</h3>
-              <p>
-                <StarsIcon className={styles.LIcon}/>
-                <soan>4.88 (584.5K reviews)</soan>
-              </p>
-              <p className={styles.price}>
-                ₹259
-                &nbsp;
-                <span className={styles.duration}>&bull;30 mins</span>
-              </p>
-              <hr />
-              <p>Professional haircut that suits your face shape</p>
-            </div>
-            <div className={styles.image}>
-              <Image src={haircut} alt='haircut-for-men' />
-              <button className={styles.sellerBtn}>add</button>
-            </div>
-          </div>
-          <Divider className={styles.divider} />
-          <div className={styles.details}>
-            <div className={styles.aboutService}>
-              <h3>Haircut for men</h3>
-              <p>
-                <StarsIcon className={styles.LIcon}/>
-                <soan>4.88 (584.5K reviews)</soan>
-              </p>
-              <p className={styles.price}>
-                ₹259
-                &nbsp;
-                <span className={styles.duration}>&bull;30 mins</span>
-              </p>
-              <hr />
-              <p>Professional haircut that suits your face shape</p>
-            </div>
-            <div className={styles.image}>
-              <Image src={haircut} alt='haircut-for-men' />
-              <button className={styles.sellerBtn}>add</button>
-            </div>
-          </div>
-          <Divider className={styles.divider} />
-
         </div>
         <div className={styles.booking}>
-          <h4>Book At</h4>
+        <h4>Book At</h4>
           <button onClick={handleSalonClick}>Salon</button>
-          <button onClick={handleSalonClick}>Home</button>
+          <button onClick={handleSalonClick}>Home</button> 
+          
         </div>
       </div>
-
     </div>
-  )
+  );
 }
 
-export default SalonService
+export default SalonService;
