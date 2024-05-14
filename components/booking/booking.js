@@ -16,7 +16,8 @@ function Booking() {
   const servicesDetails = Session.getObject("selectedService");
   const router = useRouter();
   const [totalCount, setTotalCount] = useState(1); // Initial count
-  const serviceIds = servicesDetails?.map((item) => item.categoryId);
+  const serviceIds = servicesDetails?.map((item) => item.id);
+  console.log("servicekjkjkj:::>",servicesDetails);
   console.log("serviceIds::>", serviceIds);
   const salonId = Session.get('selectedSalonId')
   console.log("SalonId", salonId);
@@ -26,7 +27,7 @@ function Booking() {
     date: '',
     startTime: '',
     serviceType: '',
-    addressId:1,
+    addressId:38,
     duration: '',
     serviceIds: serviceIds
   };

@@ -16,6 +16,7 @@ import { ImCross } from "react-icons/im";
 
 import WishLists from '../userwishLists/wishLists';
 import { useRouter } from 'next/navigation';
+import UserAddress from '../userAddress/userAddress';
 
 
 const UserProfie = () => {
@@ -272,19 +273,7 @@ const UserProfie = () => {
 
 
                 {showManageAddress && (
-                    <div className={styles.manageAddress}>
-                        <div className={styles.manageDetails}>
-                            <h5>Manage Addresses</h5>
-                            <button><IoMdAdd />ADD A NEW ADDRESS</button>
-                            <div className={styles.addressDetails}>
-                                <button className={styles.home}>HOME</button>
-                                <HiOutlineDotsVertical className={styles.dotted} />
-                                <p>City:{cityDetails}</p>
-                                <p>State/province/area:{cityDetails}</p>
-                                <p>{cityDetails}</p>
-                            </div>
-                        </div>
-                    </div>
+                   <UserAddress/>
 
                 )}
                 {showWishLists && (
