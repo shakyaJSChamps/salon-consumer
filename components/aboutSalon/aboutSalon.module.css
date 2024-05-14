@@ -80,13 +80,16 @@
     padding: 15px 0px;
 }
 
-.div {
+.reviewDiv {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .reviewsContainer {
-    width: 50%;
+    width: 40%;
     border: 1px solid grey;
     padding: 10px;
     border-radius: 10px;

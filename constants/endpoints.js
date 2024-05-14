@@ -22,7 +22,7 @@ export const __endpoint_getSalonStaff = (salonid) => {
 export const __endpoint_getSalonReviews = (salonid) => {
     return `${endpoint}consumer/salons/${salonid}/reviews`;
 };
-
+export const __endpoint_appointment=endpoint+"consumer/appointments"
 
 // export const __endpoint_putServiceType = endpoint + "admin/services/categories";
 // export const __endpoint_getSaloon = endpoint + "admin/salon ";

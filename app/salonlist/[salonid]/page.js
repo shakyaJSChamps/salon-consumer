@@ -10,6 +10,8 @@ import SalonService from '@/components/salonService/salonService';
 import SalonGallery from '@/components/salonGallery/salonGallery';
 import AboutSalon from '@/components/aboutSalon/aboutSalon';
 import { getDetailPageData } from '@/api/account.api';
+import { FaHeart } from "react-icons/fa";
+import Slider from "react-slick";
 
 function SalonDetail({ params }) {
     const salonid = params.salonid
@@ -29,6 +31,7 @@ function SalonDetail({ params }) {
                 // Call getDetailPageData with salonid
                 const detailPageData = await getDetailPageData(salonid);
                 setData(detailPageData?.data?.data);
+                console.log("kjhfsjkhajk",detailPageData)
             } catch (error) {
                 console.log(error);
             }
@@ -49,9 +52,8 @@ function SalonDetail({ params }) {
                         <h2>{data?.name}</h2>
                         <div className={styles.wishlistIcon}>
                             <ShareIcon className={styles.wIcon} />
-                            <FavoriteBorderIcon className={styles.wIcon} style={{
-                                color: data?.isFavorite ? "red" : ""
-                            }} />
+                            {data?.isFavorite ?<FaHeart className={styles.wIcon} style={{color:"red"}}/>:<FavoriteBorderIcon className={styles.wIcon}/>}
+
                         </div>
                     </div>
                     <div className={styles.salonRating}>
