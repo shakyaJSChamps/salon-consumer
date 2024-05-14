@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'; // Changed from 'next/navigation'
 import { getSalonService } from '@/api/account.api';
 import Notify from '@/utils/notify'
 import { useDispatch } from 'react-redux';
-import { storeSelectedService } from '@/app/Redux/selectedServiceSlice';
+import { storeSelectedSalonId, storeSelectedService } from '@/app/Redux/selectedServiceSlice';
 
 function SalonService({ id }) {
   const [activeCategory, setActiveCategory] = useState(''); // Set default active category
@@ -27,6 +27,7 @@ function SalonService({ id }) {
         const res = await getSalonService(id);
         const data = res?.data?.data;
         if (data && data.length > 0) {
+          dispatch(storeSelectedSalonId(id));
           setActiveCategory(data[0].name); // Set first service as default active category
           setSelectedCategoryServices(data[0].services);
           setServiceData(data);
@@ -103,8 +104,7 @@ function SalonService({ id }) {
               <div className={styles.aboutService}>
                 <h3>{item.serviceName}</h3>
                 <p>
-                  <StarsIcon className={styles.LIcon} />
-                  <span>4.88 (584.5K reviews)</span>
+                  <span>{item.type}</span>
                 </p>
                 <p className={styles.price}>
                   ₹{item.servicePrice}

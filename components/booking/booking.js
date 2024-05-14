@@ -10,25 +10,32 @@ import Session from '@/service/session';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { appointment } from '@/api/account.api';
 
 function Booking() {
   const servicesDetails = Session.getObject("selectedService");
   const router = useRouter();
   const [totalCount, setTotalCount] = useState(1); // Initial count
-  const totalPrice = servicesDetails.reduce((total, service) => total + (service.servicePrice * totalCount), 0);
+  const serviceIds = servicesDetails?.map((item) => item.categoryId);
+  console.log("serviceIds::>", serviceIds);
+  const salonId = Session.get('selectedSalonId')
+  console.log("SalonId", salonId);
   // Formik initial values
   const initialValues = {
-    totalPrice: totalPrice,
+    salonId: parseInt(salonId),
     date: '',
-    time: '',
-    type: ''
+    startTime: '',
+    serviceType: '',
+    addressId:1,
+    duration: '',
+    serviceIds: serviceIds
   };
 
   // Formik validation schema
   const validationSchema = Yup.object().shape({
     date: Yup.date().required('Date is required'),
-    time: Yup.string().required('Time is required'),
-    type: Yup.string().required('Type is required')
+    startTime: Yup.string().required('Time is required'),
+    serviceType: Yup.string().required('Type is required')
   });
 
   // Function to handle incrementing count
@@ -44,10 +51,16 @@ function Booking() {
   }
 
   // Function to handle booking
-  function handleSubmit(values) {
-    console.log("values::>",values)
-    // Perform booking logic here, then navigate to payment page
-    router.push('salon/payment');
+  async function handleSubmit(values) {
+    console.log("values::>", values)
+    try {
+      const res = await appointment(values)
+      console.log("resAppointment::>", res)
+      router.push('salon/payment');
+    } catch (error) {
+      console.log("error::>", error)
+    }
+    
   }
 
   return (
@@ -100,17 +113,25 @@ function Booking() {
               <div className={styles.dateContainer}>
                 <h3>Select time slot</h3>
                 <div className={styles.timeslot}>
-                <Field type='time' name='time' />
-                  <ErrorMessage name="time" component="div" className="error" />
+                  <Field type='text' name='startTime' />
+                  <ErrorMessage name="startTime" component="div" className="error" />
+                  {/* Add your time slot selection UI here */}
+                </div>
+              </div>
+              <div className={styles.dateContainer}>
+                <h3>Duration</h3>
+                <div className={styles.timeslot}>
+                  <Field type='number' name='duration' />
+                  <ErrorMessage name="duration" component="div" className="error" />
                   {/* Add your time slot selection UI here */}
                 </div>
               </div>
 
               <div className={styles.address}>
-                <h3>Add address</h3>
+                <h3>Service Type</h3>
                 <div className={styles.inputContainer}>
-                  <Field type='text' name='type' placeholder='Type' />
-                  <ErrorMessage name="type" component="div" className="error" />
+                  <Field type='text' name='serviceType' placeholder='serviceType' />
+                  <ErrorMessage name="serviceType" component="div" className="error" />
                 </div>
               </div>
 

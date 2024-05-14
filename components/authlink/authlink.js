@@ -22,8 +22,9 @@ import { FaRegUserCircle } from 'react-icons/fa';
 function Authlink() {
     const [menu, setMenu] = useState(false);
     const dispatch = useDispatch();
-    const user = useSelector(selectUser);
+    const user = useSelector(state=>state.auth.user);
     const authLinkRef = useRef(null);
+    // console.log("user::>",user);
 
     const userName = user?.name;
 
