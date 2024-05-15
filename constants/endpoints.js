@@ -29,3 +29,7 @@ export const __endpoint_address=endpoint+"users/addresses"
 // export const __endpoint_putServiceType = endpoint + "admin/services/categories";
 // export const __endpoint_getSaloon = endpoint + "admin/salon ";
 // export const __endpoint_getUser = endpoint + "admin/users";
+
+
+// Static Page APIs
+export const __endpoint_staticPageUrl = endpoint + "file/doc/";
