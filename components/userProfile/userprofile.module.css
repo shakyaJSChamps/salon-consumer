@@ -1,6 +1,7 @@
 .container {
     margin-top: 10px;
     padding: 50px 110px;
+    position:relative;
 
 }
 
@@ -295,6 +296,7 @@
 .manageAddress {
     width: 560px;
     border-radius: 1px;
+    position: relative;
 
 }
 
@@ -321,7 +323,7 @@
 
 .addressDetails {
     border: 1px solid #B4B4B4;
-    padding: 20px 25px;
+    padding: 5px 19px;
     margin-top: 10px;
     position: relative;
 
@@ -375,7 +377,25 @@
 .faq {
     padding: 10px;
 }
-
+/* AddressMenu */
+.AddressMenu{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    height: fit-content;
+    padding: 10px;
+    position: absolute;
+    right: 20rem;
+    top: 14rem;
+    background-color:white;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.AddressMenu button{
+    border: none;
+    background-color: transparent;
+}
 @media screen and (max-width:1400px) {}
 
 @media screen and (max-width:576px) {}
