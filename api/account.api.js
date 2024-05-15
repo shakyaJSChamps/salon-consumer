@@ -1,11 +1,3 @@
-<<<<<<< Updated upstream
-import HTTP from '@/service/http';
-import { methods } from '../constants/page'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address } from '@/constants/endpoints'
-
-
-
-=======
 import HTTP from "@/service/http";
 import { methods } from "../constants/page";
 import {
@@ -19,7 +11,6 @@ import {
   __endpoint_getService,
   __endpoint_getSalonStaff, __endpoint_appointment,
 } from "@/constants/endpoints";
->>>>>>> Stashed changes
 
 export const doLogin = (payload) =>
   HTTP.Request(methods.POST, __endpoint_doLogin, payload);
@@ -55,7 +46,6 @@ export const getSalonService = (salonid) =>
 
 export const appointment = (payload) =>
   HTTP.Request(methods.POST, __endpoint_appointment, payload);
-<<<<<<< Updated upstream
 export const getAddress=()=>
   HTTP.Request(methods.GET,__endpoint_address);
 export const addAddress = (payload) =>
@@ -64,5 +54,3 @@ export const deleteAddress = (id) =>
   HTTP.Request(methods.DELETE, `${__endpoint_address}/${id}`);
 export const setDefaultAddress = (id) =>
   HTTP.Request(methods.PATCH, `${__endpoint_address}/${id}/default`);
-=======
->>>>>>> Stashed changes
