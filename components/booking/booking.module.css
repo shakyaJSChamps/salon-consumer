@@ -2,8 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    padding: 20px 15px;
+    padding: 30px 44px;
 }
 
 .wrapper {
@@ -161,14 +160,18 @@
     width: 59px;
     height: auto;
 }
-
-.bookingDate {
-    font-size: 13px;
-    padding: 10px 0px;
+.bookingDate,.dateContainer{
+    padding: 7px 0px;
 }
 
-.dateContainer {
-    padding: 10px 0px;
+.bookingDate h3 {
+    font-size: 14px;
+    font-weight: bold;   
+}
+
+.dateContainer h3 {
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .dateContainer input {
@@ -195,8 +198,8 @@
 .timeslot{
     display: flex;
     flex-wrap: wrap;
-    padding: 20px 0px;
-    gap: 10px;
+    padding: 8px 0px;
+    gap: 8px;
 }
 .paper{
     display: flex;
@@ -220,20 +223,37 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 12px;
 }
 .address h3{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
+}
+.addressBtn{
+     border: none;
+    background-color: black;
+    color: white;
+    border-left: 1px solid #ccc;
+    /* Example border for the bottom */
+    border-right: 1px solid #ccc;
+    /* Example border for the bottom */
+    box-shadow:
+        -3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        3px 0 5px -3px rgba(0, 0, 0, 0.5),
+        0 5px 5px -3px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    border-radius: 8px;
 }
 .inputContainer{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 0px 0px 15px 0px;
+    padding: 0px 0px 10px 0px;
 }
-.inputContainer input{
-    width: 400px;
-    height: auto;
+.inputContainer input,
+.inputContainer select{
     padding: 10px 7px;
     box-shadow:
         -3px 0 5px -3px rgba(0, 0, 0, 0.5),
@@ -245,11 +265,13 @@
     border: none;
 
 }
+.inputContainer option{
+    padding: 5px;
+}
 .book{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 95px;
 }
 .book button{
     background-color: black;

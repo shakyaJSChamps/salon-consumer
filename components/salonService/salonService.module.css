@@ -115,6 +115,11 @@
     display: block;
     max-width: 100%;
 } */
+.image img{
+    width: 129px;
+    height: auto;
+    border-radius: 20px;
+}
 
 .sellerBtn {
     position: absolute;

@@ -1,10 +1,10 @@
 import Booking from "@/components/booking/booking"
 
-function BookingAt() {
- 
+function BookingAt({params}) {
+console.log("papapap",params.bookingAt) 
   return (
     <div>
-      <Booking/>
+      <Booking serviceAt={params.bookingAt} />
     </div>
 
   )

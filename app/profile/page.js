@@ -1,10 +1,11 @@
-const { default: UserProfie } = require("@/components/userProfile/userProfile")
+import UserInformation from "@/components/userProfile/userInformation"
+
 
 const Profile = () => {
     return <>
 
 
-        <UserProfie />
+        <UserInformation />
     </>
 }
 

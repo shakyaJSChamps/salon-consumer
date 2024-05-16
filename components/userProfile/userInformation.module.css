@@ -10,6 +10,11 @@
     justify-content: center;
     gap: 25px;
 }
+.userImageDiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .profile h4 {
     font-size: 0.789em;
@@ -48,7 +53,7 @@
 .details {
     display: flex;
     position: relative;
-    gap: 55px;
+    gap: 22px;
 }
 
 .edits {
@@ -119,17 +124,12 @@
     border: 1px solid #858585;
 }
 
-.otherDetails .saves {
-    background-color: black;
-    cursor: pointer;
-    color: white;
+ .saves {
     background-color: black;
     cursor: pointer;
     color: white;
     padding: 4px 20px;
     border-radius: 3px;
-    position: absolute;
-    top: -9px;
 }
 
 .details .edits {
