@@ -1,0 +1,25 @@
+.manageAddress {
+    /* width: 560px; */
+    border-radius: 1px;
+    position: relative;
+
+}
+
+
+.manageDetails {
+    /* border: 1px solid #B4B4B4; */
+    padding: 0px 15px 0px 0px;
+    border-radius: 5px;
+
+}
+.addressDetails {
+    border: 1px solid #B4B4B4;
+    padding: 3px 20px;
+    /* margin-top: -1px; */
+    position: relative;
+}
+
+.addressDetails p {
+    font-size: 12px;
+    margin-bottom: 5px;
+}

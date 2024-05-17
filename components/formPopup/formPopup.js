@@ -1,53 +1,29 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
-import { addAddressSchema } from '@/utils/schema';
-import { addAddress } from '@/api/account.api';
-import Notify from '@/utils/notify'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const AddUserAddress = (props) => {
-    const initialValues = {
-        streetAddress: '',
-        houseNo: '',
-        landmark: '',
-        latitude: '',
-        longitude: '',
-        pincode: '',
-        city: '',
-        state: '',
-        country: ''
-    }
-    const handleSubmit =async (values) => {
-        try {
-            const res =await addAddress(values)
-            console.log("resAddress--->",res)
-            Notify.success(res?.data?.message)
-            props.onHide(); // Close modal after form submission
-        } catch (error) {
-            Notify.error(error.message)
-        }
-        
-    }
+const FormPopup = ({ title,initialValues, handleSubmit, validationSchema,btn, onHide,show }) => {
     return (
         <Modal
-            {...props}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            onHide={onHide}
+            show={show}
         >
             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter"
-                    className='fw-bold py-2'>
-                    Add Address
+                <Modal.Title id="contained-modal-title-vcenter" className='fw-bold py-2'>
+                    {title}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={addAddressSchema}
+                    validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
-                    {({ errors, touched }) => (
+                     {({ errors, touched }) => (
                         <Form  id="submit">
                             <div className="form-group">
                                 <label className='fw-bold py-2'>Street Address</label>
@@ -91,11 +67,11 @@ const AddUserAddress = (props) => {
                 </Formik>
             </Modal.Body>
             <Modal.Footer>
-                <Button style={{ backgroundColor: "black", color: "white", border: "none" }} form="submit" type="submit">Save</Button>
-                <Button style={{ backgroundColor: "grey", color: "white", border: "none" }} onClick={props.onHide}>Close</Button>
+                <Button style={{ backgroundColor: "black", color: "white", border: "none" }} form="submit" type="submit">{btn}</Button>
+                <Button style={{ backgroundColor: "grey", color: "white", border: "none" }} onClick={onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
 };
 
-export default AddUserAddress;
+export default FormPopup;

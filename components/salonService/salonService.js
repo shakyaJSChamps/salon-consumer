@@ -4,6 +4,7 @@ import styles from './salonService.module.css';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import StarsIcon from '@mui/icons-material/Stars';
+import serviceImg from '@/assets/images/haircutService.svg'
 import Divider from '@mui/material/Divider';
 import { useRouter } from 'next/navigation'; // Changed from 'next/navigation'
 import { getSalonService } from '@/api/account.api';
@@ -17,6 +18,7 @@ function SalonService({ id }) {
   const [serviceData, setServiceData] = useState([]);
   const [selectedCategoryServices, setSelectedCategoryServices] = useState([]);
   const [selectedServicesDetails, setSelectedServicesDetails] = useState([]);
+  const [bookingLocation, setBookingLocation] = useState('');
   console.log("selectedServicesDetails",selectedServicesDetails);
   const router = useRouter();
   const dispatch=useDispatch();
@@ -56,11 +58,21 @@ function SalonService({ id }) {
   };
 
   const handleSalonClick = () => {
-    if(selectedServicesDetails.length>0){
-      router.push('salonid/salon');
+    if (selectedServicesDetails.length > 0) {
+      if (bookingLocation === 'Salon') {
+        router.push(`${id}/${bookingLocation}`);
+      } else 
+        if (bookingLocation === 'Home') {
+          router.push(`${id}/${bookingLocation}`);
+        }
+      
+    } else {
+      Notify.error("Please select a service");
     }
-    Notify.error("please Select service")
-   
+  };
+  const handleBookingLocationChange = (location) => {
+    setBookingLocation(location);
+    handleSalonClick();
   };
 
   const handleAddButtonClick = (serviceDetails) => {
@@ -115,7 +127,7 @@ function SalonService({ id }) {
                 <p>Professional {item.serviceName.toLowerCase()} service</p>
               </div>
               <div className={styles.image}>
-                <Image src={item.imageUrl} alt={item.serviceName} />
+                <Image src={serviceImg} alt={item.serviceName} />
                 <button 
                   className={`${styles.sellerBtn} ${activeServiceIndexes.includes(index) ? styles.selected : ''}`} 
                   onClick={() => handleAddButtonClick(item)}
@@ -129,8 +141,19 @@ function SalonService({ id }) {
         </div>
         <div className={styles.booking}>
         <h4>Book At</h4>
-          <button onClick={handleSalonClick}>Salon</button>
-          <button onClick={handleSalonClick}>Home</button> 
+        <button
+          onClick={() => handleBookingLocationChange('Salon')}
+          className={bookingLocation === 'Salon' ? styles.activeButton : ''}
+        >
+          Salon
+        </button>
+        <button
+          onClick={() => handleBookingLocationChange('Home')}
+          className={bookingLocation === 'Home' ? styles.activeButton : ''}
+        >
+          Home
+        </button>
+           
           
         </div>
       </div>

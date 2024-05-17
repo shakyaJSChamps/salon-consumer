@@ -50,6 +50,12 @@
     width: 13px;
     height: auto;
 }
+.countSection{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 5px;
+}
 
 .serviceList ul,.offerlist ul {
     padding: 5px 13px;

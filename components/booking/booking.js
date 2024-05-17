@@ -2,22 +2,24 @@
 import styles from './booking.module.css'
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import Image from 'next/image';
-import haircut from '@/assets/images/haircolorMen.svg'
 import { useRouter } from 'next/navigation';
-import { useSelector } from 'react-redux';
 import Session from '@/service/session';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { appointment } from '@/api/account.api';
+import AddressPopup from '../userProfile/addressPopup/addressPopup';
 
-function Booking() {
+function Booking(props) {
+  // console.log("serviceAt",props.serviceAt);
   const servicesDetails = Session.getObject("selectedService");
   const router = useRouter();
+  const [showAddress, setShowAddress] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  console.log("sele::>", selectedAddress)
   const [totalCount, setTotalCount] = useState(1); // Initial count
   const serviceIds = servicesDetails?.map((item) => item.id);
-  console.log("servicekjkjkj:::>",servicesDetails);
+  console.log("servicekjkjkj:::>", servicesDetails);
   console.log("serviceIds::>", serviceIds);
   const salonId = Session.get('selectedSalonId')
   console.log("SalonId", salonId);
@@ -27,16 +29,25 @@ function Booking() {
     date: '',
     startTime: '',
     serviceType: '',
-    addressId:38,
     duration: '',
+    homeService: props.serviceAt === 'Home',
     serviceIds: serviceIds
+  };
+  const handleShowAddress = () => {
+    setShowAddress(!showAddress);
+
+  }
+  const handleAddressSelection = (address) => {
+    setSelectedAddress(address);
+    setShowAddress(false); // Close the address popup after selection
   };
 
   // Formik validation schema
   const validationSchema = Yup.object().shape({
     date: Yup.date().required('Date is required'),
     startTime: Yup.string().required('Time is required'),
-    serviceType: Yup.string().required('Type is required')
+    serviceType: Yup.string().required('Type is required'),
+    // addressId: Yup.number().required('Type is required')
   });
 
   // Function to handle incrementing count
@@ -54,14 +65,26 @@ function Booking() {
   // Function to handle booking
   async function handleSubmit(values) {
     console.log("values::>", values)
+    const data= {...(props.serviceAt)==='Home' ? {
+      salonId: values.salonId,
+      date: values.date,
+      startTime:values.startTime,
+      serviceType: values.serviceType,
+      addressId: selectedAddress?.id,
+      duration: values.duration,
+      homeService: true,
+      serviceIds: serviceIds
+
+    }:values };
+    console.log("data:::>",data);
     try {
-      const res = await appointment(values)
+      const res = await appointment(data)
       console.log("resAppointment::>", res)
       router.push('salon/payment');
     } catch (error) {
       console.log("error::>", error)
     }
-    
+
   }
 
   return (
@@ -76,7 +99,7 @@ function Booking() {
             <Form>
               <div className={styles.counter}>
                 <div className={styles.countSection}>
-                  <div className=''>
+                  <div>
                     <h3>Grooming Essentials</h3>
                   </div>
                   <div className={styles.count}>
@@ -131,10 +154,23 @@ function Booking() {
               <div className={styles.address}>
                 <h3>Service Type</h3>
                 <div className={styles.inputContainer}>
-                  <Field type='text' name='serviceType' placeholder='serviceType' />
+                  <Field as="select" type='text' name='serviceType' placeholder='serviceType' >
+                    <option >Select serviceType</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </Field>
+
                   <ErrorMessage name="serviceType" component="div" className="error" />
                 </div>
               </div>
+              {props.serviceAt === 'Home' && <div className={styles.address}>
+
+                {selectedAddress !== null && <><h3>Address</h3> <div className={styles.inputContainer}>
+                  <Field type='text' name='addressId' value={`${selectedAddress?.id} ${selectedAddress?.houseNo} ${selectedAddress?.streetAddress}, ${selectedAddress?.city}, ${selectedAddress?.state}, ${selectedAddress?.pincode}`} placeholder='Address' />
+                  <ErrorMessage name="addressId" component="div" className="error" />
+                </div></>}
+                {selectedAddress === null && <button onClick={handleShowAddress} className={styles.addressBtn}>Select Address</button>}
+              </div>}
 
               <div className={styles.book}>
                 <button type="submit">Book Now</button>
@@ -142,7 +178,9 @@ function Booking() {
             </Form>
           )}
         </Formik>
+
       </div>
+      <AddressPopup show={showAddress} onHide={() => setShowAddress(false)} onSelectAddress={handleAddressSelection} />
     </div>
   )
 }

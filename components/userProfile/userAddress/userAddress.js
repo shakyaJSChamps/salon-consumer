@@ -1,5 +1,5 @@
 "use client"
-import styles from '@/components/userProfile/userprofile.module.css';
+import styles from '../userInformation.module.css';
 import { useEffect, useState } from 'react';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { IoMdAdd } from 'react-icons/io';
@@ -8,9 +8,11 @@ import { deleteAddress, getAddress, setDefaultAddress } from '@/api/account.api'
 import { Paper } from '@mui/material';
 import Notify from '@/utils/notify'
 import Swal from 'sweetalert2';
+import UpdateUserAddress from './updateAddress';
 
 function UserAddress() {
     const [addAddressOpen, setAddAddressOpen] = useState(false);
+    const [updateAddressOpen, setUpdateAddressOpen] = useState(false);
     const [addresses, setAddresses] = useState([]);
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -27,8 +29,9 @@ function UserAddress() {
         setMenuOpen(!menuOpen);
     };
 
-    const handleUpdateAddress = () => {
-        // Add logic to handle update address
+    const handleUpdateAddressOpen = () => {
+        setUpdateAddressOpen(!updateAddressOpen);
+
         setMenuOpen(false);
     };
 
@@ -45,6 +48,7 @@ function UserAddress() {
 
     };
     const onDelete = () => {
+        setMenuOpen(false);
         // Show confirmation dialog
         Swal.fire({
             title: "Are you sure?",
@@ -107,11 +111,12 @@ function UserAddress() {
                 </div>
                 {menuOpen && selectedAddress && (
                     <Paper elevation={2} className={styles.AddressMenu}>
-                        <button onClick={handleUpdateAddress}>Update</button>
+                        <button onClick={handleUpdateAddressOpen}>Update</button>
                         <button onClick={handleSetDefaultAddress}>SetDefault</button>
                         <button onClick={onDelete}>Delete</button>
                     </Paper>
                 )}
+                <UpdateUserAddress data={selectedAddress} show={updateAddressOpen} onHide={()=>setUpdateAddressOpen(false)}/>
             </>
         );
     }

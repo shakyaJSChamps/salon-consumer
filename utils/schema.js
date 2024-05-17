@@ -7,13 +7,17 @@ import * as yup  from "yup"
     export const OtpVerifySchema = yup.object().shape({
     otp: yup.string().length(4, 'OTP must be exactly 4 digits').required('OTP is required'),
   });
-  export const addAddressSchema=yup.object().shape({
+  export const addAddressSchema = yup.object().shape({
     streetAddress: yup.string().required('Street Address is required'),
     houseNo: yup.string().required('House No is required'),
-    landmark: yup.string().required('Landmark is required'),
-    pincode: yup.string().required('Pincode is required'),
+    pincode: yup.string()
+        .required('Pincode is required')
+        .matches(/^[0-9]+$/, 'Pincode must contain only numbers')
+        .test('is-numeric', 'Pincode must contain only numbers', (value) => /^\d+$/.test(value) && value.length === 6),
     city: yup.string().required('City is required'),
     state: yup.string().required('State is required'),
     country: yup.string().required('Country is required')
 })
+
+
  

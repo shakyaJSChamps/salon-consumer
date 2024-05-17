@@ -24,6 +24,7 @@ export const __endpoint_getSalonReviews = (salonid) => {
 };
 export const __endpoint_appointment=endpoint+"consumer/appointments"
 export const __endpoint_address=endpoint+"users/addresses"
+export const __endpoint_UserProfile=endpoint+"account/user/profile"
 
 
 // export const __endpoint_putServiceType = endpoint + "admin/services/categories";
