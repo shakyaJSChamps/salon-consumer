@@ -17,66 +17,14 @@ function Footer() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.links}>
-        <div className={styles.footerItem}>
-          <Image src={Stylrax} alt="Stylrax_brand" />
-          {/* <i className={styles.designs}>Lorem Impsum Sit Dot emet</i> */}
-        </div>
-        <div className={styles.footerItem}>
-          <Link href="">Hair Salon</Link>
-          <Link href="">Spa & Wellness</Link>
-          <Link href="">Skin Care Services</Link>
-          <Link href="">Personal Grooming Services</Link>
-          <Link href="">Bridal Services</Link>
-          <Link href="">Nail Salon</Link>
-        </div>
-        <div className={styles.footerItem}>
-          <Link href="">Stylrax Skin Care Clinic</Link>
-          <Link href="">Stylrax Hair Treatment Clinic</Link>
-          <Link href="">Stylrax Anti-Aging Treatment Clinic</Link>
-          <Link href="">Stylrax Cosmetic Treatment Clinic</Link>
-          <Link href="">Stylrax Clinic</Link>
-        </div>
-        <div className={styles.footerItem}>
-          <Link href="">Pricing</Link>
-          <Link href="">Refer a Friend</Link>
-          <Link href="">Packages</Link>
-          <Link href="">Offers</Link>
-          <Link href="">Gift Card</Link>
-          <Link href="">Blogs</Link>
-        </div>
-        <div className={styles.footerItem}>
-          <Link href="aboutUs">About Us</Link>
-          <Link href="privacyPolicy">Privacy Policy</Link>
-          <Link href="termsOfUse">Terms of use</Link>
-        </div>
+    <div className={styles.mainDiv}>
+      <div className={styles.footerLogo}>
+        <Image src={Stylrax} alt="Stylrax_brand" />
       </div>
-      <div className={styles.socialMedia}>
-        {/* <div className={styles.socialMediaItems}>
-          <p className={styles.social}>Get Social</p>
-          <div className={styles.socialIcons}>
-            <MdFacebook />
-            <FaInstagram />
-            <FaXTwitter />
-            <CiLinkedin />
-            <FaYoutube />
-          </div>
-        </div> */}
-        {/* <div className={styles.socialMediaItems}>
-          <p>Subscribe to Our Newsletter</p>
-          <form onSubmit={handleOnSubmit}>
-            <input type="text" placeholder='Enter Mobile Number' />
-            <button className={styles.formBtn}>Submit</button>
-          </form>
-        </div> */}
-        {/* <div className={styles.socialMediaItems}>
-          <p>Download Our App </p>
-          <div className={styles.downloadsLogo}>
-            <Image src={AppStore} alt="Apple store" />
-            <Image src={GooglePlays} alt="Google play store" />
-          </div>
-        </div> */}
+      <div className={styles.footerItem}>
+        <Link href="aboutUs">About Us</Link>
+        <Link href="privacyPolicy">Privacy Policy</Link>
+        <Link href="termsOfUse">Terms of use</Link>
       </div>
     </div>
   );

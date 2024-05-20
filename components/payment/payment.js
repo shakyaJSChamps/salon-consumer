@@ -4,13 +4,11 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import Session from '@/service/session';
 import { useState } from 'react';
-import { Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
 function PaymentPage() {
     const [totalCount, setTotalCount] = useState(1);
-    const [confirmPopup, setConfirmPopup] = useState(false);
     const servicesDetails = Session.getObject('selectedService');
     console.log("sel::::>", servicesDetails);
     const router = useRouter();
@@ -57,12 +55,12 @@ function PaymentPage() {
                             <AddIcon className={styles.countIcon} style={{ fontSize: "12px" }} onClick={handleIncrement} />
                         </div>
                         <div className={styles.totalPrice}>
-                            <p>₹{servicesDetails.reduce((total, service) => total + (service.servicePrice * totalCount), 0)}</p>
+                            <p>₹{servicesDetails?.reduce((total, service) => total + (service.servicePrice * totalCount), 0)}</p>
                         </div>
                     </div>
                 </div>
 
-                {servicesDetails.map((service, index) => (
+                {servicesDetails?.map((service, index) => (
                     <div key={index} className={styles.serviceType}>
                         <div className={styles.price}>
                             <div className={styles.serviceList}>
@@ -85,7 +83,7 @@ function PaymentPage() {
                 </div>
                 <div className={styles.paymentSummary}>
                     <h3>Payment summary</h3>
-                    {servicesDetails.map((service, index) => (
+                    {servicesDetails?.map((service, index) => (
                         <div key={index} className={styles.total}>
                             <h4>{service.serviceName}</h4>
                             <span>₹{service.servicePrice}</span>
@@ -95,7 +93,7 @@ function PaymentPage() {
                     <hr className={styles.hr} />
                     <div className={styles.grandTotal}>
                         <h4>Total</h4>
-                        <span>₹{servicesDetails.reduce((total, service) => total + (service.servicePrice * totalCount), 0)}</span>
+                        <span>₹{servicesDetails?.reduce((total, service) => total + (service.servicePrice * totalCount), 0)}</span>
                     </div>
                 </div>
             </div>

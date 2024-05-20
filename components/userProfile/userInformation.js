@@ -27,24 +27,7 @@ const UserInformation = () => {
     // State to manage edit mode for each input field
     
     const router = useRouter();
-    const [userInfo, setUserInfo] = useState()
-    // const userInfo = Session.getObject("profile");
-    console.log("user info", userInfo);
-
-    useEffect(()=>{
-        const fetchUserDetails= async ()=>{
-            try {
-              const userDetails=await getUserProfile();
-              setUserInfo(userDetails?.data?.data);
-            //   console.log("user===>",userDetails?.data?.data);  
-            } catch (error) {
-              Notify.error(error.message);
-              console.log("errorUser:::>",error);  
-            }
-        }
-        fetchUserDetails();
-    },[])
- 
+    
 
     const handleLogOut = () => {
         dispatch(logoutUser())
@@ -151,7 +134,7 @@ const UserInformation = () => {
                 )}
                 {showProfileInfo && (
                     <div className={styles.profileInfo}>
-                        <UserProfile userInfo={userInfo} />
+                        <UserProfile />
                         <div className={styles.faq}>
 
                             <h6>FAQs</h6>
