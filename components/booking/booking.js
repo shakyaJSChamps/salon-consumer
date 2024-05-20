@@ -9,6 +9,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { appointment } from '@/api/account.api';
 import AddressPopup from '../userProfile/addressPopup/addressPopup';
+import Notify from '@/utils/notify'
 
 function Booking(props) {
   // console.log("serviceAt",props.serviceAt);
@@ -19,6 +20,8 @@ function Booking(props) {
   console.log("sele::>", selectedAddress)
   const [totalCount, setTotalCount] = useState(1); // Initial count
   const serviceIds = servicesDetails?.map((item) => item.id);
+  const totalServiceDuration = servicesDetails.reduce((total, service) => total + service.serviceDuration, 0);
+  console.log("totalDuration::>",totalServiceDuration)
   console.log("servicekjkjkj:::>", servicesDetails);
   console.log("serviceIds::>", serviceIds);
   const salonId = Session.get('selectedSalonId')
@@ -29,7 +32,7 @@ function Booking(props) {
     date: '',
     startTime: '',
     serviceType: '',
-    duration: '',
+    duration: totalServiceDuration,
     homeService: props.serviceAt === 'Home',
     serviceIds: serviceIds
   };
@@ -54,7 +57,6 @@ function Booking(props) {
   function handleIncrement() {
     setTotalCount(prevCount => prevCount * 2); // Double the total count
   }
-
   // Function to handle decrementing count
   function handleDecrement() {
     if (totalCount > 1) {
@@ -82,6 +84,7 @@ function Booking(props) {
       console.log("resAppointment::>", res)
       router.push('salon/payment');
     } catch (error) {
+      Notify.error(error.message);
       console.log("error::>", error)
     }
 

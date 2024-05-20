@@ -12,6 +12,7 @@ import RescheduleAppointment from '../resheduleAppointMent/rescheduleAppointMent
 import Ratings from '../rating&review/rating';
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
+import { getAppointment } from '@/api/account.api';
 
 const Appointments = () => {
 
@@ -61,7 +62,17 @@ const Appointments = () => {
     const handleToggleMenu = () => {
         setMenuVisible(!menuVisible);
     };
-
+     useEffect(()=>{
+        const fetchData=async ()=>{
+            try {
+                const pendingAppointment=await getAppointment("pending")
+                console.log("pandingAppointment:::>",pendingAppointment?.data?.data);
+            } catch (error) {
+                console.log("error when getting pending Appointment",error)
+            }
+        }
+        fetchData();
+     },[])
 
     return (
         <>

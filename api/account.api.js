@@ -36,6 +36,9 @@ export const getSalonService = (salonid) =>
 
 export const appointment = (payload) =>
   HTTP.Request(methods.POST, __endpoint_appointment, payload);
+export const getAppointment = (status) =>
+  HTTP.Request(methods.GET, `${__endpoint_appointment}?status=${status}`);
+
 export const getAddress=()=>
   HTTP.Request(methods.GET,__endpoint_address);
 export const addAddress = (payload) =>

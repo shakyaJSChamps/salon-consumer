@@ -41,6 +41,7 @@ function UserAddress() {
             const res = await setDefaultAddress(selectedAddress.id)
             console.log("SetDefault Res::>", res);
             setMenuOpen(false);
+            fetchAddress();
         } catch (error) {
             Notify.error(error.message)
             console.log("setDefault Error::>", error)
@@ -72,6 +73,7 @@ function UserAddress() {
                 const res = await deleteAddress(selectedAddress.id)
                 console.log("resDelete::>", res);
                 setMenuOpen(false);
+                fetchAddress();
             } catch (error) {
                 console.log("error occured when deleting address", error)
                 Notify.error(error.message)
@@ -79,18 +81,17 @@ function UserAddress() {
 
         };
 
-        useEffect(() => {
-            const fetchAddress = async () => {
-                try {
-                    const res = await getAddress();
-                    setAddresses(res?.data?.data);
-                } catch (error) {
-                    console.log("error===>", error);
-                }
-            };
+        const fetchAddress = async () => {
+            try {
+                const res = await getAddress();
+                setAddresses(res?.data?.data);
+            } catch (error) {
+                console.log("error===>", error);
+            }
+        };
+        useEffect(()=>{
             fetchAddress();
-        }, []);
-
+        },[])
         return (
             <>
                 <div className={styles.manageAddress}>
@@ -107,7 +108,7 @@ function UserAddress() {
                             </div>
                         ))}
                     </div>
-                    <AddUserAddress show={addAddressOpen} onHide={() => setAddAddressOpen(false)} />
+                    <AddUserAddress updatedData={fetchAddress} show={addAddressOpen} onHide={() => setAddAddressOpen(false)} />
                 </div>
                 {menuOpen && selectedAddress && (
                     <Paper elevation={2} className={styles.AddressMenu}>

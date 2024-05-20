@@ -4,6 +4,7 @@ import Notify from '@/utils/notify'
 import FormPopup from '@/components/formPopup/formPopup';
 
 const AddUserAddress = (props) => {
+    const {updatedData}=props
     const initialValues = {
         streetAddress: '',
         houseNo: '',
@@ -22,6 +23,7 @@ const AddUserAddress = (props) => {
             console.log("resAddress--->",res)
             Notify.success(res?.data?.message)
             props.onHide(); // Close modal after form submission
+            updatedData();
         } catch (error) {
             Notify.error(error.message)
         }
