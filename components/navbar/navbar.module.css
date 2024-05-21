@@ -1,6 +1,6 @@
 .container {
     background-color: black;
-    padding: 15px 30px;
+    padding: 15px 60px;
     gap: 20px;
 }
 
@@ -16,16 +16,18 @@
 
 .links {
     display: flex;
-    gap: 78px;
-    padding: 18px 0px;
+    align-items: center;
+    justify-content: space-between;
+    /* gap: 78px; */
+    padding: 18px 15px;
 }
 
 .featuredlink {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-left: 20px;
-    gap: 60px;
+    /* justify-content: center; */
+    /* padding-left: 20px; */
+    gap: 55px;
 }
 
 .featuredlink span {
@@ -158,6 +160,9 @@
 
 
 @media screen and (max-width:576px) {
+    .container{
+        padding: 15px 15px;
+    }
     .logo img {
         background-color: transparent;
         width: 230px;

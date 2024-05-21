@@ -1,12 +1,10 @@
 "use client"
 import styles from './appointment.module.css'
 import SearchIcon from '@mui/icons-material/Search';
-import { AppointMentData, PastAppointMentData } from './data';
 import Img from '@/assets/images/1677519626723-82ff21.jpeg.svg';
 import Image from 'next/image';
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { RxCalendar } from "react-icons/rx";
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import RescheduleAppointment from '../resheduleAppointMent/rescheduleAppointMent';
 import Ratings from '../rating&review/rating';
@@ -16,10 +14,13 @@ import { getAppointment } from '@/api/account.api';
 
 const Appointments = () => {
 
-
     const [appointmentShow, setShowAppointMent] = useState(true)
     const [rescheduleShow, setRescheduleShow] = useState(false)
     const [ratingShow, setRatingShow] = useState(false)
+    const [appointments, setAppointments] = useState({
+        pending: null,
+        past: null
+    });
 
     const handelShowRescedule = () => {
         setRescheduleShow(true)
@@ -38,10 +39,8 @@ const Appointments = () => {
         setRatingShow(true)
     }
 
-
     const [menuVisible, setMenuVisible] = useState(true);
     const [scheduleShowVisible, setShowScheduleVisible] = useState(false)
-
 
     useEffect(() => {
         const handleResize = () => {
@@ -62,17 +61,25 @@ const Appointments = () => {
     const handleToggleMenu = () => {
         setMenuVisible(!menuVisible);
     };
-     useEffect(()=>{
-        const fetchData=async ()=>{
-            try {
-                const pendingAppointment=await getAppointment("pending")
-                console.log("pandingAppointment:::>",pendingAppointment?.data?.data);
-            } catch (error) {
-                console.log("error when getting pending Appointment",error)
-            }
+
+    const fetchAppointments = async () => {
+        try {
+            const pending = await getAppointment("pending");
+            const completed = await getAppointment("completed");
+            const cancelled = await getAppointment("cancelled");
+
+            setAppointments({
+                pending: pending?.data?.data,
+                past: [...completed?.data?.data, ...cancelled?.data?.data]
+            });
+        } catch (error) {
+            console.log("Error when getting appointments", error);
         }
-        fetchData();
-     },[])
+    }
+
+    useEffect(() => {
+        fetchAppointments();
+    }, []);
 
     return (
         <>
@@ -125,52 +132,49 @@ const Appointments = () => {
 
                     <h4 className={styles.title}>Upcoming</h4>
                     <div className={styles.upcomingScheduleContainer}>
-
-                        {AppointMentData.map((data, index) => (<div className={styles.upcomingSchedule} key={index}>
-                            <div className={styles.images}>
-
-                                <Image src={Img} alt="image" height={100} width={100} />
+                        {appointments.pending?.map((data, index) => (
+                            <div className={styles.upcomingSchedule} key={index}>
+                                <div className={styles.images}>
+                                    <Image src={Img} alt="image" height={100} width={100} />
+                                </div>
+                                <div className={styles.upcomingDetails}>
+                                    <h5>{data.salon.name}</h5>
+                                    <p><p><RxCalendar /><span>{data.date}</span></p><p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p></p>
+                                    <p>Services- {data.services.map((item) => item.serviceName).join(", ")}</p>
+                                    <p>Status-<span className={styles.circles}></span>{data.status}</p>
+                                </div>
+                                <div className={styles.buttons}>
+                                    <button onClick={handelShowRescedule}>Re-Schedule</button>
+                                    <button>Cancel</button>
+                                </div>
                             </div>
-                            <div className={styles.upcomingDetails}>
-                                <h5>{data.title}</h5>
-                                <p><p><RxCalendar /><span>{data.date}</span></p><p><HiOutlineLocationMarker /><span>{data.location}</span></p></p>
-                                <p>Services- {data.services}</p>
-                                <p>Status-<span className={styles.circles}></span>{data.status}</p>
-                            </div>
-                            <div className={styles.buttons}>
-                                <button onClick={handelShowRescedule}>Re-Schedule</button>
-                                <button>Cancel</button>
-                            </div>
-                        </div>))}
+                        ))}
                     </div>
-
 
                     <h4 className={styles.title}>Past</h4>
                     <div className={styles.pastScheduleContainer}>
-
-                        {PastAppointMentData.map((data, index) => (
+                        {appointments.past?.map((data, index) => (
                             <div className={styles.pastSchedule} key={index}>
                                 <div className={styles.images}>
-
                                     <Image src={Img} alt="image" height={100} width={100} />
                                 </div>
                                 <div className={`${styles.upcomingDetails} upcomingDetailsPast`}>
-                                    <h5>{data.title}</h5>
+                                    <h5>{data.salon.name}</h5>
                                     <p><p><RxCalendar /><span>{data.date}</span></p>
-                                        <p><HiOutlineLocationMarker /><span>{data.location}</span></p></p>
-                                    <p>Services- {data.services}</p>
+                                        <p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p></p>
+                                    <p>Services- {data.services.map((item) => item.serviceName).join(", ")}</p>
                                     <p>
-                                        <span className={`${styles.circles} ${data.status === 'completed' ? styles.completed : styles.cancelled}`}></span>
-                                        {data.status === 'completed' ? 'Completed' : 'Cancelled'}
+                                        <span className={`${styles.circles} ${data.status==="COMPLETED"?styles.completed:styles.cancelled}`}></span>
+                                        {data.status}
                                     </p>
                                 </div>
                                 <div className={styles.buttonsPast}>
                                     <button>View Details</button>
                                     <button onClick={handelRatingShow} className={styles.rating}>Rate & Review</button>
                                 </div>
-                            </div>))}
+                            </div>
+                        ))}
                     </div>
-
                 </div>
             )}
 
@@ -186,7 +190,6 @@ const Appointments = () => {
                     </>
                 )
             }
-
         </>
     )
 }

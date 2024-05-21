@@ -16,6 +16,7 @@
     flex-direction: column;
     gap: 10px;
     padding-bottom: 20px;
+    align-items: center;
 }
 .downloadContainer h3{
     font-size: 22px;
@@ -47,11 +48,11 @@
 
     }
     .downloadContainer p{
-        font-size: 12px;
+        font-size: 14px;
 
     }
     .downloadLink img{
-        width: 119px;
+        width: 135px;
 
     }
     

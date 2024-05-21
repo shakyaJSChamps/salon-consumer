@@ -19,11 +19,11 @@
 
 .heading h4 {
     text-align: start;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .heading span {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
 
 }
@@ -52,13 +52,13 @@
 }
 
 .icon {
-    width: 30px;
-    height: 30px;
+    width: 4vw;
+    height: 6vh;
 }
 
-.image img {
-    width: 200px;
-    height: 155px
+.image {
+    width: 50%;
+    height: auto
 }
 
 .paper {
@@ -68,6 +68,8 @@
 }
 
 .details {
+    width: 50%;
+    height: auto;
     display: flex;
     justify-content: space-evenly;
     /* flex: 1; */
@@ -195,10 +197,10 @@
         gap: 13px;
     }
 
-    .image img {
+    /* .image img {
         width: 166px;
         height: 123px;
-    }
+    } */
 
     .details h2 {
         font-size: 18px;
@@ -226,10 +228,10 @@
         height: 337px;
     }
 
-    .image img {
-        width: 157px;
-        height: 116px;
-    }
+     .image img {
+        width: 100%;
+        height: auto;
+    } 
 }
 
 @media screen and (max-width:768px) {
@@ -269,10 +271,10 @@
         height: 212px;
     }
 
-    .image img {
+    /* .image img {
         width: 175px;
         height: 130px;
-    }
+    } */
 
     .details h2 {
         font-size: 18px;

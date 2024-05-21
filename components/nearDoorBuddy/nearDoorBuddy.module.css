@@ -56,9 +56,13 @@
     height: 30px;
 }
 
-.image img {
-    width: 200px;
-    height: 155px
+.image {
+    width: 50%;
+    height: auto
+}
+.image img{
+    width: 100%;
+    height: auto;
 }
 
 .paper {
@@ -68,6 +72,8 @@
 }
 
 .details {
+    width: 50%;
+    height: auto;
     display: flex;
     justify-content: space-evenly;
     /* flex: 1; */
