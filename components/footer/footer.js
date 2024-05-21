@@ -19,7 +19,7 @@ function Footer() {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.footerLogo}>
-        <Image src={Stylrax} alt="Stylrax_brand" />
+        <Link href="/"><Image src={Stylrax} alt="Stylrax_brand" /></Link>
       </div>
       <div className={styles.footerItem}>
         <Link href="aboutUs">About Us</Link>

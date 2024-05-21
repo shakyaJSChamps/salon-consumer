@@ -51,12 +51,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 80px;
+    gap: 26px
 }
 
 .haircutDiv {
-    width: 520px;
-    height: 370px;
+    width: 46vw;
+    height: 59vh;
     background-image: url("../../assets/images/haircutMen.svg");
     background-position: center;
     background-size: cover;
@@ -98,8 +98,8 @@
 
 }
 .massageDiv, .facialsDiv{
-    width: 280px;
-    height: 170px;
+    width: 26vw;
+    height: 28vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -173,11 +173,13 @@
     .title h2 {
         font-size: 27px;
         padding-bottom: 5px;
+        text-align: center;
 
     }
 
     .description p {
         font-size: 11px;
+        text-align: center;
     } 
     .serviceIcons{
         flex-direction:column;
