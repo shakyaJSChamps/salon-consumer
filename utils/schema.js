@@ -18,6 +18,13 @@ import * as yup  from "yup"
     state: yup.string().required('State is required'),
     country: yup.string().required('Country is required')
 })
+export const rescheduleValidationSchema = yup.object({
+  bookingDate: yup.date().required('Booking date is required'),
+  timeSlot: yup.string().required('Time slot is required'),
+});
 
-
+export const ratingValidationSchema = yup.object({
+  rating: yup.number().min(1, 'Rating is required').required('Rating is required'),
+  review: yup.string().required('Review is required'),
+});
  

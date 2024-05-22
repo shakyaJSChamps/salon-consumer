@@ -24,6 +24,8 @@ export const getSalonStaff = (salonid) =>
 
 export const getSalonReviews = (salonid) =>
   HTTP.Request(methods.GET, `${__endpoint_getSalonReviews(salonid)}`);
+export const postSalonReviews = (payload,salonid) =>
+  HTTP.Request(methods.POST, `${__endpoint_getSalonReviews(salonid)}`,payload);
 
 export const getDoorBuddyList = (payload) =>
   HTTP.Request(methods.GET, __endpoint_getDoorBuddyList, payload);
@@ -38,6 +40,10 @@ export const appointment = (payload) =>
   HTTP.Request(methods.POST, __endpoint_appointment, payload);
 export const getAppointment = (status) =>
   HTTP.Request(methods.GET, `${__endpoint_appointment}?status=${status}`);
+export const deleteAppointment = (payload,id) =>
+  HTTP.Request(methods.PUT, `${__endpoint_appointment}/${id}`,payload);
+export const rescheduleAppointment = (payload,id) =>
+  HTTP.Request(methods.PUT, `${__endpoint_appointment}/${id}`,payload);
 
 export const getAddress=()=>
   HTTP.Request(methods.GET,__endpoint_address);

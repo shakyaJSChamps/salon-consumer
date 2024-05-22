@@ -10,7 +10,8 @@ import RescheduleAppointment from '../resheduleAppointMent/rescheduleAppointMent
 import Ratings from '../rating&review/rating';
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
-import { getAppointment } from '@/api/account.api';
+import { deleteAppointment, getAppointment } from '@/api/account.api';
+import Swal from 'sweetalert2';
 
 const Appointments = () => {
 
@@ -21,8 +22,11 @@ const Appointments = () => {
         pending: null,
         past: null
     });
+    const [selectedAppointment, setSelectedAppointment] = useState(null); // State to hold the appointment data to be canceled
 
-    const handelShowRescedule = () => {
+    const handelShowRescedule = (appointment) => {
+        
+        setSelectedAppointment(appointment)
         setRescheduleShow(true)
         setShowAppointMent(false)
         setRatingShow(false)
@@ -33,7 +37,9 @@ const Appointments = () => {
         setRatingShow(false)
     }
 
-    const handelRatingShow = () => {
+    const handelRatingShow = (appointment) => {
+        console.log("resh;;;>",appointment)
+        setSelectedAppointment(appointment)
         setShowAppointMent(false)
         setRescheduleShow(false)
         setRatingShow(true)
@@ -80,6 +86,38 @@ const Appointments = () => {
     useEffect(() => {
         fetchAppointments();
     }, []);
+
+    const handleDelete = (appointment) => {
+        console.log("Appointment to cancel:", appointment);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Are you want to cancel this appointment?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "black",
+            confirmButtonBorder:"none",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                cancelAppointment(appointment);
+            }
+        });
+    }
+
+    const cancelAppointment=async(appointment)=>{
+     try {
+        const data={
+            type:"cancel",
+            cancelReason:"change my plan"
+        }
+        const res=await deleteAppointment(data,appointment.id)
+        console.log("ResAppointmentCancel::>",res)
+        fetchAppointments();
+     } catch (error) {
+        console.log("error to cancel Appointment",error)
+     }
+    }
 
     return (
         <>
@@ -144,8 +182,8 @@ const Appointments = () => {
                                     <p>Status-<span className={styles.circles}></span>{data.status}</p>
                                 </div>
                                 <div className={styles.buttons}>
-                                    <button onClick={handelShowRescedule}>Re-Schedule</button>
-                                    <button>Cancel</button>
+                                    <button onClick={()=> handelShowRescedule(data)}>Re-Schedule</button>
+                                    {data.status==="PENDING" && <button onClick={() => handleDelete(data)}>Cancel</button>}
                                 </div>
                             </div>
                         ))}
@@ -170,7 +208,7 @@ const Appointments = () => {
                                 </div>
                                 <div className={styles.buttonsPast}>
                                     <button>View Details</button>
-                                    <button onClick={handelRatingShow} className={styles.rating}>Rate & Review</button>
+                                    <button onClick={()=> handelRatingShow(data)} className={styles.rating}>Rate & Review</button>
                                 </div>
                             </div>
                         ))}
@@ -180,13 +218,13 @@ const Appointments = () => {
 
             {rescheduleShow && (
                 <>
-                    <RescheduleAppointment handelShowAppointMent={handelShowAppointMent} />
+                    <RescheduleAppointment appointment={fetchAppointments} selectedAppointment={selectedAppointment} handelShowAppointMent={handelShowAppointMent} />
                 </>
             )}
             {
                 ratingShow && (
                     <>
-                        <Ratings handelShowAppointMent={handelShowAppointMent} />
+                        <Ratings selectedAppointment={selectedAppointment} handelShowAppointMent={handelShowAppointMent} />
                     </>
                 )
             }
