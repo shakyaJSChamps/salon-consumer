@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { useState, useEffect } from 'react';
 import { staticPageUrl } from '@/api/staticPage.api';
 
-const StaticPage = ({endpoint}) => {
+const StaticPage = ({ endpoint, className }) => {
   const [pageContent, setPageContent] = useState("");
 
   useEffect(() => {
@@ -12,7 +12,6 @@ const StaticPage = ({endpoint}) => {
   const fetchPageContent = async () => {
     try {
       const response = await staticPageUrl(endpoint);
-
       console.log("API Response:", response);
       const htmlResponse = await fetch(response.data.data.filePath);
       const htmlContent = await htmlResponse.text();
@@ -24,9 +23,7 @@ const StaticPage = ({endpoint}) => {
   };
 
   return (
-      <div
-        dangerouslySetInnerHTML={{ __html: pageContent }}
-      />
+    <div className={className} dangerouslySetInnerHTML={{ __html: pageContent }} />
   );
 };
 
