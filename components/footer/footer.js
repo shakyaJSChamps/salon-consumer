@@ -23,7 +23,7 @@ function Footer() {
         <Link href="/"><Image src={Stylrax} alt="Stylrax_brand" /></Link>
       </div>
       <div className={styles.footerItem}>
-        <Link href="/aboutUs" className={styles.footerItemList}>About Us</Link>
+        <Link href="/about-us" className={styles.footerItemList}>About Us</Link>
         <Link href="/contact-us" className={styles.footerItemList}>Contact Us</Link>
         <Link href="/privacyPolicy" className={styles.footerItemList}>Privacy Policy</Link>
         <Link href="/termsOfUse" className={styles.footerItemList}>Terms of use</Link>
