@@ -16,8 +16,11 @@
 }
 
 .wishListsInfo p {
-    color: #898989;
-    font-size: 0.674em
+   color: #898989;
+    font-size: 0.674em;
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .wishListsInfo h3 {
@@ -32,8 +35,8 @@
 
 
 .wishListItems .img img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 10%;
 }
 
