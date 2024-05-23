@@ -10,6 +10,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
 import { FaYoutube } from "react-icons/fa6";
+
 function Footer() {
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -22,9 +23,10 @@ function Footer() {
         <Link href="/"><Image src={Stylrax} alt="Stylrax_brand" /></Link>
       </div>
       <div className={styles.footerItem}>
-        <Link href="aboutUs">About Us</Link>
-        <Link href="privacyPolicy">Privacy Policy</Link>
-        <Link href="termsOfUse">Terms of use</Link>
+        <Link href="/aboutUs" className={styles.footerItemList}>About Us</Link>
+        <Link href="/contact-us" className={styles.footerItemList}>Contact Us</Link>
+        <Link href="/privacyPolicy" className={styles.footerItemList}>Privacy Policy</Link>
+        <Link href="/termsOfUse" className={styles.footerItemList}>Terms of use</Link>
       </div>
     </div>
   );
