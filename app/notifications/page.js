@@ -1,18 +1,12 @@
-import styles from './notifications.module.css'
+
+import Notification from '@/components/notification/notification'
+
+
 
 function Notifications() {
+   
     return (
-        <div className={styles.mainDiv}>
-
-            <div className={styles.notifications}>
-                <div className={styles.notificationsHeader}>
-                    <h3>Title</h3>
-                </div>
-                <div className={styles.message}>
-                    <p>Message</p>
-                </div>
-            </div>
-        </div>
+       <Notification/>
     )
 }
 
