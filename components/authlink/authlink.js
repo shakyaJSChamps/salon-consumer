@@ -78,10 +78,10 @@ function Authlink() {
                     <Link href="/appointment" onClick={handleLinkClick}>
                         <GrNotes />My Appointments
                     </Link>
-                    <Link href="" onClick={handleLinkClick}>
+                    <Link href="/wishList" onClick={handleLinkClick}>
                         <CiHeart />Wishlist
                     </Link>
-                    <Link href="" onClick={handleLinkClick}>
+                    <Link href="/notifications" onClick={handleLinkClick}>
                         <IoMdNotificationsOutline />Notification
                     </Link>
                     <Link href="" onClick={handleLogout}>
