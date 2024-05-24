@@ -1,6 +1,6 @@
 import HTTP from '@/service/http';
 import { methods } from '../constants/page'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList } from '@/constants/endpoints'
+import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification } from '@/constants/endpoints'
 
 export const doLogin = (payload) =>
   HTTP.Request(methods.POST, __endpoint_doLogin, payload);
@@ -61,3 +61,6 @@ export const getUserProfile = () =>
   HTTP.Request(methods.GET, __endpoint_UserProfile);
 export const UpdateUserProfile = (payload) =>
   HTTP.Request(methods.POST, __endpoint_UserProfile, payload);
+//notifications api
+export const getUserNotifications = () =>
+  HTTP.Request(methods.GET, __endpoint_getNotification);

@@ -36,3 +36,6 @@ export const __endpoint_UserProfile=endpoint+"account/user/profile"
 
 // Static Page APIs
 export const __endpoint_staticPageUrl = endpoint + "file/doc/";
+
+// Notifications page API
+export const __endpoint_getNotification = endpoint + "users/notifications";
