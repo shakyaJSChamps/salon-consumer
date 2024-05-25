@@ -18,16 +18,16 @@ import WishLists from '../userwishLists/wishLists';
 import { useRouter } from 'next/navigation';
 import UserAddress from './userAddress/userAddress';
 import UserProfile from './profile/UserProfile';
-import { getUserProfile } from '@/api/account.api';
+import { getFavouriteSalonList } from '@/api/account.api';
 
 
 const UserInformation = () => {
-   
+
     const dispatch = useDispatch()
     // State to manage edit mode for each input field
-    
+
     const router = useRouter();
-    
+
 
     const handleLogOut = () => {
         dispatch(logoutUser())
@@ -80,6 +80,7 @@ const UserInformation = () => {
         setMenuVisible(false);
     };
 
+
     return (
 
         <div className={styles.container}>
@@ -106,20 +107,20 @@ const UserInformation = () => {
                         </div>
 
                         {/* <hr /> */}
-                        <div className={styles.menuItem} onClick={handleMenuItemClick}>
+                        {/* <div className={styles.menuItem} onClick={handleMenuItemClick}>
                             <h4><BsWallet2 />PAYMENTS</h4>
                             <p>Wallet</p>
                             <p>Gift Cards</p>
                             <p>Saved UPI</p>
                             <p>Saved Cards</p>
 
-                        </div>
+                        </div> */}
                         <hr />
                         <div className={`${styles.menuItem} ${styles.lastBtn}`} onClick={handleMenuItemClick}>
                             <h4><BsWallet2 />MY STUFF</h4>
-                            <p>My Coupons</p>
-                            <p>My Reviews & Rating</p>
-                            <p>All Notification</p>
+                            {/* <p>My Coupons</p> */}
+                            {/* <p>My Reviews & Rating</p> */}
+                            {/* <p>All Notification</p> */}
                             <p className={` ${showWishLists ? styles.activeLink : styles.profileBtn}`}
                                 onClick={handelWishLists}>My Wishlist</p>
 
@@ -154,7 +155,7 @@ const UserInformation = () => {
 
 
                 {showManageAddress && (
-                   <UserAddress/>
+                    <UserAddress />
 
                 )}
                 {showWishLists && (

@@ -3,6 +3,8 @@ import { endpoint } from '@/constants/page';
 /* user Login */
 export const __endpoint_doLogin = endpoint + "account/otp/login";
 export const __endpoint_verifyUser = endpoint + "account/otp/verify";
+//list api
+export const __endpoint_favoriteSalonList = endpoint + "consumer/salons";
 export const __endpoint_getSaloonList = (page, size) => {
     return `${endpoint}consumer/salons?page=${page}&size=${size}`;
 };
@@ -34,3 +36,6 @@ export const __endpoint_UserProfile=endpoint+"account/user/profile"
 
 // Static Page APIs
 export const __endpoint_staticPageUrl = endpoint + "file/doc/";
+
+// Notifications page API
+export const __endpoint_getNotification = endpoint + "users/notifications";

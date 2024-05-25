@@ -1,0 +1,17 @@
+.mainDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notifications{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid grey;
+    padding: 10px;
+    border-radius: 5px;
+}
+.noNotifications{
+    text-align: center;
+    padding: 100px;
+}

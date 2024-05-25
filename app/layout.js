@@ -3,6 +3,8 @@ import "./globals.css";
 
 
 import { Providers } from "./Redux/providers";
+import Navbar from "@/components/navbar/navbar";
+import Footer from "@/components/footer/footer";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,8 +20,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <Navbar />
           {children}
-          </Providers>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
