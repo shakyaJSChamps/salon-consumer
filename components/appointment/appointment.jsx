@@ -12,6 +12,7 @@ import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
 import { deleteAppointment, getAppointment } from '@/api/account.api';
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 const Appointments = () => {
 
@@ -173,7 +174,7 @@ const Appointments = () => {
                         {appointments.pending?.map((data, index) => (
                             <div className={styles.upcomingSchedule} key={index}>
                                 <div className={styles.images}>
-                                    <Image src={Img} alt="image" height={100} width={100} />
+                                    <Image src={data.salon.mainGateImageUrl} alt="image" height={100} width={100} />
                                 </div>
                                 <div className={styles.upcomingDetails}>
                                     <h5>{data.salon.name}</h5>
@@ -194,7 +195,7 @@ const Appointments = () => {
                         {appointments.past?.map((data, index) => (
                             <div className={styles.pastSchedule} key={index}>
                                 <div className={styles.images}>
-                                    <Image src={Img} alt="image" height={100} width={100} />
+                                    <Image src={data.salon.mainGateImageUrl} alt="image" height={100} width={100} />
                                 </div>
                                 <div className={`${styles.upcomingDetails} upcomingDetailsPast`}>
                                     <h5>{data.salon.name}</h5>
@@ -207,8 +208,8 @@ const Appointments = () => {
                                     </p>
                                 </div>
                                 <div className={styles.buttonsPast}>
-                                    <button>View Details</button>
-                                    <button onClick={()=> handelRatingShow(data)} className={styles.rating}>Rate & Review</button>
+                                    <Link href={`appointment/${data.id}`}><button>View Details</button></Link>
+                                    {data.status==="COMPLETED" && <button onClick={()=> handelRatingShow(data)} className={styles.rating}>Rate & Review</button>}
                                 </div>
                             </div>
                         ))}
