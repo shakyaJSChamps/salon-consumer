@@ -23,11 +23,12 @@
 }
 
 .footerItem a {
+    margin-top: 20px;
     text-decoration: none;
     color: white;
-    font-size: 18px;
+    font-size: 22px;
     list-style: none;
-    font-family: "Poppins";
+    /* font-family: "Poppins"; */
     font-weight: 600px;
 }
 
