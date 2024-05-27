@@ -1,0 +1,81 @@
+.mainDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.paper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80vw;
+    max-width: 1200px;
+    height: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+.details h3 {
+    font-size: 24px;
+    font-weight:bold;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.appointmentDetails, .userDetails, .paymentDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+.details p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paymentDetails hr {
+    border: 0.5px solid #ddd;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .paper {
+        width: 95vw;
+        padding: 15px;
+    }
+
+    .details {
+        padding: 15px;
+    }
+
+    .details h3 {
+        font-size: 22px;
+    }
+
+    .appointmentDetails, .userDetails, .paymentDetails {
+        font-size: 16px;
+    }
+
+    .details p {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
