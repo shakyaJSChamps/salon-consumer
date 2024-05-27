@@ -46,6 +46,8 @@ export const deleteAppointment = (payload,id) =>
   HTTP.Request(methods.PUT, `${__endpoint_appointment}/${id}`,payload);
 export const rescheduleAppointment = (payload,id) =>
   HTTP.Request(methods.PUT, `${__endpoint_appointment}/${id}`,payload);
+export const appointmentDetails = (id) =>
+  HTTP.Request(methods.GET, `${__endpoint_appointment}/${id}`);
 
 export const getAddress=()=>
   HTTP.Request(methods.GET,__endpoint_address);

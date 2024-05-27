@@ -1,9 +1,11 @@
+import AppointmentDetailPage from '@/components/appointmentDetailPage/AppointmentDetailPage'
 import React from 'react'
 
-function AppointmentDetailsPage() {
+function AppointmentDetailsPage(params) {
+   const appointmentId=params.params.appointmentId
   return (
     <div>
-      AppointmentDetailsPage
+      <AppointmentDetailPage appointmentId={appointmentId} />
     </div>
   )
 }
