@@ -23,10 +23,15 @@ const Appointments = () => {
         pending: null,
         past: null
     });
-    const [selectedAppointment, setSelectedAppointment] = useState(null); // State to hold the appointment data to be canceled
+    const [filteredPending, setFilteredPending] = useState([]);
+    const [filteredPast, setFilteredPast] = useState([]);
+    const [selectedAppointment, setSelectedAppointment] = useState(null);
+
+    const [statusFilter, setStatusFilter] = useState('');
+    const [typeFilter, setTypeFilter] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
 
     const handelShowRescedule = (appointment) => {
-        
         setSelectedAppointment(appointment)
         setRescheduleShow(true)
         setShowAppointMent(false)
@@ -39,7 +44,6 @@ const Appointments = () => {
     }
 
     const handelRatingShow = (appointment) => {
-        console.log("resh;;;>",appointment)
         setSelectedAppointment(appointment)
         setShowAppointMent(false)
         setRescheduleShow(false)
@@ -88,15 +92,37 @@ const Appointments = () => {
         fetchAppointments();
     }, []);
 
+    useEffect(() => {
+        filterAppointments();
+    }, [statusFilter, typeFilter, selectedDate, appointments]);
+
+    const filterAppointments = () => {
+        const filterByStatus = (appointment) => !statusFilter || appointment.status.toLowerCase() === statusFilter.toLowerCase();
+        const filterByType = (appointment) => !typeFilter || appointment.services.some(service => service.serviceName.toLowerCase() === typeFilter.toLowerCase());
+        const filterByDate = (appointment) => {
+            const appointmentDate = new Date(appointment.date).toISOString().split('T')[0];
+            return !selectedDate || appointmentDate === selectedDate;
+        };
+
+        const pendingFiltered = (appointments.pending || []).filter(appointment =>
+            filterByStatus(appointment) && filterByType(appointment) && filterByDate(appointment)
+        );
+        const pastFiltered = (appointments.past || []).filter(appointment =>
+            filterByStatus(appointment) && filterByType(appointment) && filterByDate(appointment)
+        );
+
+        setFilteredPending(pendingFiltered);
+        setFilteredPast(pastFiltered);
+    }
+
     const handleDelete = (appointment) => {
-        console.log("Appointment to cancel:", appointment);
         Swal.fire({
             title: "Are you sure?",
-            text: "Are you want to cancel this appointment?",
+            text: "Do you want to cancel this appointment?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "black",
-            confirmButtonBorder:"none",
+            confirmButtonBorder: "none",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
@@ -106,18 +132,17 @@ const Appointments = () => {
         });
     }
 
-    const cancelAppointment=async(appointment)=>{
-     try {
-        const data={
-            type:"cancel",
-            cancelReason:"change my plan"
+    const cancelAppointment = async (appointment) => {
+        try {
+            const data = {
+                type: "cancel",
+                cancelReason: "change my plan"
+            }
+            const res = await deleteAppointment(data, appointment.id)
+            fetchAppointments();
+        } catch (error) {
+            console.log("error to cancel Appointment", error)
         }
-        const res=await deleteAppointment(data,appointment.id)
-        console.log("ResAppointmentCancel::>",res)
-        fetchAppointments();
-     } catch (error) {
-        console.log("error to cancel Appointment",error)
-     }
     }
 
     return (
@@ -136,55 +161,49 @@ const Appointments = () => {
                                 <input type="text" placeholder='Search' className={styles.searchIcon} /><SearchIcon />
                             </div>
                             <div className={styles.userInput}>
-                                <p>Timeline</p>
-                                <select className={styles.selects}>
-                                    <option value="All">All</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                    <option value="4">Option 4</option>
-                                </select>
-                            </div>
-                            <div className={styles.userInput}>
                                 <p>Status</p>
-                                <select className={styles.selects}>
-                                    <option value="Status">Completed</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                    <option value="4">Option 4</option>
+                                <select className={styles.selects} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                                    <option value="">All</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="rejected">Rejected</option>
                                 </select>
                             </div>
                             <div className={styles.userInput}>
                                 <p>Type</p>
-                                <select className={styles.selects}>
-                                    <option value="Type">Haircut</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                    <option value="4">Option 4</option>
+                                <select className={styles.selects} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+                                    <option value="">All</option>
+                                    <option value="Haircut">Haircut</option>
+                                    <option value="Shave">Shave</option>
+                                    <option value="Coloring">Coloring</option>
+                                    {/* Add more types as needed */}
                                 </select>
                             </div>
                             <div className={styles.userInput}>
-                                <p>Date Range</p>
-                                <input type="date" placeholder='Select Date' />
+                                <p>Date</p>
+                                <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
                             </div>
                         </div>
                     )}
 
                     <h4 className={styles.title}>Upcoming</h4>
                     <div className={styles.upcomingScheduleContainer}>
-                        {appointments.pending?.map((data, index) => (
+                        { filteredPending.map((data, index) => (
                             <div className={styles.upcomingSchedule} key={index}>
                                 <div className={styles.images}>
                                     <Image src={data.salon.mainGateImageUrl} alt="image" height={100} width={100} />
                                 </div>
                                 <div className={styles.upcomingDetails}>
                                     <h5>{data.salon.name}</h5>
-                                    <p><p><RxCalendar /><span>{data.date}</span></p><p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p></p>
+                                    <p><RxCalendar /><span>{data.date}</span></p>
+                                    <p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p>
                                     <p>Services- {data.services.map((item) => item.serviceName).join(", ")}</p>
                                     <p>Status-<span className={styles.circles}></span>{data.status}</p>
                                 </div>
                                 <div className={styles.buttons}>
-                                    <button onClick={()=> handelShowRescedule(data)}>Re-Schedule</button>
-                                    {data.status==="PENDING" && <button onClick={() => handleDelete(data)}>Cancel</button>}
+                                    <button onClick={() => handelShowRescedule(data)}>Re-Schedule</button>
+                                    {data.status === "PENDING" && <button onClick={() => handleDelete(data)}>Cancel</button>}
                                 </div>
                             </div>
                         ))}
@@ -192,24 +211,24 @@ const Appointments = () => {
 
                     <h4 className={styles.title}>Past</h4>
                     <div className={styles.pastScheduleContainer}>
-                        {appointments.past?.map((data, index) => (
+                        {filteredPast.map((data, index) => (
                             <div className={styles.pastSchedule} key={index}>
                                 <div className={styles.images}>
                                     <Image src={data.salon.mainGateImageUrl} alt="image" height={100} width={100} />
                                 </div>
                                 <div className={`${styles.upcomingDetails} upcomingDetailsPast`}>
                                     <h5>{data.salon.name}</h5>
-                                    <p><p><RxCalendar /><span>{data.date}</span></p>
-                                        <p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p></p>
+                                    <p><RxCalendar /><span>{data.date}</span></p>
+                                    <p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p>
                                     <p>Services- {data.services.map((item) => item.serviceName).join(", ")}</p>
                                     <p>
-                                        <span className={`${styles.circles} ${data.status==="COMPLETED"?styles.completed:styles.cancelled}`}></span>
+                                        <span className={`${styles.circles} ${data.status === "COMPLETED" ? styles.completed : styles.cancelled}`}></span>
                                         {data.status}
                                     </p>
                                 </div>
                                 <div className={styles.buttonsPast}>
                                     <Link href={`appointment/${data.id}`}><button>View Details</button></Link>
-                                    {data.status==="COMPLETED" && <button onClick={()=> handelRatingShow(data)} className={styles.rating}>Rate & Review</button>}
+                                    {data.status === "COMPLETED" && <button onClick={() => handelRatingShow(data)} className={styles.rating}>Rate & Review</button>}
                                 </div>
                             </div>
                         ))}
