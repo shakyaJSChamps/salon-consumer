@@ -13,6 +13,9 @@ const PhoneInputComponent = ({ value }) => {
         borderRadius: "20px",
         boxShadow:"none",
         outlineColor:"none",
+        width:"30vw",
+        height:"6vh",
+        fontSize:"20px"
       }}
       containerClass="phone-container"
       country={"in"}
