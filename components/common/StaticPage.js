@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { staticPageUrl } from '@/api/staticPage.api';
+import { useState, useEffect } from "react";
+import { staticPageUrl } from "@/api/staticPage.api";
 
 const StaticPage = ({ endpoint, className }) => {
   const [pageContent, setPageContent] = useState("");
@@ -15,7 +15,7 @@ const StaticPage = ({ endpoint, className }) => {
       console.log("API Response:", response);
       const htmlResponse = await fetch(response.data.data.filePath);
       const htmlContent = await htmlResponse.text();
-      console.log("HTML content ::>", htmlResponse)
+      console.log("HTML content ::>", htmlResponse);
       setPageContent(htmlContent);
     } catch (error) {
       console.error("Error fetching page content:", error);
@@ -23,7 +23,11 @@ const StaticPage = ({ endpoint, className }) => {
   };
 
   return (
-    <div className={className} dangerouslySetInnerHTML={{ __html: pageContent }} />
+    <div
+      className={className}
+      style={{ margin: "0 5px", lineHeight: "35px" }}
+      dangerouslySetInnerHTML={{ __html: pageContent }}
+    />
   );
 };
 
