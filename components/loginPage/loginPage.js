@@ -29,8 +29,8 @@ function LoginPage() {
       const res = await doLogin(data);
       console.log("Response ::>", res);
       setPhoneNumber(phoneNumber);
+      // Notify.success(res.data.message)
       setSendOtp(true);
-      Notify.success(res.data.message);
       console.log("API response logged to console:", res.data.message);
     } catch (error) {
       // console.log(error);
