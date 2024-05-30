@@ -16,7 +16,7 @@ function HomePage() {
       <Banner/>
       <ServiceMenu/>
       <NearSalons/>
-      <NearDoorBuddy/>
+      {/* <NearDoorBuddy/> */}
       <BookAppointment/>
       <TopServices/>
       <TopSalons/>
