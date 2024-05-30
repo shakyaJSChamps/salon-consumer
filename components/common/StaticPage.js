@@ -23,11 +23,11 @@ const StaticPage = ({ endpoint, className }) => {
   };
 
   return (
-    <div
-      className={className}
-      style={{ margin: "0 5px", lineHeight: "35px" }}
-      dangerouslySetInnerHTML={{ __html: pageContent }}
-    />
+<div
+  className={`${className} additional-class`}
+  dangerouslySetInnerHTML={{ __html: pageContent }}
+/>
+
   );
 };
 
