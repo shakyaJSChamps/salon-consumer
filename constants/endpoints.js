@@ -39,3 +39,4 @@ export const __endpoint_staticPageUrl = endpoint + "file/doc/";
 
 // Notifications page API
 export const __endpoint_getNotification = endpoint + "users/notifications";
+export const __endpoint_fileUploaders = endpoint + "file/presignedUrl";
