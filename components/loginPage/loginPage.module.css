@@ -131,8 +131,23 @@
     color: #2874F0;
     font-size: 12px;
 }
-
+.agree a{
+    color: #2874F0;
+}
+.otpBox{
+    width: 5vw;
+    height: 7vh;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 /* Media query for smaller screens */
+
+
 @media screen and (max-width: 768px) {
     .loginForm {
         flex-direction: column;

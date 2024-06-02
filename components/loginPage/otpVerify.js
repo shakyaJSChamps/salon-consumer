@@ -84,14 +84,7 @@ function OtpVerify({ phoneNumber }) {
                                         e.preventDefault();
                                     }
                                 }}
-                                style={{
-                                    width: "5vw",
-                                    height: "7vh",
-                                    border: "none",
-                                    backgroundColor: "transparent",
-                                    outline: "none",
-                                    fontSize: "25px"
-                                }}
+                                className={styles.otpBox}
                             />
                         )}
                     />
