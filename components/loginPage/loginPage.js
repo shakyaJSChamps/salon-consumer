@@ -7,6 +7,7 @@ import { doLogin } from "@/api/account.api";
 import OtpVerify from "./otpVerify";
 import Notify from "../../utils/notify";
 import PhoneInputComponent from "./PhoneInputComponent";
+import Link from "next/link";
 
 const initialValues = {
   phoneNumber: "",
@@ -56,16 +57,16 @@ function LoginPage() {
               onSubmit={onSubmit}
             >
               <Form className={styles.form}>
-                <PhoneInputComponent setPhoneNumber={setPhoneNumber} />
+                <PhoneInputComponent setPhoneNumber={setPhoneNumber} className={styles.mobileField}/>
 
                 <ErrorMessage
                   component="div"
                   name="phoneNumber"
                   className={styles.error}
                 />
-                <p>
+                <p className={styles.agree}>
                   By continuing, you agree to Stylrax&apos;s{" "}
-                  <span>Terms of Use</span> and <span>Privacy Policy</span>.
+                  <Link href="/termsOfUse">Terms of Use</Link> and <Link href="/privacyPolicy">Privacy Policy</Link>.
                 </p>
                 <button type="submit" className={styles.btn}>
                   Request OTP

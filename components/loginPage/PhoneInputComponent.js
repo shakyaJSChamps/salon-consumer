@@ -2,7 +2,6 @@ import { useFormikContext } from "formik";
 import React from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
 const PhoneInputComponent = ({ value }) => {
   const { setFieldValue } = useFormikContext();
   const { phoneNumber } = useFormikContext().initialValues;
@@ -11,11 +10,11 @@ const PhoneInputComponent = ({ value }) => {
     <PhoneInput
       inputStyle={{
         borderRadius: "20px",
-        boxShadow:"none",
-        outlineColor:"none",
-        width:"30vw",
-        height:"6vh",
-        fontSize:"20px"
+        boxShadow: "none",
+        outlineColor: "none",
+        width: "470px",
+        height: "6vh",
+        fontSize: "20px",
       }}
       containerClass="phone-container"
       country={"in"}
