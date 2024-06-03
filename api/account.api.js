@@ -1,6 +1,6 @@
 import HTTP from '@/service/http';
 import { methods } from '../constants/page'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification, __endpoint_fileUploaders, __endpoint_searchService, __endpoint_searchText } from '@/constants/endpoints'
+import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification, __endpoint_fileUploaders,__endpoint_searchText, __endpoint_searchService } from '@/constants/endpoints'
 
 export const doLogin = (payload) =>
   HTTP.Request(methods.POST, __endpoint_doLogin, payload);
@@ -69,14 +69,13 @@ export const getUserNotifications = () =>
 export const fileUploaders = (payload) =>
   HTTP.Request(methods.GET, __endpoint_fileUploaders, payload);
 
-export const searchService = () =>
-  HTTP.Request(methods.GET, __endpoint_searchService);
-// export const searchText = (query) => {
-//   const url = __endpoint_searchText(query);
-//   return HTTP.Request(methods.GET, url);
-// };
+export const searchService = (city) =>
+  HTTP.Request(methods.GET, `${__endpoint_searchService}?search=${encodeURIComponent(city)}`);
 
-export const searchText = (query) =>
-  HTTP.Request(methods.GET, `${__endpoint_searchText}?page=1&size=10&search=${query}`);
+// export const searchService = (city) =>
+//     HTTP.Request(methods.GET, `${__endpoint_searchService}?search=${city}`);
+
+export const searchText = (query,page,size) =>
+  HTTP.Request(methods.GET, `${__endpoint_searchText}?page=${page}&size=${size}&search=${query}`);
 // export const searchText = (query) =>
 //   HTTP.Request(methods.GET, __endpoint_searchService, query);

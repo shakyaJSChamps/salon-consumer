@@ -86,7 +86,7 @@ function Navbar() {
                     </div>
                 </div>
                 <div className={styles.searchDiv}>
-                    <SearchIcon className={styles.icon} />
+                    {/* <SearchIcon className={styles.icon} /> */}
                     <div className={styles.searchInput}>
                         <SearchInput />
                     </div>
