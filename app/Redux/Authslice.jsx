@@ -13,6 +13,7 @@ const initialState = {
   city: initialCity,
   state: "",
   country: "",
+  filteredSalon: null,
 };
 
 export const authSlice = createSlice({
@@ -38,22 +39,27 @@ export const authSlice = createSlice({
     },
     setUserLocation: (state, action) => {
       const { city, state: region, country } = action.payload;
-      state.city = city;
-      state.state = region;
-      state.country = country;
+      state.city = city || "";
+      state.state = region || "";
+      state.country = country || "";
       Session.set("city", city);
       Session.set("state", region);
       Session.set("country", country);
     },
+    setFilteredSalon: (state, action) => {
+      state.filteredSalon = action.payload;
+      Session.setObject("filteredSalon", action.payload);
+    },
   },
 });
 
-export const { loginUser, logoutUser, setUserLocation } = authSlice.actions;
+export const { loginUser, logoutUser, setUserLocation ,setFilteredSalon} = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectCity = (state) => state.auth.city;
 export const selectState = (state) => state.auth.state;
 export const selectCountry = (state) => state.auth.country;
+export const selectFilteredSalon = (state) => state.auth.filteredSalon;
 
 export default authSlice.reducer;
