@@ -1,4 +1,4 @@
-.wishLists {
+/* .wishLists {
     width: 560px;
     display: flex;
     flex-direction: column;
@@ -76,4 +76,18 @@
         padding: 14px 21px;
     }
 
+} */
+
+.main{
+    padding: 20px 300px;
+}
+.img{
+    width: 50%;
+    height: auto;
+    height: 182px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

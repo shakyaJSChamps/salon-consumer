@@ -1,92 +1,77 @@
-"use client"
-
-import { useEffect, useState } from 'react';
-import styles from './locationSearch.module.css'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useDispatch } from 'react-redux';
-import { userLocations } from '@/app/Redux/Authslice';
-import axios from 'axios';
-import { GetUserLocation, HandleSelectLocation } from '@/service/locations';
-
+import { useEffect, useState } from "react";
+import styles from "./locationSearch.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserLocation } from "@/app/Redux/Authslice";
+import { GetUserLocation, HandleSelectLocation } from "@/service/locations";
 
 function LocationSearch() {
+  const [permissionDenied, setPermissionDenied] = useState(true);
+  const dispatch = useDispatch();
+  const city = useSelector((state) => state.auth.city);
+  const state = useSelector((state) => state.auth.state);
+  const country = useSelector((state) => state.auth.country);
 
-    const [permissionDenied, setPermissionDenied] = useState(true);
-    const [userLocation, setUserLocation] = useState(null);
-    const [deniedUserLocation, setDeniedUserLocation] = useState("Select Location");
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        const fetchLocation = async () => {
-            try {
-                const location = await GetUserLocation();
-                console.log("location import permissions", location)
-                setUserLocation(location);
-                setPermissionDenied(false);
-                dispatch(userLocations(location));
-            } catch (error) {
-                setPermissionDenied(true);
-            }
-        };
-
-        fetchLocation();
-    }, [dispatch]);
-
-
-    const handleSelectLocation = async (location) => {
-        if (location === "Current Location") {
-            try {
-                // Prompt the browser to ask for permission
-                const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject);
-                });
-                console.log("position", position)
-                const location = await GetUserLocation(); // Call GetUserLocation without passing latitude and longitude
-                setUserLocation(location);
-                setPermissionDenied(false);
-                dispatch(userLocations(location));
-            } catch (error) {
-                console.error('Failed to fetch user location:==>', error);
-                setPermissionDenied(true);
-            }
-        } else {
-            const locationParts = await HandleSelectLocation(location, setDeniedUserLocation);
-            if (locationParts) {
-                dispatch(userLocations(locationParts));
-            }
-        }
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        const location = await GetUserLocation();
+        console.log("location import permissions", location);
+        dispatch(setUserLocation(location)); // Dispatch the address fields
+        setPermissionDenied(false);
+      } catch (error) {
+        setPermissionDenied(true);
+      }
     };
 
+    fetchLocation();
+  }, [dispatch]);
 
-    return (
-        <div className={styles.dropdown}>
-            {!permissionDenied ? (
-                <select className={styles.dropdownbtn} defaultValue={userLocation}
-                    onChange={(e) => handleSelectLocation(e.target.value)}>
-                    <option value={userLocation}>{userLocation}</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Noida">Noida</option>
-                    <option value="Gurugram">Gurugram</option>
-                </select>
-            ) : (
-                <select
-                    className={styles.dropdownbtn}
-                    defaultValue={deniedUserLocation}
-                    onChange={(e) => handleSelectLocation(e.target.value)}
-                >
-                    <option value="Select Location">Select Location</option>
-                    <option value="Current Location">Current Location</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Noida">Noida</option>
-                    <option value="Gurugram">Gurugram</option>
-                </select>
+  const handleSelectLocation = async (location) => {
+    if (location === "Current Location") {
+      try {
+        const location = await GetUserLocation();
+        dispatch(setUserLocation(location)); // Dispatch the address fields
+        setPermissionDenied(false);
+      } catch (error) {
+        console.error("Failed to fetch user location:", error);
+        setPermissionDenied(true);
+      }
+    } else {
+      const locationData = await HandleSelectLocation(location);
+      if (locationData) {
+        dispatch(setUserLocation(locationData)); // Dispatch the address fields
+      }
+    }
+  };
 
-
-            )}
-        </div>
-
-    )
+  return (
+    <div className={styles.dropdown}>
+      {!permissionDenied ? (
+        <select
+          className={styles.dropdownbtn}
+          value={`${city}, ${state}` || ""}
+          onChange={(e) => handleSelectLocation(e.target.value)}
+        >
+          <option value={`${city}, ${state}`}>{`${city}, ${state}`}</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Noida">Noida</option>
+          <option value="Gurugram">Gurugram</option>
+        </select>
+      ) : (
+        <select
+          className={styles.dropdownbtn}
+          value={"Select Location"}
+          onChange={(e) => handleSelectLocation(e.target.value)}
+        >
+          <option value="Select Location">Select Location</option>
+          <option value="Current Location">Current Location</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Noida">Noida</option>
+          <option value="Gurugram">Gurugram</option>
+        </select>
+      )}
+    </div>
+  );
 }
 
-export default LocationSearch
+export default LocationSearch;

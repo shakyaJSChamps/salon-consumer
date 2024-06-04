@@ -140,12 +140,12 @@ const Lists = (props) => {
                             </div>
                         </div>
                         <div className={styles.categoryContainer}>
-                            <FilterServices
+                            {/* <FilterServices
                                 title="Shops Category"
                                 options={ShopsCategory}
                                 selectedOptions={facilities}
                                 onChange={(option) => handleFilterChange(option, "facility")}
-                            />
+                            /> */}
 
                             <FilterServices
                                 title="Category"
@@ -162,7 +162,7 @@ const Lists = (props) => {
                                 formatOption={(option) => `${option}.0`}
                             />
 
-                            <div className={styles.shopCategory}>
+                            {/* <div className={styles.shopCategory}>
                                 <h5>Distance</h5>
                                 {Distance.map((distance, index) => (
                                     <div key={index} className={styles.checkboxContainer}>
@@ -170,7 +170,7 @@ const Lists = (props) => {
                                         <label htmlFor={distance}>{distance}</label>
                                     </div>
                                 ))}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className={styles.salonList}>

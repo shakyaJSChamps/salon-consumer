@@ -59,27 +59,48 @@
 
 .container {
     position: relative;
-    width: 300px; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    width: fit-content; 
   }
+  .searchIcon{
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+   .icon{
+    margin-top: 1px;
+   } 
   
   .input {
-    width: 100%;
+    width: 60%;
     padding: 8px;
     box-sizing: border-box;
   }
   
   .dropdown {
     position: absolute;
+    top: calc(100% + 0px); /* Adjust as needed */
     background: white;
     border: 1px solid #ccc;
-    max-height: 200px; /* Adjust as needed */
-    overflow-y: auto;
+    max-height: 62%; 
     z-index: 1000;
+    overflow-y:scroll;
+    margin-top: 30px;
+    border-radius: 10px;
+  }
+  .dropdown::-webkit-scrollbar{
+    display: none;
   }
   
   .dropdownItem {
     padding: 8px;
+    display: flex;
+    gap: 15px;
     cursor: pointer;
+    margin-bottom: -10px;
   }
   
   .dropdownItem:hover {
