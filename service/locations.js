@@ -12,7 +12,9 @@ export async function GetUserLocation() {
       const data = response.data;
       console.log("res loc", response);
 
-      const { city, state, country } = data.address;
+     // const { city, state, country } = data.address;
+     const city = data.address.city || data.address.town || data.address.village;
+     const { state, country } = data.address;
 
       return { city, state, country }; // Return the extracted address fields
     } catch (error) {
