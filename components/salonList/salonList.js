@@ -1,98 +1,85 @@
-"use client";
+// // pages/salon-list.js
 
-import { useEffect, useState } from "react";
+// import { getSalonLists } from "@/api/account.api";
+// import SalonList from "./serverSide";
+
+// export async function getServerSideProps(context) {
+//     console.log("getServerSideProps is called");
+//     const page = 1;
+//     const pageSize = 10;
+
+//     try {
+//         const response = await getSalonLists(page, pageSize);
+//         console.log("API response:", response); // Log the API response
+//         const initialData = response?.data?.data?.items || [];
+//         console.log("initialData:", initialData); // Log the initialData
+//         return {
+//             props: {
+//                 initialData,
+//             },
+//         };
+//     } catch (error) {
+//         console.error("Error fetching salon data:", error);
+//         return {
+//             props: {
+//                 initialData: [],
+//             },
+//         };
+//     }
+// }
+
+// const SalonListPage = ({ initialData }) => {
+//     console.log("initial data", initialData);
+//     return <SalonList initialData={initialData} />;
+// };
+
+// export default SalonListPage;
+
+
+
+
+
+
+
+
+// pages/salon-list.js
+
+import SalonList from "./serverSide";
 import { getSalonLists } from "@/api/account.api";
-import { GoLocation } from "react-icons/go";
-import { ShopsCategory, Rating, Distance, Category } from "./data";
-import Img from "@/assets/images/salonImage.svg";
-import calendraImages from "@/assets/images/Group 1000003690.svg";
-import Lists from "../lists/lists";
-import Session from "@/service/session";
 
-const SalonList = () => {
-    const [lists, setLists] = useState([]);
-    console.log("list", lists);
+export async function getServerSideProps(context) {
+    console.log("getServerSideProps is called");
+    const page = 2;
+    const pageSize = 10;
 
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false);
-    const [hasMoreData, setHasMoreData] = useState(true);
-    const filteredSalon = Session.getObject('filteredSalon');
-    //const filteredSalon = Session.getObject('filteredSalon')?.items || [];
-
-    console.log("filtered hhh", filteredSalon);
-    const loadMoreItems = async () => {
-        if (isLoading || !isInitialDataLoaded || !hasMoreData) return;
-        setIsLoading(true);
-        try {
-            const response = await getSalonLists(page, pageSize);
-            const responseData = response?.data?.data?.items;
-            if (responseData.length > 0) {
-                // Filter out duplicates before appending to the existing list
-                const filteredData = responseData.filter(item => !lists.some(existingItem => existingItem.id === item.id));
-                setPage(page + 1);
-                setLists(prevLists => [...prevLists, ...filteredData]);
-            } else {
-                console.log("No more data available.");
-                setHasMoreData(false);
-            }
-        } catch (error) {
-            console.error("Error fetching salon data:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        const loadInitialData = async () => {
-            setIsLoading(true);
-            try {
-                const response = await getSalonLists(page, pageSize);
-                setLists(response?.data?.data?.items);
-                setIsInitialDataLoaded(true);
-            } catch (error) {
-                console.error("Error fetching salon data:", error);
-            } finally {
-                setIsLoading(false);
-            }
+    try {
+        const response = await getSalonLists(page, pageSize);
+        console.log("API response:", response); 
+        const initialData = response?.data?.data?.items || [];
+        console.log("initialData:", initialData); // Log the initialData
+        return {
+            props: {
+                initialData,
+            },
         };
-        if (!isInitialDataLoaded) {
-            loadInitialData();
-        }
-    }, [page, pageSize, isInitialDataLoaded]);
+    } catch (error) {
+        console.error("Error fetching salon data:", error);
+        return {
+            props: {
+                initialData: [],
+                error: "Error fetching salon data. Please try again later.",
+            },
+        };
+    }
+}
 
-    useEffect(() => {
-        if (filteredSalon) {
-            // Update the lists state with data from filteredSalon
-            setLists(filteredSalon.items || []);
-        }
-    }, [filteredSalon]);
+const SalonListPage = ({ initialData, error }) => {
+    console.log("initial data", initialData);
+    if (error) {
+        return <div>{error}</div>;
+    }
 
-    return (
-        <Lists
-            title="Salon"
-            buttonLabel="View Details"
-            imageSrc={Img}
-            lists={lists}
-            ShopsCategory={ShopsCategory}
-            Rating={Rating}
-            Distance={Distance}
-            Category={Category}
-            GoLocation={GoLocation}
-            calendraImages={calendraImages}
-            detailsLinkBase="/salonlist"
-            setLists={setLists}
-            page={page}
-            setPage={setPage}
-            pageSize={pageSize}
-            setPageSize={setPageSize}
-            isLoading={isLoading}
-            loadMoreItems={loadMoreItems}
-            lazyLoadingThreshold={0.5}
-            hasMoreData={hasMoreData}
-        />
-    );
+    return <SalonList initialData={initialData} />;
 };
 
-export default SalonList;
+export default SalonListPage;

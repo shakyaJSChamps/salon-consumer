@@ -11,6 +11,7 @@ import Ratings from '../rating&review/rating';
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
 import { deleteAppointment, getAppointment } from '@/api/account.api';
+import { MdOutlineFileDownload } from "react-icons/md";
 import Swal from 'sweetalert2';
 import Link from 'next/link';
 
@@ -210,9 +211,11 @@ const Appointments = () => {
                     </div>
 
                     <h4 className={styles.title}>Past</h4>
+                    <div>
                     <div className={styles.pastScheduleContainer}>
                         {filteredPast.map((data, index) => (
-                            <div className={styles.pastSchedule} key={index}>
+                           <div key={index} className={styles.appointmentDiv}>
+                             <div className={styles.pastSchedule} key={index}>
                                 <div className={styles.images}>
                                     <Image src={data.salon.mainGateImageUrl} alt="image" height={100} width={100} />
                                 </div>
@@ -226,13 +229,27 @@ const Appointments = () => {
                                         {data.status}
                                     </p>
                                 </div>
+                                
                                 <div className={styles.buttonsPast}>
                                     <Link href={`appointment/${data.id}`}><button>View Details</button></Link>
                                     {data.status === "COMPLETED" && <button onClick={() => handelRatingShow(data)} className={styles.rating}>Rate & Review</button>}
                                 </div>
+                            
+                
                             </div>
+                            {data.status === "COMPLETED" && (
+                                <div className={styles.downloadInvoice}>
+                                    <div className={styles.load}><MdOutlineFileDownload /></div>
+                                    <p>Download Invoice</p>
+                                </div>
+                            )}
+                           
+                           </div>
                         ))}
+                        </div>
+                        
                     </div>
+                    
                 </div>
             )}
 
