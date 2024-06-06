@@ -412,7 +412,7 @@ const Lists = (props) => {
                     {listFilter?.map((salon, index) => (
                         <div key={index} className={styles.salonDetails}>
                             <div className={styles.img}>
-                                <img src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" />
+                                <Image src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" />
                             </div>
                             <div className={styles.details}>
                                 <div className={styles.titlesDetails}>

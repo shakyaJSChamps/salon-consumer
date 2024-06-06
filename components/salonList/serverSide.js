@@ -10,7 +10,7 @@ import Lists from "../lists/lists";
 import Session from "@/service/session";
 
 const SalonList = ({ initialData }) => {
-  const [lists, setLists] = useState(initialData || []);
+  const [lists, setLists] = useState([]);
   console.log("listed", lists);
   const [page, setPage] = useState(2); // Starting from 2 because initial data is already loaded
   const [pageSize, setPageSize] = useState(10);

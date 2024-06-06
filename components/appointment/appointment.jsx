@@ -88,14 +88,12 @@ const Appointments = () => {
             console.log("Error when getting appointments", error);
         }
     }
-
     useEffect(() => {
         fetchAppointments();
     }, []);
+  
 
-    useEffect(() => {
-        filterAppointments();
-    }, [statusFilter, typeFilter, selectedDate, appointments]);
+    
 
     const filterAppointments = () => {
         const filterByStatus = (appointment) => !statusFilter || appointment.status.toLowerCase() === statusFilter.toLowerCase();
@@ -115,7 +113,9 @@ const Appointments = () => {
         setFilteredPending(pendingFiltered);
         setFilteredPast(pastFiltered);
     }
-
+    useEffect(() => {
+        filterAppointments();
+    }, [statusFilter, typeFilter, selectedDate, appointments]);
     const handleDelete = (appointment) => {
         Swal.fire({
             title: "Are you sure?",
