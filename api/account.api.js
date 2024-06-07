@@ -1,6 +1,6 @@
 import HTTP from '@/service/http';
 import { methods } from '../constants/page'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification, __endpoint_fileUploaders,__endpoint_searchText, __endpoint_searchService } from '@/constants/endpoints'
+import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification, __endpoint_fileUploaders,__endpoint_searchText, __endpoint_searchService, __endpoint_homePage } from '@/constants/endpoints'
 
 export const doLogin = (payload) =>
   HTTP.Request(methods.POST, __endpoint_doLogin, payload);
@@ -77,5 +77,5 @@ export const searchService = (city) =>
 
 export const searchText = (query,page,size) =>
   HTTP.Request(methods.GET, `${__endpoint_searchText}?page=${page}&size=${size}&search=${query}`);
-// export const searchText = (query) =>
-//   HTTP.Request(methods.GET, __endpoint_searchService, query);
+export const homePage = () =>
+  HTTP.Request(methods.GET, __endpoint_homePage);
