@@ -35,10 +35,10 @@ function HomePage() {
       <ServiceMenu/>
       <NearSalons data={data}/>
       {/* <NearDoorBuddy/> */}
-      <BookAppointment/>
+      {/* <BookAppointment/> */}
       <TopServices />
       <TopSalons data={data}/>
-      <DownloadApp/>
+      {/* <DownloadApp/> */}
       <Support/>
     </div>
   )

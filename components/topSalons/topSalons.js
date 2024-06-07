@@ -24,7 +24,7 @@ function TopSalons({ data }) {
         {data?.data?.mostPopularSalons.map((salon, index) => (
           <Paper elevation={3} key={index} className={styles.paper}>
             <div className={styles.image}>
-              <Image src={salon.mainGateImageUrl} alt='salonImage' width={200} height={200} />
+              <img src={salon.mainGateImageUrl} alt='salonImage'  />
             </div>
             <div className={styles.details}>
               <h3>{salon.name}</h3>

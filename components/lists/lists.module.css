@@ -169,18 +169,15 @@
 }
 
 
-.img {
-    width: 50%;
-    height: auto;
-    height: 182px;
-    overflow: hidden;
-    position: relative;
+.img img{
+    width: 270px;
+    height: 200px;
 }
 
 .img img {
     /* object-fit: cover !important; */
-    width: 100%;
-    height: auto;
+    /* width: 100%; */
+    /* height: auto; */
 }
 
 .details {
@@ -238,9 +235,9 @@
 
 
 .img img {
-    object-fit: cover !important;
+    /* object-fit: cover !important;
     width: max-content;
-    height: max-content;
+    height: max-content; */
 }
 
 .description,

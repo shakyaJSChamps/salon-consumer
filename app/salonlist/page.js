@@ -1,13 +1,11 @@
+import SalonList from "@/components/salonList/salonList"
 
-import SalonListPage from "@/components/salonList/salonList";
-import SalonList from "@/components/salonList/salonList";
 
 const SalonLists = () => {
 
     return (
         <>
             <SalonList />
-            {/* <SalonListPage /> */}
         </>
     )
 }

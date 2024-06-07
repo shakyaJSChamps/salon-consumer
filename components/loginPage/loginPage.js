@@ -15,9 +15,10 @@ const initialValues = {
 function LoginPage() {
   const [sendOtp, setSendOtp] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const [submitting, setSubmitting] = useState(false);
   const onSubmit = async (values) => {
     try {
+      setSubmitting(true);
       console.log("Submitting form with values:", values);
       const { phoneNumber } = values;
       console.log("Values ::", values);
@@ -36,6 +37,8 @@ function LoginPage() {
     } catch (error) {
       // console.log(error);
       Notify.error(error.message);
+    } finally {
+      setSubmitting(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -68,8 +71,8 @@ function LoginPage() {
                   By continuing, you agree to Stylrax&apos;s{" "}
                   <Link href="/termsOfUse">Terms of Use</Link> and <Link href="/privacyPolicy">Privacy Policy</Link>.
                 </p>
-                <button type="submit" className={styles.btn}>
-                  Request OTP
+                <button type="submit" className={styles.btn} disabled={ submitting}>
+                  {submitting ? 'Submitting...' : 'Request OTP'} 
                 </button>
               </Form>
             </Formik>

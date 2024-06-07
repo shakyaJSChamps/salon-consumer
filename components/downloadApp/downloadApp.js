@@ -13,11 +13,11 @@ function DownloadApp() {
       <div className={styles.downloadContainer}>
         <h3>Make Your Salon Bookings Online</h3>
         <p>Simple, easy and fast. Download the app now!</p>
-        <div className={styles.downloadLink}>
+        {/* <div className={styles.downloadLink}>
           <Image src={playstore} alt='playstore' className={styles.gplay} />
           <Image src={appstore} alt='playstore'
             className={styles.appstore} />
-        </div>
+        </div> */}
       </div>
 
     </div>
