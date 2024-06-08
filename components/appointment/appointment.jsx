@@ -235,14 +235,14 @@ const Appointments = () => {
                                     {data.status === "COMPLETED" && <button onClick={() => handelRatingShow(data)} className={styles.rating}>Rate & Review</button>}
                                 </div>
                             
-                
-                            </div>
-                            {data.status === "COMPLETED" && (
+                                {data.status === "COMPLETED" && (
                                 <div className={styles.downloadInvoice}>
                                     <div className={styles.load}><MdOutlineFileDownload /></div>
                                     <p>Download Invoice</p>
                                 </div>
                             )}
+                            </div>
+                           
                            
                            </div>
                         ))}

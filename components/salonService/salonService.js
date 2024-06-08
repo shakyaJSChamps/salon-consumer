@@ -127,7 +127,7 @@ function SalonService({ id }) {
                 <p>Professional {item.serviceName.toLowerCase()} service</p>
               </div>
               <div className={styles.image}>
-                <Image src={serviceImg} alt={item.serviceName} />
+                <img src={serviceImg} alt={item.serviceName}  />
                 <button 
                   className={`${styles.sellerBtn} ${activeServiceIndexes.includes(index) ? styles.selected : ''}`} 
                   onClick={() => handleAddButtonClick(item)}

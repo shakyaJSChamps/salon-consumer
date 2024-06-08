@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { verifyUser } from '@/api/account.api';
 import { loginUser } from '@/app/Redux/Authslice';
+import { useState } from 'react';
 
 const initialValues = {
     otp: "",
@@ -14,9 +15,11 @@ const initialValues = {
 function OtpVerify({ phoneNumber }) {
     const dispatch = useDispatch();
     const router = useRouter();
+    const [submitting, setSubmitting] = useState(false);
 
     const onSubmit = async (values) => {
         try {
+            setSubmitting(true);
             const { otp } = values;
             console.log("phoneNumber", phoneNumber);
             const verifyData = {
@@ -35,6 +38,8 @@ function OtpVerify({ phoneNumber }) {
             router.push('/');
         } catch (error) {
             console.log(error);
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -95,8 +100,8 @@ function OtpVerify({ phoneNumber }) {
                         className={styles.error}
                     />
                     <p className={styles.resend}>Resend Otp</p>
-                    <button type="submit" className={styles.btn}>
-                        Next
+                    <button type="submit" className={styles.btn} disabled={submitting}>
+                       {submitting?'Submitting...':'Next'}
                     </button>
                 </Form>
             )}

@@ -32,7 +32,7 @@ const WishLists = () => {
                <div key={index} className={styles.salonDetails}>
                <div className={main.img}>
                    
-                       <Image src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" />
+                       <Image src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" style={{width:"200px",height:"200px"}}/>
        
                </div>
                <div className={styles.details}>

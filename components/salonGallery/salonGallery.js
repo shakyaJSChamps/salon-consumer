@@ -7,8 +7,8 @@ function SalonGallery({ data }) {
   return (
     <div className={styles.container}>
         {data?.map((item,index) => (
-            <Image key={index} src={item} alt={'image'} 
-            style={{width:"200px",height:"200px"}} />
+            <img key={index} src={item} alt={'image'} 
+           />
         ))}
     </div>
   )

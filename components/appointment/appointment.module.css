@@ -89,7 +89,7 @@
     margin-bottom: 10px;
     background-color: #D9D9D9;
     justify-content: space-around;
-    width: 85%;
+    width: 100%;
 }
 .appointmentDiv{
     display: flex;
