@@ -22,11 +22,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-        <Suspense fallback={<Loading/>}>
         <Navbar />
-          {children}
+        <div className="contentWrapper">
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
+          </div>
+
           <Footer />
-        </Suspense>
         </Providers>
       </body>
     </html>

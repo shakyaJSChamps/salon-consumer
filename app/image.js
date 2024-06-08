@@ -8,7 +8,7 @@ const Images = ({ alt, className, imageUrl }) => {
       src={imageUrl ? imageUrl : dummyImage}
       alt={alt}
       className={className}
-      width={300} 
+      width={200} 
       height={200}
     />
   );
@@ -19,5 +19,8 @@ Images.propTypes = {
   className: PropTypes.string,
   imageUrl: PropTypes.string.isRequired,
 };
-
+Images.defaultProps = {
+  className: '',
+  imageUrl: dummyImage,
+};
 export default Images;

@@ -10,6 +10,7 @@ import main from "./wishlist.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { CiHeart } from 'react-icons/ci';
+import Images from '@/app/image';
 const WishLists = () => {
     const [favouriteSalons, setFavouriteSalons] = useState(null)
     console.log("favouriteSalonList::>", favouriteSalons);
@@ -32,7 +33,7 @@ const WishLists = () => {
                <div key={index} className={styles.salonDetails}>
                <div className={main.img}>
                    
-                       <Image src={salon.mainGateImageUrl ? salon.mainGateImageUrl : imageSrc} alt="image" style={{width:"200px",height:"200px"}}/>
+                       <Images imageUrl={salon.mainGateImageUrl} alt="image" style={{width:"200px",height:"200px"}}/>
        
                </div>
                <div className={styles.details}>

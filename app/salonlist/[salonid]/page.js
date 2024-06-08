@@ -12,6 +12,7 @@ import AboutSalon from '@/components/aboutSalon/aboutSalon';
 import { getDetailPageData } from '@/api/account.api';
 import { FaHeart } from "react-icons/fa";
 import Slider from "react-slick";
+import { Col, Row } from 'react-bootstrap';
 
 function SalonDetail({ params }) {
     const salonid = params.salonid
@@ -69,10 +70,11 @@ function SalonDetail({ params }) {
                 <div className={styles.salonTiming}>
                     <h4>Working hours</h4>
                     <div className={styles.timing}>
+                     
                         {data && data.workingHours && data.workingHours.map((day, index) => (
-                            <h3 key={index}>
-                                {day.day}<span>{`${day.openTime}-${day.closeTime}`}</span>
-                            </h3>
+                            <Row key={index}>
+                             <Row className={styles.mainDiv}><Col md={6}>{day.day}</Col><Col className={styles.main} md={6}>{`${day.openTime}-${day.closeTime}`}</Col></Row>
+                            </Row>
                         ))}
 
 

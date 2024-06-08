@@ -10,7 +10,11 @@ const Loading = () => {
     position: 'fixed',
     top: 0,
     left: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 165,
+    marginBottom: 200,
+
+    backgroundColor: 'grey',
+    color:"white",
     zIndex: 9999,
   };
 
