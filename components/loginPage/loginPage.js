@@ -60,7 +60,14 @@ function LoginPage() {
               onSubmit={onSubmit}
             >
               <Form className={styles.form}>
-                <PhoneInputComponent setPhoneNumber={setPhoneNumber} className={styles.mobileField}/>
+                <PhoneInputComponent setPhoneNumber={setPhoneNumber} className={styles.mobileField} style={{
+        borderRadius: "20px",
+        boxShadow: "none",
+        outlineColor: "none",
+        width: "470px",
+        height: "6vh",
+        fontSize: "20px",
+      }}/>
 
                 <ErrorMessage
                   component="div"

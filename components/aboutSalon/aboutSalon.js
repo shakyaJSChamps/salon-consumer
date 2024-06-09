@@ -5,6 +5,7 @@ import specialist from '@/assets/images/specialist.svg'
 import StarsIcon from '@mui/icons-material/Stars';
 import { getSalonReviews, getSalonStaff } from '@/api/account.api';
 import { useEffect, useState } from 'react';
+import Images from '@/app/image';
 
 
 function AboutSalon({ id }) {
@@ -58,7 +59,7 @@ function AboutSalon({ id }) {
                                 staff.map((specialist, index) => (
                                     <div className={styles.specialistDetails} key={index}>
                                         <div className={styles.image}>
-                                            <Image src={specialist.profileImageUrl
+                                            <Images  imageUrl={specialist.profileImageUrl
                                             } alt={specialist.firstName} width={100} height={100} />
                                         </div>
                                         <div className={styles.content}>

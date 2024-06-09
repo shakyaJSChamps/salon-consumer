@@ -2,20 +2,14 @@ import { useFormikContext } from "formik";
 import React from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-const PhoneInputComponent = ({ value }) => {
+const PhoneInputComponent = ({ value ,style,disabled}) => {
   const { setFieldValue } = useFormikContext();
   const { phoneNumber } = useFormikContext().initialValues;
 
   return (
     <PhoneInput
-      inputStyle={{
-        borderRadius: "20px",
-        boxShadow: "none",
-        outlineColor: "none",
-        width: "470px",
-        height: "6vh",
-        fontSize: "20px",
-      }}
+      inputStyle={style}
+      disabled={disabled}
       containerClass="phone-container"
       country={"in"}
       placeholder="Enter phone number"
