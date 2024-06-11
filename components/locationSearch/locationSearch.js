@@ -53,9 +53,9 @@ function LocationSearch() {
           onChange={(e) => handleSelectLocation(e.target.value)}
         >
           <option value={`${city}, ${state}`}>{`${city}, ${state}`}</option>
-          <option value="Delhi">Delhi</option>
+          {/* <option value="Delhi">Delhi</option>
           <option value="Noida">Noida</option>
-          <option value="Gurugram">Gurugram</option>
+          <option value="Gurugram">Gurugram</option> */}
         </select>
       ) : (
         <select
@@ -65,9 +65,9 @@ function LocationSearch() {
         >
           <option value="Select Location">Select Location</option>
           <option value="Current Location">Current Location</option>
-          <option value="Delhi">Delhi</option>
+          {/* <option value="Delhi">Delhi</option>
           <option value="Noida">Noida</option>
-          <option value="Gurugram">Gurugram</option>
+          <option value="Gurugram">Gurugram</option> */}
         </select>
       )}
     </div>

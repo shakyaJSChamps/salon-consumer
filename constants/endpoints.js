@@ -41,6 +41,9 @@ export const __endpoint_staticPageUrl = endpoint + "file/doc/";
 export const __endpoint_getNotification = endpoint + "users/notifications";
 export const __endpoint_fileUploaders = endpoint + "file/presignedUrl";
 export const __endpoint_searchService = endpoint + "consumer/salons/list";
+export const __endpoint_signatureServices = endpoint + "services/categories";
+export const __endpoint_getBanner = endpoint + "services/advertisement";
+
 //export const searchService = (city) => `${endpoint}consumer/salons/list?search=${city}`;
 export const __endpoint_searchText =  endpoint+"consumer/salons/search";
 
