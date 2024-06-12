@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { verifyUser } from '@/api/account.api';
 import { loginUser } from '@/app/Redux/Authslice';
 import { useState } from 'react';
-
+import { setCookie } from 'nookies';
 const initialValues = {
     otp: "",
 };
@@ -30,6 +30,10 @@ function OtpVerify({ phoneNumber }) {
             const response = await verifyUser(verifyData);
             console.log("response----", response);
             const authToken = response.data.data.authToken;
+            setCookie(null, 'token', authToken, {
+                maxAge: 30 * 24 * 60 * 60,
+                path: '/',
+              });
             const userInfo = {
                 profile: response.data.data.profile,
                 role: response.data.data.role,
