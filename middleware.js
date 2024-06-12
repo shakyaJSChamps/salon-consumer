@@ -34,53 +34,46 @@
 //   matcher: ['/salonlist/salonid/salon', '/my-appointment', '/wishlist', '/profile'],
 // };
 
-
-
-
 import { NextResponse } from 'next/server';
-import Session from './service/session';
+import { parse } from 'cookie';
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request) {
-  // Define public paths that don't require authentication
-  const publicPaths = ['/login', '/signup']; // Add more public paths as needed
+  const publicPaths = ['/login', '/signup'];
+  const { pathname } = new URL(request.url);
 
-  // Check if the current path is a public path
-  const isPublicPath = publicPaths.includes(new URL(request.url).pathname);
+  const isPublicPath = publicPaths.includes(pathname);
 
-  // If it's a public path, allow access without authentication
   if (isPublicPath) {
     return NextResponse.next();
   }
 
-  // If it's not a public path, check for authentication
   const isAuthenticated = checkAuthentication(request);
 
-  // If authenticated, allow access to the private route
   if (isAuthenticated) {
     return NextResponse.next();
   } else {
-    // If not authenticated, redirect to the login page
     return NextResponse.redirect(new URL('/login', request.url));
   }
 }
 
 function checkAuthentication(request) {
-  // Implement your authentication logic here
-  // For example, check if the user is logged in
-  const authToken = Session.get('authToken');
-  return authToken !== undefined; // Return true if authenticated, false otherwise
+  const cookies = parse(request.headers.get('cookie') || '');
+  const authToken = cookies.authToken;
+  console.log("authToken -->", authToken); // Token को कंसोल में प्रिंट करना
+  return authToken !== undefined;
 }
 
-// Logout function to clear session upon logout
 export function logout() {
-  // Clear the authentication token or user session upon logout
-  Session.remove('authToken');
-  // Force a reload of the page to clear any cached authentication state
-  window.location.reload();
+  // यहां कुकी को क्लाइंट-साइड पर हटाने के लिए लॉजिक जोड़ा जा सकता है
+  // हालांकि, क्लाइंट-साइड कोड यहां काम नहीं करेगा क्योंकि यह सर्वर-साइड मिडलवेयर है
 }
 
-// Specify the type of middleware
 export const config = {
-  type: 'function',
+  matcher: [
+    '/salonlist/salonid/salon',
+    '/my-appointment',
+    '/wishlist',
+    '/profile',
+    '/protected/(.*)' // Add other protected routes here if needed
+  ],
 };

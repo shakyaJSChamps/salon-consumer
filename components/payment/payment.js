@@ -6,9 +6,10 @@ import Session from '@/service/session';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
-
 function PaymentPage() {
     const [totalCount, setTotalCount] = useState(1);
+    const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+
     const servicesDetails = Session.getObject('selectedService');
     console.log("sel::::>", servicesDetails);
     const router = useRouter();
@@ -40,7 +41,58 @@ function PaymentPage() {
             setTotalCount(prevCount => prevCount / 2); // Halve the total count
         }
     }
-
+  
+    
+     
+      const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+          const script = document.createElement('script');
+          script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+          script.onload = () => {
+            resolve(true);
+          };
+          script.onerror = () => {
+            resolve(false);
+          };
+          document.body.appendChild(script);
+        });
+      };
+    
+      const handlePayment = async () => {
+        const res = await loadRazorpayScript();
+    
+        if (!res) {
+          alert('Razorpay SDK failed to load. Are you online?');
+          return;
+        }
+    
+        const options = {
+          key: 'rzp_test_P7r14IYnJIljg6', 
+          amount: '50000', // Amount in paise (50000 paise = 500 INR)
+          currency: 'INR',
+          name: 'Your Company Name',
+          description: 'Test Transaction',
+          handler: function (response) {
+            alert(response.razorpay_payment_id);
+            // Handle payment success here, like sending payment ID to your backend server
+          },
+          prefill: {
+            name: 'Your Name',
+            email: 'Your Email',
+            contact: 'Your Phone Number',
+          },
+          notes: {
+            address: 'Your Address',
+          },
+          theme: {
+            color: '#F37254',
+          },
+        };
+    
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      };
+    
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -98,7 +150,7 @@ function PaymentPage() {
                 </div>
             </div>
             <div className={styles.payment}>
-                <button onClick={handleConfirm}>Confirm Payment</button>
+                <button onClick={handlePayment}>Confirm Payment</button>
             </div>
 
         </div>

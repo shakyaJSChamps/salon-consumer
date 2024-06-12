@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './banner.module.css';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrNext } from "react-icons/gr";
+import { getBanner } from '@/api/account.api';
 
 const sliderContent = [
     { title: `Bespoke Cuts, <br>Effortless Style`, description: 'Professional haircut and grooming services' },
@@ -17,6 +18,8 @@ const sliderContent = [
 
 function Banner() {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [banner, setBanner] = useState([]);
+    console.log("banner",banner)
     const sliderRef = useRef(null);
 
     const NextArrow = (props) => {
@@ -66,6 +69,17 @@ function Banner() {
     };
 
 
+    useEffect(() => {
+      const banner = async () => {
+        try {
+          const res = await getBanner();
+          setBanner(res?.data?.data);
+        } catch (error) {
+          console.log("error===>", error);
+        }
+      };
+      banner();
+    }, []);
     return (
         <div className={styles.container}>
             {/* <div className={styles.sliderImg}>

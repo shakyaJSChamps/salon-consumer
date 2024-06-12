@@ -8,7 +8,7 @@ import OtpVerify from "./otpVerify";
 import Notify from "../../utils/notify";
 import PhoneInputComponent from "./PhoneInputComponent";
 import Link from "next/link";
-
+import { useRouter } from 'next/router';
 const initialValues = {
   phoneNumber: "",
 };
