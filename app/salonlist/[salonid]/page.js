@@ -70,14 +70,14 @@ function SalonDetail({ params }) {
                 <div className={styles.salonTiming}>
                     <h4>Working hours</h4>
                     <div className={styles.timing}>
-                     
                         {data && data.workingHours && data.workingHours.map((day, index) => (
-                            <Row key={index}>
-                             <Row className={styles.mainDiv}><Col md={6}>{day.day}</Col><Col className={styles.main} md={6}>{`${day.openTime}-${day.closeTime}`}</Col></Row>
-                            </Row>
+                            // Display only if both openTime and closeTime are specified
+                            day.openTime && day.closeTime && (
+                                <Row key={index}>
+                                    <Row className={styles.mainDiv}><Col md={6}>{day.day}</Col><Col className={styles.main} md={6}>{`${day.openTime}-${day.closeTime}`}</Col></Row>
+                                </Row>
+                            )
                         ))}
-
-
                     </div>
                 </div>
             </div>

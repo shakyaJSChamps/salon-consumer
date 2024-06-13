@@ -3,9 +3,11 @@ import styles from "./locationSearch.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLocation } from "@/app/Redux/Authslice";
 import { GetUserLocation, HandleSelectLocation } from "@/service/locations";
+import { getAddress } from "@/api/account.api";
 
 function LocationSearch() {
   const [permissionDenied, setPermissionDenied] = useState(true);
+  const [addresses, setAddresses] = useState([]);
   const dispatch = useDispatch();
   const city = useSelector((state) => state.auth.city);
   const state = useSelector((state) => state.auth.state);
@@ -15,7 +17,6 @@ function LocationSearch() {
     const fetchLocation = async () => {
       try {
         const location = await GetUserLocation();
-        console.log("location import permissions", location);
         dispatch(setUserLocation(location)); // Dispatch the address fields
         setPermissionDenied(false);
       } catch (error) {
@@ -26,8 +27,8 @@ function LocationSearch() {
     fetchLocation();
   }, [dispatch]);
 
-  const handleSelectLocation = async (location) => {
-    if (location === "Current Location") {
+  const handleSelectLocation = async (selectedLocation) => {
+    if (selectedLocation === "Current Location") {
       try {
         const location = await GetUserLocation();
         dispatch(setUserLocation(location)); // Dispatch the address fields
@@ -37,12 +38,25 @@ function LocationSearch() {
         setPermissionDenied(true);
       }
     } else {
-      const locationData = await HandleSelectLocation(location);
+      const locationData = await HandleSelectLocation(selectedLocation);
       if (locationData) {
         dispatch(setUserLocation(locationData)); // Dispatch the address fields
       }
     }
   };
+
+  const fetchAddress = async () => {
+    try {
+      const res = await getAddress();
+      setAddresses(res?.data?.data);
+    } catch (error) {
+      console.log("Error fetching addresses:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAddress();
+  }, []);
 
   return (
     <div className={styles.dropdown}>
@@ -53,9 +67,14 @@ function LocationSearch() {
           onChange={(e) => handleSelectLocation(e.target.value)}
         >
           <option value={`${city}, ${state}`}>{`${city}, ${state}`}</option>
-          {/* <option value="Delhi">Delhi</option>
-          <option value="Noida">Noida</option>
-          <option value="Gurugram">Gurugram</option> */}
+          {addresses.map((address) => (
+            <option
+              key={address.id}
+              value={`${address.city}, ${address.state}`}
+            >
+              {`${address.city}, ${address.state}`}
+            </option>
+          ))}
         </select>
       ) : (
         <select
@@ -65,9 +84,14 @@ function LocationSearch() {
         >
           <option value="Select Location">Select Location</option>
           <option value="Current Location">Current Location</option>
-          {/* <option value="Delhi">Delhi</option>
-          <option value="Noida">Noida</option>
-          <option value="Gurugram">Gurugram</option> */}
+          {addresses.map((address) => (
+            <option
+              key={address.id}
+              value={`${address.city}, ${address.state}`}
+            >
+              {`${address.city}, ${address.state}`}
+            </option>
+          ))}
         </select>
       )}
     </div>

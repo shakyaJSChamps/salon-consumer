@@ -43,12 +43,7 @@ function AboutSalon({ id }) {
     return (
         <div className={styles.container}>
             <div className={styles.aboutContent}>
-                <div className={styles.title}>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt <br />
-                        ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br />
-                        incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do<br />
-                        eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur</p>
-                </div>
+               
                 <div className={styles.specialistContainer}>
                     <div className={styles.heading}>
                         Our Specialist
@@ -61,6 +56,7 @@ function AboutSalon({ id }) {
                                         <div className={styles.image}>
                                             <Images  imageUrl={specialist.profileImageUrl
                                             } alt={specialist.firstName} width={100} height={100} />
+                                            {/* <Image src={specialist.profileImageUrl} width={100} height={100} alt ='profile'/> */}
                                         </div>
                                         <div className={styles.content}>
                                             <h3>{specialist.
