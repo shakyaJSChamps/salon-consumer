@@ -30,9 +30,9 @@ const WishLists = () => {
 
             {favouriteSalons?.map((salon, index) => (
                <div key={index} className={styles.salonDetails}>
-               <div className={styles.img}>
+               <div className=''>
                    
-                       <Images imageUrl={salon.mainGateImageUrl} alt="image" style={{width:"200px",height:"200px"}} />
+                       <Images imageUrl={salon.mainGateImageUrl} alt="image"  className= {styles.img}/>
        
                </div>
                <div className={styles.details}>
@@ -64,9 +64,11 @@ const WishLists = () => {
 
                    </div>
                    <p className={styles.description}>{salon.address}</p>
+                   <div className={styles.btnDiv}>
                    <Link href={`/salonlist/${salon.id}`}>
                        <button className={styles.doorBuddyBtn}>View Details</button>
                    </Link>
+                   </div>
                </div>
            </div>
             ))}

@@ -39,6 +39,9 @@ function SalonDetail({ params }) {
         }
         getSalonData();
     }, [salonid]);
+
+    const hasWorkingHours = data?.workingHours?.some(day => day.openTime && day.closeTime);
+
     return (
         <div className={styles.container}>
             <div className={styles.salonSlider} style={{ backgroundImage: `url(${data?.mainGateImageUrl})` }}>
@@ -70,14 +73,20 @@ function SalonDetail({ params }) {
                 <div className={styles.salonTiming}>
                     <h4>Working hours</h4>
                     <div className={styles.timing}>
-                        {data && data.workingHours && data.workingHours.map((day, index) => (
-                            // Display only if both openTime and closeTime are specified
-                            day.openTime && day.closeTime && (
-                                <Row key={index}>
-                                    <Row className={styles.mainDiv}><Col md={6}>{day.day}</Col><Col className={styles.main} md={6}>{`${day.openTime}-${day.closeTime}`}</Col></Row>
-                                </Row>
-                            )
-                        ))}
+                    <Col>
+                            {hasWorkingHours ? (
+                                data.workingHours.map((day, index) => (
+                                    day.openTime && day.closeTime && (
+                                        <Row key={index}>
+                                            <Col md={6}>{day.day}</Col>
+                                            <Col className={styles.main} md={6}>{`${day.openTime} - ${day.closeTime}`}</Col>
+                                        </Row>
+                                    )
+                                ))
+                            ) : (
+                                <p>No working days available</p>
+                            )}
+                        </Col>
                     </div>
                 </div>
             </div>

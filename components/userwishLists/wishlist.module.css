@@ -1,369 +1,396 @@
 .container {
-    margin-top: 10px;
-    padding: 0px 110px;
-    padding-bottom: 30px !important;
-
+  margin-top: 10px;
+  padding: 0px 110px;
+  padding-bottom: 30px !important;
 }
 
-
-
-
 .locationIcons {
-    position: absolute;
-    font-size: 40px;
-    left: 18px;
-    z-index: 999999999;
-    top: 36px;
-
+  position: absolute;
+  font-size: 40px;
+  left: 18px;
+  z-index: 999999999;
+  top: 36px;
 }
 
 .scissors {
-    position: absolute;
-    font-size: 28px;
-    left: 46px;
-    top: 48px;
-    z-index: 45;
-
+  position: absolute;
+  font-size: 28px;
+  left: 46px;
+  top: 48px;
+  z-index: 45;
 }
 
 .combIcons {
-    position: absolute;
-    font-size: 47px;
-    left: 19px;
-    z-index: 111111;
-    top: 23px;
-    rotate: 160deg;
+  position: absolute;
+  font-size: 47px;
+  left: 19px;
+  z-index: 111111;
+  top: 23px;
+  rotate: 160deg;
 }
 
 .findsSalon {
-    /* border: 2px solid black; */
-    padding-left: 198px;
-
+  /* border: 2px solid black; */
+  padding-left: 198px;
 }
 
-
 .heart {
-    width: 10px;
-    height: 10px;
-    position: relative;
-    transform: rotate(-48deg);
-    margin-left: 20px;
-    cursor: pointer;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  transform: rotate(-48deg);
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .heart::before,
 .heart::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    background-color: rgb(228, 75, 75);
-    border-radius: 58%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: rgb(228, 75, 75);
+  border-radius: 58%;
 }
 
 .heart::before {
-    top: -7px;
-    left: 0;
+  top: -7px;
+  left: 0;
 }
 
 .heart::after {
-    top: 0;
-    left: 6px;
+  top: 0;
+  left: 6px;
 }
 
 .heart.nonFavorite::before,
 .heart.nonFavorite::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    background-color: black;
-    border-radius: 50%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
 }
 
 .heart.favorite {
-    background-color: rgb(228, 75, 75);
+  background-color: rgb(228, 75, 75);
 }
 
 .heart.nonFavorite {
-    background-color: black;
+  background-color: black;
 }
 
 .find p {
-    font-size: 0.8875em;
-    font-weight: 400;
+  font-size: 0.8875em;
+  font-weight: 400;
 }
 
 .find h3 {
-    font-size: 1.81875em;
-    font-weight: bolder;
+  font-size: 1.81875em;
+  font-weight: bolder;
 }
 
 .salonLists {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 }
 
-
 .titles h6 {
-    font-size: 26px;
-    font-weight: bold;
+  font-size: 26px;
+  font-weight: bold;
 }
 
 .salonListFilter {
-
-    border: 3px solid rgb(177, 169, 169);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    padding: 35px 22px;
-    height: max-content;
-    border-radius: 8px;
+  border: 3px solid rgb(177, 169, 169);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 35px 22px;
+  height: max-content;
+  border-radius: 8px;
 }
 
 .salonList {
-    width: 560px;
-
-
+  width: 560px;
 }
-
 
 .salonDetails {
-    display: flex;
-
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
-    margin-bottom: 15px;
-
-
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  margin-bottom: 15px;
+  height: 285px;
 }
-
-
-.img img{
-    width: 270px;
-    height: 200px;
+.main{
+    padding: 20px 0px;
 }
-
 .img img {
-    /* object-fit: cover !important; */
-    /* width: 100%; */
-    /* height: auto; */
+  /* object-fit: cover !important; */
+  /* width: 100%; */
+  /* height: auto; */
 }
 
 .details {
-    padding: 20px 35px;
-   width: 450px;
-   height: auto;
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
+  padding: 20px 35px;
+  width: 450px;
+  height: auto;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .details button {
-    background-color: black;
-    color: white;
-    padding: 10px 82px;
-    cursor: pointer;
-    border: none;
-    border-radius: 3px;
-    font-weight: 600;
-    margin-top: 10px;
-    font-size: 0.85em;
+  background-color: black;
+  color: white;
+  padding: 10px 82px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 0.85em;
 }
 
 .wishList {
-    display: flex;
+  display: flex;
 }
 
 .titlesDetails {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .wishlists p {
-    font-size: 0.8125em;
+  font-size: 0.8125em;
 }
 
 .titles h2 {
-    font-size: 1.185em;
-    font-weight: 800;
+  font-size: 1.185em;
+  font-weight: 800;
 }
 
 .locations {
-    font-size: 1.78125em;
-
+  font-size: 1.78125em;
 }
 
 .ratings {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-
 .img img {
-    /* object-fit: cover !important;
+  /* object-fit: cover !important;
     width: max-content;
     height: max-content; */
 }
 
 .description,
 .ratings p {
-    font-size: 0.74625em;
-    font-weight: 700;
-    line-height: 15px;
+  font-size: 0.74625em;
+  font-weight: 700;
+  line-height: 15px;
 }
 
 .ratings p {
-    /* line-height: 25px; */
+  /* line-height: 25px; */
 }
 
 .salonDetails svg {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .locations {
-    line-height: 30px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-
+  line-height: 30px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .wishlists svg {
-    font-size: 23px;
-    text-align: center;
-    cursor: pointer;
-    margin-left: 13px;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 13px;
 }
 
 .wishlists {
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-
 .applyConditions {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .applyConditions button {
-    padding: 4px 16px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 0.664em;
+  padding: 4px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.664em;
 }
 
 .applyConditions .clear {
-    background-color: white;
-    color: black;
-    font-size: 0.725em;
-    font-weight: 500;
+  background-color: white;
+  color: black;
+  font-size: 0.725em;
+  font-weight: 500;
 }
 
 .applyConditions p {
-    font-size: 1em;
-
+  font-size: 1em;
 }
 
 .shopCategory {
-    line-height: 25px;
+  line-height: 25px;
 }
 
 .shopCategory h5 {
-    font-size: 0.845em;
-    font-weight: 600;
-    margin-bottom: 10px;
+  font-size: 0.845em;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .checkboxContainer .checkboxes {
-    background-color: red !important;
+  background-color: red !important;
 }
 
 .shopCategory label {
-    font-size: 0.745em;
-    margin-left: 5px;
-    font-weight: 500;
+  font-size: 0.745em;
+  margin-left: 5px;
+  font-weight: 500;
 }
 
 .locations {
-    font-size: 17px;
-    /* line-height: 40px; */
+  font-size: 17px;
+  /* line-height: 40px; */
 }
 
 .buddyType {
-    font-size: 9px;
-    font-weight: 700;
+  font-size: 9px;
+  font-weight: 700;
 }
 
 .categoryContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  height: 100%;
+  width: 450px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue !important;
 }
 
 .doorBuddyBtn {
-    padding: 13px 69px !important;
+  padding: 13px 180px !important;
 }
 
 .showMoreButton {
-    margin: 0px 0px 10px 54%;
+  margin: 0px 0px 10px 54%;
 }
 
 .showMoreButton button {
-    font-size: 20px;
-    border: none;
-    background-color: transparent;
-    color: black;
-    text-decoration: underline;
-    cursor: pointer;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .showMoreButton button:hover {
-    color: blue;
+  color: blue;
 }
 
+@media (max-width: 1200px) {
+  .img {
+    width: 350px;
+  }
+  .details {
+    width: 350px;
+  }
+  .doorBuddyBtn {
+    padding: 13px 132px !important;
+  }
+}
 
+@media screen and (max-width: 991px) {
+  .img {
+    width: 250px;
+  }
+  .details {
+    width: 250px;
+  }
+  .doorBuddyBtn {
+    padding: 8px 80px !important;
+  }
+}@media screen and (max-width: 575px) {
+    .img {
+      width: 300px;
+      height: 200px;
 
-
-
-@media screen and (max-width:991px) {
-
-    .details{
-        padding: 20px 10px;
     }
-
-    
-}
-
-
-
-
-
-.main{
-    padding: 20px 300px;
-}
-.img{
-    width: 500px;
-    height: auto;
-    height: 182px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: blue !important;
-}
+    .details {
+      width: 150px;
+      height: 50%;
+    }
+    .salonDetails{
+        flex-direction: column;
+        height: 400px;
+        width: 300px;
+    }
+    .doorBuddyBtn {
+        font-size: 15px;
+      padding: 4px 100px !important;
+    }
+    .btnDiv{
+        margin-top: -25px;
+    }
+    .wishlists{
+        margin-left: 100px;
+        margin-top: -60px;
+    }
+    .titles{
+        margin-top: -35px;
+        font-size: 15px;
+    }
+    .locations{
+        margin-top: -15px;
+        
+    }
+    .ratings{
+        margin-top: -15px;
+    }
+    .ratings p{
+        margin-top: -5px;
+    }
+    .description{
+        margin-top: -15px;
+        display: flex;
+    }
+  }
