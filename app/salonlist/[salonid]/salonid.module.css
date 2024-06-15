@@ -18,7 +18,10 @@
     gap: 20px;
 }
 .main{
-    align-items: flex-start;
+    padding-left: 100px;
+    margin-top: -17px;
+    display: flex;
+  
 }
 .sliderTitle h3 {
     font-size: 38px;

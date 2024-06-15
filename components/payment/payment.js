@@ -67,7 +67,7 @@ function PaymentPage() {
         }
     
         const options = {
-          key: 'rzp_test_P7r14IYnJIljg6', 
+          key:  process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
           amount: '50000', // Amount in paise (50000 paise = 500 INR)
           currency: 'INR',
           name: 'Your Company Name',
@@ -85,7 +85,7 @@ function PaymentPage() {
             address: 'Your Address',
           },
           theme: {
-            color: '#F37254',
+            color: '#000000',
           },
         };
     

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Session from '@/service/session';
 
 function NearSalons({ data }) {
   console.log("near salon", data.data);
@@ -17,6 +18,9 @@ function NearSalons({ data }) {
 //   }
 
  // const { nearBySalons } = data;
+ const handleViewAllClick = () => {
+  Session.remove('filteredSalon');
+};
 
   return (
     <div className={styles.container}>
@@ -74,7 +78,11 @@ function NearSalons({ data }) {
       </div>
 
       <div className={styles.linkDiv}>
-        <Link href={'/salonlist'} className={styles.link} >View all salons
+        {/* <Link href={'/salonlist'} className={styles.link} >View all salons
+          <ArrowForwardIcon className={styles.arrow} />
+        </Link> */}
+   <Link href={'/salonlist'} onClick={handleViewAllClick} className={styles.link}>
+          View all salons
           <ArrowForwardIcon className={styles.arrow} />
         </Link>
       </div>

@@ -138,7 +138,10 @@
     outline: none;
     border: 1px solid #858585;
 }
-
+.iconWithMenu {
+    position: relative;
+    display: inline-block;
+}
 .saves {
     background-color: black;
     cursor: pointer;
@@ -408,7 +411,11 @@
 
 @media screen and (max-width:576px) {}
 
-@media screen and (max-width:1200px) {}
+@media screen and (max-width:1200px) {
+    .AddressMenu{
+        margin-right: -110px;
+    }
+}
 
 @media screen and (max-width:992px) {}
 
@@ -416,6 +423,9 @@
     .container {
         margin-top: 10px;
         padding: 50px 10px;
+    }
+    .AddressMenu{
+        margin-right: -195px;
     }
 }
 
@@ -507,7 +517,9 @@
     .profileInfo {
         width: 470px;
     }
-
+    .AddressMenu{
+        margin-right: -291px;
+    }
     .manageDetails {
         padding: 14px 34px 55px 19px;
     }

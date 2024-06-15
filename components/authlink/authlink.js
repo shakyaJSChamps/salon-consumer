@@ -5,6 +5,7 @@ import styles from './authlink.module.css';
 import authUser from '@/assets/images/loginUser.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
+import { destroyCookie } from 'nookies';
 import {
     loginUser,
     logoutUser,
@@ -48,6 +49,7 @@ function Authlink() {
 
     const handleLogout = () => {
         dispatch(logoutUser());
+        destroyCookie(null, 'token', { path: '/' });
         setMenu(false);
     };
 

@@ -107,11 +107,6 @@ function Banner() {
                             />
                         ))}
                     </div>
-                    {/* <div className={styles.midOffer}>
-                        <p>amet consectetur</p>
-                        <div className={styles.border}></div>
-                        <h1>30% off</h1>
-                    </div> */}
                 </div>
             </div>
         </div>

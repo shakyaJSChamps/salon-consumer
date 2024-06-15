@@ -1,12 +1,11 @@
 "use client"
 import Image from 'next/image'
-import styles from "../../components/lists/lists.module.css";
 import { IoStarSharp } from "react-icons/io5";
 import Img from '@/assets/images/salonImage.svg'
 import { useEffect, useState } from 'react';
 import { getFavouriteSalonList } from '@/api/account.api';
 import Link from 'next/link';
-import main from "./wishlist.module.css";
+import styles from "./wishlist.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { CiHeart } from 'react-icons/ci';
@@ -27,13 +26,13 @@ const WishLists = () => {
         fetchData();
     }, [])
     return (
-        <div className={main.main}>
+        <div className={styles.main}>
 
             {favouriteSalons?.map((salon, index) => (
                <div key={index} className={styles.salonDetails}>
-               <div className={main.img}>
+               <div className=''>
                    
-                       <Images imageUrl={salon.mainGateImageUrl} alt="image" style={{width:"200px",height:"200px"}}/>
+                       <Images imageUrl={salon.mainGateImageUrl} alt="image"  className= {styles.img}/>
        
                </div>
                <div className={styles.details}>
@@ -65,32 +64,15 @@ const WishLists = () => {
 
                    </div>
                    <p className={styles.description}>{salon.address}</p>
+                   <div className={styles.btnDiv}>
                    <Link href={`/salonlist/${salon.id}`}>
                        <button className={styles.doorBuddyBtn}>View Details</button>
                    </Link>
+                   </div>
                </div>
            </div>
             ))}
-            {/* <div className={styles.wishListItems}>
-                <div className={styles.img}>
-                    <Image src={Img} alt="Image" />
-                </div>
-                <div className={styles.wishListsInfo}>
-                    <h3>HairWithCare</h3>
-                    <p className={styles.studioName}>Salon Studio</p>
-                    <p className={styles.rating}><IoStarSharp />4.2(5.2k)</p>
-                </div>
-            </div>
-            <div className={styles.wishListItems}>
-                <div className={styles.img}>
-                    <Image src={Img} alt="Image" />
-                </div>
-                <div className={styles.wishListsInfo}>
-                    <h3>HairWithCare</h3>
-                    <p className={styles.studioName}>Salon Studio</p>
-                    <p className={styles.rating}><IoStarSharp />4.2(5.2k)</p>
-                </div>
-            </div> */}
+           
         </div>
     )
 }

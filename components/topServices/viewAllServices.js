@@ -1,13 +1,13 @@
 'use client'
 import { Paper } from "@mui/material";
-import styles from "./topServices.module.css";
+import styles from "./viewAllServices.module.css";
 import Image from "next/image";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signatureServices } from "@/api/account.api";
 
-function TopServices() {
+function ViewAllServices() {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -27,10 +27,10 @@ function TopServices() {
       <div className={styles.headingContainer}>
         <div className={styles.heading}>Signature Services</div>
         <div className={styles.linkDiv}>
-          <Link href='/services' className={styles.link}>
+          {/* <Link href='/services' className={styles.link}>
             View all services
             <ArrowForwardIcon className={styles.arrow} />
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className={styles.content}>
@@ -52,4 +52,4 @@ function TopServices() {
   );
 }
 
-export default TopServices;
+export default ViewAllServices;
