@@ -1,43 +1,53 @@
-import { getUserNotifications } from '@/api/account.api';
+'use client';
+import React, { useEffect, useState } from 'react';
 import styles from './notification.module.css';
-
-// export async function getServerSideProps(context) {
-//   console.log('Inside getServerSideProps...');
-//   try {
-//     console.log('Fetching notifications...');
-//     const res = await getUserNotifications();
-//     console.log('Notifications fetched:', res);
-//     const notifications = res?.data?.data;
-//     return {
-//       props: { notifications },
-//     };
-//   } catch (error) {
-//     console.error('Error fetching notifications:', error);
-//     return {
-//       props: { notifications: [] }, // Return an empty array
-//     };
-//   }
-// }
+import { IoMdNotifications } from "react-icons/io";
+import { getUserNotifications } from '@/api/account.api';
 
 function Notification() {
-  // console.log("notifications::>", notifications);
+  const [notifications, setNotifications] = useState({});
 
-  // if (!notifications || notifications.length === 0) {
-  //   return <div className={styles.noNotifications}>No notifications available.</div>;
-  // }
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await getUserNotifications();
+        setNotifications(response?.data?.data);
+      } catch (error) {
+        console.error('Failed to fetch notifications:', error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   return (
     <div className={styles.mainDiv}>
-      {/* {notifications.map((notification, index) => ( */}
-        <div className={styles.notifications}>
-          <div className={styles.notificationsHeader}>
-            <h3>title</h3>
-          </div>
-          <div className={styles.message}>
-            <p>message</p>
-          </div>
+      <div className={styles.notifications}>
+        <div className={styles.notificationsHeader}>
+          <h3>Notifications</h3>
         </div>
-      {/* ))} */}
+        {notifications.length === 0 ? (
+          <div className={styles.noNotifications}>
+            <p>No Notifications</p>
+          </div>
+        ) : (
+          notifications?.data?.map((notification) => (
+            <div key={notification.id} className={styles.notificationItem}>
+              <div className={styles.message}>
+                <p>
+                  <span className={styles.iconWrapper}>
+                    <IoMdNotifications className={styles.icon} />
+                  </span>
+                  {notification.message}
+                  <span className={styles.time}>
+                    {/* {new Date(notification.time).toLocaleString()} */}
+                  </span>
+                </p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
