@@ -67,14 +67,14 @@ function LocationSearch() {
           onChange={(e) => handleSelectLocation(e.target.value)}
         >
           <option value={`${city}, ${state}`}>{`${city}, ${state}`}</option>
-          {addresses.map((address) => (
+          {/* {addresses.map((address) => (
             <option
               key={address.id}
               value={`${address.city}, ${address.state}`}
             >
               {`${address.city}, ${address.state}`}
             </option>
-          ))}
+          ))} */}
         </select>
       ) : (
         <select
@@ -84,14 +84,14 @@ function LocationSearch() {
         >
           <option value="Select Location">Select Location</option>
           <option value="Current Location">Current Location</option>
-          {addresses.map((address) => (
+          {/* {addresses.map((address) => (
             <option
               key={address.id}
               value={`${address.city}, ${address.state}`}
             >
               {`${address.city}, ${address.state}`}
             </option>
-          ))}
+          ))} */}
         </select>
       )}
     </div>

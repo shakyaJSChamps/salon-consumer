@@ -260,7 +260,7 @@ const Lists = (props) => {
                   <p>{salon.serviceType}</p>
                 </div>
                 <p className={styles.description}>{salon.address}</p>
-                <Link href={`/salonlist/${salon.id}`}>
+                <Link href={`/salonlist/${salon.id}`} className={styles.btnDiv}>
                   <button className={doorBuddyBtn ? styles.doorBuddyBtn : ""}>
                     {buttonLabel}
                   </button>

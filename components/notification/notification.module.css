@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 52vh;
 }
 .notifications{
     display: flex;
@@ -10,8 +11,41 @@
     border: 1px solid grey;
     padding: 10px;
     border-radius: 5px;
+    width: 600px;
+    height: fit-content;
 }
 .noNotifications{
     text-align: center;
     padding: 100px;
 }
+.message p{
+    border: 2px solid grey;
+    padding: 6px;
+    border-radius: 10px;
+}
+.message .time{
+    float: right;
+}
+.iconWrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: 10px;
+  }
+  
+  .icon {
+    color: #555;
+  }
+
+  @media (max-width:575px){
+    .notifications{
+        border: none;
+    }
+    .mainDiv{
+        height: 40vh;
+    }
+  }
