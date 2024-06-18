@@ -45,18 +45,18 @@ function LocationSearch() {
     }
   };
 
-  const fetchAddress = async () => {
-    try {
-      const res = await getAddress();
-      setAddresses(res?.data?.data);
-    } catch (error) {
-      console.log("Error fetching addresses:", error);
-    }
-  };
+  // const fetchAddress = async () => {
+  //   try {
+  //     const res = await getAddress();
+  //     setAddresses(res?.data?.data);
+  //   } catch (error) {
+  //     console.log("Error fetching addresses:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchAddress();
-  }, []);
+  // useEffect(() => {
+  //   fetchAddress();
+  // }, []);
 
   return (
     <div className={styles.dropdown}>

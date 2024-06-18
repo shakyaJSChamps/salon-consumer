@@ -190,7 +190,7 @@ function SearchInput() {
         const res = await searchService(city);
         setServices(res?.data?.data || []);
       } catch (error) {
-        console.error("Error fetching services:", error);
+        //console.error("Error fetching services:", error);
       }
     };
 
@@ -205,9 +205,14 @@ function SearchInput() {
   };
 
   const debounceFetchServices = useDebounce(async (query) => {
+   
     if (query) {
+      let requestUrl = '';
+      if (city) {
+        requestUrl = `?search=${city}`;
+      }
       try {
-        const res = await searchService(city);
+        const res = await searchService(requestUrl);
         const services = res?.data?.data || [];
         const filtered = services.filter((s) =>
           s.toLowerCase().includes(query.toLowerCase())
