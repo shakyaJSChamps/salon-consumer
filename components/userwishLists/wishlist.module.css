@@ -136,7 +136,7 @@
 .details {
   padding: 20px 35px;
   width: 450px;
-  height: auto;
+  height: 100%;
   font-weight: 600;
   display: flex;
   flex-direction: column;

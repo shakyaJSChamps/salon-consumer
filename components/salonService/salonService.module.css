@@ -15,7 +15,10 @@
 .service {
     flex: 1;
 }
-
+.activeButton:hover{
+    background-color: black;
+    color: white;
+}
 .bestSeller {
     flex: 2;
 }

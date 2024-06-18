@@ -34,6 +34,7 @@
     border-radius: 1px;
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
     gap: 25px;
     text-align: center;
     border-radius: 5px;
@@ -469,6 +470,7 @@
 
     .profileMenu {
         position: fixed;
+        margin-top: 0;
         top: 0;
         left: -300px;
         /* Initially off-screen */

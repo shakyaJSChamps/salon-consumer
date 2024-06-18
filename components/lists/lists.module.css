@@ -1,581 +1,651 @@
 .container {
-    margin-top: 10px;
-    padding: 0px 110px;
-    padding-bottom: 30px !important;
-
+  margin-top: 10px;
+  padding: 0px 110px;
+  padding-bottom: 30px !important;
+  position: relative;
 }
 
 .find {
-    background-color: black;
-    color: white;
-    width: 320px;
-    padding: 20px 40px;
-    border-radius: 15px;
-    margin: 30px 0px;
-    display: flex;
-    position: relative;
-    gap: 12px;
+  background-color: black;
+  color: white;
+  width: 320px;
+  padding: 20px 40px;
+  border-radius: 15px;
+  margin: 30px 0px;
+  display: flex;
+  position: relative;
+  gap: 12px;
 }
 
 .doorBuddyFind {
-    padding: 20px 112px;
-    background-color: black;
-    color: white;
-    width: 320px;
-    border-radius: 15px;
-    margin: 30px 0px;
-    display: flex;
-    justify-content: space-around;
-    position: relative;
+  padding: 20px 112px;
+  background-color: black;
+  color: white;
+  width: 320px;
+  border-radius: 15px;
+  margin: 30px 0px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
 }
 
 .calendra {
-    position: absolute;
-    font-size: 53px;
-    left: 44px;
-    top: 23px;
-    z-index: 45;
-
-
+  position: absolute;
+  font-size: 53px;
+  left: 44px;
+  top: 23px;
+  z-index: 45;
 }
 
 .locationIcons {
-    position: absolute;
-    font-size: 40px;
-    left: 18px;
-    z-index: 999999999;
-    top: 36px;
-
+  position: absolute;
+  font-size: 40px;
+  left: 18px;
+  z-index: 999999999;
+  top: 36px;
 }
 
 .scissors {
-    position: absolute;
-    font-size: 28px;
-    left: 46px;
-    top: 48px;
-    z-index: 45;
-
+  position: absolute;
+  font-size: 28px;
+  left: 46px;
+  top: 48px;
+  z-index: 45;
 }
 
 .combIcons {
-    position: absolute;
-    font-size: 47px;
-    left: 19px;
-    z-index: 111111;
-    top: 23px;
-    rotate: 160deg;
+  position: absolute;
+  font-size: 47px;
+  left: 19px;
+  z-index: 111111;
+  top: 23px;
+  rotate: 160deg;
 }
 
 .findsSalon {
-    /* border: 2px solid black; */
-    padding-left: 198px;
-
+  /* border: 2px solid black; */
+  padding-left: 198px;
 }
 
-
 .heart {
-    width: 10px;
-    height: 10px;
-    position: relative;
-    transform: rotate(-48deg);
-    margin-left: 20px;
-    cursor: pointer;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  transform: rotate(-48deg);
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .heart::before,
 .heart::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    background-color: rgb(228, 75, 75);
-    border-radius: 58%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: rgb(228, 75, 75);
+  border-radius: 58%;
 }
 
 .heart::before {
-    top: -7px;
-    left: 0;
+  top: -7px;
+  left: 0;
 }
 
 .heart::after {
-    top: 0;
-    left: 6px;
+  top: 0;
+  left: 6px;
 }
 
 .heart.nonFavorite::before,
 .heart.nonFavorite::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    background-color: black;
-    border-radius: 50%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
 }
 
 .heart.favorite {
-    background-color: rgb(228, 75, 75);
+  background-color: rgb(228, 75, 75);
 }
 
 .heart.nonFavorite {
-    background-color: black;
+  background-color: black;
 }
 
 .find p {
-    font-size: 0.8875em;
-    font-weight: 400;
+  font-size: 0.8875em;
+  font-weight: 400;
 }
 
 .find h3 {
-    font-size: 1.81875em;
-    font-weight: bolder;
+  font-size: 1.81875em;
+  font-weight: bolder;
 }
 
 .salonLists {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 }
 
-
 .titles h6 {
-    font-size: 26px;
-    font-weight: bold;
+  font-size: 26px;
+  font-weight: bold;
 }
 
 .salonListFilter {
-
-    border: 3px solid rgb(177, 169, 169);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    padding: 35px 22px;
-    height: max-content;
-    border-radius: 8px;
+  border: 3px solid rgb(177, 169, 169);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 35px 22px;
+  height: max-content;
+  border-radius: 8px;
+  display: block;
 }
-
+.listFilter {
+  border: 3px solid rgb(177, 169, 169);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 35px 22px;
+  height: max-content;
+  border-radius: 8px;
+  display: block;
+}
 .salonList {
-    width: 560px;
-
-
+  width: 560px;
 }
-
 
 .salonDetails {
-    display: flex;
-    height: 220px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
-    margin-bottom: 15px;
-
-
-}
-
-
-.img img{
-    width: 270px;
-    height: 220px;
+  display: flex;
+  height: 220px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  margin-bottom: 15px;
 }
 
 .img img {
-    /* object-fit: cover !important; */
-    /* width: 100%; */
-    /* height: auto; */
+  width: 270px;
+  height: 220px;
+}
+
+.img img {
+  /* object-fit: cover !important; */
+  /* width: 100%; */
+  /* height: auto; */
 }
 
 .details {
-    padding: 20px 35px;
-   width: 50%;
-   height: auto;
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
+  padding: 20px 35px;
+  width: 50%;
+  height: auto;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-
+.humburger,
+.humburgerCross {
+  display: none;
+}
 .details button {
-    background-color: black;
-    color: white;
-    padding: 10px 91px;
-    cursor: pointer;
-    border: none;
-    border-radius: 3px;
-    font-weight: 600;
-    margin-top: 10px;
-    font-size: 0.85em;
+  background-color: black;
+  color: white;
+  padding: 10px 91px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 0.85em;
 }
 
 .wishList {
-    display: flex;
+  display: flex;
 }
 
 .titlesDetails {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .wishlists p {
-    font-size: 0.8125em;
+  font-size: 0.8125em;
 }
 
 .titles h2 {
-    font-size: 1.185em;
-    font-weight: 800;
+  font-size: 1.185em;
+  font-weight: 800;
 }
 
 .locations {
-    font-size: 1.78125em;
-
+  font-size: 1.78125em;
 }
 
 .ratings {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-
 .img img {
-    /* object-fit: cover !important;
+  /* object-fit: cover !important;
     width: max-content;
     height: max-content; */
 }
 
 .description,
 .ratings p {
-    font-size: 0.74625em;
-    font-weight: 700;
-    line-height: 15px;
+  font-size: 0.74625em;
+  font-weight: 700;
+  line-height: 15px;
 }
 
 .ratings p {
-    /* line-height: 25px; */
+  /* line-height: 25px; */
 }
 
 .salonDetails svg {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .locations {
-    line-height: 30px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-
+  line-height: 30px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .wishlists svg {
-    font-size: 23px;
-    text-align: center;
-    cursor: pointer;
-    margin-left: 13px;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 13px;
+}
+.conditions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.conditions button {
+  padding: 4px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.664em;
+}
+
+.conditions .clear {
+  background-color: white;
+  color: black;
+  font-size: 0.725em;
+  font-weight: 500;
+}
+
+.conditions p {
+  font-size: 1em;
 }
 
 .wishlists {
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-
 .applyConditions {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .applyConditions button {
-    padding: 4px 16px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 0.664em;
+  padding: 4px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.664em;
 }
 
 .applyConditions .clear {
-    background-color: white;
-    color: black;
-    font-size: 0.725em;
-    font-weight: 500;
+  background-color: white;
+  color: black;
+  font-size: 0.725em;
+  font-weight: 500;
 }
 
 .applyConditions p {
-    font-size: 1em;
-
+  font-size: 1em;
 }
 
 .shopCategory {
-    line-height: 25px;
+  line-height: 25px;
 }
 
 .shopCategory h5 {
-    font-size: 0.845em;
-    font-weight: 600;
-    margin-bottom: 10px;
+  font-size: 0.845em;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .checkboxContainer .checkboxes {
-    background-color: red !important;
+  background-color: red !important;
 }
 
 .shopCategory label {
-    font-size: 0.745em;
-    margin-left: 5px;
-    font-weight: 500;
+  font-size: 0.745em;
+  margin-left: 5px;
+  font-weight: 500;
 }
 
 .locations {
-    font-size: 17px;
-    /* line-height: 40px; */
+  font-size: 17px;
+  /* line-height: 40px; */
 }
 
 .buddyType {
-    font-size: 9px;
-    font-weight: 700;
+  font-size: 9px;
+  font-weight: 700;
 }
-
+.salonListFilter {
+  display: none;
+}
 .categoryContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.categoryContainers {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .doorBuddyBtn {
-    padding: 13px 69px !important;
+  padding: 13px 69px !important;
 }
 
 .showMoreButton {
-    margin: 0px 0px 10px 54%;
+  margin: 0px 0px 10px 54%;
 }
 
 .showMoreButton button {
-    font-size: 20px;
-    border: none;
-    background-color: transparent;
-    color: black;
-    text-decoration: underline;
-    cursor: pointer;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .showMoreButton button:hover {
-    color: blue;
+  color: blue;
 }
 
+@media screen and (max-width: 1400px) {
+  .container {
+    padding: 0px 50px;
+  }
 
+  .salonLists {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
+  .findsSalon {
+    padding-left: 50px;
+  }
 
+  .findsSalon {
+    padding-left: 155px;
+  }
 
-@media screen and (max-width:1400px) {
-
-    .container {
-        padding: 0px 50px;
-    }
-
-    .salonLists {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-
-    }
-
-    .findsSalon {
-        padding-left: 50px;
-    }
-
-    .findsSalon {
-        padding-left: 155px;
-    }
-
-    .doorBuddyBtn {
-        padding: 13px 69px !important;
-    }
+  .doorBuddyBtn {
+    padding: 13px 69px !important;
+  }
 }
 
-@media screen and (max-width:1200px) {}
-
-@media screen and (max-width:1024px) {
-    .salonLists {
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .findsSalon {
-        padding-left: 2%;
-    }
-
-
-    .details button {
-
-        padding: 13px 76px;
-    }
-
-    .doorBuddyBtn {
-        padding: 13px 56px !important;
-    }
-
-    .img {
-
-        height: 184px;
-    }
-
+@media screen and (max-width: 1200px) {
 }
 
-@media screen and (max-width:992px) {}
+@media screen and (max-width: 1024px) {
+  .salonLists {
+    justify-content: center;
+    gap: 20px;
+  }
 
-@media screen and (max-width:768px) {
-    .container {
+  .findsSalon {
+    padding-left: 2%;
+  }
 
-        padding: 0px 10px;
-    }
+  .details button {
+    padding: 13px 76px;
+  }
 
-    .img {
-        width: 100%;
-        object-fit: cover;
-    }
+  .doorBuddyBtn {
+    padding: 13px 56px !important;
+  }
 
+  .img {
+    height: 184px;
+  }
+}
 
+@media screen and (max-width: 992px) {
+}
 
-    .salonLists {
-        flex-direction: row
-    }
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0px 10px;
+  }
+  .shopCategory{
+    padding: 0px 15px;
+  }
+  .img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .salonListFilter {
+    position: fixed;
+    left: 105px;
+    /* Initially off-screen */
+    width: 350px;
+    height: 50vh;
+    margin-top: 0px;
+    background-color: #fff;
+    z-index: 1000;
+    transition: left 0.5s ease;
+    overflow-x: auto;
+    padding: 60px 0px !important;
+  }
+  .humburgerCross {
+    display: block;
+    margin-top: -50px;
+  }
+  .humburger {
+    display: block;
+  }
+  .salonListFilter {
+    display: block;
+  }
+  .salonLists {
+    flex-direction: row;
+  }
 
-    .salonList {
-        /* width: 100vw; */
-    }
+  .salonList {
+    /* width: 100vw; */
+  }
 
-    .salonListFilter {
-        width: 200px;
-        padding: 10px;
-    }
+  .salonListFilter {
+    width: 250px;
+    padding: 10px;
+  }
 
-    .container {
-        padding: 0px 10px;
-    }
+  .container {
+    padding: 0px 10px;
+  }
 
-    .find {
-        width: 230px;
-        padding: 20px 22px;
-    }
+  .find {
+    width: 230px;
+    padding: 20px 22px;
+  }
 
-    .findsSalon {
-        padding-left: 0%;
-    }
+  .findsSalon {
+    padding-left: 0%;
+  }
 
-    .applyConditions {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
+  .applyConditions {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 
-    .applyConditions p {
-        font-size: 15px;
-    }
+  .applyConditions p {
+    font-size: 15px;
+  }
 
-    .details {
-        padding: 10px 15px;
-    }
+  .details {
+    padding: 10px 15px;
+  }
 
+  .details button {
+    padding: 10px 84px;
+  }
+  .listFilter {
+    display: none;
+  }
 
-    .details button {
-        padding: 10px 84px;
+  .findsSalon {
+    margin: 30px 0px;
+  }
 
-    }
+  .details button {
+    padding: 13px 80px;
+  }
 
+  .doorBuddyBtn {
+    padding: 13px 69px !important;
+  }
 
-
-    .findsSalon {
-        margin: 30px 0px;
-    }
-
-    .details button {
-
-        padding: 13px 80px;
-    }
-
-    .doorBuddyBtn {
-        padding: 13px 69px !important;
-    }
-
-    /* .img {
+  /* .img {
         flex: unset !important;
     } */
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
+  .salonDetails {
+    flex-direction: column;
+  }
+  .img img {
+    width: 350px;
+    height: 200px;
+  }
+  .salonDetails{
+    height: 400px;
+  }
+  .salonLists {
+    flex-direction: column-reverse;
+  }
+  
+  .wishlists{
+    margin-right: -165px;
+  }
+  .titles{
+    padding-top: 10px;
+  }
+  .details button{
+    padding: 13px 135px;
+  }
+  .serviceType{
+    margin-right: 50px;
+  }
+  .salonListFilter{
+    width: 250px;
+    margin: auto;
+    top: 277px;
+  }
+  /* .humburgerCross {
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-start;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 11111111 !important;
+    font-size: 18px !important;
+    top: -142px !important;
+    left: 185px !important;
+  } */
+  .salonList {
+    width: 350px;
+    margin: auto;
+  }
+  .humburger {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    align-self: flex-start;
+    position: absolute;
+    left: 20px;
+    top: 0px;
+  }
 
+  
 
-    .salonDetails {
-        flex-direction: column;
-    }
+  .salonListFilter {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+  }
 
-    .salonLists {
-        flex-direction: column-reverse;
-    }
+  .shopCategory {
+    width: 125px;
+  }
 
-    .salonList {
-        width: 350px;
-        margin: auto;
-    }
+  .categoryContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
+  .applyConditions button {
+    padding: 8px 25px;
+  }
 
-    .details {
-        padding: 10px 25px;
-    }
+  .find {
+    padding-left: 0px;
+  }
 
-    .salonListFilter {
-        width: 350px;
-        margin: auto;
-    }
+ 
 
-    .shopCategory {
-        width: 125px;
-    }
+  .doorBuddyBtn {
+    padding: 13px 71px !important;
+  }
 
-    .categoryContainer {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
+  .find {
+    width: 300px;
+    margin: auto;
+    justify-content: center;
+    gap: 25px;
+  }
 
-
-    .applyConditions button {
-        padding: 8px 25px;
-
-
-    }
-
-    .find {
-        padding-left: 0px;
-    }
-
-    .details button {
-
-        padding: 13px 103px;
-    }
-
-    .doorBuddyBtn {
-        padding: 13px 71px !important;
-    }
-
-    .find {
-        width: 300px;
-        margin: auto;
-        justify-content: center;
-        gap: 25px;
-
-    }
-
-    .img {
-        flex: unset !important;
-    }
-
+  .img {
+    flex: unset !important;
+  }
 }
 
 /* 
@@ -594,25 +664,28 @@
 
 } */
 
-@media screen and (max-width:360px) {
-    .salonList {
-        width: 280px;
-        margin: auto;
-    }
+@media screen and (max-width: 360px) {
+  .salonList {
+    width: 280px;
+    margin: auto;
+  }
 
-    .details button {
+  .details button {
+    padding: 13px 68px;
+  }
 
-        padding: 13px 68px;
-    }
+  .doorBuddyBtn {
+    padding: 13px 60px !important;
+  }
 
-
-    .doorBuddyBtn {
-        padding: 13px 60px !important;
-    }
-
-    .find {
-        width: 285px;
-        margin: auto;
-        justify-content: center;
-    }
+  .find {
+    width: 285px;
+    margin: auto;
+    justify-content: center;
+  }
 }
+
+@media (max-width:400px){
+.salonListFilter{
+  margin-left: -80px;
+}}

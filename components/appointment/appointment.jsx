@@ -158,9 +158,9 @@ const Appointments = () => {
                     )}
                     {(scheduleShowVisible || menuVisible) && (
                         <div className={styles.userInputs} >
-                            <div className={styles.userInput}>
+                            {/* <div className={styles.userInput}>
                                 <input type="text" placeholder='Search' className={styles.searchIcon} /><SearchIcon />
-                            </div>
+                            </div> */}
                             <div className={styles.userInput}>
                                 <p>Status</p>
                                 <select className={styles.selects} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>

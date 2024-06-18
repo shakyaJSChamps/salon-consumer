@@ -58,7 +58,7 @@ const Ratings = ({ handelShowAppointMent,selectedAppointment }) => {
                                 name="review"
                                 placeholder="Enter your review here"
                             />
-                            <ErrorMessage name="review" component="div" className={styles.error} />
+                            <ErrorMessage name="review" component="div" className='error' />
                             <button type="submit">Submit</button>
                         </div>
                     </Form>
