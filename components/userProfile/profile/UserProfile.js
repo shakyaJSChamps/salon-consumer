@@ -315,8 +315,10 @@ function UserProfile() {
     try {
       const res = await UpdateUserProfile(updatedData);
       console.log("UpdateUserProfile::>", res);
+
       setEditModes(false);
       fetchUserDetails();
+      
     } catch (error) {
       console.log("error", error);
       Notify.error(error.message);

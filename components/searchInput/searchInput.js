@@ -183,11 +183,11 @@ function SearchInput() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!city) return;
+   // if (!city) return;
 
     const fetchServices = async () => {
       try {
-        const res = await searchService(city);
+        const res = await searchService(query);
         setServices(res?.data?.data || []);
       } catch (error) {
         //console.error("Error fetching services:", error);
@@ -207,12 +207,12 @@ function SearchInput() {
   const debounceFetchServices = useDebounce(async (query) => {
    
     if (query) {
-      let requestUrl = '';
-      if (city) {
-        requestUrl = `?search=${city}`;
-      }
+      // let requestUrl = '';
+      // if (city) {
+      //   requestUrl = `?search=${city}`;
+      // }
       try {
-        const res = await searchService(requestUrl);
+        const res = await searchService(query);
         const services = res?.data?.data || [];
         const filtered = services.filter((s) =>
           s.toLowerCase().includes(query.toLowerCase())

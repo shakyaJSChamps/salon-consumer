@@ -73,11 +73,11 @@ export const getBanners = () =>
 export const fileUploaders = (payload) =>
   HTTP.Request(methods.GET, __endpoint_fileUploaders, payload);
 
-export const searchService = (requestUrl) =>
-  HTTP.Request(methods.GET, `${__endpoint_searchService}${requestUrl}`);
+//export const searchService = (requestUrl) =>
+ // HTTP.Request(methods.GET, `${__endpoint_searchService}${requestUrl}`);
 
-// export const searchService = (city) =>
-//     HTTP.Request(methods.GET, `${__endpoint_searchService}?search=${city}`);
+ export const searchService = (query) =>
+     HTTP.Request(methods.GET, `${__endpoint_searchService}?search=${query}`);
 
 export const searchText = (query,page,size) =>
   HTTP.Request(methods.GET, `${__endpoint_searchText}?page=${page}&size=${size}&search=${query}`);
