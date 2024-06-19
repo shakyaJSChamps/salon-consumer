@@ -68,13 +68,13 @@ export const getUserNotifications = () =>
   HTTP.Request(methods.GET, __endpoint_getNotification);
 export const signatureServices = () =>
   HTTP.Request(methods.GET, __endpoint_signatureServices);
-export const getBanner = () =>
+export const getBanners = () =>
   HTTP.Request(methods.GET, __endpoint_getBanner);
 export const fileUploaders = (payload) =>
   HTTP.Request(methods.GET, __endpoint_fileUploaders, payload);
 
-export const searchService = (city) =>
-  HTTP.Request(methods.GET, `${__endpoint_searchService}?search=${encodeURIComponent(city)}`);
+export const searchService = (requestUrl) =>
+  HTTP.Request(methods.GET, `${__endpoint_searchService}${requestUrl}`);
 
 // export const searchService = (city) =>
 //     HTTP.Request(methods.GET, `${__endpoint_searchService}?search=${city}`);

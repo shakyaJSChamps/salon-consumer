@@ -2,20 +2,18 @@
     color: black;
     display: flex;
     position: relative;
-    background-image: url('../../assets/images/Frame\ 177.svg');
     background-size: cover;
     background-position: center;
     font-family: Poppins;
-    display: flex;
+    height: 400px;
     justify-content: flex-end;
     padding: 100px 120px 30px 0px;
-
+    transition: background-image 0.5s ease;
 }
 
 
 .sliderImg {
     width: 50%;
-    flex-grow: 1;
 
 
 
@@ -76,13 +74,18 @@
 .slidersContent p {
     font-size: 12px;
     font-weight: 600;
+    color: black;
+
 }
 
 .slidersContent h1 {
     font-weight: bold;
     font-size: 35px;
+    color: black;
 }
-
+.slidersContent a{
+    color: white;
+}
 .slidersContent button {
     padding: 8px 32px;
     border-radius: 19px;

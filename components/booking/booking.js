@@ -4,45 +4,46 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
 import Session from "@/service/session";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { appointment } from "@/api/account.api";
 import AddressPopup from "../userProfile/addressPopup/addressPopup";
 import Notify from "@/utils/notify";
+import moment from "moment";
 
 function Booking(props) {
-  // console.log("serviceAt",props.serviceAt);
   const servicesDetails = Session.getObject("selectedService");
   const router = useRouter();
   const [showAddress, setShowAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
-  console.log("sele::>", selectedAddress);
   const [totalCount, setTotalCount] = useState(1); // Initial count
+  const [endTime, setEndTime] = useState("");
+
   const serviceIds = servicesDetails?.map((item) => item.id);
   const totalServiceDuration = servicesDetails.reduce(
     (total, service) => total + service.serviceDuration,
     0
   );
-  console.log("totalDuration::>", totalServiceDuration);
-  console.log("servicekjkjkj:::>", servicesDetails);
-  console.log("serviceIds::>", serviceIds);
+
   const salonId = Session.get("selectedSalonId");
-  console.log("SalonId", salonId);
   const today = new Date().toISOString().split("T")[0];
+
   // Formik initial values
   const initialValues = {
     salonId: parseInt(salonId),
     date: "",
     startTime: "",
     serviceType: "",
-    duration: totalServiceDuration,
+    duration: totalServiceDuration, // Duration in seconds
     homeService: props.serviceAt === "Home",
     serviceIds: serviceIds,
   };
+
   const handleShowAddress = () => {
     setShowAddress(!showAddress);
   };
+
   const handleAddressSelection = (address) => {
     setSelectedAddress(address);
     setShowAddress(false); // Close the address popup after selection
@@ -53,15 +54,15 @@ function Booking(props) {
     date: Yup.date()
       .required("Date is required")
       .min(today, "Date cannot be in the past"),
-    startTime: Yup.string().required("Time is required"),
-    serviceType: Yup.string().required("Type is required"),
-    // addressId: Yup.number().required('Type is required')
+    startTime: Yup.string().required("Start time is required"),
+    serviceType: Yup.string().required("ServiceType is required"),
   });
 
   // Function to handle incrementing count
   function handleIncrement() {
     setTotalCount((prevCount) => prevCount * 2);
   }
+
   // Function to handle decrementing count
   function handleDecrement() {
     if (totalCount > 1) {
@@ -71,7 +72,6 @@ function Booking(props) {
 
   // Function to handle booking
   async function handleSubmit(values) {
-    console.log("values::>", values);
     const data = {
       ...(props.serviceAt === "Home"
         ? {
@@ -84,18 +84,29 @@ function Booking(props) {
             homeService: true,
             serviceIds: serviceIds,
           }
-        : values),
+        : {
+            ...values,
+          }),
     };
-    console.log("data:::>", data);
+
     try {
       const res = await appointment(data);
-      console.log("resAppointment::>", res);
       router.push("salon/payment");
     } catch (error) {
       Notify.error(error.message);
-      console.log("error::>", error);
     }
   }
+
+  useEffect(() => {
+    // Calculate end time whenever start time or duration changes
+    if (initialValues.startTime && initialValues.duration) {
+      const durationInMinutes = initialValues.duration / 60; // Convert duration from seconds to minutes
+      const end = moment(initialValues.startTime, "HH:mm")
+        .add(durationInMinutes, "minutes")
+        .format("hh:mm A");
+      setEndTime(end);
+    }
+  }, [initialValues.startTime, initialValues.duration]);
 
   return (
     <div className={styles.container}>
@@ -105,7 +116,7 @@ function Booking(props) {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, values, setFieldValue }) => (
             <Form>
               <div className={styles.counter}>
                 <div className={styles.countSection}>
@@ -158,7 +169,7 @@ function Booking(props) {
               <div className={styles.bookingDate}>
                 <h3>Booking date</h3>
                 <div className={styles.dateContainer}>
-                  <Field type="date" name="date" min={today} />{" "}
+                  <Field type="date" name="date" min={today} />
                   <ErrorMessage name="date" component="div" className="error" />
                 </div>
               </div>
@@ -166,8 +177,18 @@ function Booking(props) {
               <div className={styles.dateContainer}>
                 <h3>Select time slot</h3>
                 <div className={styles.timeslot}>
-                  <Field type="text" name="startTime" />
-                  {/* Add your time slot selection UI here */}
+                  <Field
+                    type="text"
+                    name="startTime"
+                    onChange={(e) => {
+                      setFieldValue("startTime", e.target.value);
+                      const durationInMinutes = values.duration / 60; // Convert duration from seconds to minutes
+                      const end = moment(e.target.value, "HH:mm")
+                        .add(durationInMinutes, "minutes")
+                        .format("hh:mm A");
+                      setEndTime(end);
+                    }}
+                  />
                 </div>
                 <ErrorMessage
                   name="startTime"
@@ -175,16 +196,35 @@ function Booking(props) {
                   className="error"
                 />
               </div>
+
+              <div className={styles.dateContainer}>
+                <h3>End Time</h3>
+                <div className={styles.timeslot}>
+                  <Field type="text" name="endTime" value={endTime} readOnly />
+                </div>
+              </div>
+
               <div className={styles.dateContainer}>
                 <h3>Duration</h3>
                 <div className={styles.timeslot}>
-                  <Field type="number" name="duration" />
+                  <Field
+                    type="number"
+                    name="duration"
+                    onChange={(e) => {
+                      setFieldValue("duration", e.target.value);
+                      const durationInMinutes = e.target.value / 60; // Convert duration from seconds to minutes
+                      const end = moment(values.startTime, "HH:mm")
+                        .add(durationInMinutes, "minutes")
+                        .format("hh:mm A");
+                      setEndTime(end);
+                    }}
+                  />
+                  <span>(sec)</span>
                   <ErrorMessage
                     name="duration"
                     component="div"
                     className="error"
                   />
-                  {/* Add your time slot selection UI here */}
                 </div>
               </div>
 
@@ -220,6 +260,7 @@ function Booking(props) {
                           name="addressId"
                           value={`${selectedAddress?.id} ${selectedAddress?.houseNo} ${selectedAddress?.streetAddress}, ${selectedAddress?.city}, ${selectedAddress?.state}, ${selectedAddress?.pincode}`}
                           placeholder="Address"
+                          readOnly
                         />
                         <ErrorMessage
                           name="addressId"
@@ -231,6 +272,7 @@ function Booking(props) {
                   )}
                   {selectedAddress === null && (
                     <button
+                      type="button"
                       onClick={handleShowAddress}
                       className={styles.addressBtn}
                     >
@@ -252,6 +294,7 @@ function Booking(props) {
         onHide={() => setShowAddress(false)}
         onSelectAddress={handleAddressSelection}
       />
+
     </div>
   );
 }
