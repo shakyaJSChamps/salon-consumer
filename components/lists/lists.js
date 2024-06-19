@@ -353,6 +353,7 @@ const Lists = (props) => {
   } = props;
 
   const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
+  console.log("service ,,",selectedServiceTypes)
   const [facilities, setFacilities] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState({});
   const listRef = useRef(null);
