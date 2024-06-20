@@ -25,7 +25,7 @@ function SalonService({ id ,homeService}) {
   const profile = Session.get('profile')
   console.log("profile",profile)
 
-  console.log("profile",profile.name)
+ // console.log("profile",profile.name)
   console.log("token",token)
   console.log("selectedServicesDetails",selectedServicesDetails);
   const router = useRouter();
