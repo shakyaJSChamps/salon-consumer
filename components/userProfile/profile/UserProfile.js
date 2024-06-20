@@ -242,14 +242,16 @@ import { AiOutlineEdit } from "react-icons/ai";
 import PhoneInputComponent from "@/components/loginPage/PhoneInputComponent";
 import { userProfileSchema } from "@/utils/schema";
 import Images from "@/app/image";
-
+import { useRouter } from 'next/navigation';
+import Link from "next/link";
 function UserProfile() {
   const [userInfo, setUserInfo] = useState(null);
   const [editModes, setEditModes] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
+  const router = useRouter();
   console.log("userInfo::>", userInfo);
-
+ // console.log("id salon",id)
   const fetchUserDetails = async () => {
     try {
       const userDetails = await getUserProfile();
@@ -317,8 +319,19 @@ function UserProfile() {
       console.log("UpdateUserProfile::>", res);
 
       setEditModes(false);
+
       fetchUserDetails();
-      
+      const isProfileIncomplete = !values?.name || !values?.email;
+      if (!isProfileIncomplete) {
+        //router.push('/notifications');
+        const id = Session.get('selectedSalonId')
+
+        router.push(`/salonlist/${id}`);
+
+      } else {
+        router.push('/');
+  
+      }
     } catch (error) {
       console.log("error", error);
       Notify.error(error.message);
@@ -467,7 +480,9 @@ function UserProfile() {
                   />
                 </div>
               </div>
-
+              {/* <Link href={`/salonlist/${salon.id}`}>
+                  View Details
+                </Link> */}
               {editModes && (
                 <button className={styles.saves} type="submit">
                   Save
