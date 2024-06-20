@@ -33,7 +33,10 @@
     font-size: 13px;
     font-weight: 500;
 }
-
+.timeslot span{
+    margin-left: -185px;
+    margin-top: 6px;
+}
 .count {
     display: flex;
     align-items: center;

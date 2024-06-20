@@ -11,14 +11,22 @@ import { getSalonService } from '@/api/account.api';
 import Notify from '@/utils/notify'
 import { useDispatch } from 'react-redux';
 import { storeSelectedSalonId, storeSelectedService } from '@/app/Redux/selectedServiceSlice';
+import Session from '@/service/session';
 
-function SalonService({ id }) {
+function SalonService({ id ,homeService}) {
+  console.log('home service',homeService)
   const [activeCategory, setActiveCategory] = useState(''); // Set default active category
   const [activeServiceIndexes, setActiveServiceIndexes] = useState([]); // Indexes of the selected services
   const [serviceData, setServiceData] = useState([]);
   const [selectedCategoryServices, setSelectedCategoryServices] = useState([]);
   const [selectedServicesDetails, setSelectedServicesDetails] = useState([]);
   const [bookingLocation, setBookingLocation] = useState('');
+  const token = Session.get('authToken');
+  const profile = Session.get('profile')
+  console.log("profile",profile)
+
+ // console.log("profile",profile.name)
+  console.log("token",token)
   console.log("selectedServicesDetails",selectedServicesDetails);
   const router = useRouter();
   const dispatch=useDispatch();
@@ -58,18 +66,43 @@ function SalonService({ id }) {
   };
 
   const handleSalonClick = () => {
-    if (selectedServicesDetails.length > 0) {
-      if (bookingLocation === 'Salon') {
-        router.push(`${id}/${bookingLocation}`);
-      } else 
-        if (bookingLocation === 'Home') {
-          router.push(`${id}/${bookingLocation}`);
-        }
-      
-    } else {
-      Notify.error("Please select a service");
+    if (!token) {
+      router.push('/login'); // Redirect to login if token is null
+      return;
     }
-  };
+    const isProfileIncomplete = profile.name ==='' && profile.email === '';
+   console.log("is pro",isProfileIncomplete)
+   console.log("profile id",profile.userId)
+
+    if (isProfileIncomplete && profile.userId===undefined) {
+      router.push('/profile');
+
+    }
+ else {
+  router.push(`${id}/${bookingLocation}`);
+
+  }
+
+  // Redirect to the appropriate booking location if profile is filled
+  // if (bookingLocation) {
+  //   router.push(`${id}/${bookingLocation}`);
+  // } else {
+  //   Notify.error("Please select a booking location (Salon or Home)");
+  // }
+};
+
+  //   if (selectedServicesDetails.length > 0) {
+  //     if (bookingLocation === 'Salon') {
+  //       router.push(`${id}/${bookingLocation}`);
+  //     } else 
+  //       if (bookingLocation === 'Home') {
+  //         router.push(`${id}/${bookingLocation}`);
+  //       }
+      
+  //   } else {
+  //     Notify.error("Please select a service");
+  //   }
+  // };
   const handleBookingLocationChange = (location) => {
     setBookingLocation(location);
     handleSalonClick();
@@ -127,7 +160,7 @@ function SalonService({ id }) {
                 <p>Professional {item.serviceName.toLowerCase()} service</p>
               </div>
               <div className={styles.image}>
-                <Image src={serviceImg} alt={item.serviceName} />
+                {/* <img src={serviceImg} alt={item.serviceName}  /> */}
                 <button 
                   className={`${styles.sellerBtn} ${activeServiceIndexes.includes(index) ? styles.selected : ''}`} 
                   onClick={() => handleAddButtonClick(item)}
@@ -147,12 +180,16 @@ function SalonService({ id }) {
         >
           Salon
         </button>
-        <button
-          onClick={() => handleBookingLocationChange('Home')}
-          className={bookingLocation === 'Home' ? styles.activeButton : ''}
-        >
-          Home
-        </button>
+        {homeService && (
+            <button
+              onClick={() => handleBookingLocationChange('Home')}
+              className={bookingLocation === 'Home' ? styles.activeButton : ''}
+            >
+              Home
+            </button>
+          )}
+          
+        
            
           
         </div>

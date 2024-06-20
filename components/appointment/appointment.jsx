@@ -11,6 +11,7 @@ import Ratings from '../rating&review/rating';
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
 import { deleteAppointment, getAppointment } from '@/api/account.api';
+import { MdOutlineFileDownload } from "react-icons/md";
 import Swal from 'sweetalert2';
 import Link from 'next/link';
 
@@ -87,14 +88,12 @@ const Appointments = () => {
             console.log("Error when getting appointments", error);
         }
     }
-
     useEffect(() => {
         fetchAppointments();
     }, []);
+  
 
-    useEffect(() => {
-        filterAppointments();
-    }, [statusFilter, typeFilter, selectedDate, appointments]);
+    
 
     const filterAppointments = () => {
         const filterByStatus = (appointment) => !statusFilter || appointment.status.toLowerCase() === statusFilter.toLowerCase();
@@ -114,7 +113,9 @@ const Appointments = () => {
         setFilteredPending(pendingFiltered);
         setFilteredPast(pastFiltered);
     }
-
+    useEffect(() => {
+        filterAppointments();
+    }, [statusFilter, typeFilter, selectedDate, appointments]);
     const handleDelete = (appointment) => {
         Swal.fire({
             title: "Are you sure?",
@@ -157,9 +158,9 @@ const Appointments = () => {
                     )}
                     {(scheduleShowVisible || menuVisible) && (
                         <div className={styles.userInputs} >
-                            <div className={styles.userInput}>
+                            {/* <div className={styles.userInput}>
                                 <input type="text" placeholder='Search' className={styles.searchIcon} /><SearchIcon />
-                            </div>
+                            </div> */}
                             <div className={styles.userInput}>
                                 <p>Status</p>
                                 <select className={styles.selects} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
@@ -210,9 +211,11 @@ const Appointments = () => {
                     </div>
 
                     <h4 className={styles.title}>Past</h4>
+                    <div>
                     <div className={styles.pastScheduleContainer}>
                         {filteredPast.map((data, index) => (
-                            <div className={styles.pastSchedule} key={index}>
+                           <div key={index} className={styles.appointmentDiv}>
+                             <div className={styles.pastSchedule} key={index}>
                                 <div className={styles.images}>
                                     <Image src={data.salon.mainGateImageUrl} alt="image" height={100} width={100} />
                                 </div>
@@ -226,13 +229,27 @@ const Appointments = () => {
                                         {data.status}
                                     </p>
                                 </div>
+                                
                                 <div className={styles.buttonsPast}>
                                     <Link href={`appointment/${data.id}`}><button>View Details</button></Link>
                                     {data.status === "COMPLETED" && <button onClick={() => handelRatingShow(data)} className={styles.rating}>Rate & Review</button>}
                                 </div>
+                            
+                                {data.status === "COMPLETED" && (
+                                <div className={styles.downloadInvoice}>
+                                    <div className={styles.load}><MdOutlineFileDownload /></div>
+                                    <p>Download Invoice</p>
+                                </div>
+                            )}
                             </div>
+                           
+                           
+                           </div>
                         ))}
+                        </div>
+                        
                     </div>
+                    
                 </div>
             )}
 

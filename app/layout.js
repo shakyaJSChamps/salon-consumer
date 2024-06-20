@@ -5,6 +5,8 @@ import "./globals.css";
 import { Providers } from "./Redux/providers";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,11 +22,17 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Navbar />
-          {children}
+        <Navbar />
+        <div className="contentWrapper">
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
+          </div>
+
           <Footer />
         </Providers>
       </body>
     </html>
   );
 }
+

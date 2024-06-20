@@ -28,3 +28,11 @@ export const ratingValidationSchema = yup.object({
   review: yup.string().required('Review is required'),
 });
  
+export const userProfileSchema = yup.object({
+  name: yup.string()
+  .matches(/^[A-Za-z ]*$/, 'Name can only contain letters')
+  .required('Name is required'),  
+  email: yup.string().required('Email is required'),
+  address: yup.string().required('Address is required'),
+
+});

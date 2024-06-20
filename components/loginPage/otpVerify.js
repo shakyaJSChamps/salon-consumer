@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { verifyUser } from '@/api/account.api';
 import { loginUser } from '@/app/Redux/Authslice';
-
+import { useState } from 'react';
+import { setCookie } from 'nookies';
 const initialValues = {
     otp: "",
 };
@@ -14,9 +15,11 @@ const initialValues = {
 function OtpVerify({ phoneNumber }) {
     const dispatch = useDispatch();
     const router = useRouter();
+    const [submitting, setSubmitting] = useState(false);
 
     const onSubmit = async (values) => {
         try {
+            setSubmitting(true);
             const { otp } = values;
             console.log("phoneNumber", phoneNumber);
             const verifyData = {
@@ -27,6 +30,10 @@ function OtpVerify({ phoneNumber }) {
             const response = await verifyUser(verifyData);
             console.log("response----", response);
             const authToken = response.data.data.authToken;
+            setCookie(null, 'token', authToken, {
+                maxAge: 30 * 24 * 60 * 60,
+                path: '/',
+              });
             const userInfo = {
                 profile: response.data.data.profile,
                 role: response.data.data.role,
@@ -35,6 +42,8 @@ function OtpVerify({ phoneNumber }) {
             router.push('/');
         } catch (error) {
             console.log(error);
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -84,14 +93,7 @@ function OtpVerify({ phoneNumber }) {
                                         e.preventDefault();
                                     }
                                 }}
-                                style={{
-                                    width: "5vw",
-                                    height: "7vh",
-                                    border: "none",
-                                    backgroundColor: "transparent",
-                                    outline: "none",
-                                    fontSize: "25px"
-                                }}
+                                className={styles.otpBox}
                             />
                         )}
                     />
@@ -102,8 +104,8 @@ function OtpVerify({ phoneNumber }) {
                         className={styles.error}
                     />
                     <p className={styles.resend}>Resend Otp</p>
-                    <button type="submit" className={styles.btn}>
-                        Next
+                    <button type="submit" className={styles.btn} disabled={submitting}>
+                       {submitting?'Submitting...':'Next'}
                     </button>
                 </Form>
             )}

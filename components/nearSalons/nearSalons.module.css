@@ -36,7 +36,7 @@
 }
 
 .salons {
-    height: 343px;
+    height: 440px;
     overflow-y: scroll;
 }
 
@@ -56,16 +56,18 @@
     height: 6vh;
 }
 
-.image {
+/* .image {
     width: 50%;
     height: auto
-}
+} */
 
 .paper {
     display: flex;
     width: fit-content;
     gap: 20px;
+    width: 540px;
 }
+
 
 .details {
     width: 50%;
@@ -113,7 +115,7 @@
 }
 
 .locIcon {
-    font-size: 12px;
+    font-size: 25px;
     align-items: center;
 }
 
@@ -195,13 +197,16 @@
 
     .paper {
         gap: 13px;
+        overflow: scroll;
     }
 
-    /* .image img {
+    .image img {
         width: 166px;
         height: 123px;
-    } */
-
+    } 
+   .btn{
+    width: 180px;
+   }
     .details h2 {
         font-size: 18px;
     }
@@ -229,14 +234,21 @@
     }
 
      .image img {
-        width: 100%;
-        height: auto;
+        width: 340px;
+        height: 200px;
     } 
+    .paper{
+        width: 730px;
+    }
 }
 
 @media screen and (max-width:768px) {
     .container {
         padding: 35px 64px;
+    }
+    .image img {
+        width: 270px;
+        height: 200px;
     }
 }
 
@@ -265,16 +277,21 @@
 
     .paper {
         gap: 14px;
+        width: 500px;
     }
 
     .salons {
         height: 212px;
     }
 
-    /* .image img {
-        width: 175px;
-        height: 130px;
-    } */
+    .image img{
+        width: 200px;
+        height: 150px;
+    }
+    .paper{
+        width: 400px;
+        overflow: visible;
+    }
 
     .details h2 {
         font-size: 18px;

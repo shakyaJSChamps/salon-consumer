@@ -5,6 +5,7 @@ import specialist from '@/assets/images/specialist.svg'
 import StarsIcon from '@mui/icons-material/Stars';
 import { getSalonReviews, getSalonStaff } from '@/api/account.api';
 import { useEffect, useState } from 'react';
+import Images from '@/app/image';
 
 
 function AboutSalon({ id }) {
@@ -42,12 +43,7 @@ function AboutSalon({ id }) {
     return (
         <div className={styles.container}>
             <div className={styles.aboutContent}>
-                <div className={styles.title}>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt <br />
-                        ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br />
-                        incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do<br />
-                        eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur</p>
-                </div>
+               
                 <div className={styles.specialistContainer}>
                     <div className={styles.heading}>
                         Our Specialist
@@ -58,8 +54,9 @@ function AboutSalon({ id }) {
                                 staff.map((specialist, index) => (
                                     <div className={styles.specialistDetails} key={index}>
                                         <div className={styles.image}>
-                                            <Image src={specialist.profileImageUrl
+                                            <Images  imageUrl={specialist.profileImageUrl
                                             } alt={specialist.firstName} width={100} height={100} />
+                                            {/* <Image src={specialist.profileImageUrl} width={100} height={100} alt ='profile'/> */}
                                         </div>
                                         <div className={styles.content}>
                                             <h3>{specialist.
@@ -74,7 +71,7 @@ function AboutSalon({ id }) {
                                     </div>
                                 ))
                             ) : (
-                                <p>No staff data available</p>
+                                <p className={styles.noStaff}>No staff data available</p>
                             )}
                         </div>
                     </div>

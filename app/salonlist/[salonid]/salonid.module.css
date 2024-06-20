@@ -13,7 +13,16 @@
     padding-top: 25px;
 
 }
-
+.mainDiv{
+    display: flex;
+    gap: 20px;
+}
+.main{
+    padding-left: 100px;
+    margin-top: -17px;
+    display: flex;
+  
+}
 .sliderTitle h3 {
     font-size: 38px;
     font-weight: bold;

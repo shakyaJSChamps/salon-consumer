@@ -1,8 +1,7 @@
 .container {
     margin-top: 10px;
     padding: 50px 110px;
-    position:relative;
-
+    position: relative;
 }
 
 .profile {
@@ -10,10 +9,13 @@
     justify-content: center;
     gap: 25px;
 }
-.userImageDiv{
+
+.userImageDiv {
+    position: relative;
+    width: 100px;
+    height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .profile h4 {
@@ -22,7 +24,6 @@
 
 .profileInfo {
     width: 560px;
-
 }
 
 .profileMenu {
@@ -33,6 +34,7 @@
     border-radius: 1px;
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
     gap: 25px;
     text-align: center;
     border-radius: 5px;
@@ -45,9 +47,26 @@
 }
 
 .profileDetails img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 50%;
+}
+
+.editImageIcon {
+    position: absolute;
+    bottom: 0px;
+    right: 1px;
+    background: white;
+    border: 1px solid grey;
+    color: black;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.editImageInput {
+    display: none;
 }
 
 .details {
@@ -63,7 +82,6 @@
     cursor: pointer;
     font-weight: 500;
 }
-
 
 .form input {
     color: #858585;
@@ -90,7 +108,6 @@
 
 .select {
     padding: 9px 15px;
-
 }
 
 .name {
@@ -108,7 +125,6 @@
     display: flex;
     flex-direction: column;
     width: 23%;
-
 }
 
 .humburger,
@@ -123,8 +139,11 @@
     outline: none;
     border: 1px solid #858585;
 }
-
- .saves {
+.iconWithMenu {
+    position: relative;
+    display: inline-block;
+}
+.saves {
     background-color: black;
     cursor: pointer;
     color: white;
@@ -142,12 +161,8 @@
     background-color: black;
     cursor: pointer;
     color: white;
-    background-color: black;
-    cursor: pointer;
-    color: white;
     padding: 4px 20px;
     border-radius: 3px;
-
 }
 
 .address {
@@ -164,7 +179,6 @@
     flex-direction: column;
     gap: 12px;
 }
-
 
 .editsGender {
     position: absolute;
@@ -186,7 +200,6 @@
     padding: 10px 5px !important;
 }
 
-
 .profileInfo {
     color: #1C1C1C !important;
 }
@@ -202,7 +215,6 @@
     color: #717171;
     text-align: justify !important;
     padding-left: 37px;
-
 }
 
 .menuItemAccount {
@@ -211,7 +223,6 @@
     gap: 13px;
     color: #717171;
     text-align: center;
-
 }
 
 .menuItem p {
@@ -223,7 +234,6 @@
 }
 
 .profileBtn {
-
     padding: 18px 15px;
     cursor: pointer;
     color: #717171;
@@ -234,20 +244,17 @@
 }
 
 .activeLink {
-
     background-color: black;
     color: white !important;
     padding: 18px 15px;
     cursor: pointer;
     font-size: 14px;
     border: none !important;
-
 }
 
 .lastBtn .profileBtn {
     padding: unset !important;
 }
-
 
 .lastBtn .activeLink {
     width: 250px;
@@ -293,19 +300,22 @@
     padding: 18px 0px;
 }
 
+.imageRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .manageAddress {
     width: 560px;
     border-radius: 1px;
     position: relative;
-
 }
-
 
 .manageDetails {
     border: 1px solid #B4B4B4;
     padding: 12px 44px 62px 29px;
     border-radius: 5px;
-
 }
 
 .manageDetails button {
@@ -326,7 +336,6 @@
     padding: 5px 19px;
     margin-top: 10px;
     position: relative;
-
 }
 
 .addressDetails p {
@@ -362,12 +371,9 @@
     color: #7D7D7D !important;
 }
 
-
 .accountSetting {
     display: none;
 }
-
-
 
 .manageDetails button {
     font-size: 0.675em;
@@ -377,8 +383,9 @@
 .faq {
     padding: 10px;
 }
+
 /* AddressMenu */
-.AddressMenu{
+.AddressMenu {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -388,19 +395,28 @@
     position: absolute;
     right: 20rem;
     top: 14rem;
-    background-color:white;
+    background-color: white;
     border: 1px solid grey;
     border-radius: 5px;
 }
-.AddressMenu button{
+
+.AddressMenu button {
     border: none;
     background-color: transparent;
+}
+.gender{
+    border: 1px solid grey;
+   
 }
 @media screen and (max-width:1400px) {}
 
 @media screen and (max-width:576px) {}
 
-@media screen and (max-width:1200px) {}
+@media screen and (max-width:1200px) {
+    .AddressMenu{
+        margin-right: -110px;
+    }
+}
 
 @media screen and (max-width:992px) {}
 
@@ -408,10 +424,11 @@
     .container {
         margin-top: 10px;
         padding: 50px 10px;
-
+    }
+    .AddressMenu{
+        margin-right: -195px;
     }
 }
-
 
 @media screen and (max-width:768px) {
     .infoNumber {
@@ -445,7 +462,6 @@
         font-size: 18px !important;
         top: -142px !important;
         left: 185px !important;
-
     }
 
     .container {
@@ -454,6 +470,7 @@
 
     .profileMenu {
         position: fixed;
+        margin-top: 0;
         top: 0;
         left: -300px;
         /* Initially off-screen */
@@ -475,7 +492,6 @@
         display: flex;
         /* flex-direction: column; */
         gap: 25px;
-
     }
 
     .menuItem {
@@ -497,18 +513,15 @@
     .account {
         display: none;
     }
-
-
 }
-
 
 @media screen and (max-width:576px) {
     .profileInfo {
         width: 470px;
-
-
     }
-
+    .AddressMenu{
+        margin-right: -291px;
+    }
     .manageDetails {
         padding: 14px 34px 55px 19px;
     }
@@ -529,77 +542,18 @@
     }
 
     .profileMenu {
-
         padding: 50px 0px;
-
     }
 
     .humburgerCross {
         top: -129px !important;
         left: 172px !important;
     }
-
 }
-
-/* 
-@media screen and (max-width:555px) {
-    .profile {
-        flex-direction: column;
-    }
-
-    .profileInfo {
-        margin: auto;
-
-
-    }
-
-    .infoNumber {
-        width: 38%;
-    }
-
-    .manageAddress {
-        width: 475px;
-        margin: auto;
-    }
-
-    .manageDetails {
-        padding: 14px 20px 55px 19px;
-    }
-
-    .lastBtn .activeLink {
-        margin-left: -5px;
-    }
-
-
-
-} */
-/* 
-@media screen and (max-width:475px) {
-    .manageAddress {
-        width: 400px;
-        margin: auto;
-    }
-
-    .wishLists {
-        width: 400px;
-        margin: auto;
-    }
-
-    .accountSetting {
-        display: block;
-        position: absolute;
-        left: 57px;
-        top: 5px;
-        font-size: 18px;
-        text-align: center;
-    }
-}*/
 
 @media screen and (max-width:450px) {
     .profileInfo {
         width: 424px;
-
-
     }
 
     .details {
@@ -632,7 +586,6 @@
     .otherDetails .saves {
         right: 0px;
         left: unset !important;
-
     }
 
     .details .saves {
@@ -655,44 +608,9 @@
     }
 
     .profileMenu {
-
         width: 214px !important;
     }
-
 }
-
-/* @media screen and (max-width:380px) {
-
-    .manageAddress {
-        width: 355px;
-        margin: auto;
-    }
-
-    .profileInfo {
-        width: 355px;
-        margin: auto;
-    }
-
-    .profileDetails {
-        padding: 12px 25px 62px 20px;
-    }
-
-    .wishLists {
-        width: 300px;
-        margin: auto;
-    }
-
-    .details .edits {
-        position: absolute !important;
-        right: 1px !important;
-    }
-
-    .humburgerCross {
-        font-size: 30px;
-        top: -130px !important;
-
-    }
-} */
 
 @media screen and (max-width:350px) {
     .manageAddress {
@@ -718,7 +636,6 @@
     .container {
         margin-top: 10px;
         padding: 30px 10px;
-
     }
 
     .wishLists {

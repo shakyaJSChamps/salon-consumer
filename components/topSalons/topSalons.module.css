@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     gap: 37px;
+  
 
 }
 
@@ -29,13 +30,17 @@
 
 }
 
-.linkDiv a {
+.linkDiv a{
     display: flex;
     color: black;
     font-size: 13px;
     font-weight: 500;
+    color: white;
+    text-decoration: none;
 }
-
+.link a{
+    color: white;
+}
 .arrow {
     font-size: 20px;
 }
@@ -89,7 +94,7 @@
 }
 
 .locIcon {
-    font-size: 12px;
+    font-size: 25px;
     align-items: center;
 }
 
@@ -121,7 +126,9 @@
     padding: 5px 8px;
     /* width: fit-content; */
 }
-
+.btn a{
+    color: white;
+}
 @media screen and (max-width:1280px) {
     .container {
         gap: 15px;

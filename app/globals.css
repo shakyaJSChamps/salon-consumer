@@ -14,6 +14,7 @@ body {
   max-height: 100vh;
   overflow-x: hidden;
 }
+
 .navbar_featuredlink__rJ2VK span{
   color: white !important;
 }
@@ -50,4 +51,7 @@ a {
 }
 .footer_mainDiv__64VnC{
 width: 100%;
+}
+.error{
+  color: red;
 }
