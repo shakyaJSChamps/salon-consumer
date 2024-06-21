@@ -94,6 +94,7 @@ function Booking(props) {
       router.push("salon/payment");
     } catch (error) {
       Notify.error(error.message);
+      console.log('err msg',error.message)
     }
   }
 
