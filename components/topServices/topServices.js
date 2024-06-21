@@ -1,14 +1,23 @@
-'use client'
+"use client";
 import { Paper } from "@mui/material";
 import styles from "./topServices.module.css";
 import Image from "next/image";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { signatureServices } from "@/api/account.api";
+import { serviceDetails, signatureServices } from "@/api/account.api";
+import { useRouter } from "next/navigation";
+import Session from "@/service/session";
+import { setSalonService } from "@/app/Redux/Authslice";
+import { useDispatch } from "react-redux";
 
 function TopServices() {
   const [services, setServices] = useState([]);
+  const [serviceDetail, setServiceDetail] = useState([]);
+  console.log("vv", serviceDetail);
+  const dispatch = useDispatch();
+
+  const router = useRouter();
 
   useEffect(() => {
     const getServices = async () => {
@@ -22,12 +31,25 @@ function TopServices() {
     getServices();
   }, []);
 
+  const handleClick = async (id) => {
+    try {
+      const res = await serviceDetails(id);
+      const detailedService = res?.data?.data || null;
+      dispatch(setSalonService(detailedService));
+      Session.remove("filteredSalon");
+      Session.remove("salonList");
+      router.push("/salonlist");
+    } catch (error) {
+      console.log("error===>", error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>
         <div className={styles.heading}>Signature Services</div>
         <div className={styles.linkDiv}>
-          <Link href='/services' className={styles.link}>
+          <Link href="/services" className={styles.link}>
             View all services
             <ArrowForwardIcon className={styles.arrow} />
           </Link>
@@ -35,7 +57,12 @@ function TopServices() {
       </div>
       <div className={styles.content}>
         {services.map((service) => (
-          <Paper key={service.id} elevation={3} className={styles.paper}>
+          <Paper
+            key={service.id}
+            elevation={3}
+            className={styles.paper}
+            onClick={() => handleClick(service.id)}
+          >
             <div className={styles.type}>{service.name}</div>
             <div className={styles.image}>
               <Image

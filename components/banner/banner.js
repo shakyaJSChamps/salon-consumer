@@ -26,11 +26,13 @@ function Banner() {
     const NextArrow = (props) => {
         const { className, onClick } = props;
         return (
-            <GrNext
-                className={className}
-                onClick={onClick}
-                style={{ position: "absolute", top: "40%", zIndex: 1, cursor: "pointer", color: "white" }}
-            />
+            // <GrNext
+            //     className={className}
+            //     onClick={onClick}
+            //     style={{ position: "absolute", top: "40%", zIndex: 1, cursor: "pointer", color: "white" }}
+            // />
+            <>
+            </>
         );
     };
 
@@ -91,14 +93,14 @@ function Banner() {
                 <Slider {...settings} ref={sliderRef}>
                     {banner.map((slide, index) => (
                         <div key={index}>
-                            <h1 dangerouslySetInnerHTML={{ __html: slide.name }} />
+                            {/* <h1 dangerouslySetInnerHTML={{ __html: slide.name }} />
                             <p>{slide.city}</p>
-                            <button><Link href={slide.redirectLink}>Discover</Link></button>
+                            <button><Link href={slide.redirectLink}>Discover</Link></button> */}
 
                         </div>
                     ))}
                 </Slider>
-                <div className={styles.sliderDetails}>
+                {/* <div className={styles.sliderDetails}>
                     <div className={styles.sliderDots}>
                         {banner.map((_, dotIndex) => (
                             <span
@@ -108,7 +110,7 @@ function Banner() {
                             />
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
