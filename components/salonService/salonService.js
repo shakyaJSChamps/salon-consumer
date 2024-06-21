@@ -7,11 +7,12 @@ import StarsIcon from '@mui/icons-material/Stars';
 import serviceImg from '@/assets/images/haircutService.svg'
 import Divider from '@mui/material/Divider';
 import { useRouter } from 'next/navigation'; // Changed from 'next/navigation'
-import { getSalonService } from '@/api/account.api';
+import { getSalonService, getUserProfile } from '@/api/account.api';
 import Notify from '@/utils/notify'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { storeSelectedSalonId, storeSelectedService } from '@/app/Redux/selectedServiceSlice';
 import Session from '@/service/session';
+import { selectUser } from '@/app/Redux/Authslice';
 
 function SalonService({ id ,homeService}) {
   console.log('home service',homeService)
@@ -21,11 +22,16 @@ function SalonService({ id ,homeService}) {
   const [selectedCategoryServices, setSelectedCategoryServices] = useState([]);
   const [selectedServicesDetails, setSelectedServicesDetails] = useState([]);
   const [bookingLocation, setBookingLocation] = useState('');
+  const [userInfo, setUserInfo] = useState(null);
   const token = Session.get('authToken');
-  const profile = Session.get('profile')
-  console.log("profile",profile)
+ // const profile = Session.get('profile')
+ const profile = useSelector(selectUser);
+   console.log("profile",profile)
+   console.log("user info",userInfo)
+   //console.log("user info",userInfo.name)
+   console.log("user info",userInfo?.userId)
 
- // console.log("profile",profile.name)
+  console.log("profile",profile?.name)
   console.log("token",token)
   console.log("selectedServicesDetails",selectedServicesDetails);
   const router = useRouter();
@@ -64,49 +70,51 @@ function SalonService({ id ,homeService}) {
     const selectedCategory = serviceData.find(category => category.name === serviceName);
     setSelectedCategoryServices(selectedCategory.services);
   };
+  const fetchUserDetails = async () => {
+    try {
+      const userDetails = await getUserProfile();
+      setUserInfo(userDetails?.data?.data);
+      console.log("user details",userDetails)
+    } catch (error) {
+      Notify.error(error.message);
+      console.log("errorUser:::>", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
   const handleSalonClick = () => {
     if (!token) {
       router.push('/login'); // Redirect to login if token is null
       return;
     }
-    const isProfileIncomplete = profile.name ==='' && profile.email === '';
-   console.log("is pro",isProfileIncomplete)
-   console.log("profile id",profile.userId)
-
-    if (isProfileIncomplete && profile.userId===undefined) {
-      router.push('/profile');
-
+    if (!profile) {
+      // If profile is not yet available, wait and check again
+      return;
     }
- else {
-  router.push(`${id}/${bookingLocation}`);
 
-  }
+    const isProfileIncomplete = userInfo?.name ==='' && userInfo?.email ==='';
+    
+    console.log("is pro", isProfileIncomplete);
+    console.log("profile id", profile.userId);
 
-  // Redirect to the appropriate booking location if profile is filled
-  // if (bookingLocation) {
-  //   router.push(`${id}/${bookingLocation}`);
-  // } else {
-  //   Notify.error("Please select a booking location (Salon or Home)");
-  // }
-};
+    if (isProfileIncomplete) {
+      router.push('/profile');
+    } else {
+      router.push(`${id}/${bookingLocation}`);
+    }
+  };
 
-  //   if (selectedServicesDetails.length > 0) {
-  //     if (bookingLocation === 'Salon') {
-  //       router.push(`${id}/${bookingLocation}`);
-  //     } else 
-  //       if (bookingLocation === 'Home') {
-  //         router.push(`${id}/${bookingLocation}`);
-  //       }
-      
-  //   } else {
-  //     Notify.error("Please select a service");
-  //   }
-  // };
   const handleBookingLocationChange = (location) => {
     setBookingLocation(location);
     handleSalonClick();
+
   };
+
+  useEffect(() => {
+    // Check profile completeness every time profile or bookingLocation changes
+  }, [profile, bookingLocation]);
 
   const handleAddButtonClick = (serviceDetails) => {
     const selectedIndex = selectedServicesDetails.findIndex(service => service === serviceDetails);
