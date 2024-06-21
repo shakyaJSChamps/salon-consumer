@@ -5,7 +5,7 @@ import { OtpVerifySchema } from "@/utils/schema";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { verifyUser } from "@/api/account.api";
-import { loginUser } from "@/app/Redux/authSlice";
+import { loginUser } from "@/app/Redux/AuthSlice";
 import { useState } from "react";
 import { setCookie } from "nookies";
 
