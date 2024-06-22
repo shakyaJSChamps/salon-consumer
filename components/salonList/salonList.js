@@ -10,23 +10,35 @@ import Session from '@/service/session';
 
 const SalonList = () => {
   const [lists, setLists] = useState([]);
+  const [allSalon, setAllSalon] = useState([]);
+  console.log("allss",allSalon)
+
   console.log("Listed",lists)
   const [page, setPage] = useState(1); // Starting from 2 because initial data is already loaded
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
   
   // Memoize filteredSalon to prevent unnecessary recalculations
   const filteredSalon = useMemo(() => Session.getObject('filteredSalon'), []);
-
+  const salonService = useMemo(() => Session.getObject('salonService'), []);
+ console.log("salon service",salonService)
   useEffect(() => {
 
-    if (!filteredSalon) {
-      fetchSalonLists();
+    if (salonService) {
+      setLists(salonService || []);
+      console.log("salonlist")
+    } else if(filteredSalon){
+      setLists(filteredSalon.items || [])
+      console.log("salonSService")
+
     } else {
-      setLists(filteredSalon.items || []);
+      setLists(allSalon);
+      console.log("filteredsalon")
+
     }
-  }, [filteredSalon,lists]); 
+  }, [filteredSalon,salonService,allSalon]); 
+  
 
   const fetchSalonLists = async () => {
     if (isLoading || !hasMoreData) return;
@@ -39,7 +51,11 @@ const SalonList = () => {
       if (responseData.length > 0) {
         const filteredData = responseData.filter(item => !lists.some(existingItem => existingItem.id === item.id));
         setPage(page + 1);
-        setLists(prevLists => [...prevLists, ...filteredData]);
+        const updatedLists = [...lists, ...filteredData];
+        setAllSalon(updatedLists);
+        Session.setObject('salonList', { items: updatedLists });
+  
+        //setLists(prevLists => [...prevLists, ...filteredData]);
       } else {
         setHasMoreData(false);
       }
@@ -49,7 +65,9 @@ const SalonList = () => {
       setIsLoading(false);
     }
   };
-
+useEffect(()=>{
+  fetchSalonLists()
+},[])
   const loadMoreItems = () => {
     if (!isLoading && hasMoreData) {
       fetchSalonLists();

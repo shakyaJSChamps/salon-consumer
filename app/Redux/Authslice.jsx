@@ -14,6 +14,8 @@ const initialState = {
   state: "",
   country: "",
   filteredSalon: null,
+  salonList: Session.getObject("salonList") || [],
+  salonService: Session.getObject("salonService") || [],
 };
 
 export const authSlice = createSlice({
@@ -50,10 +52,29 @@ export const authSlice = createSlice({
       state.filteredSalon = action.payload;
       Session.setObject("filteredSalon", action.payload);
     },
+    setSalonList: (state, action) => {
+      console.log("salon list:", action.payload);
+
+      state.salonList = action.payload;
+      Session.setObject("salonList", action.payload);
+    },
+    setSalonService: (state, action) => {
+      console.log("salon service:", action.payload);
+      state.salonList = action.payload;
+      Session.setObject("salonService", action.payload);
+
+    },
   },
 });
 
-export const { loginUser, logoutUser, setUserLocation ,setFilteredSalon} = authSlice.actions;
+export const {
+  loginUser,
+  logoutUser,
+  setUserLocation,
+  setFilteredSalon,
+  setSalonList,
+  setSalonService
+} = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
@@ -61,5 +82,7 @@ export const selectCity = (state) => state.auth.city;
 export const selectState = (state) => state.auth.state;
 export const selectCountry = (state) => state.auth.country;
 export const selectFilteredSalon = (state) => state.auth.filteredSalon;
+export const selectSalonList = (state) => state.auth.salonList;
+export const selectSalonService = (state) => state.auth.salonService;
 
 export default authSlice.reducer;
