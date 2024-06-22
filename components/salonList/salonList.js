@@ -23,7 +23,7 @@ const SalonList = () => {
   const filteredSalon = useMemo(() => Session.getObject('filteredSalon'), []);
   const salonService = useMemo(() => Session.getObject('salonService'), []);
  console.log("salon service",salonService)
-  useEffect(() => {
+useEffect(() => {
 
     if (salonService) {
       setLists(salonService || []);

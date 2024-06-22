@@ -6,6 +6,8 @@ const initialUser = Session.getObject("profile") || null;
 const initialIsLoggedIn = Session.get("isLoggedIn") || false;
 const initialToken = Session.get("authToken") || null;
 const initialCity = Session.get("city") || "";
+const initialSalonList = Session.getObject("salonList") || [];
+const initialSalonService = Session.getObject("salonService") || null;
 const initialState = {
   user: initialUser,
   authToken: initialToken,
@@ -14,8 +16,9 @@ const initialState = {
   state: "",
   country: "",
   filteredSalon: null,
-  salonList: Session.getObject("salonList") || [],
-  salonService: Session.getObject("salonService") || [],
+  salonList: initialSalonList,
+salonService: initialSalonService,
+
 };
 
 export const authSlice = createSlice({
@@ -58,9 +61,9 @@ export const authSlice = createSlice({
       state.salonList = action.payload;
       Session.setObject("salonList", action.payload);
     },
-    setSalonService: (state, action) => {
+     setSalonService: (state, action) => {
       console.log("salon service:", action.payload);
-      state.salonList = action.payload;
+ state.salonService = action.payload;
       Session.setObject("salonService", action.payload);
 
     },
@@ -73,7 +76,7 @@ export const {
   setUserLocation,
   setFilteredSalon,
   setSalonList,
-  setSalonService
+setSalonService
 } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;

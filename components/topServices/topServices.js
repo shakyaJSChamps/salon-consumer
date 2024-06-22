@@ -8,14 +8,13 @@ import { useEffect, useState } from "react";
 import { serviceDetails, signatureServices } from "@/api/account.api";
 import { useRouter } from "next/navigation";
 import Session from "@/service/session";
-import { setSalonService } from "@/app/Redux/Authslice";
-import { useDispatch } from "react-redux";
 
 function TopServices() {
   const [services, setServices] = useState([]);
   const [serviceDetail, setServiceDetail] = useState([]);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
   console.log("vv", serviceDetail);
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const router = useRouter();
 
@@ -31,16 +30,26 @@ function TopServices() {
     getServices();
   }, []);
 
-  const handleClick = async (id) => {
+  const fetchDetails = async (id) => {
     try {
       const res = await serviceDetails(id);
-      const detailedService = res?.data?.data || null;
-      dispatch(setSalonService(detailedService));
+      const serviceData = res?.data?.data || [];
+      setServiceDetail(serviceData);
+      // dispatch(setSalonService(serviceData));
+      Session.setObject("salonService", serviceData);
+      console.log("dispatch", serviceData);
       Session.remove("filteredSalon");
       Session.remove("salonList");
       router.push("/salonlist");
     } catch (error) {
       console.log("error===>", error);
+    }
+  };
+
+  const handleServiceClick = (id) => {
+    setSelectedServiceId(id === selectedServiceId ? null : id); // Toggle selected service
+    if (id !== selectedServiceId) {
+      fetchDetails(id);
     }
   };
 
@@ -61,7 +70,7 @@ function TopServices() {
             key={service.id}
             elevation={3}
             className={styles.paper}
-            onClick={() => handleClick(service.id)}
+            onClick={() => handleServiceClick(service.id)}
           >
             <div className={styles.type}>{service.name}</div>
             <div className={styles.image}>
