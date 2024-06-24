@@ -8,6 +8,9 @@ const initialToken = Session.get("authToken") || null;
 const initialCity = Session.get("city") || "";
 const initialSalonList = Session.getObject("salonList") || [];
 const initialSalonService = Session.getObject("salonService") || null;
+const initialBannerCity = Session.getObject("selectedBannerCity") || null;
+const initialBannerSalons = Session.getObject("selectedBannerSalons") || [];
+
 const initialState = {
   user: initialUser,
   authToken: initialToken,
@@ -17,8 +20,9 @@ const initialState = {
   country: "",
   filteredSalon: null,
   salonList: initialSalonList,
-salonService: initialSalonService,
-
+  salonService: initialSalonService,
+  selectedBannerCity: initialBannerCity,
+  selectedBannerSalons: initialBannerSalons
 };
 
 export const authSlice = createSlice({
@@ -67,6 +71,13 @@ export const authSlice = createSlice({
       Session.setObject("salonService", action.payload);
 
     },
+
+    setSelectedBannerCity:(state,action) =>{
+      Session.set("selectedBannerCity",action.payload)
+    },
+    setSelectedBannerSalons:(state,action) =>{
+      Session.setObject("selectedBannerSalons",action.payload)
+    }
   },
 });
 
@@ -76,7 +87,9 @@ export const {
   setUserLocation,
   setFilteredSalon,
   setSalonList,
-setSalonService
+setSalonService,
+setSelectedBannerCity,
+setSelectedBannerSalons
 } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;

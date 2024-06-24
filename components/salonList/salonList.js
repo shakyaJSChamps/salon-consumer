@@ -22,7 +22,9 @@ const SalonList = () => {
   // Memoize filteredSalon to prevent unnecessary recalculations
   const filteredSalon = useMemo(() => Session.getObject('filteredSalon'), []);
   const salonService = useMemo(() => Session.getObject('salonService'), []);
- console.log("salon service",salonService)
+  const selectedBannerSalons = useMemo(() => Session.getObject('selectedBannerSalons'), []);
+ 
+ console.log("salon banner",selectedBannerSalons)
 useEffect(() => {
 
     if (salonService) {
@@ -32,7 +34,11 @@ useEffect(() => {
       setLists(filteredSalon.items || [])
       console.log("salonSService")
 
-    } else {
+    } 
+    else if(selectedBannerSalons){
+      setLists(selectedBannerSalons.items || [])
+      console.log("salonSService")
+     } else {
       setLists(allSalon);
       console.log("filteredsalon")
 

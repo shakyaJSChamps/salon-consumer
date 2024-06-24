@@ -236,6 +236,8 @@ import {
   UpdateUserProfile,
   fileUploaders,
   getUserProfile,
+  otpSend,
+  otpVerify,
 } from "@/api/account.api";
 import Notify from "@/utils/notify";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -244,11 +246,18 @@ import { userProfileSchema } from "@/utils/schema";
 import Images from "@/app/image";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import { FaCheckCircle } from 'react-icons/fa'; 
+import OTPInput from "react-otp-input";
+
 function UserProfile() {
   const [userInfo, setUserInfo] = useState(null);
   const [editModes, setEditModes] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
+  const [isOTPVerified, setIsOTPVerified] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
+
   const router = useRouter();
   console.log("userInfo::>", userInfo);
  // console.log("id salon",id)
@@ -358,6 +367,40 @@ function UserProfile() {
     }
   };
 
+
+  
+  const handleVerifyEmailClick = async (values) => {
+    try {
+      const verifyEmailData = {
+        email: values.email,
+      };
+      // console.log("verifyEmailData ::>", verifyEmailData);
+      const res = await otpSend(verifyEmailData);
+      // console.log("Email verification ::>", res);
+      setShowOTP(true);
+      Notify.success(res.message);
+    } catch (error) {
+      Notify.error(error.message);
+    }
+  };
+
+  const handleOTPVerification = async (otp, values) => {
+    try {
+      const verifyOtpData = {
+        email: values.email,
+        otp: otp,
+      };
+      const otpRes = await otpVerify(verifyOtpData);
+      Notify.success(otpRes.message);
+      setShowOTP(false);
+      setIsEmailVerified(true);
+      setIsOTPVerified(true);
+      setOtp("");
+    } catch (error) {
+      Notify.error(error.message);
+    }
+  };
+
   return (
     <div className={styles.profileDetails}>
       {userInfo && (
@@ -431,9 +474,46 @@ function UserProfile() {
                 <Field
                   type="text"
                   name="email"
+                  icon={isOTPVerified && <FaCheckCircle />} 
+                  iconClass="text-success"
+                  disable={isOTPVerified}
                   className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
                   disabled={!editModes}
                 />
+{/* 
+         {(values.email && !showOTP && !isEmailVerified)  && (
+                  <div className="">
+                    <button
+                      type="button"
+                      className={styles.verify__email_button}
+                      onClick={() => handleVerifyEmailClick(values)}
+                    >
+                      Verify Email
+                    </button>
+                  </div>
+                )}
+                {showOTP && (
+                  <>
+                    <label htmlFor="otp" className="fw-bold">
+                      OTP
+                    </label>
+                    <div className="otp-box d-flex justify-content-center">
+                      <OTPInput
+                        value={otp}
+                        onChange={(otpValue) => {
+                          setOtp(otpValue);
+                          if (otpValue.length === 4) {
+                            handleOTPVerification(otpValue, values, {});
+                          }
+                        }}
+                        numInputs={4}
+                        renderSeparator={<span></span>}
+                        renderInput={renderInput}
+                      />
+                    </div>
+                  </>
+                )} */}
+
                 <ErrorMessage name="email" component="div" className="invalid-feedback" />
               </div>
               <div className={styles.details}>
@@ -451,7 +531,7 @@ function UserProfile() {
                   <ErrorMessage name="gender" component="div" className="invalid-feedback" />
                 </div>
               </div>
-              <div className={styles.otherDetails}>
+              {/* <div className={styles.otherDetails}>
                 <label className={styles.label}>Address</label>
                 <Field
                   type="text"
@@ -460,7 +540,7 @@ function UserProfile() {
                   disabled={!editModes}
                 />
                 <ErrorMessage name="address" component="div" className="invalid-feedback" />
-              </div>
+              </div> */}
               <div className={styles.details}>
                 <div className={styles.infoNumber}>
                   <label className={styles.label}>Contact Number</label>

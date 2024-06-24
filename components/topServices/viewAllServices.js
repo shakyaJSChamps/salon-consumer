@@ -6,10 +6,11 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signatureServices } from "@/api/account.api";
+import { useRouter } from "next/navigation";
 
 function ViewAllServices() {
   const [services, setServices] = useState([]);
-
+  const router = useRouter();
   useEffect(() => {
     const getServices = async () => {
       try {
@@ -21,7 +22,9 @@ function ViewAllServices() {
     };
     getServices();
   }, []);
-
+const handleClick = ()=>{
+router.push('/salonlist');
+}
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>
@@ -33,7 +36,7 @@ function ViewAllServices() {
           </Link> */}
         </div>
       </div>
-      <div className={styles.content}>
+      <div className={styles.content} onClick={handleClick}>
         {services.map((service) => (
           <Paper key={service.id} elevation={3} className={styles.paper}>
             <div className={styles.type}>{service.name}</div>
