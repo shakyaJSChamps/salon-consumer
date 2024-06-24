@@ -49,3 +49,4 @@ export const __endpoint_searchText =  endpoint+"consumer/salons/search";
 
 //home page
 export const __endpoint_homePage =  endpoint+"consumer/salons/summary";
+export const __endpoint_serviceDetails =  endpoint+"consumer/services";

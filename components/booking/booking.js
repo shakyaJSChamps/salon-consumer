@@ -13,7 +13,7 @@ import Notify from "@/utils/notify";
 import moment from "moment";
 
 function Booking(props) {
-  const servicesDetails = Session.getObject("selectedService");
+  const servicesDetails = Session.getObject("selectedService") || [];
   const router = useRouter();
   const [showAddress, setShowAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -205,7 +205,7 @@ function Booking(props) {
                 </div>
               </div>
 
-              <div className={styles.dateContainer}>
+              {/* <div className={styles.dateContainer}>
                 <h3>Duration</h3>
                 <div className={styles.timeslot}>
                   <Field
@@ -227,7 +227,7 @@ function Booking(props) {
                     className="error"
                   />
                 </div>
-              </div>
+              </div> */}
 
               <div className={styles.address}>
                 <h3>Service Type</h3>
@@ -239,8 +239,8 @@ function Booking(props) {
                     placeholder="serviceType"
                   >
                     <option>Select serviceType</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </Field>
 
                   <ErrorMessage

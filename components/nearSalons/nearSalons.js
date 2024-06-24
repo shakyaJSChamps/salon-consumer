@@ -20,6 +20,8 @@ function NearSalons({ data }) {
  // const { nearBySalons } = data;
  const handleViewAllClick = () => {
   Session.remove('filteredSalon');
+  Session.remove('salonService');
+
 };
 
   return (
