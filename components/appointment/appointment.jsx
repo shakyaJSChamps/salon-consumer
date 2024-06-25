@@ -171,16 +171,7 @@ const Appointments = () => {
                                     <option value="rejected">Rejected</option>
                                 </select>
                             </div>
-                            <div className={styles.userInput}>
-                                <p>Type</p>
-                                <select className={styles.selects} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-                                    <option value="">All</option>
-                                    <option value="Haircut">Haircut</option>
-                                    <option value="Shave">Shave</option>
-                                    <option value="Coloring">Coloring</option>
-                                    {/* Add more types as needed */}
-                                </select>
-                            </div>
+                          
                             <div className={styles.userInput}>
                                 <p>Date</p>
                                 <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />

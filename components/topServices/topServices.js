@@ -40,6 +40,8 @@ function TopServices() {
       console.log("dispatch", serviceData);
       Session.remove("filteredSalon");
       Session.remove("salonList");
+      Session.remove('selectedBannerSalons');
+
       router.push("/salonlist");
     } catch (error) {
       console.log("error===>", error);

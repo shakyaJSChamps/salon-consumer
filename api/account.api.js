@@ -1,11 +1,19 @@
 import HTTP from '@/service/http';
 import { methods } from '../constants/page'
-import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification, __endpoint_fileUploaders,__endpoint_searchText, __endpoint_searchService, __endpoint_homePage, __endpoint_signatureServices, __endpoint_getBanner, __endpoint_serviceDetails } from '@/constants/endpoints'
+import { __endpoint_doLogin, __endpoint_verifyUser, __endpoint_getSaloonList, __endpoint_getDoorBuddyList, __endpoint_getDetailPageData, __endpoint_favoriteSalon, __endpoint_getSalonReviews, __endpoint_getService, __endpoint_getSalonStaff, __endpoint_appointment, __endpoint_getAddress, __endpoint_address, __endpoint_UserProfile, __endpoint_favoriteSalonList, __endpoint_getNotification, __endpoint_fileUploaders,__endpoint_searchText, __endpoint_searchService, __endpoint_homePage, __endpoint_signatureServices, __endpoint_getBanner, __endpoint_serviceDetails, __endpoint_paymentGateway, __endpoint_resendOtp, __endpoint_otpSend, __endpoint_otpVerify } from '@/constants/endpoints'
 
 export const doLogin = (payload) =>
   HTTP.Request(methods.POST, __endpoint_doLogin, payload);
 export const verifyUser = (payload) =>
   HTTP.Request(methods.POST, __endpoint_verifyUser, payload);
+export const resend = (payload) =>
+  HTTP.Request(methods.POST, __endpoint_resendOtp, payload);
+
+export const otpSend = (payload) =>
+  HTTP.Request(methods.POST, __endpoint_otpSend, payload);
+export const otpVerify = (payload) =>
+  HTTP.Request(methods.POST, __endpoint_otpVerify, payload);
+
 export const getFavouriteSalonList = () =>
   HTTP.Request(methods.GET, `${__endpoint_favoriteSalonList}?favorite=true`);
 
@@ -86,3 +94,9 @@ export const homePage = () =>
 
 export const serviceDetails = (id) =>
   HTTP.Request(methods.GET, `${__endpoint_serviceDetails}/${id}/salons`);
+
+export const payments = (payload) =>
+  HTTP.Request(methods.POST, `${__endpoint_paymentGateway}/14/order`,payload);
+
+export const getDetails = () =>
+  HTTP.Request(methods.GET, `${__endpoint_paymentGateway}/14/order`);

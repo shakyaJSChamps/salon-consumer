@@ -1,19 +1,20 @@
+'use client'
 import OTPInput from "react-otp-input";
 import styles from "./loginPage.module.css";
 import { ErrorMessage, Form, Formik } from "formik";
 import { OtpVerifySchema } from "@/utils/schema";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { verifyUser } from "@/api/account.api";
+import { resend, verifyUser } from "@/api/account.api";
 import { loginUser } from "@/app/Redux/Authslice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setCookie } from "nookies";
 
 const initialValues = {
   otp: "",
 };
 
-function OtpVerify({ phoneNumber }) {
+function OtpVerify({ phoneNumber ,timer, setTimer, isTimerActive, setIsTimerActive }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -58,6 +59,33 @@ function OtpVerify({ phoneNumber }) {
     }
   };
 
+  
+  useEffect(() => {
+    let interval;
+    if (isTimerActive && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (timer === 0) {
+      setIsTimerActive(false);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerActive, timer, setTimer, setIsTimerActive]);
+
+const Resend = async()=>{
+  try {
+    const resendData = {
+      countryCode: "91",
+      phoneNumber: phoneNumber,
+    };
+
+    const res = await resend(resendData);
+    setTimer(30); // Reset the timer
+    setIsTimerActive(true); // Start the timer
+  } catch (error) {
+    console.log(error.message);
+  }
+}
   const handleKeyDown = (e, index, props) => {
     if (e.key === "Backspace" && props.values.otp[index] === "") {
       if (index > 0) {
@@ -114,7 +142,21 @@ function OtpVerify({ phoneNumber }) {
           />
           <hr />
           <ErrorMessage component="div" name="otp" className={styles.error} />
-          <p className={styles.resend}>Resend Otp</p>
+          {/* <p className={styles.resend} onClick={Resend}>Resend Otp</p> */}
+          {submitting && timer < 30 && (
+              <p className={styles.timerDiv}>Resend OTP in {30 - timer} seconds</p>
+            )}
+              {isTimerActive ? (
+                <p className={styles.timerDi}>{`Resend OTP in ${timer} seconds`}</p>
+              ) : (
+                <p
+                  type="button"
+                  onClick={Resend}
+                  className={`${styles.resend}`}
+                >
+                  Resend OTP
+                </p>
+              )}
           <button type="submit" className={styles.btn} disabled={submitting}>
             {submitting ? "Submitting..." : "Next"}
           </button>

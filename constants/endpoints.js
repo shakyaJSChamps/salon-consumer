@@ -50,3 +50,7 @@ export const __endpoint_searchText =  endpoint+"consumer/salons/search";
 //home page
 export const __endpoint_homePage =  endpoint+"consumer/salons/summary";
 export const __endpoint_serviceDetails =  endpoint+"consumer/services";
+export const __endpoint_paymentGateway =  endpoint+"consumer/appointments";
+export const __endpoint_resendOtp =  endpoint+"b2b/account/otp/resend";
+export const __endpoint_otpSend =  endpoint+"b2b/account/email/otp/send";
+export const __endpoint_otpVerify =  endpoint+"b2b/account/email/otp/verify";

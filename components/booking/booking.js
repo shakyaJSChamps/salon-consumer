@@ -71,33 +71,37 @@ function Booking(props) {
   }
 
   // Function to handle booking
-  async function handleSubmit(values) {
-    const data = {
-      ...(props.serviceAt === "Home"
-        ? {
-            salonId: values.salonId,
-            date: values.date,
-            startTime: values.startTime,
-            serviceType: values.serviceType,
-            addressId: selectedAddress?.id,
-            duration: values.duration,
-            homeService: true,
-            serviceIds: serviceIds,
-          }
-        : {
-            ...values,
-          }),
-    };
+  // async function handleSubmit(values) {
+  //   const data = {
+  //     ...(props.serviceAt === "Home"
+  //       ? {
+  //           salonId: values.salonId,
+  //           date: values.date,
+  //           startTime: values.startTime,
+  //           serviceType: values.serviceType,
+  //           addressId: selectedAddress?.id,
+  //           duration: values.duration,
+  //           homeService: true,
+  //           serviceIds: serviceIds,
+  //         }
+  //       : {
+  //           ...values,
+  //         }),
+  //   };
 
-    try {
-      const res = await appointment(data);
-      router.push("salon/payment");
-    } catch (error) {
-      Notify.error(error.message);
-      console.log('err msg',error.message)
-    }
+  //   try {
+  //     const res = await appointment(data);
+  //     router.push("salon/payment");
+  //   } catch (error) {
+  //     Notify.error(error.message);
+  //     console.log('err msg',error.message)
+  //   }
+  // }
+
+  const handleClick =()=>{
+        router.push("salon/payment");
+
   }
-
   useEffect(() => {
     // Calculate end time whenever start time or duration changes
     if (initialValues.startTime && initialValues.duration) {
@@ -113,9 +117,9 @@ function Booking(props) {
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+         // initialValues={initialValues}
+         // validationSchema={validationSchema}
+         // onSubmit={handleSubmit}
         >
           {({ errors, touched, values, setFieldValue }) => (
             <Form>
@@ -283,7 +287,7 @@ function Booking(props) {
                 </div>
               )}
 
-              <div className={styles.book}>
+              <div className={styles.book} onClick={handleClick}>
                 <button type="submit">Book Now</button>
               </div>
             </Form>

@@ -103,6 +103,7 @@ function SearchInput() {
       console.log("Response data on suggestion click (input):", data);
       console.log("Navigating to /salonlist");
       Session.remove("salonService");
+      Session.remove('selectedBannerSalons');
 
       router.push("/salonlist"); // Navigate to salonlist page
     } else if (source === "icon") {
@@ -117,6 +118,7 @@ function SearchInput() {
         );
         console.log("Navigating to /salonlist");
         Session.remove("salonService");
+        Session.remove('selectedBannerSalons');
 
         router.push("/salonlist"); // Navigate to salonlist page
       } catch (error) {
@@ -161,6 +163,7 @@ function SearchInput() {
       console.log("Response data on icon click:", data);
       console.log("Navigating to /salonlist");
       Session.remove("salonService");
+      Session.remove('selectedBannerSalons');
 
       router.push("/salonlist"); // Navigate to salonlist page
     }

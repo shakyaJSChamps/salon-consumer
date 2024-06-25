@@ -8,14 +8,18 @@ import OtpVerify from "./otpVerify";
 import Notify from "../../utils/notify";
 import PhoneInputComponent from "./PhoneInputComponent";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 const initialValues = {
   phoneNumber: "",
 };
-function LoginPage() {
+function LoginPage({setActiveStep}) {
   const [sendOtp, setSendOtp] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [timer, setTimer] = useState(0);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [submittingText, setSubmittingText] = useState("Submit");
+
   const onSubmit = async (values) => {
     try {
       setSubmitting(true);
@@ -33,6 +37,8 @@ function LoginPage() {
       setPhoneNumber(phoneNumber);
       // Notify.success(res.data.message)
       setSendOtp(true);
+      setTimer(30);
+      setIsTimerActive(true);
       console.log("API response logged to console:", res.data.message);
     } catch (error) {
       // console.log(error);
@@ -60,14 +66,18 @@ function LoginPage() {
               onSubmit={onSubmit}
             >
               <Form className={styles.form}>
-                <PhoneInputComponent setPhoneNumber={setPhoneNumber} className={styles.mobileField} style={{
-        borderRadius: "20px",
-        boxShadow: "none",
-        outlineColor: "none",
-        width: "470px",
-        height: "6vh",
-        fontSize: "20px",
-      }}/>
+                <PhoneInputComponent
+                  setPhoneNumber={setPhoneNumber}
+                  className={styles.mobileField}
+                  style={{
+                    borderRadius: "20px",
+                    boxShadow: "none",
+                    outlineColor: "none",
+                    width: "470px",
+                    height: "6vh",
+                    fontSize: "20px",
+                  }}
+                />
 
                 <ErrorMessage
                   component="div"
@@ -76,15 +86,27 @@ function LoginPage() {
                 />
                 <p className={styles.agree}>
                   By continuing, you agree to Stylrax&apos;s{" "}
-                  <Link href="/termsOfUse">Terms of Use</Link> and <Link href="/privacyPolicy">Privacy Policy</Link>.
+                  <Link href="/termsOfUse">Terms of Use</Link> and{" "}
+                  <Link href="/privacyPolicy">Privacy Policy</Link>.
                 </p>
-                <button type="submit" className={styles.btn} disabled={ submitting}>
-                  {submitting ? 'Submitting...' : 'Request OTP'} 
+                <button
+                  type="submit"
+                  className={styles.btn}
+                  disabled={submitting}
+                >
+                  {submitting ? "Submitting..." : "Request OTP"}
                 </button>
               </Form>
             </Formik>
           ) : (
-            <OtpVerify phoneNumber={phoneNumber} />
+            <OtpVerify
+              phoneNumber={phoneNumber}
+              setActiveStep={setActiveStep}
+              timer={timer}
+              setTimer={setTimer}
+              isTimerActive={isTimerActive}
+              setIsTimerActive={setIsTimerActive}
+            />
           )}
         </div>
       </div>

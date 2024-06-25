@@ -21,6 +21,7 @@ function NearSalons({ data }) {
  const handleViewAllClick = () => {
   Session.remove('filteredSalon');
   Session.remove('salonService');
+  Session.remove('selectedBannerSalons');
 
 };
 
