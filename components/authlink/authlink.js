@@ -19,9 +19,13 @@ import { TbLogout } from 'react-icons/tb';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { GrNotes } from 'react-icons/gr';
 import { FaRegUserCircle } from 'react-icons/fa';
+import { getUserProfile } from '@/api/account.api';
+import Images from '@/app/image';
 
 function Authlink() {
     const [menu, setMenu] = useState(false);
+    const [userInfo,setUserInfo] = useState(null);
+    console.log("userInfo",userInfo);
     const dispatch = useDispatch();
     const user = useSelector(state=>state.auth.user);
     const authLinkRef = useRef(null);
@@ -56,7 +60,18 @@ function Authlink() {
     const handleLinkClick = () => {
         setMenu(false);
     };
-
+    const fetchUserDetails = async () => {
+        try {
+          const userDetails = await getUserProfile();
+          setUserInfo(userDetails?.data?.data);
+        } catch (error) {
+          Notify.error(error.message);
+          console.log("errorUser:::>", error);
+        }
+      };
+      useEffect(()=>{
+        fetchUserDetails();
+      },[])
     return (
         <div className={styles.authLink} ref={authLinkRef}>
             {!user ? (
@@ -67,8 +82,8 @@ function Authlink() {
             ) : (
                 <>
                     <Link href="" onClick={handleToggleMenu}>
-                        <Image src={authUser} width={25} height={25} alt="authUser" />
-                        <span>{userName}</span>
+                        <Images imageUrl={userInfo?.profileImageUrl} width={25} height={25} alt="authUser" className={styles.userImg}/>
+                        <span>{userInfo?.name}</span>
                     </Link>
                 </>
             )}

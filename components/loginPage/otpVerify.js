@@ -143,9 +143,9 @@ const Resend = async()=>{
           <hr />
           <ErrorMessage component="div" name="otp" className={styles.error} />
           {/* <p className={styles.resend} onClick={Resend}>Resend Otp</p> */}
-          {submitting && timer < 30 && (
-              <p className={styles.timerDiv}>Resend OTP in {30 - timer} seconds</p>
-            )}
+          {/* {submitting && timer < 30 && (
+               <p className={styles.timerDiv}>Resend OTP in {30 - timer} seconds</p>
+            )} */}
               {isTimerActive ? (
                 <p className={styles.timerDi}>{`Resend OTP in ${timer} seconds`}</p>
               ) : (

@@ -20,7 +20,7 @@ function Banner() {
         <GrNext 
             className={className}
             onClick={onClick}
-            style={{ position: "absolute", top: "40%", zIndex: 1, cursor: "pointer", color: "white" }} 
+            style={{ position: "absolute", top: "40%", zIndex: 1, cursor: "pointer", color: "black" }} 
         />
     );
 
@@ -45,13 +45,14 @@ function Banner() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
+        dots: true,
         autoplaySpeed: 3000,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
-        beforeChange: (current, next) => {
-            setCurrentSlide(next);
-            setBackgroundImage(banners[next]?.mediaUrl || '');
-        }
+        // beforeChange: (current, next) => {
+        //     setCurrentSlide(next);
+        //     setBackgroundImage(banners[next]?.mediaUrl || '');
+        // }
     };
 
     useEffect(() => {
@@ -85,6 +86,7 @@ function Banner() {
           }
     };
 
+    
     return (
         <div
             className={styles.container}
@@ -95,13 +97,21 @@ function Banner() {
                     {banners.map((slide, index) => (
                         <div key={index} onClick={() => handleClick(slide)}>
                             <img src={slide.mediaUrl} alt={slide.name} className={styles.sliderImage} />
-                            {/* <h1 dangerouslySetInnerHTML={{ __html: slide.name }} />
-                            <p>{slide.city}</p>
-                            <button><Link href={slide.redirectLink}>Discover</Link></button> */}
+                            {/* <h1 dangerouslySetInnerHTML={{ __html: slide.name }} /> */}
+                            {/* <p>{slide.city}</p> */}
+                            {/* <button><Link href={slide.redirectLink}>Discover</Link></button>  */}
                         </div>
                     ))}
                 </Slider>
-               
+                {/* <div className={styles.sliderDots}>
+                        {banners.map((_, dotIndex) => (
+                            <span
+                                key={dotIndex}
+                                className={dotIndex === currentSlide ? styles.active : ""}
+                                onClick={() => handleDotClick(dotIndex)}
+                            />
+                        ))}
+                    </div> */}
             </div>
         </div>
     );

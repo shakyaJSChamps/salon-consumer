@@ -33,6 +33,6 @@ export const userProfileSchema = yup.object({
   .matches(/^[A-Za-z ]*$/, 'Name can only contain letters')
   .required('Name is required'),  
   email: yup.string().required('Email is required'),
-  address: yup.string().required('Address is required'),
+ // address: yup.string().required('Address is required'),
 
 });

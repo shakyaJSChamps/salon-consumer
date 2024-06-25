@@ -141,6 +141,13 @@
   height: 100px;
   border-radius: 5px;
 }
+.specialist{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
 @media screen and (max-width: 1200px) {
   .title {
     font-size: 17px;
@@ -149,8 +156,10 @@
   .specialist {
     gap: 14px;
     justify-content: center;
+    grid-template-columns: repeat(6, 1fr);
+
   }
-.noStaff{
+.specialist .noStaff{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -205,7 +214,10 @@
     font-size: 12px;
     padding: 21px 12px;
   }
+.specialist{
+  grid-template-columns: repeat(4, 1fr);
 
+}
   .image img {
     width: 77px;
   }
@@ -296,7 +308,9 @@
 
   .specialist {
     justify-content: flex-start;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
+    grid-template-columns: repeat(3, 1fr);
+
     gap: 8px;
   }
 .specialist .noStaff{

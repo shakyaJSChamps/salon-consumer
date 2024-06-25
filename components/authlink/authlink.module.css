@@ -19,7 +19,11 @@
     top: 44px;
     right: -53px;
 }
-
+.userImg{
+    border-radius: 20px;
+    height: 25px;
+    width: 25px;
+}
 .profileMenu a {
     gap: 15px;
 }

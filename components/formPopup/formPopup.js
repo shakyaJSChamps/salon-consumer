@@ -25,6 +25,11 @@ const FormPopup = ({ title,initialValues, handleSubmit, validationSchema,btn, on
                 >
                      {({ errors, touched }) => (
                         <Form  id="submit">
+                             <div className="form-group">
+                                <label className='fw-bold py-2'>Name</label>
+                                <Field type="text" name="landmark" className={`form-control ${touched.landmark && errors.landmark ? 'is-invalid' : ''}`} />
+                                <ErrorMessage name="landmark" component="div" className="invalid-feedback" />
+                            </div>
                             <div className="form-group">
                                 <label className='fw-bold py-2'>Street Address</label>
                                 <Field type="text" name="streetAddress" className={`form-control ${touched.streetAddress && errors.streetAddress ? 'is-invalid' : ''}`} />
@@ -35,11 +40,7 @@ const FormPopup = ({ title,initialValues, handleSubmit, validationSchema,btn, on
                                 <Field type="text" name="houseNo" className={`form-control ${touched.houseNo && errors.houseNo ? 'is-invalid' : ''}`} />
                                 <ErrorMessage name="houseNo" component="div" className="invalid-feedback" />
                             </div>
-                            <div className="form-group">
-                                <label className='fw-bold py-2'>Landmark</label>
-                                <Field type="text" name="landmark" className={`form-control ${touched.landmark && errors.landmark ? 'is-invalid' : ''}`} />
-                                <ErrorMessage name="landmark" component="div" className="invalid-feedback" />
-                            </div>
+                           
                             <div className="form-group">
                                 <label className='fw-bold py-2'>Pin Code</label>
                                 <Field type="text" name="pincode" className={`form-control ${touched.pincode && errors.pincode ? 'is-invalid' : ''}`} />
