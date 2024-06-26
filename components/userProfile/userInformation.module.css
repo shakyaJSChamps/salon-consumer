@@ -408,6 +408,34 @@
     border: 1px solid grey;
    
 }
+input.inputOtp {
+    height: 38px;
+    width: 66px !important;
+    border-radius: 4px;
+    text-align: center;
+    margin: 0.3em;
+    font-size: 18px;
+    border: 1px solid #858585;
+    outline: #858585;
+  }
+  .verify__email_button{
+    color: white;
+    background-color: #1C1C1C;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 13px;
+  }
+  .verifiedIcon{
+    color: green !important;
+    margin-top: -30px;
+   margin-left: 400px;
+  }
+  @media (max-width: 767.9px) {
+    input.inputOtp {
+      height: 35px;
+      width: 55px !important;
+    }
+  }
 @media screen and (max-width:1400px) {}
 
 @media screen and (max-width:576px) {}
