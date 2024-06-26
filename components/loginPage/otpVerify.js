@@ -9,6 +9,7 @@ import { resend, verifyUser } from "@/api/account.api";
 import { loginUser } from "@/app/Redux/Authslice";
 import { useEffect, useState } from "react";
 import { setCookie } from "nookies";
+import Notify from "@/utils/notify";
 
 const initialValues = {
   otp: "",
@@ -53,7 +54,7 @@ function OtpVerify({ phoneNumber ,timer, setTimer, isTimerActive, setIsTimerActi
         router.push("/");
       }
     } catch (error) {
-      console.log(error);
+      Notify.error(error.message)
     } finally {
       setSubmitting(false);
     }

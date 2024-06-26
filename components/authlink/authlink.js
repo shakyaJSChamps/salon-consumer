@@ -101,7 +101,7 @@ function Authlink() {
                     <Link href="/notifications" onClick={handleLinkClick}>
                         <IoMdNotificationsOutline />Notification
                     </Link>
-                    <Link href="" onClick={handleLogout}>
+                    <Link href="/" onClick={handleLogout}>
                         <TbLogout />Logout
                     </Link>
                 </div>

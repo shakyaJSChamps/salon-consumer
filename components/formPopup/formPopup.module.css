@@ -1,0 +1,13 @@
+.form_popup{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .name_label{
+    text-align: center;
+    display: flex;
+    font-size: 20px;
+    font-weight: bolder;
+  }

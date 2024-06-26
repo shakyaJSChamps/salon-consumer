@@ -16,8 +16,6 @@ function UserAddress() {
     const [addresses, setAddresses] = useState([]);
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
-    console.log("selectedAddress::>", selectedAddress);
-    console.log("addresses===>", addresses)
 
     const handleClickOpen = () => {
         setAddAddressOpen(!addAddressOpen);
@@ -39,12 +37,10 @@ function UserAddress() {
         // Add logic to handle setting default address
         try {
             const res = await setDefaultAddress(selectedAddress.id)
-            console.log("SetDefault Res::>", res);
             setMenuOpen(false);
             fetchAddress();
         } catch (error) {
             Notify.error(error.message)
-            console.log("setDefault Error::>", error)
         }
 
     };
@@ -71,11 +67,9 @@ function UserAddress() {
         const handleDeleteAddress = async () => {
             try {
                 const res = await deleteAddress(selectedAddress.id)
-                console.log("resDelete::>", res);
                 setMenuOpen(false);
                 fetchAddress();
             } catch (error) {
-                console.log("error occured when deleting address", error)
                 Notify.error(error.message)
             }
 
@@ -86,7 +80,7 @@ function UserAddress() {
                 const res = await getAddress();
                 setAddresses(res?.data?.data);
             } catch (error) {
-                console.log("error===>", error);
+                Notify.error(error.message)
             }
         };
         useEffect(()=>{
@@ -101,9 +95,10 @@ function UserAddress() {
                         {addresses.map((item, index) => (
                             <div key={index} className={styles.addressDetails}>
                                 <HiOutlineDotsVertical className={styles.dotted} onClick={(e) => handleIconClick(e, item)} />
-                                <p><span className='fw-bold'>Address:&nbsp; </span>{`${item.houseNo} ${item.streetAddress} ${item.landmark}, ${item.city}`} </p>
-                                <p><span className='fw-bold'>Pin Code:&nbsp;</span>{item.pincode} </p>
-                                <p><span className='fw-bold'>State:&nbsp;</span>{item.state} </p>
+                                    <h4 className='fw-bold'>{item.landmark}</h4>
+                                <p><span className='fw-bold'></span>{`${item.houseNo}, ${item.streetAddress} ${item.city} ${item.state} ,${item.country} ${item.pincode}`} </p>
+                                {/* <p><span className='fw-bold'>Pin Code:&nbsp;</span>{item.pincode} </p> */}
+                                {/* <p><span className='fw-bold'>State:&nbsp;</span>{item.state} </p> */}
                                 {/* <p className='fw-bold '>{item.isDefault}</p> */}
                             </div>
                         ))}
@@ -112,8 +107,8 @@ function UserAddress() {
                 </div>
                 {menuOpen && selectedAddress && (
                     <Paper elevation={2} className={styles.AddressMenu}>
-                        <button onClick={handleUpdateAddressOpen}>Update</button>
-                        <button onClick={handleSetDefaultAddress}>SetDefault</button>
+                        <button onClick={handleUpdateAddressOpen}>Edit</button>
+                        <button onClick={handleSetDefaultAddress}>Set Default</button>
                         <button onClick={onDelete}>Delete</button>
                     </Paper>
                 )}
