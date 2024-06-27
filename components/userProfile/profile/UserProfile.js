@@ -32,8 +32,6 @@ function UserProfile() {
   const [showOTP, setShowOTP] = useState(false);
   const [otp, setOtp] = useState("");
   const router = useRouter();
-  console.log("userInfo::>", userInfo);
-  // console.log("id salon",id)
   const fetchUserDetails = async () => {
     try {
       const userDetails = await getUserProfile();
@@ -93,7 +91,6 @@ function UserProfile() {
       setImagePreview(URL.createObjectURL(file));
       try {
         const imagePath = await handleOnFileSelect(file);
-        console.log("imagePath::>", imagePath);
         setImagePreview(imagePath);
         // Assuming you want to update userInfo with the new image URL
         setUserInfo((prevState) => ({
@@ -101,7 +98,6 @@ function UserProfile() {
           profileImageUrl: imagePath,
         }));
       } catch (error) {
-        console.error("Error uploading image:", error);
         Notify.error(error.message);
       }
     }
@@ -113,9 +109,7 @@ function UserProfile() {
     }
   };
   const handleSubmit = async (values) => {
-    console.log("values::>", values);
     const updatedData = { ...values };
-    console.log("updatedData::>", updatedData);
 
     // if (imageFile) {
     //     updatedData.profileImageUrl = imagePreview; // Assuming you handle image upload on server-side
@@ -145,7 +139,6 @@ function UserProfile() {
   const handleOnFileSelect = async (file) => {
     try {
       const response = await fileUploaders({ fileName: file.name });
-      console.log("resImage::>", response);
       const requestOptions = {
         method: "PUT",
         body: file,
@@ -157,7 +150,6 @@ function UserProfile() {
       let imagePath = response.data.data.path;
       return imagePath;
     } catch (error) {
-      console.error("Error uploading image:", error);
       Notify.error(error.message);
     }
   };
@@ -167,9 +159,7 @@ function UserProfile() {
       const verifyEmailData = {
         email: values.email,
       };
-      // console.log("verifyEmailData ::>", verifyEmailData);
       const res = await otpSend(verifyEmailData);
-      // console.log("Email verification ::>", res);
       setShowOTP(true);
       Notify.success(res.message);
     } catch (error) {

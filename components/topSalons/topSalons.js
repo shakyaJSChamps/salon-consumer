@@ -8,7 +8,7 @@ import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useEffect, useState } from 'react';
 import { homePage } from '@/api/account.api';
-
+import Notify from '@/utils/notify';
 function TopSalons() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -18,13 +18,12 @@ function TopSalons() {
         const responseData= res.data;
         setData(responseData);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        Notify.error(error.message);
       }
     };
 
     fetchData();
   }, []);
-  console.log("data",data)
 
   return (
     <div className={styles.container}>

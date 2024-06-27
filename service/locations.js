@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Notify from "@/utils/notify";
 export async function GetUserLocation() {
   if (navigator.geolocation) {
     try {
@@ -10,7 +10,6 @@ export async function GetUserLocation() {
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.latitude}&lon=${coords.longitude}`
       );
       const data = response.data;
-      console.log("res loc", response);
 
      // const { city, state, country } = data.address;
     // const city = data.address.city || data.address.town || data.address.village;
@@ -20,11 +19,10 @@ export async function GetUserLocation() {
 
       return { city, state, country }; // Return the extracted address fields
     } catch (error) {
-      console.log("Failed to fetch user location:", error);
+      Notify.error(error.message);
       throw error;
     }
   } else {
-    console.log("Browser does not support geolocation");
     return null;
   }
 }
@@ -39,14 +37,11 @@ export async function HandleSelectLocation(location, setDeniedUserLocation) {
       if (data && data.length > 0) {
         const { city, state, country } = data[0].address;
         setDeniedUserLocation({ city, state, country }); // Store the extracted address fields
-        console.log("location handle select", data[0]);
         return { city, state, country }; // Return the extracted address fields
       } else {
-        console.log("Failed to fetch location details: No data found");
         return null;
       }
     } catch (error) {
-      console.log("Failed to fetch location details:", error);
       return null;
     }
   }

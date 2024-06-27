@@ -10,9 +10,9 @@ import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { CiHeart } from 'react-icons/ci';
 import Images from '@/app/image';
+import Notify from '@/utils/notify';
 const WishLists = () => {
     const [favouriteSalons, setFavouriteSalons] = useState(null)
-    console.log("favouriteSalonList::>", favouriteSalons);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -20,7 +20,7 @@ const WishLists = () => {
                 // console.log("favouriteSalonList::>",res?.data?.data?.items);
                 setFavouriteSalons(res?.data?.data?.items)
             } catch (error) {
-                console.log("error", error)
+                Notify.error(error.message)
             }
         }
         fetchData();

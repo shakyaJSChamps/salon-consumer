@@ -7,7 +7,7 @@ import Session from "@/service/session";
 import { useDispatch } from "react-redux";
 import { setFilteredSalon } from "../../app/Redux/Authslice"; // Update the import path accordingly
 import { useRouter } from "next/navigation";
-
+import Notify from "@/utils/notify";
 function useDebounce(callback, delay) {
   const debounceTimeout = useRef(null);
 
@@ -32,15 +32,11 @@ function SearchInput() {
   const router = useRouter();
 
   useEffect(() => {
-    // if (!city) return;
-
     const fetchServices = async () => {
       try {
         const res = await searchService(query);
         setServices(res?.data?.data || []);
-      } catch (error) {
-        //console.error("Error fetching services:", error);
-      }
+      } catch (error) {}
     };
 
     fetchServices();
@@ -67,7 +63,7 @@ function SearchInput() {
         );
         setFilteredServices(filtered);
       } catch (error) {
-        console.error("Error fetching services:", error);
+        Notify.error(error.message);
       }
     } else {
       setFilteredServices([]);
@@ -81,7 +77,7 @@ function SearchInput() {
       setFilteredServices([]); // Clear suggestions when search results are fetched
       return res?.data?.data; // Return the response data
     } catch (error) {
-      console.error("Error searching text:", error);
+      Notify.error(error.message);
     }
   }, []);
 
@@ -89,7 +85,6 @@ function SearchInput() {
     async (e) => {
       if (e.key === "Enter" && inputValue) {
         const data = await handleSearch(inputValue);
-        console.log("Response data on Enter:", data);
       }
     },
     [inputValue, handleSearch]
@@ -100,10 +95,8 @@ function SearchInput() {
     if (source === "input") {
       const data = await handleSearch(suggestion);
       dispatch(setFilteredSalon(data)); // Dispatch action to store the data
-      console.log("Response data on suggestion click (input):", data);
-      console.log("Navigating to /salonlist");
       Session.remove("salonService");
-      Session.remove('selectedBannerSalons');
+      Session.remove("selectedBannerSalons");
 
       router.push("/salonlist"); // Navigate to salonlist page
     } else if (source === "icon") {
@@ -112,13 +105,8 @@ function SearchInput() {
         setText(res?.data?.data || []);
         setFilteredServices([]); // Clear suggestions when search results are fetched
         dispatch(setFilteredSalon(res?.data?.data)); // Dispatch action to store the data
-        console.log(
-          "Response data on suggestion click (icon):",
-          res?.data?.data
-        );
-        console.log("Navigating to /salonlist");
         Session.remove("salonService");
-        Session.remove('selectedBannerSalons');
+        Session.remove("selectedBannerSalons");
 
         router.push("/salonlist"); // Navigate to salonlist page
       } catch (error) {
@@ -160,10 +148,8 @@ function SearchInput() {
   const handleIconClick = async () => {
     if (inputValue) {
       const data = await handleSearch(inputValue);
-      console.log("Response data on icon click:", data);
-      console.log("Navigating to /salonlist");
       Session.remove("salonService");
-      Session.remove('selectedBannerSalons');
+      Session.remove("selectedBannerSalons");
 
       router.push("/salonlist"); // Navigate to salonlist page
     }

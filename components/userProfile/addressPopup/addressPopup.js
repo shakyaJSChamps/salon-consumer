@@ -4,17 +4,16 @@ import { useEffect, useState } from 'react';
 import { getAddress } from '@/api/account.api';
 import { IoMdAdd } from 'react-icons/io';
 import styles from './addressPopUp.module.css'
-
+import Notify from '@/utils/notify';
 function AddressPopup(props) {
     const [addresses, setAddresses] = useState([]);
-    console.log("addressPopup", addresses)
     useEffect(() => {
         const fetchAddress = async () => {
             try {
                 const res = await getAddress();
                 setAddresses(res?.data?.data);
             } catch (error) {
-                console.log("error===>", error);
+                Notify.error(error.message);
             }
         };
         fetchAddress();

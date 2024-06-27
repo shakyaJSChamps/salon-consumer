@@ -20,7 +20,6 @@ const AddUserAddress = (props) => {
         try {
             const res =await addAddress(values) 
             //   e.preventDefault();
-            console.log("resAddress--->",res)
             Notify.success(res?.data?.message)
             props.onHide(); // Close modal after form submission
             updatedData();

@@ -136,16 +136,13 @@ import AboutSalon from '@/components/aboutSalon/aboutSalon';
 import { getDetailPageData } from '@/api/account.api';
 import { FaHeart } from "react-icons/fa";
 import { Col, Row } from 'react-bootstrap';
-
+import Notify from '@/utils/notify';
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function SalonDetail({ params }) {
     const salonid = params.salonid
-    console.log("params-----", salonid);
-    // State to keep track of active button
     const [activeButton, setActiveButton] = useState('about');
     const [data, setData] = useState([]);
-    console.log("data----->", data);
     // Function to handle button click and update active button
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
@@ -157,16 +154,14 @@ function SalonDetail({ params }) {
                 // Call getDetailPageData with salonid
                 const detailPageData = await getDetailPageData(salonid);
                 setData(detailPageData?.data?.data);
-                console.log("kjhfsjkhajk", detailPageData)
             } catch (error) {
-                console.log(error);
+                Notify.log(error.message);
             }
         }
         getSalonData();
     }, [salonid]);
     
     const homeService = data?.homeService;
-    console.log("home service", homeService);
     const workingHours = data?.workingHours || [];
 
     return (

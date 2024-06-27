@@ -11,7 +11,7 @@ import NearDoorBuddy from '@/components/nearDoorBuddy/nearDoorBuddy'
 import NearSalons from '@/components/nearSalons/nearSalons'
 import { homePage } from '@/api/account.api'
 import { useEffect, useState } from 'react'
-
+import Notify from '@/utils/notify'
 function HomePage() {
   const [data, setData] = useState([]);
 
@@ -22,7 +22,7 @@ function HomePage() {
         const responseData= res.data;
         setData(responseData);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        Notify.error(error.message);
       }
     };
 

@@ -12,7 +12,7 @@ function Footer() {
       <div className={styles.footerLogo}>
       </div>
       <div className={styles.footerItem}>
-      <Link href="/"><Image src={Stylrax} alt="Stylrax_brand" className={styles.footerLogo}/></Link>
+      <Link href="/"><Image src={Stylrax} alt="Stylrax_brand" className={styles.footerLogo}  priority={true}/></Link>
 
         <Link href="/aboutUs" className={styles.footerItemList}>About Us</Link>
         <Link href="/contactUs" className={styles.footerItemList}>Contact Us</Link>
@@ -22,7 +22,7 @@ function Footer() {
 
         <Image src={playstore} alt='playstore' className={styles.gplay} />
           <Image src={appstore} alt='playstore'
-            className={styles.appstore} />
+            className={styles.appstore}/>
       </div>
       
       </div>

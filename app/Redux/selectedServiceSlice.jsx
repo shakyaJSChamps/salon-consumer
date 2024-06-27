@@ -10,11 +10,9 @@ export const selectedServices= createSlice({
 reducers: {
     storeSelectedService:(state,action)=>{
         Session.setObject('selectedService',action.payload)
-        console.log("seeeeee:::>",action.payload);
     },
     storeSelectedSalonId:(state,action)=>{
         Session.set('selectedSalonId',action.payload)
-        console.log("selectedSalonId::>",action.payload)
     }
 }
 })

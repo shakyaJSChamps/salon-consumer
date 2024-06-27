@@ -30,7 +30,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      console.log("loginUser action payload:", action.payload);
       const { authToken, userInfo } = action.payload;
       state.user = userInfo?.profile;
       state.authToken = authToken;
@@ -60,14 +59,12 @@ export const authSlice = createSlice({
       Session.setObject("filteredSalon", action.payload);
     },
     setSalonList: (state, action) => {
-      console.log("salon list:", action.payload);
 
       state.salonList = action.payload;
       Session.setObject("salonList", action.payload);
     },
      setSalonService: (state, action) => {
-      console.log("salon service:", action.payload);
- state.salonService = action.payload;
+      state.salonService = action.payload;
       Session.setObject("salonService", action.payload);
 
     },

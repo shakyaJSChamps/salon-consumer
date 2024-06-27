@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import dummyImage from '../assets/images/dummyImage.webp';
 import Image from 'next/image';
 
-const Images = ({ alt, className, imageUrl }) => {
+const Images = ({ alt, className = '', imageUrl = dummyImage, width = 200, height = 200 }) => {
   return (
     <Image
-      src={imageUrl ? imageUrl : dummyImage}
+      src={imageUrl}
       alt={alt}
-      className={className}
-      width={200} 
-      height={200}
+      className={className || ''}
+      width={width}
+      height={height}
     />
   );
 };
@@ -17,10 +17,9 @@ const Images = ({ alt, className, imageUrl }) => {
 Images.propTypes = {
   alt: PropTypes.string.isRequired,
   className: PropTypes.string,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
-Images.defaultProps = {
-  className: '',
-  imageUrl: dummyImage,
-};
+
 export default Images;

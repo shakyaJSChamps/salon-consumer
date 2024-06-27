@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PUBLIC_URLS } from '../constants/public-endpoints';
 import Session from './session';
-
+import Notify from '@/utils/notify';
 
 /*Setting up interceptors with axios*/
 axios.interceptors.request.use(function (config) {
@@ -16,7 +16,6 @@ axios.interceptors.request.use(function (config) {
 
         if (authToken) {
             config.headers['Authorization'] = `Bearer ${authToken}`;
-            console.log("config heders", config.headers['Authorization'])
         }
     }
 
@@ -40,7 +39,6 @@ axios.interceptors.response.use(function (response) {
 
 }, function (error) {
 
-    console.log('Error ::>', error);
     if (!error.response && error.message === 'Network Error') {
         return Promise.reject("Couldn't connect to server. Please try again later.");
     } else if (error.response && error.response.status === 401) { // Assuming 401 is the unauthorized status
@@ -73,10 +71,8 @@ export default class HTTP {
                 .catch(error => {
                     if (error.errors) {
                         // Notify.error(error.errors[0]);
-                        console.log(error.errors[0]);
                     } else {
                         // Notify.error(error);
-                        console.log(error)
                     }
                     reject(error)
                 }

@@ -11,5 +11,4 @@ function Services() {
   )
 }
 
-export default Services
-TopServices
+export default Services;

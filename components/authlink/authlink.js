@@ -25,8 +25,9 @@ import Images from '@/app/image';
 function Authlink() {
     const [menu, setMenu] = useState(false);
     const [userInfo,setUserInfo] = useState(null);
-    console.log("userInfo",userInfo);
     const dispatch = useDispatch();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const user = useSelector(state=>state.auth.user);
     const authLinkRef = useRef(null);
     // console.log("user::>",user);
@@ -60,30 +61,53 @@ function Authlink() {
     const handleLinkClick = () => {
         setMenu(false);
     };
-    const fetchUserDetails = async () => {
-        try {
-          const userDetails = await getUserProfile();
-          setUserInfo(userDetails?.data?.data);
-        } catch (error) {
-          Notify.error(error.message);
-          console.log("errorUser:::>", error);
-        }
-      };
-      useEffect(()=>{
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const userDetails = await getUserProfile();
+                setUserInfo(userDetails?.data?.data);
+            } catch (error) {
+                Notify.error(error.message);
+                console.log("errorUser:::>", error);
+            }
+        };
         fetchUserDetails();
-      },[])
+    }, []);
+
+
+  useEffect(() => {
+    // Simulate checking if the user is logged in
+    const checkAuth = async () => {
+      // Replace with actual auth check logic
+      const authStatus = await new Promise((resolve) => setTimeout(() => resolve(true), 1000));
+      setIsLoggedIn(authStatus);
+      setIsMounted(true);
+    };
+    
+    checkAuth();
+  }, []);
+
+  // Conditional rendering to avoid hydration mismatch
+  if (!isMounted) {
+    return null; // or a loading spinner
+  }
+      if (typeof window === 'undefined') {
+        return null; // Render nothing on the server
+    }
+
+    
     return (
         <div className={styles.authLink} ref={authLinkRef}>
-            {!user ? (
+            {!isLoggedIn ? (
                 <Link href="/login">
-                    <Image src={authUser} width={25} height={25} alt="authUser" />
-                    <span>Signin/Signup</span>
+                        <Images imageUrl={String(userInfo?.profileImageUrl)} width={25} height={25} alt="authUser" className={styles.userImg} />
+                        <span>Signin/Signup</span>
                 </Link>
             ) : (
                 <>
                     <Link href="" onClick={handleToggleMenu}>
-                        <Images imageUrl={userInfo?.profileImageUrl} width={25} height={25} alt="authUser" className={styles.userImg}/>
-                        <span>{userInfo?.name}</span>
+                    <Images imageUrl={String(userInfo?.profileImageUrl)} width={25} height={25} alt="authUser" className={styles.userImg} />
+                    <span>{userInfo?.name}</span>
                     </Link>
                 </>
             )}

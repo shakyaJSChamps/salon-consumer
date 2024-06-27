@@ -8,14 +8,11 @@ import { useEffect, useState } from "react";
 import { serviceDetails, signatureServices } from "@/api/account.api";
 import { useRouter } from "next/navigation";
 import Session from "@/service/session";
-
+import Notify from "@/utils/notify";
 function TopServices() {
   const [services, setServices] = useState([]);
   const [serviceDetail, setServiceDetail] = useState([]);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
-  console.log("vv", serviceDetail);
-  //const dispatch = useDispatch();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +21,7 @@ function TopServices() {
         const res = await signatureServices();
         setServices(res?.data?.data || []);
       } catch (error) {
-        console.log("error===>", error);
+        Notify.error(error.message);
       }
     };
     getServices();
@@ -37,14 +34,13 @@ function TopServices() {
       setServiceDetail(serviceData);
       // dispatch(setSalonService(serviceData));
       Session.setObject("salonService", serviceData);
-      console.log("dispatch", serviceData);
       Session.remove("filteredSalon");
       Session.remove("salonList");
       Session.remove('selectedBannerSalons');
 
       router.push("/salonlist");
     } catch (error) {
-      console.log("error===>", error);
+      Notify.error(error.message);
     }
   };
 
