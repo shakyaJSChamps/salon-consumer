@@ -263,7 +263,7 @@ function Booking(props) {
                         <Field
                           type="text"
                           name="addressId"
-                          value={`${selectedAddress?.id} ${selectedAddress?.houseNo} ${selectedAddress?.streetAddress}, ${selectedAddress?.city}, ${selectedAddress?.state}, ${selectedAddress?.pincode}`}
+                          value={`${selectedAddress?.houseNo} ${selectedAddress?.streetAddress}, ${selectedAddress?.city}, ${selectedAddress?.state},${selectedAddress?.country}, ${selectedAddress?.pincode}`}
                           placeholder="Address"
                           readOnly
                         />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import styles from "./formPopup.module.css";
 const FormPopup = ({ title,initialValues, handleSubmit, validationSchema,btn, onHide,show }) => {
     return (
         <Modal
@@ -25,9 +25,9 @@ const FormPopup = ({ title,initialValues, handleSubmit, validationSchema,btn, on
                 >
                      {({ errors, touched }) => (
                         <Form  id="submit">
-                             <div className="form-group">
-                                <label className='fw-bold py-2'>Name</label>
-                                <Field type="text" name="landmark" className={`form-control ${touched.landmark && errors.landmark ? 'is-invalid' : ''}`} />
+                             <div className={`${styles.form_popup} form-group`}>
+                                <label className={`${styles.name_label} fw-bold py-2`}>Name</label>
+                                <Field type="text" name="landmark" className={`form-control w-75 d-flex justify-content-center align-items-center  ${touched.landmark && errors.landmark ? 'is-invalid' : ''}`} />
                                 <ErrorMessage name="landmark" component="div" className="invalid-feedback" />
                             </div>
                             <div className="form-group">

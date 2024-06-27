@@ -28,6 +28,7 @@ function UserProfile() {
   const [imagePreview, setImagePreview] = useState("");
   const [isOTPVerified, setIsOTPVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [verified, setVerified] = useState(true);
   const [showOTP, setShowOTP] = useState(false);
   const [otp, setOtp] = useState("");
   const router = useRouter();
@@ -39,7 +40,6 @@ function UserProfile() {
       setUserInfo(userDetails?.data?.data);
     } catch (error) {
       Notify.error(error.message);
-      console.log("errorUser:::>", error);
     }
   };
 
@@ -83,6 +83,7 @@ function UserProfile() {
 
   const handleEditClick = () => {
     setEditModes(!editModes);
+    setVerified(false);
   };
 
   const handleImageChange = async (e) => {
@@ -123,22 +124,20 @@ function UserProfile() {
     try {
       const res = await UpdateUserProfile(updatedData);
       fetchUserDetails();
-      console.log("UpdateUserProfile::>", res);
-
+      Notify.success(res.data.message);
       setEditModes(false);
-
+      setShowOTP(false);
+      setVerified(false);
       fetchUserDetails();
       const isProfileIncomplete = !values?.name || !values?.email;
       if (!isProfileIncomplete) {
         //router.push('/notifications');
         const id = Session.get("selectedSalonId");
-        fetchUserDetails();
-        router.push(`/salonlist/${id}`);
+        //router.push(`/salonlist/${id}`);
       } else {
         router.push("/");
       }
     } catch (error) {
-      console.log("error", error);
       Notify.error(error.message);
     }
   };
@@ -286,7 +285,7 @@ function UserProfile() {
                   <FaCheckCircle className={styles.verifiedIcon} />
                 )}
 
-                {values.email && !showOTP && !isEmailVerified && (
+                {values.email && !showOTP && !isEmailVerified && !verified && (
                   <div className="pt-3">
                     <button
                       type="button"
@@ -295,9 +294,9 @@ function UserProfile() {
                     >
                       Verify Email
                     </button>
-                    {/* <FaCheckCircle /> */}
                   </div>
                 )}
+
                 {showOTP && (
                   <>
                     <label htmlFor="otp" className="fw-bold">

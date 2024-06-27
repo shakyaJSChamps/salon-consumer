@@ -145,11 +145,14 @@ const Appointments = () => {
             console.log("error to cancel Appointment", error)
         }
     }
+    const containerStyle = {
+        height: filteredPending.length === 0 && filteredPast.length === 0 ? '360px' : 'auto'
+    };
 
     return (
         <>
             {appointmentShow && (
-                <div className={styles.container}>
+                <div className={styles.container}  style={containerStyle}>
                     <h3 className={styles.titleAppointment}>My Appointments</h3>
                     {menuVisible ? (
                         <ImCross className={styles.humburgerCross} onClick={handleToggleMenu} />
@@ -202,6 +205,9 @@ const Appointments = () => {
                     </div>
 
                     <h4 className={styles.title}>Past</h4>
+                    {filteredPast.length === 0 ? (
+                        <p className={styles.noAppointments}>No appointments</p>
+                    ) : (
                     <div>
                     <div className={styles.pastScheduleContainer}>
                         {filteredPast.map((data, index) => (
@@ -240,7 +246,7 @@ const Appointments = () => {
                         </div>
                         
                     </div>
-                    
+                    )}
                 </div>
             )}
 

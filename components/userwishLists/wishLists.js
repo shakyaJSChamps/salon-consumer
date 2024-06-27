@@ -25,10 +25,17 @@ const WishLists = () => {
         }
         fetchData();
     }, [])
-    return (
-        <div className={styles.main}>
 
-            {favouriteSalons?.map((salon, index) => (
+    const containerStyle = {
+        height: !favouriteSalons || favouriteSalons.length === 0 ? '360px' : 'auto'
+    };
+
+    return (
+        <div className={styles.main} style={containerStyle}>
+          {!favouriteSalons || favouriteSalons.length === 0 ? (
+                <p className='fw-bold'>No wishlist items</p>
+            ) : (
+            favouriteSalons?.map((salon, index) => (
                <div key={index} className={styles.salonDetails}>
                <div className=''>
                    
@@ -71,8 +78,8 @@ const WishLists = () => {
                    </div>
                </div>
            </div>
-            ))}
-           
+            ))
+            )}
         </div>
     )
 }

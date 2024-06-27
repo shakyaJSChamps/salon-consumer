@@ -7,6 +7,9 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import { Suspense } from "react";
 import Loading from "./loading";
+import "react-toastify/dist/ReactToastify.css";
+
+import { ToastContainer } from "react-toastify";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -26,6 +29,8 @@ export default function RootLayout({ children }) {
         <div className="contentWrapper">
             <Suspense fallback={<Loading />}>
               {children}
+              <ToastContainer />
+
             </Suspense>
           </div>
 
