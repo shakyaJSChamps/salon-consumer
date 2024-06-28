@@ -73,6 +73,7 @@ const Lists = (props) => {
   const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
   const [facilities, setFacilities] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
   const listRef = useRef(null);
 
   const handleFilterChange = (option, type) => {
@@ -177,6 +178,7 @@ const Lists = (props) => {
   const handleToggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
+
 
   return (
     <div className={styles.container}>
@@ -329,6 +331,11 @@ const Lists = (props) => {
           <div ref={listRef} className={styles.listBottomMarker}></div>
         </div>
       </div>
+      {hasMoreData && !isLoading && (
+        <button onClick={loadMoreItems} className={styles.loadMoreBtn}>
+          View More
+        </button>
+      )}
     </div>
   );
 };

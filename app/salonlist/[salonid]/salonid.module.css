@@ -5,14 +5,31 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 140px 79px;
+    /* padding: 140px 79px; */
 }
-
+.sliderImage{
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .sliderTitle {
     color: white;
-    padding-top: 25px;
+    /* padding-top: 25px; */
 
 }
+.salonSlider {
+    position: relative;
+  }
+  
+  .salonSlider .slick-dots {
+    bottom: 10px !important;
+    right: 10px !important;
+    left: auto !important;
+    margin-bottom: 60px;
+    text-align: right !important;
+    position: absolute !important;
+  }
 .mainDiv{
     display: flex;
     gap: 20px;

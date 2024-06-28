@@ -20,13 +20,13 @@ const navLinks = [
         name: "Top salons",
         url: "/salons",
         imageUrl: salons,
-        target:"_blank"
+        target:""
     },
     {
         name: "Top services",
         url: "/services",
         imageUrl: services,
-        target:"_blank"
+        target:""
     },
     {
         name: "Stylrax for Business",

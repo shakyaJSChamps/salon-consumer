@@ -22,7 +22,6 @@ const PhoneInputComponent = ({ value ,style,disabled}) => {
           .replace(/^(\+91|91|-)/, "")
           .replace(/-/g, "");
         setFieldValue("phoneNumber", sanitizedPhoneNumber.trim());
-        console.log("Phone number entered:", sanitizedPhoneNumber.trim());
       }}
     />
   );

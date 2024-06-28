@@ -29,7 +29,7 @@ function Authlink() {
   const [isMounted, setIsMounted] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const authLinkRef = useRef(null);
-  // console.log("user::>",user);
+   //console.log("user::>",user);
 
   const userName = user?.name;
 
@@ -91,13 +91,13 @@ function Authlink() {
         <>
           <Link href="" onClick={handleToggleMenu}>
             <Images
-              imageUrl={String(userInfo?.profileImageUrl)}
+              imageUrl={String(user?.profileImageUrl)}
               width={25}
               height={25}
               alt="authUser"
               className={styles.userImg}
             />
-            <span>{userInfo?.name}</span>
+            <span>{user?.name}</span>
           </Link>
         </>
       )}

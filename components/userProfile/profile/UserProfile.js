@@ -20,18 +20,22 @@ import Images from "@/app/image";
 import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import OTPInput from "react-otp-input";
+import { loginUser, updateUserProfile } from "@/app/Redux/Authslice";
+import { useDispatch } from "react-redux";
 
 function UserProfile() {
   const [userInfo, setUserInfo] = useState(null);
-  const [editModes, setEditModes] = useState(false);
+  const [editModes, setEditModes] = useState(true);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [isOTPVerified, setIsOTPVerified] = useState(false);
+  const [verified, setVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [verified, setVerified] = useState(true);
+
   const [showOTP, setShowOTP] = useState(false);
   const [otp, setOtp] = useState("");
   const router = useRouter();
+  const dispatch = useDispatch();
   const fetchUserDetails = async () => {
     try {
       const userDetails = await getUserProfile();
@@ -44,6 +48,7 @@ function UserProfile() {
   useEffect(() => {
     fetchUserDetails();
   }, []);
+
   const renderInput = (props, index) => (
     <input
       {...props}
@@ -70,6 +75,7 @@ function UserProfile() {
       }}
     />
   );
+
   const initialValues = {
     profileImageUrl: userInfo?.profileImageUrl || "",
     name: userInfo?.name || "",
@@ -77,11 +83,6 @@ function UserProfile() {
     gender: userInfo?.gender || "",
     address: userInfo?.address || "",
     phoneNumber: userInfo?.phoneNumber || "",
-  };
-
-  const handleEditClick = () => {
-    setEditModes(!editModes);
-    setVerified(false);
   };
 
   const handleImageChange = async (e) => {
@@ -92,7 +93,6 @@ function UserProfile() {
       try {
         const imagePath = await handleOnFileSelect(file);
         setImagePreview(imagePath);
-        // Assuming you want to update userInfo with the new image URL
         setUserInfo((prevState) => ({
           ...prevState,
           profileImageUrl: imagePath,
@@ -102,32 +102,27 @@ function UserProfile() {
       }
     }
   };
+
   const handleKeyPress = (event) => {
     const regex = /^[A-Za-z ]*$/;
     if (!regex.test(event.key)) {
       event.preventDefault();
     }
   };
+
   const handleSubmit = async (values) => {
     const updatedData = { ...values };
-
-    // if (imageFile) {
-    //     updatedData.profileImageUrl = imagePreview; // Assuming you handle image upload on server-side
-    // }
-
     try {
       const res = await UpdateUserProfile(updatedData);
       fetchUserDetails();
+      dispatch(updateUserProfile(updatedData));
       Notify.success(res.data.message);
-      setEditModes(false);
       setShowOTP(false);
-      setVerified(false);
       fetchUserDetails();
       const isProfileIncomplete = !values?.name || !values?.email;
       if (!isProfileIncomplete) {
-        //router.push('/notifications');
-        const id = Session.get("selectedSalonId");
-        //router.push(`/salonlist/${id}`);
+        // const id = Session.get("selectedSalonId");
+        // router.push(`/salonlist/${id}`);
       } else {
         router.push("/");
       }
@@ -197,13 +192,6 @@ function UserProfile() {
             <Form className={styles.form}>
               <div className={styles.imageRow}>
                 <div className={styles.userImageDiv}>
-                  {/* <Image
-                    src={imagePreview || values.profileImageUrl}
-                    alt="user profile"
-                    width={100}
-                    height={100}
-                    className={styles.profileImage}
-                  /> */}
                   <Images
                     imageUrl={values.profileImageUrl}
                     alt="user profile"
@@ -229,15 +217,6 @@ function UserProfile() {
                     onChange={handleImageChange}
                   />
                 </div>
-                {!editModes && (
-                  <button
-                    className={styles.saves}
-                    type="button"
-                    onClick={handleEditClick}
-                  >
-                    Edit
-                  </button>
-                )}
               </div>
               <div className={styles.details}>
                 <div className={styles.name}>
@@ -249,7 +228,6 @@ function UserProfile() {
                     className={`form-control ${
                       touched.name && errors.name ? "is-invalid" : ""
                     }`}
-                    disabled={!editModes}
                   />
                   <ErrorMessage
                     name="name"
@@ -269,23 +247,26 @@ function UserProfile() {
                   className={`form-control ${
                     touched.email && errors.email ? "is-invalid" : ""
                   }`}
-                  disabled={!editModes}
                 />
                 {isEmailVerified && (
                   <FaCheckCircle className={styles.verifiedIcon} />
                 )}
 
-                {values.email && !showOTP && !isEmailVerified && !verified && (
-                  <div className="pt-3">
-                    <button
-                      type="button"
-                      className={styles.verify__email_button}
-                      onClick={() => handleVerifyEmailClick(values)}
-                    >
-                      Verify Email
-                    </button>
-                  </div>
-                )}
+                {values.email &&
+                  !showOTP &&
+                  !isEmailVerified &&
+                  !verified &&
+                  !userInfo?.verified && (
+                    <div className="pt-3">
+                      <button
+                        type="button"
+                        className={styles.verify__email_button}
+                        onClick={() => handleVerifyEmailClick(values)}
+                      >
+                        Verify Email
+                      </button>
+                    </div>
+                  )}
 
                 {showOTP && (
                   <>
@@ -298,7 +279,7 @@ function UserProfile() {
                         onChange={(otpValue) => {
                           setOtp(otpValue);
                           if (otpValue.length === 4) {
-                            handleOTPVerification(otpValue, values, {});
+                            handleOTPVerification(otpValue, values);
                           }
                         }}
                         numInputs={4}
@@ -324,9 +305,10 @@ function UserProfile() {
                     className={`form-control ${
                       touched.gender && errors.gender ? "is-invalid" : ""
                     } ${styles.gender}`}
-                    disabled={!editModes}
                   >
-                    <option value="" disabled hidden>Select</option>
+                    <option value="" disabled hidden>
+                      Select
+                    </option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </Field>
@@ -337,16 +319,6 @@ function UserProfile() {
                   />
                 </div>
               </div>
-              {/* <div className={styles.otherDetails}>
-                <label className={styles.label}>Address</label>
-                <Field
-                  type="text"
-                  name="address"
-                  className={`form-control ${touched.address && errors.address ? 'is-invalid' : ''}`}
-                  disabled={!editModes}
-                />
-                <ErrorMessage name="address" component="div" className="invalid-feedback" />
-              </div> */}
               <div className={styles.details}>
                 <div className={styles.infoNumber}>
                   <label className={styles.label}>Contact Number</label>
@@ -366,14 +338,9 @@ function UserProfile() {
                   />
                 </div>
               </div>
-              {/* <Link href={`/salonlist/${salon.id}`}>
-                  View Details
-                </Link> */}
-              {editModes && (
-                <button className={styles.saves} type="submit">
-                  Save
-                </button>
-              )}
+              <button className={styles.saves} type="submit">
+                Save
+              </button>
             </Form>
           )}
         </Formik>

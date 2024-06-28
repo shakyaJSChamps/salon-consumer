@@ -4,7 +4,14 @@
   padding-bottom: 30px !important;
   position: relative;
 }
-
+.loadMoreBtn{
+  float: right;
+  background-color: black;
+  color: white;
+  padding: 4px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
 .find {
   background-color: black;
   color: white;
@@ -64,7 +71,7 @@
 
 .findsSalon {
   /* border: 2px solid black; */
-  padding-left: 198px;
+  padding-left: 220px;
 }
 
 .heart {
