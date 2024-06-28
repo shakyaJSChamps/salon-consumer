@@ -326,8 +326,9 @@ function UserProfile() {
                     } ${styles.gender}`}
                     disabled={!editModes}
                   >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="" disabled hidden>Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </Field>
                   <ErrorMessage
                     name="gender"
