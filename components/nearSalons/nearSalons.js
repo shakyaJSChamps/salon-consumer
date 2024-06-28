@@ -10,7 +10,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Session from '@/service/session';
 
 function NearSalons({ data }) {
-  console.log("near salon", data.data);
 
   // Ensure that data and nearBySalons are available
 //   if (!data || !data.nearBySalons) {

@@ -16,6 +16,14 @@
     width: 300px;
     height: auto;
 }
+.appstore{
+    width: 150px;
+    height: auto;
+}
+.gplay{
+    width: 150px;
+    height: auto;  
+}
 .iconDiv{
     display: flex;
     align-items: center;

@@ -4,20 +4,16 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import Session from "@/service/session";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { getDetails, payments } from "@/api/account.api";
-
+import Notify from "@/utils/notify";
 function Payment() {
   const [totalCount, setTotalCount] = useState(1);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState([]);
   const [order, setOrder] = useState(null);
-  console.log("order", order);
 
-  console.log("paymentDetails", paymentDetails);
   const servicesDetails = Session.getObject("selectedService");
-  console.log("sel::::>", servicesDetails);
   const router = useRouter();
 
   const totalAmount = servicesDetails?.reduce(
@@ -38,7 +34,6 @@ function Payment() {
   }
 
   const handleOrder = async () => {
-    console.log("handleOrder function called");
 
     try {
       const payload = {
@@ -48,7 +43,7 @@ function Payment() {
       
       setOrder(res?.data?.data);
     } catch (error) {
-      console.error("Payment API call failed:", error);
+      Notify.error(error.message);
     }
   };
   const loadRazorpayScript = () => {
@@ -66,7 +61,6 @@ function Payment() {
   };
 
   const handlePayment = async () => {
-    console.log("handlePayment function called");
 
     const res = await loadRazorpayScript();
 
@@ -84,8 +78,8 @@ function Payment() {
       description: "Test Transaction",
       handler: async function (response) {
         //alert(response.razorpay_payment_id);
-        console.log("res razorpay", response);
-        console.log('options',options)
+       // console.log("res razorpay", response);
+      //  console.log('options',options)
 
       },
       prefill: {
@@ -111,14 +105,13 @@ function Payment() {
         const res = await getDetails();
         setPaymentDetails(res?.data?.data || []);
       } catch (error) {
-        console.log("error===>", error);
+        Notify.error(error.message);
       }
     };
     getPaymentDetails();
   }, []);
 
   useEffect(() => {
-    console.log("PaymentPage rendered");
   }, []);
   return (
     <div className={styles.container}>
@@ -206,7 +199,6 @@ function Payment() {
         {!order && (
           <button
             onClick={() => {
-              console.log("Confirm Payment button clicked");
               handleOrder();
             }}
           >

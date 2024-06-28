@@ -5,7 +5,6 @@ import FormPopup from '@/components/formPopup/formPopup';
 
 const UpdateUserAddress = (props) => {
     const data=props.data;
-    console.log("data===>",data);
     const initialValues = {
         streetAddress: data?.streetAddress || '',
         houseNo: data?.houseNo || '',
@@ -21,7 +20,6 @@ const UpdateUserAddress = (props) => {
         try {
             const res =await UpdateAddress(values,data.id) 
             //   e.preventDefault();
-            console.log("resAddress--->",res)
             Notify.success(res?.data?.message)
             props.onHide(); // Close modal after form submission
         } catch (error) {

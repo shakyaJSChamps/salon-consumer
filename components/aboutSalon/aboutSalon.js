@@ -8,12 +8,10 @@ import { useEffect, useState } from "react";
 import male from "../../assets/images/malePlaceholder.png";
 import female from "../../assets/images/femalePlaceholder.svg";
 import Images from "@/app/image";
-
+import Notify from "@/utils/notify";
 function AboutSalon({ id }) {
   const [staff, setStaff] = useState([]);
   const [reviews, setReviews] = useState();
-  // console.log("staff:::> ", staff)
-  console.log("Reviws::::>", reviews);
 
   useEffect(() => {
     const fetchStaff = async () => {
@@ -22,7 +20,7 @@ function AboutSalon({ id }) {
         const data = staffData?.data?.data;
         setStaff(data);
       } catch (error) {
-        console.error("Error fetching salon staff:", error);
+        Notify.error(error.message);
       }
     };
 
@@ -35,7 +33,7 @@ function AboutSalon({ id }) {
         const data = reviewsData?.data?.data?.reviews;
         setReviews(data);
       } catch (error) {
-        console.error("Error fetching salon staff:", error);
+        Nofity.error(error.message);
       }
     };
 

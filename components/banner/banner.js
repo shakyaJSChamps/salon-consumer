@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { GrNext } from "react-icons/gr";
 import { getBanners, searchService, searchText } from '@/api/account.api';
 import Link from 'next/link';
+import Notify from '@/utils/notify';
 import Session from '@/service/session';
 import { useRouter } from 'next/navigation';
 
@@ -64,7 +65,7 @@ function Banner() {
                     setBackgroundImage(res.data.data[0]?.mediaUrl || '');
                 }
             } catch (error) {
-                console.log("error===>", error);
+                Notify.error(error.message);
             }
         };
         fetchBanners();
@@ -72,7 +73,6 @@ function Banner() {
 
     const handleClick = async(slide) => {
         Session.set('selectedBannerCity',slide.city)
-        console.log("banner data:", slide);
         try {
             const res = await searchText(slide.city, 1, 10);
             Session.setObject("selectedBannerSalons",res?.data?.data);
@@ -80,9 +80,8 @@ function Banner() {
             Session.remove('salonService');
 
             router.push('/salonlist')
-            console.log("city response",res)
           } catch (error) {
-            console.error("Error searching text:", error);
+            Notify.error(error.message);
           }
     };
 

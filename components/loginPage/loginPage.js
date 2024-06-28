@@ -23,9 +23,7 @@ function LoginPage({setActiveStep}) {
   const onSubmit = async (values) => {
     try {
       setSubmitting(true);
-      console.log("Submitting form with values:", values);
       const { phoneNumber } = values;
-      console.log("Values ::", values);
       const data = {
         countryCode: "91",
         phoneNumber: phoneNumber,
@@ -33,13 +31,11 @@ function LoginPage({setActiveStep}) {
         deviceToken: "fasfsadfsdf",
       };
       const res = await doLogin(data);
-      console.log("Response ::>", res);
       setPhoneNumber(phoneNumber);
       // Notify.success(res.data.message)
       setSendOtp(true);
       setTimer(30);
       setIsTimerActive(true);
-      console.log("API response logged to console:", res.data.message);
     } catch (error) {
       // console.log(error);
       Notify.error(error.message);

@@ -25,14 +25,12 @@ function OtpVerify({ phoneNumber ,timer, setTimer, isTimerActive, setIsTimerActi
     try {
       setSubmitting(true);
       const { otp } = values;
-      console.log("phoneNumber", phoneNumber);
       const verifyData = {
         countryCode: "91",
         phoneNumber: phoneNumber,
         otp: otp,
       };
       const response = await verifyUser(verifyData);
-      console.log("response----", response);
       const authToken = response.data.data.authToken;
       setCookie(null, "token", authToken, {
         maxAge: 30 * 24 * 60 * 60,
@@ -84,7 +82,7 @@ const Resend = async()=>{
     setTimer(30); // Reset the timer
     setIsTimerActive(true); // Start the timer
   } catch (error) {
-    console.log(error.message);
+    Notify.error(error.message);
   }
 }
   const handleKeyDown = (e, index, props) => {

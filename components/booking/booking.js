@@ -4,13 +4,12 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
 import Session from "@/service/session";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { appointment } from "@/api/account.api";
 import AddressPopup from "../userProfile/addressPopup/addressPopup";
 import Notify from "@/utils/notify";
-import moment from "moment";
 
 function Booking(props) {
   const servicesDetails = Session.getObject("selectedService") || [];
@@ -70,7 +69,36 @@ function Booking(props) {
     }
   }
 
-  // Function to handle booking
+  const handleClick = () => {
+    router.push("salon/payment");
+  };
+
+  const calculateEndTime = (startTime, duration) => {
+    if (startTime && duration) {
+      const [hour, minute, period] = startTime.split(/:| /); // Split time string by colon or space
+      let hours = parseInt(hour, 10);
+  
+      // Adjust hours for PM time
+      if (period.toLowerCase() === "pm" && hours < 12) {
+        hours += 12;
+      } else if (period.toLowerCase() === "am" && hours === 12) {
+        hours = 0; // Midnight case
+      }
+  
+      const start = new Date(0, 0, 0, hours, parseInt(minute, 10));
+      const end = new Date(start.getTime() + duration * 60000); // Convert duration to milliseconds
+  
+      // Format end time in hh:mm AM/PM format
+      const formattedEnd = end.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      return formattedEnd;
+    }
+    return "";
+  };
+  
+
+
+
+// Function to handle booking
   // async function handleSubmit(values) {
   //   const data = {
   //     ...(props.serviceAt === "Home"
@@ -98,27 +126,12 @@ function Booking(props) {
   //   }
   // }
 
-  const handleClick =()=>{
-        router.push("salon/payment");
-
-  }
-  useEffect(() => {
-    // Calculate end time whenever start time or duration changes
-    if (initialValues.startTime && initialValues.duration) {
-      const durationInMinutes = initialValues.duration / 60; // Convert duration from seconds to minutes
-      const end = moment(initialValues.startTime, "HH:mm")
-        .add(durationInMinutes, "minutes")
-        .format("hh:mm A");
-      setEndTime(end);
-    }
-  }, [initialValues.startTime, initialValues.duration]);
-
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <Formik
-         // initialValues={initialValues}
-         // validationSchema={validationSchema}
+          initialValues={initialValues}
+          //validationSchema={validationSchema}
          // onSubmit={handleSubmit}
         >
           {({ errors, touched, values, setFieldValue }) => (
@@ -187,11 +200,9 @@ function Booking(props) {
                     name="startTime"
                     onChange={(e) => {
                       setFieldValue("startTime", e.target.value);
-                      const durationInMinutes = values.duration / 60; // Convert duration from seconds to minutes
-                      const end = moment(e.target.value, "HH:mm")
-                        .add(durationInMinutes, "minutes")
-                        .format("hh:mm A");
-                      setEndTime(end);
+                      setEndTime(
+                        calculateEndTime(e.target.value, values.duration)
+                      );
                     }}
                   />
                 </div>
@@ -208,30 +219,6 @@ function Booking(props) {
                   <Field type="text" name="endTime" value={endTime} readOnly />
                 </div>
               </div>
-
-              {/* <div className={styles.dateContainer}>
-                <h3>Duration</h3>
-                <div className={styles.timeslot}>
-                  <Field
-                    type="number"
-                    name="duration"
-                    onChange={(e) => {
-                      setFieldValue("duration", e.target.value);
-                      const durationInMinutes = e.target.value / 60; // Convert duration from seconds to minutes
-                      const end = moment(values.startTime, "HH:mm")
-                        .add(durationInMinutes, "minutes")
-                        .format("hh:mm A");
-                      setEndTime(end);
-                    }}
-                  />
-                  <span>(sec)</span>
-                  <ErrorMessage
-                    name="duration"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-              </div> */}
 
               <div className={styles.address}>
                 <h3>Service Type</h3>
@@ -287,8 +274,8 @@ function Booking(props) {
                 </div>
               )}
 
-              <div className={styles.book} onClick={handleClick}>
-                <button type="submit">Book Now</button>
+              <div className={styles.book}>
+                <button type="submit" onClick={handleClick}>Book Now</button>
               </div>
             </Form>
           )}
@@ -299,7 +286,6 @@ function Booking(props) {
         onHide={() => setShowAddress(false)}
         onSelectAddress={handleAddressSelection}
       />
-
     </div>
   );
 }

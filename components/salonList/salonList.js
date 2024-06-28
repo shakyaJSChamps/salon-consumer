@@ -11,9 +11,7 @@ import Session from '@/service/session';
 const SalonList = () => {
   const [lists, setLists] = useState([]);
   const [allSalon, setAllSalon] = useState([]);
-  console.log("allss",allSalon)
 
-  console.log("Listed",lists)
   const [page, setPage] = useState(1); // Starting from 2 because initial data is already loaded
   const [pageSize, setPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,23 +22,18 @@ const SalonList = () => {
   const salonService = useMemo(() => Session.getObject('salonService'), []);
   const selectedBannerSalons = useMemo(() => Session.getObject('selectedBannerSalons'), []);
  
- console.log("salon banner",selectedBannerSalons)
 useEffect(() => {
 
     if (salonService) {
       setLists(salonService || []);
-      console.log("salonlist")
     } else if(filteredSalon){
       setLists(filteredSalon.items || [])
-      console.log("salonSService")
 
     } 
     else if(selectedBannerSalons){
       setLists(selectedBannerSalons.items || [])
-      console.log("salonSService")
      } else {
       setLists(allSalon);
-      console.log("filteredsalon")
 
     }
   }, [filteredSalon,salonService,allSalon]); 

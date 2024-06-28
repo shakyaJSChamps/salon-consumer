@@ -15,7 +15,6 @@ export default class Session {
                 try {
                     return JSON.parse(data);
                 } catch (error) {
-                    console.error("Error parsing JSON data:", error);
                     return null;
                 }
             }
