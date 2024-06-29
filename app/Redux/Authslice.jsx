@@ -74,7 +74,13 @@ export const authSlice = createSlice({
     },
     setSelectedBannerSalons:(state,action) =>{
       Session.setObject("selectedBannerSalons",action.payload)
-    }
+    },
+    updateUserProfile: (state, action) => {
+      const updatedProfile = action.payload;
+      state.user = { ...state.user, ...updatedProfile };
+      Session.setObject("profile", state.user);
+    },
+
   },
 });
 
@@ -86,7 +92,8 @@ export const {
   setSalonList,
 setSalonService,
 setSelectedBannerCity,
-setSelectedBannerSalons
+setSelectedBannerSalons,
+updateUserProfile,
 } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;

@@ -13,7 +13,7 @@ const SalonList = () => {
   const [allSalon, setAllSalon] = useState([]);
 
   const [page, setPage] = useState(1); // Starting from 2 because initial data is already loaded
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
   
@@ -36,7 +36,7 @@ useEffect(() => {
       setLists(allSalon);
 
     }
-  }, [filteredSalon,salonService,allSalon]); 
+  }, [filteredSalon,salonService,allSalon,selectedBannerSalons]); 
   
 
   const fetchSalonLists = async () => {
@@ -92,7 +92,7 @@ useEffect(()=>{
       pageSize={pageSize}
       setPageSize={setPageSize}
       isLoading={isLoading}
-    //   loadMoreItems={loadMoreItems}
+      loadMoreItems={loadMoreItems}
     //   lazyLoadingThreshold={0.5}
       hasMoreData={hasMoreData}
     />

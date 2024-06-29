@@ -19,7 +19,7 @@ export async function GetUserLocation() {
 
       return { city, state, country }; // Return the extracted address fields
     } catch (error) {
-      Notify.error(error.message);
+     // Notify.error(error.message);
       throw error;
     }
   } else {

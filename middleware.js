@@ -6,7 +6,6 @@ export async function middleware(req) {
   if (protectedRoutes.some(route => req.nextUrl.pathname.startsWith(route))) {
     const token = req.cookies.get('token');
     //const token =tokenData.value ;// Assuming token is stored in cookies
-    console.log("token rrra",token);
     if (!token) {
      const loginUrl = new URL('/login', req.url);
       return NextResponse.redirect(loginUrl);
