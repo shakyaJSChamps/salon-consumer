@@ -34,7 +34,7 @@ function TrendingSalons() {
         {data?.data?.mostPopularSalons.map((salon, index) => (
           <Paper elevation={3} key={index} className={styles.paper}>
             <div className={styles.image}>
-              <img src={salon.mainGateImageUrl} alt="salonImage" />
+              <Image src={salon.mainGateImageUrl} alt="salonImage" width={500} height={155}/>
             </div>
             <div className={styles.details}>
               <h3>{salon.name}</h3>

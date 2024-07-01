@@ -99,17 +99,6 @@ function Payment() {
     paymentObject.open();
   };
 
-  useEffect(() => {
-    const getPaymentDetails = async () => {
-      try {
-        const res = await getDetails();
-        setPaymentDetails(res?.data?.data || []);
-      } catch (error) {
-        Notify.error(error.message);
-      }
-    };
-    getPaymentDetails();
-  }, []);
 
   useEffect(() => {
   }, []);

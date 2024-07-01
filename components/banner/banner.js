@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Notify from '@/utils/notify';
 import Session from '@/service/session';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 function Banner() {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -95,7 +96,7 @@ function Banner() {
                 <Slider {...settings} ref={sliderRef}>
                     {banners.map((slide, index) => (
                         <div key={index} onClick={() => handleClick(slide)}>
-                            <img src={slide.mediaUrl} alt={slide.name} className={styles.sliderImage} />
+                            <Image src={slide.mediaUrl} alt={slide.name} className={styles.sliderImage} width={500} height={300}/>
                             {/* <h1 dangerouslySetInnerHTML={{ __html: slide.name }} /> */}
                             {/* <p>{slide.city}</p> */}
                             {/* <button><Link href={slide.redirectLink}>Discover</Link></button>  */}

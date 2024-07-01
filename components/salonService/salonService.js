@@ -14,6 +14,7 @@ import {
 } from "@/app/Redux/selectedServiceSlice";
 import Session from "@/service/session";
 import { selectUser } from "@/app/Redux/Authslice";
+
 function SalonService({ id, homeService }) {
   const [activeCategory, setActiveCategory] = useState(""); // Set default active category
   const [activeServiceIndexes, setActiveServiceIndexes] = useState([]); // Indexes of the selected services
@@ -22,6 +23,9 @@ function SalonService({ id, homeService }) {
   const [selectedServicesDetails, setSelectedServicesDetails] = useState([]);
   const [bookingLocation, setBookingLocation] = useState("");
   const [userInfo, setUserInfo] = useState(null);
+  const [gender, setGender] = useState("Male"); // Add state for gender
+  const [filteredServices, setFilteredServices] = useState([]); // Add state for filtered services
+
   const token = Session.get("authToken");
   const profile = useSelector(selectUser);
 
@@ -44,7 +48,14 @@ function SalonService({ id, homeService }) {
       }
     }
     fetchService();
-  }, [id]);
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    const filtered = selectedCategoryServices.filter(
+      (service) => service.type === gender
+    );
+    setFilteredServices(filtered);
+  }, [selectedCategoryServices, gender]);
 
   const handleServiceClick = (serviceName, index) => {
     const currentIndex = activeServiceIndexes.indexOf(index);
@@ -61,6 +72,7 @@ function SalonService({ id, homeService }) {
     );
     setSelectedCategoryServices(selectedCategory.services);
   };
+
   const fetchUserDetails = async () => {
     try {
       const userDetails = await getUserProfile();
@@ -116,6 +128,20 @@ function SalonService({ id, homeService }) {
       <div className={styles.service}>
         <Paper className={styles.paper}>
           <h3>Select Service</h3>
+          <div className={styles.filtered_gender}>
+          <button
+            onClick={() => setGender("Male")}
+            className={gender === "Male" ? styles.active : ""}
+          >
+            Male
+          </button>
+          <button
+            onClick={() => setGender("Female")}
+            className={gender === "Female" ? styles.active : ""}
+          >
+            Female
+          </button>
+          </div>
           <hr />
           <div className={styles.serviceFor}>
             {serviceData.map((category, index) => (
@@ -135,7 +161,7 @@ function SalonService({ id, homeService }) {
       <div className={styles.bestSeller}>
         <h3>BestSeller Haircut</h3>
         <div className={styles.serviceTypeDetails}>
-          {selectedCategoryServices.map((item, index) => (
+          {filteredServices.map((item, index) => (
             <div className={styles.details} key={index}>
               <div className={styles.aboutService}>
                 <h3>{item.serviceName}</h3>
@@ -153,7 +179,6 @@ function SalonService({ id, homeService }) {
                 <p>Professional {item.serviceName.toLowerCase()} service</p>
               </div>
               <div className={styles.image}>
-                {/* <img src={serviceImg} alt={item.serviceName}  /> */}
                 <button
                   className={`${styles.sellerBtn} ${
                     activeServiceIndexes.includes(index) ? styles.selected : ""

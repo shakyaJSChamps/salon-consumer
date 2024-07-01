@@ -20,7 +20,7 @@ function AppointmentDetailPage({ appointmentId }) {
 
     useEffect(() => {
         fetchAppointmentDetails();
-    }, []);
+    });
 
     const total = details?.services?.reduce((sum, service) => sum + (service.servicePrice || 0), 0);
 

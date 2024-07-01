@@ -68,12 +68,10 @@ function SalonDetail({ params }) {
               <Image
                 src={url}
                 alt={`Banner Image ${index + 1}`}
-                // layout="fill"
-                // objectFit="cover"
-                width={1000}
+                width={500}
                 height={350}
                 className={styles.sliderImage}
-                unoptimized 
+               // unoptimized 
               />
                 {/* <h3>{data?.name}</h3> */}
                 {/* <div className={styles.sliderTitl}>

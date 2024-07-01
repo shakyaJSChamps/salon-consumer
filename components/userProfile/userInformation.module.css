@@ -9,7 +9,16 @@
     justify-content: center;
     gap: 25px;
 }
-
+.default_address{
+    float: right;
+    margin-top: -25px;
+    margin-right: 138px;
+    border-radius: 5px;
+    padding: 0px 9px;
+    border: 2px solid lightgreen;
+    font-size: 13px;
+    color: lightgreen;
+}
 .userImageDiv {
     position: relative;
     width: 100px;

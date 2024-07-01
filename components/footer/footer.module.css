@@ -76,7 +76,7 @@ width: 200px;
         flex-direction: column;
     }
     .appstore{
-        margin-top: -25px;
+        /* margin-top: -25px; */
     }
    
 }
