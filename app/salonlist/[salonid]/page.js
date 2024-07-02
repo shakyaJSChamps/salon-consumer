@@ -51,7 +51,7 @@ function SalonDetail({ params }) {
   const homeService = data?.homeService;
   const workingHours = data?.workingHours || [];
   const settings = {
-    infinite: true,
+    infinite: data?.bannerImages?.length > 1,
         speed: 2000,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -62,6 +62,8 @@ function SalonDetail({ params }) {
   return (
     <div className={styles.container}>
       <div className={styles.salonSlider}>
+      {data?.bannerImages?.length > 1 ? (
+
       <Slider {...settings}  className={styles.salonSlider}>
           {data?.bannerImages?.map((url, index) => (
             <div key={index} className={styles.sliderImageWrapper}>
@@ -80,7 +82,18 @@ function SalonDetail({ params }) {
             </div>
           ))}
         </Slider>
-
+              ) : (
+                <div className={styles.sliderImageWrapper}>
+                  <Image
+                    src={data?.bannerImages?.[0]}
+                    alt="Banner Image"
+                    width={500}
+                    height={350}
+                    className={styles.sliderImage}
+                  />
+                </div>
+              )}
+      
         <div className={styles.sliderTitle}>
           <h3>{data?.name}</h3>
         </div>

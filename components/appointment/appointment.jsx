@@ -148,9 +148,15 @@ const Appointments = () => {
         }
     }
     const containerStyle = {
-        height: filteredPending.length === 0 && filteredPast.length === 0 ? '360px' : 'auto'
+        height: filteredPending.length === 0 && filteredPast.length === 0 ? '390px' : 'auto'
     };
-
+    const formatDate = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${day}-${month}-${year}`;
+      };
     return (
         <>
             {appointmentShow && (
@@ -193,7 +199,7 @@ const Appointments = () => {
                                 </div>
                                 <div className={styles.upcomingDetails}>
                                     <h5>{data.salon.name}</h5>
-                                    <p><RxCalendar /><span>{data.date}</span></p>
+                                    <p><RxCalendar /><span>{formatDate(data.date)}</span></p>
                                     <p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p>
                                     <p>Services- {data.services.map((item) => item.serviceName).join(", ")}</p>
                                     <p>Status-<span className={styles.circles}></span>{data.status}</p>
@@ -220,7 +226,7 @@ const Appointments = () => {
                                 </div>
                                 <div className={`${styles.upcomingDetails} upcomingDetailsPast`}>
                                     <h5>{data.salon.name}</h5>
-                                    <p><RxCalendar /><span>{data.date}</span></p>
+                                    <p><RxCalendar /><span>{formatDate(data.date)}</span></p>
                                     <p><HiOutlineLocationMarker /><span>{data.salon.address}</span></p>
                                     <p>Services- {data.services.map((item) => item.serviceName).join(", ")}</p>
                                     <p>
