@@ -14,6 +14,7 @@ import { deleteAppointment, getAppointment } from '@/api/account.api';
 import { MdOutlineFileDownload } from "react-icons/md";
 import Swal from 'sweetalert2';
 import Link from 'next/link';
+import { useCallback } from 'react';
 
 const Appointments = () => {
 
@@ -95,7 +96,7 @@ const Appointments = () => {
 
     
 
-    const filterAppointments = () => {
+    const filterAppointments = useCallback(() => {
         const filterByStatus = (appointment) => !statusFilter || appointment.status.toLowerCase() === statusFilter.toLowerCase();
         const filterByType = (appointment) => !typeFilter || appointment.services.some(service => service.serviceName.toLowerCase() === typeFilter.toLowerCase());
         const filterByDate = (appointment) => {
@@ -112,10 +113,11 @@ const Appointments = () => {
 
         setFilteredPending(pendingFiltered);
         setFilteredPast(pastFiltered);
-    }
+    },[statusFilter, typeFilter, selectedDate, appointments]);
+
     useEffect(() => {
         filterAppointments();
-    }, [statusFilter, typeFilter, selectedDate, appointments]);
+    }, [filterAppointments]);
     const handleDelete = (appointment) => {
         Swal.fire({
             title: "Are you sure?",

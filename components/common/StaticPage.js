@@ -7,7 +7,7 @@ const StaticPage = ({ endpoint, className }) => {
 
   useEffect(() => {
     fetchPageContent();
-  }, []);
+  });
 
   const fetchPageContent = async () => {
     try {

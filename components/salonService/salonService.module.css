@@ -15,6 +15,33 @@
 .service {
     flex: 1;
 }
+.filtered_gender{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.filtered_gender button{
+    border-radius: 5px;
+    padding: 3px 0px;
+    outline: none;
+    width: 100px;
+}
+.serviceFor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+    overflow-x: auto; /* Allows horizontal scrolling if necessary */
+  }
+  
+  .serviceFor button {
+    flex: 1 1 auto;
+    margin: 5px;
+    padding: 10px;
+    border: none;
+   
+    cursor: pointer;
+  }
 .activeButton:hover{
     background-color: black;
     color: white;

@@ -14,6 +14,7 @@ function UserAddress() {
     const [addAddressOpen, setAddAddressOpen] = useState(false);
     const [updateAddressOpen, setUpdateAddressOpen] = useState(false);
     const [addresses, setAddresses] = useState([]);
+    console.log("default address",addresses)
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -96,6 +97,8 @@ function UserAddress() {
                             <div key={index} className={styles.addressDetails}>
                                 <HiOutlineDotsVertical className={styles.dotted} onClick={(e) => handleIconClick(e, item)} />
                                     <h4 className='fw-bold'>{item.landmark}</h4>
+                                    {item.isDefault && <span className={styles.default_address}>Default</span>}
+
                                 <p><span className='fw-bold'></span>{`${item.houseNo}, ${item.streetAddress} ${item.city} ${item.state} ,${item.country} ${item.pincode}`} </p>
                                 {/* <p><span className='fw-bold'>Pin Code:&nbsp;</span>{item.pincode} </p> */}
                                 {/* <p><span className='fw-bold'>State:&nbsp;</span>{item.state} </p> */}

@@ -66,7 +66,7 @@ useEffect(() => {
   };
 useEffect(()=>{
   fetchSalonLists()
-},[])
+})
   const loadMoreItems = () => {
     if (!isLoading && hasMoreData) {
       fetchSalonLists();
