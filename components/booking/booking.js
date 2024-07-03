@@ -10,16 +10,21 @@ import * as Yup from "yup";
 import { appointment } from "@/api/account.api";
 import AddressPopup from "../userProfile/addressPopup/addressPopup";
 import Notify from "@/utils/notify";
+import { setAppointmentId } from "@/app/Redux/Authslice";
+import { useDispatch } from "react-redux";
 
 function Booking(props) {
-  const servicesDetails = Session.getObject("selectedService") || [];
-  const router = useRouter();
-  const [showAddress, setShowAddress] = useState(false);
+  const servicesDetails = Array.isArray(Session.getObject("selectedService")) 
+  ? Session.getObject("selectedService") 
+  : [Session.getObject("selectedService")];  const router = useRouter();
+  const disptach = useDispatch();
+  const gender = Session.get('type');
+   const [showAddress, setShowAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [totalCount, setTotalCount] = useState(1); // Initial count
   const [endTime, setEndTime] = useState("");
-
-  const serviceIds = servicesDetails?.map((item) => item.id);
+ 
+  const serviceIds = servicesDetails.map((item) => item.id);
   const totalServiceDuration = servicesDetails.reduce(
     (total, service) => total + service.serviceDuration,
     0
@@ -27,13 +32,12 @@ function Booking(props) {
 
   const salonId = Session.get("selectedSalonId");
   const today = new Date().toISOString().split("T")[0];
-
   // Formik initial values
   const initialValues = {
     salonId: parseInt(salonId),
     date: "",
     startTime: "",
-    serviceType: "",
+    serviceType: gender,
     duration: totalServiceDuration, // Duration in seconds
     homeService: props.serviceAt === "Home",
     serviceIds: serviceIds,
@@ -54,7 +58,7 @@ function Booking(props) {
       .required("Date is required")
       .min(today, "Date cannot be in the past"),
     startTime: Yup.string().required("Start time is required"),
-    serviceType: Yup.string().required("ServiceType is required"),
+    //serviceType: Yup.string().required("ServiceType is required"),
   });
 
   // Function to handle incrementing count
@@ -69,9 +73,9 @@ function Booking(props) {
     }
   }
 
-  const handleClick = () => {
-    router.push("salon/payment");
-  };
+  // const handleClick = () => {
+  //   router.push("salon/payment");
+  // };
 
   const calculateEndTime = (startTime, duration) => {
     if (startTime && duration) {
@@ -98,41 +102,46 @@ function Booking(props) {
 
 
 
-// Function to handle booking
-  // async function handleSubmit(values) {
-  //   const data = {
-  //     ...(props.serviceAt === "Home"
-  //       ? {
-  //           salonId: values.salonId,
-  //           date: values.date,
-  //           startTime: values.startTime,
-  //           serviceType: values.serviceType,
-  //           addressId: selectedAddress?.id,
-  //           duration: values.duration,
-  //           homeService: true,
-  //           serviceIds: serviceIds,
-  //         }
-  //       : {
-  //           ...values,
-  //         }),
-  //   };
+//Function to handle booking
+function handleSubmit(values) {
+  const data = {
+    ...(props.serviceAt === "Home"
+      ? {
+          salonId: values.salonId,
+          date: values.date,
+          startTime: values.startTime,
+          serviceType: gender,
+          addressId: selectedAddress?.id,
+          duration: values.duration,
+          homeService: true,
+          serviceIds: serviceIds,
+        }
+      : {
+          ...values,
+        }),
+  };
 
-  //   try {
-  //     const res = await appointment(data);
-  //     router.push("salon/payment");
-  //   } catch (error) {
-  //     Notify.error(error.message);
-  //     console.log('err msg',error.message)
-  //   }
-  // }
+  appointment(data)
+    .then((res) => {
+      const appointmentId = res.data?.data?.id;
+     // console.log("Appointment ID:", appointmentId);
+      disptach(setAppointmentId(appointmentId));
+      router.push("salon/payment");
+    })
+    .catch((error) => {
+      Notify.error(error.message);
+      // Handle error appropriately
+    });
+}
+
 
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <Formik
           initialValues={initialValues}
-          //validationSchema={validationSchema}
-         // onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
           {({ errors, touched, values, setFieldValue }) => (
             <Form>
@@ -224,14 +233,15 @@ function Booking(props) {
                 <h3>Service Type</h3>
                 <div className={styles.inputContainer}>
                   <Field
-                    as="select"
+                   // as="select"
                     type="text"
                     name="serviceType"
                     placeholder="serviceType"
+                    value={gender}
                   >
-                    <option>Select serviceType</option>
+                    {/* <option>Select serviceType</option>
                     <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="Female">Female</option> */}
                   </Field>
 
                   <ErrorMessage
@@ -275,7 +285,7 @@ function Booking(props) {
               )}
 
               <div className={styles.book}>
-                <button type="submit" onClick={handleClick}>Book Now</button>
+                <button type="submit">Book Now</button>
               </div>
             </Form>
           )}

@@ -1,3 +1,4 @@
+import { appointment } from "@/api/account.api";
 import Session from "@/service/session";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -22,7 +23,8 @@ const initialState = {
   salonList: initialSalonList,
   salonService: initialSalonService,
   selectedBannerCity: initialBannerCity,
-  selectedBannerSalons: initialBannerSalons
+  selectedBannerSalons: initialBannerSalons,
+  appointmentId:null
 };
 
 export const authSlice = createSlice({
@@ -80,7 +82,11 @@ export const authSlice = createSlice({
       state.user = { ...state.user, ...updatedProfile };
       Session.setObject("profile", state.user);
     },
+    setAppointmentId: (state, action) => { // Add this action
+      state.appointmentId = action.payload;
+      Session.set("appointmentId", action.payload);
 
+    },
   },
 });
 
@@ -94,6 +100,7 @@ setSalonService,
 setSelectedBannerCity,
 setSelectedBannerSalons,
 updateUserProfile,
+setAppointmentId,
 } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;

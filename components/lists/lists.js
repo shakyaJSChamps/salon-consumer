@@ -179,9 +179,14 @@ const Lists = (props) => {
     setMenuVisible(!menuVisible);
   };
 
+  const isEmptyList = lists.length === 0;
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        isEmptyList ? styles.emptyContainer : ""
+      }`}
+    >
       <div className={styles.findsSalon}>
         <div className={doorBuddyFind ? styles.doorBuddyFind : styles.find}>
           <div className={styles.findsIcons}>

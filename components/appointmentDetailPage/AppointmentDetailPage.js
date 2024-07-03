@@ -23,7 +23,13 @@ function AppointmentDetailPage({ appointmentId }) {
     });
 
     const total = details?.services?.reduce((sum, service) => sum + (service.servicePrice || 0), 0);
-
+    const formatDate = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${day}-${month}-${year}`;
+      };
     return (
         <div className={styles.mainDiv}>
             <div elevation={2} className={styles.paper}>
@@ -32,7 +38,7 @@ function AppointmentDetailPage({ appointmentId }) {
                         <h3>Appointment Details</h3>
                     </div>
                     <div className={styles.appointmentDetails}>
-                        <p><span>Date:</span> <span>{details?.date}</span></p>
+                        <p><span>Date:</span> <span>{formatDate(details?.date)}</span></p>
                         <p><span>Time:</span> <span>{details?.startTime}</span></p>
                         <p><span>Appointment Number:</span> <span>{details?.appointmentId}</span></p>
                         <p><span>Address:</span> <span>{details?.salon?.address}</span></p>
