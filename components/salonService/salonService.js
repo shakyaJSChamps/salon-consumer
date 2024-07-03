@@ -1,4 +1,3 @@
-"use client";
 import { Grid, Paper } from "@mui/material";
 import styles from "./salonService.module.css";
 import { useEffect, useState } from "react";
@@ -25,6 +24,8 @@ function SalonService({ id, homeService }) {
   const [userInfo, setUserInfo] = useState(null);
   const [gender, setGender] = useState("Male"); // Add state for gender
   const [filteredServices, setFilteredServices] = useState([]); // Add state for filtered services
+  const [showMaleButton, setShowMaleButton] = useState(true);
+  const [showFemaleButton, setShowFemaleButton] = useState(true);
 
   const token = Session.get("authToken");
   const profile = useSelector(selectUser);
@@ -121,6 +122,14 @@ function SalonService({ id, homeService }) {
     }
     setSelectedServicesDetails(newSelectedServicesDetails);
     dispatch(storeSelectedService(newSelectedServicesDetails));
+
+    // Determine if we need to show or hide gender buttons based on the selected services
+    const selectedTypes = newSelectedServicesDetails.map((service) => service.type);
+    const isMaleServiceSelected = selectedTypes.includes("Male");
+    const isFemaleServiceSelected = selectedTypes.includes("Female");
+
+    setShowMaleButton(!isFemaleServiceSelected);
+    setShowFemaleButton(!isMaleServiceSelected);
   };
 
   return (
@@ -129,18 +138,22 @@ function SalonService({ id, homeService }) {
         <Paper className={styles.paper}>
           <h3>Select Service</h3>
           <div className={styles.filtered_gender}>
-          <button
-            onClick={() => setGender("Male")}
-            className={gender === "Male" ? styles.active : ""}
-          >
-            Male
-          </button>
-          <button
-            onClick={() => setGender("Female")}
-            className={gender === "Female" ? styles.active : ""}
-          >
-            Female
-          </button>
+            {showMaleButton && (
+              <button
+                onClick={() => setGender("Male")}
+                className={gender === "Male" ? styles.active : ""}
+              >
+                Male
+              </button>
+            )}
+            {showFemaleButton && (
+              <button
+                onClick={() => setGender("Female")}
+                className={gender === "Female" ? styles.active : ""}
+              >
+                Female
+              </button>
+            )}
           </div>
           <hr />
           <div className={styles.serviceFor}>

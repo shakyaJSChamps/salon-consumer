@@ -141,28 +141,28 @@ function Booking(props) {
                   <div>
                     <h3>Grooming Essentials</h3>
                   </div>
-                  <div className={styles.count}>
-                    <RemoveIcon
+                  {/* <div className={styles.count}> */}
+                    {/* <RemoveIcon
                       className={styles.countIcon}
                       style={{ fontSize: "12px" }}
                       onClick={handleDecrement}
-                    />
-                    <span>{totalCount}</span>
-                    <AddIcon
+                    /> */}
+                    {/* <span>{totalCount}</span> */}
+                    {/* <AddIcon
                       className={styles.countIcon}
                       style={{ fontSize: "12px" }}
                       onClick={handleIncrement}
-                    />
-                  </div>
+                    /> */}
+                  {/* </div> */}
                   <div className={styles.totalPrice}>
-                    <p>
+                    {/* <p>
                       ₹
                       {servicesDetails.reduce(
                         (total, service) =>
                           total + service.servicePrice * totalCount,
                         0
                       )}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
