@@ -20,15 +20,16 @@ function AppointmentDetailPage({ appointmentId }) {
 
     useEffect(() => {
         fetchAppointmentDetails();
-    });
+    },[]);
 
     const total = details?.services?.reduce((sum, service) => sum + (service.servicePrice || 0), 0);
     const formatDate = (date) => {
         const d = new Date(date);
         const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const month = monthNames[d.getMonth()];
         const day = String(d.getDate()).padStart(2, '0');
-        return `${day}-${month}-${year}`;
+        return `${day} ${month} ${year}`;
       };
     return (
         <div className={styles.mainDiv}>
@@ -79,9 +80,9 @@ function AppointmentDetailPage({ appointmentId }) {
                     </div>
                     <div className={styles.paymentSummary}>
                         <p><span>Item Total</span> <span>₹{total}</span></p>
-                        <p><span>Taxes and Fee</span> <span>₹49</span></p>
+                        {/* <p><span>Taxes and Fee</span> <span>₹49</span></p> */}
                         <hr />
-                        <p><strong>Grand Total:</strong> ₹{total + 49}</p>
+                        <p><strong>Grand Total:</strong> ₹{total}</p>
                     </div>
                 </div>
             </div>

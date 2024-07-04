@@ -8,12 +8,19 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
+    height: 420px;
+}
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    width: 400px !important;
 }
 
 .schedule h4 {
     font-weight: bold;
     font-size: 15px;
     padding: 15px 0px;
+}
+.timeSlot{
+    width: 100%;
 }
 .form{
     display: flex;
@@ -24,9 +31,10 @@
 .schedule input {
     font-size: 14px;
     font-weight: 500;
-
 }
-
+.booking_date{
+    margin-bottom: 10px;
+}
 .schedule input[type="text"]::placeholder {
     color: black !important;
     font-weight: 500;
@@ -41,11 +49,13 @@
 .enterInput input,
 .reschedule input {
     color: black !important;
-    padding: 6px 20px;
+    padding: 8px 20px;
     width: 100%;
     border-radius: 7px;
-    border: none;
+    border: 2px solid grey;
     box-shadow: 2px 3px 7px #a1acb0;
+    outline: none;
+
 }
 
 
@@ -67,7 +77,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-
 }
 
 .chooseTime button {
