@@ -95,8 +95,8 @@ export const homePage = () =>
 export const serviceDetails = (id) =>
   HTTP.Request(methods.GET, `${__endpoint_serviceDetails}/${id}/salons`);
 
-export const payments = (payload) =>
-  HTTP.Request(methods.POST, `${__endpoint_paymentGateway}/14/order`,payload);
+export const payments = (payload,id) =>
+  HTTP.Request(methods.POST, `${__endpoint_paymentGateway}/${id}/order`,payload);
 
-export const getDetails = () =>
-  HTTP.Request(methods.GET, `${__endpoint_paymentGateway}/14/order`);
+export const getDetails = (id) =>
+  HTTP.Request(methods.GET, `${__endpoint_paymentGateway}/${id}/order`);

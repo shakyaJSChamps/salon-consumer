@@ -121,7 +121,10 @@ function SalonService({ id, homeService }) {
       newSelectedServicesDetails.splice(selectedIndex, 1);
     }
     setSelectedServicesDetails(newSelectedServicesDetails);
-    dispatch(storeSelectedService(newSelectedServicesDetails));
+    dispatch(storeSelectedService({
+      services: newSelectedServicesDetails,
+      type: gender // Include the type (gender) when dispatching the action
+    }));
 
     // Determine if we need to show or hide gender buttons based on the selected services
     const selectedTypes = newSelectedServicesDetails.map((service) => service.type);
@@ -198,7 +201,7 @@ function SalonService({ id, homeService }) {
                   }`}
                   onClick={() => handleAddButtonClick(item)}
                 >
-                  {selectedServicesDetails.includes(item) ? "unselect" : "add"}
+                  {selectedServicesDetails.includes(item) ? "Unselect" : "Add"}
                 </button>
               </div>
             </div>

@@ -12,8 +12,8 @@ function Payment() {
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState([]);
   const [order, setOrder] = useState(null);
-
   const servicesDetails = Session.getObject("selectedService");
+  const id = Session.get('appointmentId');
   const router = useRouter();
 
   const totalAmount = servicesDetails?.reduce(
@@ -39,7 +39,7 @@ function Payment() {
       const payload = {
         subtotal: totalAmount,
       };
-      const res = await payments(payload);
+      const res = await payments(payload,id);
       
       setOrder(res?.data?.data);
     } catch (error) {
@@ -79,8 +79,8 @@ function Payment() {
       handler: async function (response) {
         //alert(response.razorpay_payment_id);
        // console.log("res razorpay", response);
-      //  console.log('options',options)
-
+       // console.log('options',options)
+        router.push("/appointment");
       },
       prefill: {
         name: "Your Name",
@@ -110,7 +110,7 @@ function Payment() {
             <div>
               <h3>Grooming Essentials</h3>
             </div>
-            <div className={styles.count}>
+            {/* <div className={styles.count}>
               <RemoveIcon
                 className={styles.countIcon}
                 style={{ fontSize: "12px" }}
@@ -122,7 +122,7 @@ function Payment() {
                 style={{ fontSize: "12px" }}
                 onClick={handleIncrement}
               />
-            </div>
+            </div> */}
             <div className={styles.totalPrice}>
               <p>
                 ₹
@@ -190,11 +190,13 @@ function Payment() {
             onClick={() => {
               handleOrder();
             }}
+            className={styles.btn}
+
           >
             Confirm Payment
           </button>
         )}
-        {order && <button onClick={handlePayment}>Pay</button>}
+        {order && <button onClick={handlePayment} className={styles.btn}>Pay</button>}
       </div>
     </div>
   );

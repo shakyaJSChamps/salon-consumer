@@ -3,10 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    padding: 24px 15px;
+    min-height: 400px;
+    padding: 51px 15px;
 }
-
+.btn{
+    cursor: pointer;
+}
 .wrapper {
     border: 2px solid grey;
     border-radius: 8px;
