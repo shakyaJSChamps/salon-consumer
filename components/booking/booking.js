@@ -12,18 +12,24 @@ import AddressPopup from "../userProfile/addressPopup/addressPopup";
 import Notify from "@/utils/notify";
 import { setAppointmentId } from "@/app/Redux/Authslice";
 import { useDispatch } from "react-redux";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { styled } from "@mui/system";
+import dayjs from "dayjs";
 
 function Booking(props) {
-  const servicesDetails = Array.isArray(Session.getObject("selectedService")) 
-  ? Session.getObject("selectedService") 
-  : [Session.getObject("selectedService")];  const router = useRouter();
+  const servicesDetails = Array.isArray(Session.getObject("selectedService"))
+    ? Session.getObject("selectedService")
+    : [Session.getObject("selectedService")];
+  const router = useRouter();
   const disptach = useDispatch();
-  const gender = Session.get('type');
-   const [showAddress, setShowAddress] = useState(false);
+  const gender = Session.get("type");
+  const [showAddress, setShowAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [totalCount, setTotalCount] = useState(1); // Initial count
   const [endTime, setEndTime] = useState("");
- 
+
   const serviceIds = servicesDetails.map((item) => item.id);
   const totalServiceDuration = servicesDetails.reduce(
     (total, service) => total + service.serviceDuration,
@@ -32,6 +38,9 @@ function Booking(props) {
 
   const salonId = Session.get("selectedSalonId");
   const today = new Date().toISOString().split("T")[0];
+  const tenDaysAhead = new Date();
+  tenDaysAhead.setDate(tenDaysAhead.getDate() + 10);
+  const maxDate = tenDaysAhead.toISOString().split("T")[0];
   // Formik initial values
   const initialValues = {
     salonId: parseInt(salonId),
@@ -73,163 +82,162 @@ function Booking(props) {
     }
   }
 
-  // const handleClick = () => {
-  //   router.push("salon/payment");
-  // };
-
   const calculateEndTime = (startTime, duration) => {
     if (startTime && duration) {
-      const [hour, minute, period] = startTime.split(/:| /); // Split time string by colon or space
-      let hours = parseInt(hour, 10);
-  
-      // Adjust hours for PM time
-      if (period.toLowerCase() === "pm" && hours < 12) {
-        hours += 12;
-      } else if (period.toLowerCase() === "am" && hours === 12) {
-        hours = 0; // Midnight case
-      }
-  
-      const start = new Date(0, 0, 0, hours, parseInt(minute, 10));
-      const end = new Date(start.getTime() + duration * 60000); // Convert duration to milliseconds
-  
-      // Format end time in hh:mm AM/PM format
-      const formattedEnd = end.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-      return formattedEnd;
+      const start = dayjs(startTime, "hh:mm A");
+      const end = start.add(duration, "minute");
+
+      // Format end time in hh:mm A format
+      return end.format("hh:mm A");
     }
     return "";
   };
-  
 
+  // Function to handle booking
+  function handleSubmit(values) {
+    // Convert startTime to the required format
+    const formattedStartTime = dayjs(values.startTime).format('hh:mm A');
 
+    const data = {
+      ...(props.serviceAt === "Home"
+        ? {
+            salonId: values.salonId,
+            date: values.date,
+            startTime: formattedStartTime,
+            serviceType: gender,
+            addressId: selectedAddress?.id,
+            duration: values.duration,
+            homeService: true,
+            serviceIds: serviceIds,
+          }
+        : {
+            ...values,
+            startTime: formattedStartTime,
+          }),
+    };
 
-//Function to handle booking
-function handleSubmit(values) {
-  const data = {
-    ...(props.serviceAt === "Home"
-      ? {
-          salonId: values.salonId,
-          date: values.date,
-          startTime: values.startTime,
-          serviceType: gender,
-          addressId: selectedAddress?.id,
-          duration: values.duration,
-          homeService: true,
-          serviceIds: serviceIds,
-        }
-      : {
-          ...values,
-        }),
-  };
-
-  appointment(data)
-    .then((res) => {
-      const appointmentId = res.data?.data?.id;
-     // console.log("Appointment ID:", appointmentId);
-      disptach(setAppointmentId(appointmentId));
-      router.push("salon/payment");
-    })
-    .catch((error) => {
-      Notify.error(error.message);
-      // Handle error appropriately
-    });
-}
-
+    appointment(data)
+      .then((res) => {
+        const appointmentId = res.data?.data?.id;
+        disptach(setAppointmentId(appointmentId));
+        router.push("salon/payment");
+      })
+      .catch((error) => {
+        Notify.error(error.message);
+      });
+  }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ errors, touched, values, setFieldValue }) => (
-            <Form>
-              <div className={styles.counter}>
-                <div className={styles.countSection}>
-                  <div>
-                    <h3>Grooming Essentials</h3>
-                  </div>
-                  {/* <div className={styles.count}> */}
-                    {/* <RemoveIcon
-                      className={styles.countIcon}
-                      style={{ fontSize: "12px" }}
-                      onClick={handleDecrement}
-                    /> */}
-                    {/* <span>{totalCount}</span> */}
-                    {/* <AddIcon
-                      className={styles.countIcon}
-                      style={{ fontSize: "12px" }}
-                      onClick={handleIncrement}
-                    /> */}
-                  {/* </div> */}
-                  <div className={styles.totalPrice}>
-                    {/* <p>
-                      ₹
-                      {servicesDetails.reduce(
-                        (total, service) =>
-                          total + service.servicePrice * totalCount,
-                        0
-                      )}
-                    </p> */}
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ errors, touched, values, setFieldValue }) => (
+              <Form>
+                <div className={styles.counter}>
+                  <div className={styles.countSection}>
+                    <div>
+                      <h3>Grooming Essentials</h3>
+                    </div>
+                    {/* <div className={styles.count}>
+                      <RemoveIcon
+                        className={styles.countIcon}
+                        style={{ fontSize: "12px" }}
+                        onClick={handleDecrement}
+                      />
+                      <span>{totalCount}</span>
+                      <AddIcon
+                        className={styles.countIcon}
+                        style={{ fontSize: "12px" }}
+                        onClick={handleIncrement}
+                      />
+                    </div> */}
+                    <div className={styles.totalPrice}>
+                      {/* <p>
+                        ₹
+                        {servicesDetails.reduce(
+                          (total, service) =>
+                            total + service.servicePrice * totalCount,
+                          0
+                        )}
+                      </p> */}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {servicesDetails.map((service, index) => (
-                <div key={index} className={styles.serviceType}>
-                  <div className={styles.price}>
-                    <div className={styles.serviceList}>
-                      <ul>
-                        <li>
-                          {service.serviceName} for {service.type} x{totalCount}
-                        </li>
-                      </ul>
-                    </div>
+                {servicesDetails.map((service, index) => (
+                  <div key={index} className={styles.serviceType}>
                     <div className={styles.price}>
-                      ₹{service.servicePrice * totalCount}
+                      <div className={styles.serviceList}>
+                        <ul>
+                          <li>
+                            {service.serviceName} for {service.type} x{totalCount}
+                          </li>
+                        </ul>
+                      </div>
+                      <div className={styles.price}>
+                        ₹{service.servicePrice * totalCount}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
-              <div className={styles.bookingDate}>
-                <h3>Booking date</h3>
-                <div className={styles.dateContainer}>
-                  <Field type="date" name="date" min={today} />
-                  <ErrorMessage name="date" component="div" className="error" />
+                <div className={styles.bookingDate}>
+                  <h3>Booking date</h3>
+                  <div className={styles.dateContainer}>
+                    <Field type="date" name="date" min={today} max={maxDate} />
+                    <ErrorMessage name="date" component="div" className="error" />
+                  </div>
                 </div>
-              </div>
 
-              <div className={styles.dateContainer}>
-                <h3>Select time slot</h3>
-                <div className={styles.timeslot}>
-                  <Field
-                    type="text"
+                <div className={styles.timeContainer}>
+                  <h3>Select time slot</h3>
+                  <div className={styles.timeslot}>
+                    <Field name="startTime">
+                      {({ field }) => (
+                        <CustomTimePicker
+                          {...field}
+                          value={field.value || null}
+                          onChange={(value) => {
+                            setFieldValue("startTime", value);
+                            setEndTime(calculateEndTime(value, values.duration));
+                          }}
+                          renderInput={(params) => (
+                            <input
+                              type="text"
+                              {...params}
+                              className={`${styles.timeSlot} timePickerInput`}
+                            />
+                          )}
+                          // disabled={isSubmitting}
+                          ampm={true}
+                        />
+                      )}
+                    </Field>
+                  </div>
+                  <ErrorMessage
                     name="startTime"
-                    onChange={(e) => {
-                      setFieldValue("startTime", e.target.value);
-                      setEndTime(
-                        calculateEndTime(e.target.value, values.duration)
-                      );
-                    }}
+                    component="div"
+                    className="error"
                   />
                 </div>
-                <ErrorMessage
-                  name="startTime"
-                  component="div"
-                  className="error"
-                />
-              </div>
 
-              <div className={styles.dateContainer}>
-                <h3>End Time</h3>
-                <div className={styles.timeslot}>
-                  <Field type="text" name="endTime" value={endTime} readOnly />
+                <div className={styles.dateContainer}>
+                  <h3>End Time</h3>
+                  <div className={styles.timeslot}>
+                    <input
+                      type="text"
+                      value={endTime}
+                      placeholder="End Time"
+                      readOnly
+                    />
+                  </div>
                 </div>
-              </div>
-
-              <div className={styles.address}>
+                <div className={styles.address}>
                 <h3>Service Type</h3>
                 <div className={styles.inputContainer}>
                   <Field
@@ -239,9 +247,6 @@ function handleSubmit(values) {
                     placeholder="serviceType"
                     value={gender}
                   >
-                    {/* <option>Select serviceType</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option> */}
                   </Field>
 
                   <ErrorMessage
@@ -251,53 +256,92 @@ function handleSubmit(values) {
                   />
                 </div>
               </div>
-              {props.serviceAt === "Home" && (
-                <div className={styles.address}>
-                  {selectedAddress !== null && (
-                    <>
-                      <h3>Address</h3>{" "}
-                      <div className={styles.inputContainer}>
-                        <Field
-                          type="text"
-                          name="addressId"
-                          value={`${selectedAddress?.houseNo} ${selectedAddress?.streetAddress}, ${selectedAddress?.city}, ${selectedAddress?.state},${selectedAddress?.country}, ${selectedAddress?.pincode}`}
-                          placeholder="Address"
-                          readOnly
-                        />
-                        <ErrorMessage
-                          name="addressId"
-                          component="div"
-                          className="error"
-                        />
-                      </div>
-                    </>
-                  )}
-                  {selectedAddress === null && (
-                    <button
-                      type="button"
-                      onClick={handleShowAddress}
-                      className={styles.addressBtn}
-                    >
-                      Select Address
-                    </button>
-                  )}
-                </div>
-              )}
+                {props.serviceAt === "Home" && (
+                  <div className={styles.address}>
+                    <h3>Address</h3>
+                    {selectedAddress && (
+                      <>
+                        <div className={styles.dateContainer}>
+                          <Field
+                            type="text"
+                            name="addressId"
+                            value={`${selectedAddress?.houseNo} ${selectedAddress?.streetAddress}, ${selectedAddress?.city}, ${selectedAddress?.state},${selectedAddress?.country}, ${selectedAddress?.pincode}`}
+                            placeholder="Address"
+                            readOnly
+                          />
+                          <ErrorMessage
+                            name="addressId"
+                            component="div"
+                            className="error"
+                          />
+                        </div>
+                      </>
+                    )}
+                    {selectedAddress === null && (
+                      <button
+                        type="button"
+                        onClick={handleShowAddress}
+                        className={styles.addressBtn}
+                      >
+                        Select Address
+                      </button>
+                    )}
+                  </div>
+                )}
 
-              <div className={styles.book}>
-                <button type="submit">Book Now</button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+                <div className={styles.book}>
+                  <button type="submit">Book Now</button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+        <AddressPopup
+          show={showAddress}
+          onHide={() => setShowAddress(false)}
+          onSelectAddress={handleAddressSelection}
+        />
       </div>
-      <AddressPopup
-        show={showAddress}
-        onHide={() => setShowAddress(false)}
-        onSelectAddress={handleAddressSelection}
-      />
-    </div>
+    </LocalizationProvider>
   );
 }
+
+const CustomTimePicker = styled(TimePicker)({
+  "& .MuiInputBase-root": {
+    border: "2px solid white",
+    boxShadow: "2px 3px 7px #a1acb0",
+    width: "100%",
+  },
+  "& .MuiOutlinedInput-root": {
+    "&:focus, &:focus-within": {
+      boxShadow: "2px 3px 7px #a1acb0",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "transparent",
+    },
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+  "& .MuiInputBase-input": {
+    border: "none",
+    width: "160px",
+    outline: "none",
+    borderRadius: "50px",
+    height: "6px",
+    "&:focus": {
+      outline: "none",
+      boxShadow: "none",
+      borderColor: "transparent",
+    },
+  },
+  "& .MuiInputAdornment-root": {
+    "&:focus": {
+      outline: "none",
+      boxShadow: "none",
+      borderColor: "transparent",
+    },
+  },
+});
 
 export default Booking;

@@ -51,7 +51,8 @@ function AboutSalon({ id }) {
                   <div className={styles.specialistDetails} key={index}>
                     <div className={styles.image}>
                       <Image
-                        src={specialist.gender === "Male" ? male : female}
+                       // src={specialist.gender === "male" ? male : female}
+                       src={specialist.gender.toLowerCase() === "male" ? male : female}
                         alt={specialist.firstName}
                         width={100}
                         height={100}

@@ -34,8 +34,8 @@
     font-weight: 500;
 }
 .timeslot span{
-    margin-left: -185px;
-    margin-top: 6px;
+    /* margin-left: -185px;
+    margin-top: 6px; */
 }
 .count {
     display: flex;
@@ -176,7 +176,10 @@
     font-size: 14px;
     font-weight: bold;
 }
-
+.timeContainer h3{
+    font-size: 14px;
+    font-weight: bold; 
+}
 .dateContainer input {
     border: none;
     border-bottom: 1px solid #ccc;

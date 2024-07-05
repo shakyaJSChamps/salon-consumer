@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 import styles from './reschedule.module.css';
 import { rescheduleAppointment } from '@/api/account.api';
 import Notify from '@/utils/notify';
-import { BackHandSharp } from '@mui/icons-material';
 import { styled } from '@mui/system';
+
 const CustomTimePicker = styled(TimePicker)({
     '& .MuiInputBase-root': {
         border: '2px solid grey',
@@ -20,6 +20,18 @@ const CustomTimePicker = styled(TimePicker)({
             borderColor: 'transparent', // Remove border on focus
             boxShadow: 'none', // Remove box shadow on focus
         },
+        '& .MuiOutlinedInput-root': {
+    '&:focus, &:focus-within': {
+      boxShadow: '2px 3px 7px #a1acb0',
+
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'transparent', // Remove border on hover
+    },
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    border: 'none', // Remove the border
+  },
     },
     '& .MuiOutlinedInput-root': {
         '&:focus': {
@@ -35,6 +47,7 @@ const CustomTimePicker = styled(TimePicker)({
         height:'6px',
         
     },
+    
 });
 
 const RescheduleAppointment = ({ handelShowAppointMent, selectedAppointment, appointment }) => {
