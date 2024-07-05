@@ -54,7 +54,9 @@
     cursor: pointer;
 
 }
-
+.containerClass{
+    height: 430px !important;
+}
 .userInput .searchIcon {
     margin-top: 23px;
 }
@@ -223,7 +225,11 @@
 .humburgerCross {
     display: none;
 }
-
+@media (max-width:1400px){
+    .fixed_height{
+        height: 430px;
+    }
+}
 @media screen and (max-width:780px) {
 
     .container {
@@ -260,7 +266,9 @@
     .container {
         position: relative;
     }
-
+    .noAppointments{
+        margin-top: 0px;
+    }
     .userInputs {
         flex-direction: column;
         align-items: flex-start;

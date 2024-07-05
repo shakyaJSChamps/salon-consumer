@@ -148,19 +148,23 @@ const Appointments = () => {
         }
     }
     const containerStyle = {
-        height: filteredPending.length === 0 && filteredPast.length === 0 ? '390px' : 'auto'
+        height: filteredPending.length === 0 && filteredPast.length === 0 ? '420px' : ''
     };
+    const containerClass = filteredPending.length === 0 && filteredPast.length === 0 ? 'fixed_height' : '';
+
     const formatDate = (date) => {
         const d = new Date(date);
         const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const month = monthNames[d.getMonth()];
         const day = String(d.getDate()).padStart(2, '0');
-        return `${day}-${month}-${year}`;
+        return `${day} ${month} ${year}`;
       };
+      
     return (
         <>
             {appointmentShow && (
-                <div className={styles.container}  style={containerStyle}>
+                <div className={`${styles.container} ${containerClass}`}  style={containerStyle}>
                     <h3 className={styles.titleAppointment}>My Appointments</h3>
                     {menuVisible ? (
                         <ImCross className={styles.humburgerCross} onClick={handleToggleMenu} />
@@ -257,7 +261,6 @@ const Appointments = () => {
                     )}
                 </div>
             )}
-
             {rescheduleShow && (
                 <>
                     <RescheduleAppointment appointment={fetchAppointments} selectedAppointment={selectedAppointment} handelShowAppointMent={handelShowAppointMent} />
