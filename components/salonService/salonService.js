@@ -192,7 +192,7 @@ function SalonService({ id, homeService }) {
                   </span>
                 </p>
                 <hr />
-                <p>Professional {item.serviceName.toLowerCase()} service</p>
+                {/* <p>Professional {item.serviceName.toLowerCase()} service</p> */}
               </div>
               <div className={styles.image}>
                 <button

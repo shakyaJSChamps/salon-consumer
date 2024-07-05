@@ -74,8 +74,8 @@ function Payment() {
       amount: order?.subtotal,
       order_id: order?.orderId,
       currency: "INR",
-      name: "Your Company Name",
-      description: "Test Transaction",
+      name: "STYLRAX",
+    //  description: "Test Transaction",
       handler: async function (response) {
         //alert(response.razorpay_payment_id);
        // console.log("res razorpay", response);
@@ -83,9 +83,9 @@ function Payment() {
         router.push("/appointment");
       },
       prefill: {
-        name: "Your Name",
-        email: "Your Email",
-        // contact: "Your Phone Number",
+      //  name: "Your Name",
+      //   email: "Your Email",
+      //   contact: "Your Phone Number",
       },
       notes: {
         address: "Your Address",
@@ -151,7 +151,7 @@ function Payment() {
             </div>
           </div>
         ))}
-        <div className={styles.offers}>
+        {/* <div className={styles.offers}>
           <h3>Coupons and offers</h3>
           <div className={styles.offerlist}>
             <ul>
@@ -159,7 +159,7 @@ function Payment() {
               <li>Flat 20% off On Payment Through Axis Bank</li>
             </ul>
           </div>
-        </div>
+        </div> */}
         <div className={styles.paymentSummary}>
           <h3>Payment summary</h3>
           {servicesDetails?.map((service, index) => (
