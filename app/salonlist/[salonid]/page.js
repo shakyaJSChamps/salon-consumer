@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SalonService from "@/components/salonService/salonService";
 import SalonGallery from "@/components/salonGallery/salonGallery";
+import dummyBanner from '../../../assets/images/dummyBanner.jpeg';
 import AboutSalon from "@/components/aboutSalon/aboutSalon";
 import { getDetailPageData } from "@/api/account.api";
 import { FaHeart } from "react-icons/fa";
@@ -85,7 +86,7 @@ function SalonDetail({ params }) {
               ) : (
                 <div className={styles.sliderImageWrapper}>
                   <Image
-                    src={data?.bannerImages?.[0]}
+                    src={data?.bannerImages?.[0] || dummyBanner}
                     alt="Banner Image"
                     width={500}
                     height={350}
@@ -113,7 +114,7 @@ function SalonDetail({ params }) {
           </div>
           <div className={styles.salonRating}>
             <StarsIcon className={styles.icon} />
-            <p>4.2 (1k+ Ratings)</p>
+            <p>4.2</p>
           </div>
           <div className={styles.salonLocation}>
             <LocationOnIcon className={styles.icon} />

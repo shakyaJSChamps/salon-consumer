@@ -75,7 +75,9 @@ function AboutSalon({ id }) {
           <div className={styles.reviewRating}>
             <div className={styles.heading}>Ratings & Reviews</div>
             <div className={styles.reviewDiv}>
-              {reviews?.map((item, index) => (
+            {Array.isArray(reviews) && reviews.length > 0 ? (
+
+              reviews?.map((item, index) => (
                 <div className={styles.reviewsContainer} key={index}>
                   <div className={styles.userDetails}>
                     <div className={styles.aboutUser}>
@@ -101,7 +103,10 @@ function AboutSalon({ id }) {
                     <p>{item.review}</p>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <p className={styles.noReviews}>No ratings and reviews available</p>
+            )}
             </div>
           </div>
         </div>

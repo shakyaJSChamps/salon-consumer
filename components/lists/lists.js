@@ -243,7 +243,7 @@ const Lists = (props) => {
                 options={getUniqueServices(lists, "rating")}
                 selectedOptions={selectedRatings}
                 onChange={(option) => handleFilterChange(option, "rating")}
-                formatOption={(option) => `${option}.0`}
+                formatOption={(option) => `${option}`}
                 closeMenu={handleToggleMenu}
               />
             </div>
@@ -271,7 +271,7 @@ const Lists = (props) => {
                 options={getUniqueServices(lists, "rating")}
                 selectedOptions={selectedRatings}
                 onChange={(option) => handleFilterChange(option, "rating")}
-                formatOption={(option) => `${option}.0`}
+                formatOption={(option) => `${option}`}
               />
             </div>
           </div>
@@ -315,7 +315,7 @@ const Lists = (props) => {
                 </div>
                 <div className={styles.ratings}>
                   <p className={styles.locations}>
-                    <StarIcon /> {salon.rating}.0
+                    <StarIcon /> {salon.rating}
                   </p>
                   <p className={styles.serviceType}>{salon.serviceType}</p>
                 </div>

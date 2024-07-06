@@ -43,6 +43,25 @@ function SalonService({ id, homeService }) {
           setActiveCategory(data[0].name); // Set first service as default active category
           setSelectedCategoryServices(data[0].services);
           setServiceData(data);
+
+           // Determine available genders
+           const maleServices = data.some(category => 
+            category.services.some(service => service.type === "Male")
+          );
+          const femaleServices = data.some(category => 
+            category.services.some(service => service.type === "Female")
+          );
+
+          setShowMaleButton(maleServices); // Show Male button if male services are available
+          setShowFemaleButton(femaleServices); // Show Female button if female services are available
+
+          // Set default gender
+          if (maleServices) {
+            setGender("Male");
+          } else if (femaleServices) {
+            setGender("Female");
+          }
+        
         }
       } catch (error) {
         Notify.error(error.message);
@@ -134,7 +153,9 @@ function SalonService({ id, homeService }) {
     setShowMaleButton(!isFemaleServiceSelected);
     setShowFemaleButton(!isMaleServiceSelected);
   };
-
+  if (serviceData.length === 0) {
+    return <div className={styles.noService}>No services available</div>;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.service}>
@@ -175,7 +196,7 @@ function SalonService({ id, homeService }) {
         </Paper>
       </div>
       <div className={styles.bestSeller}>
-        <h3>BestSeller Haircut</h3>
+        {/* <h3>BestSeller Haircut</h3> */}
         <div className={styles.serviceTypeDetails}>
           {filteredServices.map((item, index) => (
             <div className={styles.details} key={index}>
