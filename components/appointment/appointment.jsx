@@ -10,16 +10,18 @@ import RescheduleAppointment from "../resheduleAppointMent/rescheduleAppointMent
 import Ratings from "../rating&review/rating";
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
-import { deleteAppointment, getAppointment } from "@/api/account.api";
+import { deleteAppointment, getAppointment, getInvoice } from "@/api/account.api";
 import { MdOutlineFileDownload } from "react-icons/md";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import { useCallback } from "react";
+import Session from "@/service/session";
 
 const Appointments = () => {
   const [appointmentShow, setShowAppointMent] = useState(true);
   const [rescheduleShow, setRescheduleShow] = useState(false);
   const [ratingShow, setRatingShow] = useState(false);
+  const [invoice,setInvoice] = useState([]);
   const [appointments, setAppointments] = useState({
     pending: null,
     past: null,
@@ -31,7 +33,7 @@ const Appointments = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-
+  const id = Session.get('appointmentId')
   const handelShowRescedule = (appointment) => {
     setSelectedAppointment(appointment);
     setRescheduleShow(true);
@@ -188,7 +190,38 @@ const Appointments = () => {
     const day = String(d.getDate()).padStart(2, "0");
     return `${day} ${month} ${year}`;
   };
+ 
 
+  //Invoice api 
+
+  useEffect(() => {
+    const fetchInvoice = async () => {
+      try {
+        const res = await getInvoice(id);
+        setInvoice(res.data.data); // Assuming `getInvoice` returns the entire invoice object
+      } catch (error) {
+        console.error("Error fetching invoice", error);
+      }
+    };
+    fetchInvoice();
+  }, [id]);
+
+  const handleDownloadInvoice = async () => {
+    try {
+      // Assuming `invoice.invoicePath` contains the URL to download the invoice
+      const invoicePath = invoice.invoicePath;
+
+      // Initiate download
+      const link = document.createElement('a');
+      link.href = invoicePath;
+      link.setAttribute('download', ''); 
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      Notify.error(error.message);
+    }
+  };
   return (
     <>
       {appointmentShow && (
@@ -345,9 +378,9 @@ const Appointments = () => {
                       {data.status === "COMPLETED" && (
                         <div className={styles.downloadInvoice}>
                           <div className={styles.load}>
-                            <MdOutlineFileDownload />
+                            <MdOutlineFileDownload onClick={handleDownloadInvoice}/>
                           </div>
-                          <p>Download Invoice</p>
+                          <p onClick={handleDownloadInvoice} className={styles.inVoiceBtn}>Download Invoice</p>
                         </div>
                       )}
                     </div>

@@ -3,7 +3,9 @@
 
     margin: auto;
 }
-
+.inVoiceBtn{
+    cursor: pointer;
+}
 .userInputs {
     display: flex;
     align-items: center;
@@ -112,6 +114,7 @@
 .load{
    color: #7A7A7A;
    font-size: 25px;
+   cursor: pointer;
 }
 .downloadInvoice p{
     font-size: 13px;

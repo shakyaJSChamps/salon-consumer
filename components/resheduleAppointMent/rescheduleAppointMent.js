@@ -78,15 +78,15 @@ const RescheduleAppointment = ({ handelShowAppointMent, selectedAppointment, app
     });
 
     const onSubmit = async (values, { setSubmitting }) => {
-        console.log("submitted date val",values)
+        //console.log("submitted date val",values)
         try {
             // Ensure correct time format handling with AM/PM
             const formattedTime = dayjs(values.timeSlot, 'hh:mm A').format('hh:mm A'); // Preserve AM/PM for API
-          //  const formattedDate = formatDate(values.bookingDate);
+            const formattedDate = formatDate(values.bookingDate);
 
             const data = {
                 type: 'reschedule',
-                date: values.bookingDate,
+                date: formattedDate,
                 startTime: formattedTime,
             };
             const AppointmentReschedule = await rescheduleAppointment(data, selectedAppointment.id);

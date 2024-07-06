@@ -1,13 +1,16 @@
 "use client";
-import { appointmentDetails } from '@/api/account.api';
+import { appointmentDetails, getInvoice } from '@/api/account.api';
 import React, { useEffect, useState } from 'react';
 import styles from './AppointmentDetailPage.module.css';
 import { Paper } from '@mui/material';
 import { MdOutlineFileDownload } from "react-icons/md";
 import { PiGreaterThanLight } from "react-icons/pi";
+import Session from '@/service/session';
 
 function AppointmentDetailPage({ appointmentId }) {
     const [details, setDetails] = useState(null);
+    const [invoice,setInvoice] = useState([]);
+    const id = Session.get('appointmentId')
 
     const fetchAppointmentDetails = async () => {
         try {
@@ -30,6 +33,35 @@ const data = details?.salon?.homeService ==='true'?'Home Service':'Salon Service
         const month = monthNames[d.getMonth()];
         const day = String(d.getDate()).padStart(2, '0');
         return `${day} ${month} ${year}`;
+      };
+
+      useEffect(() => {
+        const fetchInvoice = async () => {
+          try {
+            const res = await getInvoice(id);
+            setInvoice(res.data.data); // Assuming `getInvoice` returns the entire invoice object
+          } catch (error) {
+            console.error("Error fetching invoice", error);
+          }
+        };
+        fetchInvoice();
+      }, [id]);
+    
+      const handleDownloadInvoice = async () => {
+        try {
+          // Assuming `invoice.invoicePath` contains the URL to download the invoice
+          const invoicePath = invoice.invoicePath;
+    
+          // Initiate download
+          const link = document.createElement('a');
+          link.href = invoicePath;
+          link.setAttribute('download', ''); 
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } catch (error) {
+          Notify.error(error.message);
+        }
       };
     return (
         <div className={styles.mainDiv}>
@@ -63,13 +95,14 @@ const data = details?.salon?.homeService ==='true'?'Home Service':'Salon Service
                     <p><span>Name</span> <span>{details?.userName}</span></p>
                     </div>
                     </div>
-                <button className={styles.rateReviewButton}>Rate & Review</button>
+                {/* <button className={styles.rateReviewButton}>Rate & Review</button> */}
                 {/* <PiGreaterThanLight /> */}
-                <div className={styles.downloadInvoice}>
-                    {/* <div className={styles.downloadIcon}><MdOutlineFileDownload /></div> */}
-                    <h3>Download Invoice</h3>
-               {/* <div className={styles.icon}><PiGreaterThanLight /></div>      */}
-                </div>
+                {details?.status === 'COMPLETED' && (
+                        <div className={styles.downloadInvoice}>
+                            <h3  onClick={handleDownloadInvoice}>Download Invoice</h3>
+                            {/* Include download functionality here */}
+                        </div>
+                    )}
                 <div className={styles.details}>
                     <div className={styles.title}>
                         <h3>Payment Details</h3>

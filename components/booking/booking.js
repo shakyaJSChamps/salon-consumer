@@ -35,6 +35,10 @@ function Booking(props) {
     (total, service) => total + service.serviceDuration,
     0
   );
+  const formatDate = (date) => {
+    const [year, month, day] = date.split("-");
+    return `${day}-${month}-${year}`;
+  };
 
   const salonId = Session.get("selectedSalonId");
   const today = new Date().toISOString().split("T")[0];
@@ -97,12 +101,13 @@ function Booking(props) {
   function handleSubmit(values) {
     // Convert startTime to the required format
     const formattedStartTime = dayjs(values.startTime).format('hh:mm A');
+    const formattedDate = formatDate(values.date);
 
     const data = {
       ...(props.serviceAt === "Home"
         ? {
             salonId: values.salonId,
-            date: values.date,
+            date: formattedDate,
             startTime: formattedStartTime,
             serviceType: gender,
             addressId: selectedAddress?.id,
@@ -112,6 +117,7 @@ function Booking(props) {
           }
         : {
             ...values,
+            date: formattedDate,
             startTime: formattedStartTime,
           }),
     };

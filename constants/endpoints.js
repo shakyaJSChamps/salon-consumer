@@ -54,3 +54,7 @@ export const __endpoint_paymentGateway =  endpoint+"consumer/appointments";
 export const __endpoint_resendOtp =  endpoint+"b2b/account/otp/resend";
 export const __endpoint_otpSend =  endpoint+"b2b/account/email/otp/send";
 export const __endpoint_otpVerify =  endpoint+"b2b/account/email/otp/verify";
+
+
+//invoice
+export const __endpoint_invoice =  endpoint+"consumer/appointments";
