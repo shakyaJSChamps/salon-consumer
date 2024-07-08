@@ -50,11 +50,15 @@ const CustomTimePicker = styled(TimePicker)({
     
 });
 const formatDate = (date) => {
-    const [year, month, day] = date.split('-');
+    const d = new Date(date);
+    const day = `${d.getDate()}`.padStart(2, '0');
+    const month = `${d.getMonth() + 1}`.padStart(2, '0');
+    const year = d.getFullYear();
     return `${day}-${month}-${year}`;
 };
 
-const RescheduleAppointment = ({ handelShowAppointMent, selectedAppointment, appointment }) => {
+
+const RescheduleAppointment = ({handleShowAppointment, selectedAppointment, appointment }) => {
     const today = new Date().toISOString().split('T')[0];
     const tenDaysAhead = new Date();
     tenDaysAhead.setDate(tenDaysAhead.getDate() + 10);
@@ -93,7 +97,7 @@ const RescheduleAppointment = ({ handelShowAppointMent, selectedAppointment, app
             console.log('Appointment rescheduled:', AppointmentReschedule);
             Notify.success('Appointment rescheduled successfully.');
             setSubmitting(false);
-            handelShowAppointMent();
+            handleShowAppointment();
             appointment();
         } catch (error) {
             Notify.error(error.message);
@@ -120,6 +124,14 @@ const RescheduleAppointment = ({ handelShowAppointMent, selectedAppointment, app
                                             className={styles.booking_date}
                                             min={today}
                                             max={maxDate}
+                                            placeholder="dd-mm-yyyy"
+                                            autoComplete="off"
+                                            onBlur={(e) => {
+                                                const { name, value } = e.target;
+                                                setFieldValue(name, value);
+                                            }}
+                                           // parse={(value) => value}
+                                           // format={(value) => formatDate(value)}
                                         />
                                         <ErrorMessage name="bookingDate" component="div" className="error" />
                                     </div>
