@@ -34,6 +34,42 @@
     font-weight: 700;
     font-size: 20px;
 }
+.cancelButton{
+    background-color: black;
+    padding: 6px 15px;
+    border-radius: 10px;
+    color: white;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.swalPopup {
+    border-radius: 20px !important; /* Apply border radius */
+  }
+
+.confirmButton{
+    background-color: black;
+    padding: 6px 15px;
+    border-radius: 10px;
+    color: white;
+    margin-top: 10px;
+    cursor: pointer;
+
+}
+.title{
+    font-size: 22px !important;
+    font-weight: 800;
+  }
+  .textarea{
+    outline: none;
+    width: 450px;
+    height: 100px;
+    padding-inline-start: 10px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+ }
+    
+
 .userInput input {
     padding: 12px 50px;
     border-radius: 8px;

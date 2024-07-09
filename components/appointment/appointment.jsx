@@ -19,28 +19,27 @@ const Appointments = () => {
   const [appointmentShow, setShowAppointment] = useState(true);
   const [rescheduleShow, setRescheduleShow] = useState(false);
   const [ratingShow, setRatingShow] = useState(false);
-  const [invoice, setInvoice] = useState([]);
-  const [selectedAppointment, setSelectedAppointment] = useState(null); // Initialize with null
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [statusFilter, setStatusFilter] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
-
-  const id = Session.get("appointmentId");
+  const [loading, setLoading] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(true);
+  const [scheduleShowVisible, setShowScheduleVisible] = useState(false);
 
   useEffect(() => {
     fetchAppointments();
   }, [statusFilter]);
 
   const fetchAppointments = async () => {
-    setLoading(true); // Set loading to true before fetching data
+    setLoading(true);
     try {
       const res = await getAppointment(statusFilter);
       setAppointments(res.data.data);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false);
     } catch (error) {
-      setLoading(false); // Ensure loading is set to false on error too
+      setLoading(false);
       Notify.error(error.message);
     }
   };
@@ -65,20 +64,6 @@ const Appointments = () => {
 
     filterAppointments();
   }, [statusFilter, selectedDate, appointments]);
-
-  useEffect(() => {
-    const fetchInvoice = async () => {
-      try {
-        const res = await getInvoice(id);
-        setInvoice(res.data.data);
-      } catch (error) {
-        Notify.error(error.message);
-      }
-    };
-    if (id) {
-      fetchInvoice();
-    }
-  }, [id]);
 
   const handleStatusChange = (e) => {
     setStatusFilter(e.target.value);
@@ -109,50 +94,111 @@ const Appointments = () => {
   };
 
   const handleDelete = (appointment) => {
+    const inputOptions = {
+      "Change of plan": "Change of plan",
+      "Not available at the time": "Not available at the time",
+      "Rebook for another time": "Rebook for another time",
+      "Find great deal somewhere else": "Find great deal somewhere else",
+      "Reason not here, Type here": "Reason not here, Type here",
+    };
+
+    const inputOptionsHtml = Object.entries(inputOptions)
+      .map(
+        ([value, label]) =>
+          `<div style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+            <label for="${value}" style="margin-right: 10px;">${label}</label>
+            <input type="radio" id="${value}" name="cancelReason" value="${value}">
+          </div>`
+      )
+      .join("");
+
     Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to cancel this appointment?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "black",
-      confirmButtonBorder: "none",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        cancelAppointment(appointment);
+      title: `<span class='${styles.title}'>Select Cancel Reason</span>`,
+      html: `
+      <div class="${styles.bulletList}">
+        ${inputOptionsHtml}
+        <textarea id="customReasonTextarea" class="${styles.textarea}" style="display: none;" placeholder="Type your reason here"></textarea>
+      </div>
+      <div class="${styles.buttonContainer}">
+        <button id="cancelButton" class="${styles.cancelButton}">Cancel</button>
+        <button id="confirmButton" class="${styles.confirmButton}">Confirm</button>
+      </div>
+    `,
+    showConfirmButton: false,
+    customClass: {
+      popup: styles.swalPopup,
+      container: styles.swalContainer, 
+    },
+      didOpen: () => {
+        const confirmButton = document.getElementById("confirmButton");
+        const cancelButton = document.getElementById("cancelButton");
+        const customReasonTextarea = document.getElementById("customReasonTextarea");
+        document.querySelectorAll('input[name="cancelReason"]').forEach((input) => {
+          input.addEventListener("change", () => {
+            if (input.value === "Reason not here, Type here") {
+              customReasonTextarea.style.display = "block";
+            } else {
+              customReasonTextarea.style.display = "none";
+            }
+          });
+        });
+        confirmButton.addEventListener("click", async () => {
+          const selectedReason = document.querySelector('input[name="cancelReason"]:checked');
+          const finalReason = selectedReason.value === "Reason not here, Type here" ? customReasonTextarea.value : selectedReason.value;
+          if (!selectedReason || (selectedReason.value === "Reason not here, Type here" && !customReasonTextarea.value)) {
+            Swal.showValidationMessage("You need to choose a reason or type one!");
+          } else {
+            await cancelAppointment(appointment, finalReason);
+            Swal.close();
+          }
+        });
+
+        cancelButton.addEventListener("click", () => {
+          Swal.close();
+        });
       }
     });
   };
 
-  // Commented out line: Notify.log(error.message);
+  
+  const cancelAppointment = async (appointment,cancelReason) => {
 
-  const cancelAppointment = async (appointment) => {
     try {
       const data = {
         type: "cancel",
-        cancelReason: "change my plan",
+        cancelReason,
       };
       const res = await deleteAppointment(data, appointment.id);
       fetchAppointments();
     } catch (error) {
-      Notify.log(error.message); // Notify.log used instead of Notify.error
+      Notify.log(error.message);
     }
   };
 
-  const handleDownloadInvoice = async () => {
+
+  const handleDownloadInvoice = async (appointment) => {
     try {
-      const invoicePath = invoice.invoicePath;
-      const link = document.createElement("a");
-      link.href = invoicePath;
-      link.setAttribute("download", "");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      if (appointment && appointment.id) {
+        const res = await getInvoice(appointment.id);
+        const invoicePath = res.data.data.invoicePath;
+
+        // Initiate download
+        const link = document.createElement('a');
+        link.href = invoicePath;
+        link.setAttribute('download', '');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        Notify.error("No appointment ID found to download invoice");
+      }
     } catch (error) {
       Notify.error(error.message);
+
     }
   };
+  
+  
 
   const formatDate = (date) => {
     const d = new Date(date);
@@ -165,9 +211,6 @@ const Appointments = () => {
     const day = String(d.getDate()).padStart(2, "0");
     return `${day} ${month} ${year}`;
   };
-
-  const [menuVisible, setMenuVisible] = useState(true);
-  const [scheduleShowVisible, setShowScheduleVisible] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -280,13 +323,13 @@ const Appointments = () => {
                     )}
                   </div>
                 )}
-                {data.status === "COMPLETED" && (
+                {data.status === "COMPLETED" &&(
                   <div className={styles.downloadInvoice}>
                     <div className={styles.load}>
-                      <MdOutlineFileDownload onClick={handleDownloadInvoice} />
+                    <MdOutlineFileDownload onClick={() => handleDownloadInvoice(data)} />
                     </div>
                     <p
-                      onClick={handleDownloadInvoice}
+                      onClick={() => handleDownloadInvoice(data)}
                       className={styles.inVoiceBtn}
                     >
                       Download Invoice
