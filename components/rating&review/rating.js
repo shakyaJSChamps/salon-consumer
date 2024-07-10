@@ -5,9 +5,8 @@ import { IoStarSharp } from "react-icons/io5";
 import styles from './rating.module.css';
 import { ratingValidationSchema } from '@/utils/schema';
 import { postSalonReviews } from '@/api/account.api';
-
-const Ratings = ({ handelShowAppointMent,selectedAppointment }) => {
-    console.log("selectedAppoint:::>",selectedAppointment)
+import Notify from '@/utils/notify';
+const Ratings = ({  handleShowAppointment,selectedAppointment }) => {
     const salonId=selectedAppointment?.salon?.id;
     const initialValues={
         appointmentId:selectedAppointment.id,
@@ -17,10 +16,10 @@ const Ratings = ({ handelShowAppointMent,selectedAppointment }) => {
       const handleSubmit=async(values)=>{
         try {
             const res=await postSalonReviews(values,salonId);
-            console.log("res:::",res)
-            handelShowAppointMent();
+            Notify.success(res.data.message);
+            handleShowAppointment();
         } catch (error) {
-            console.log("error::>",error);
+            Notify.error(error.message);
         }
       }
 
