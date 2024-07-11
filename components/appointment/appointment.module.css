@@ -267,7 +267,17 @@
     border-radius: 50%;
     background-color: green;
 }
-
+.circles.pending {
+    background-color: red;
+  }
+  
+  .circles.completed {
+    background-color: green;
+  }
+  
+  .circles.cancelled {
+    background-color: red;
+  }
 .completed {
     background-color: green;
 }

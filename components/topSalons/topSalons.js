@@ -31,11 +31,11 @@ function TopSalons() {
         <div className={styles.heading}>
           Trending Salons
         </div>
-        {/* <div className={styles.linkDiv}>
-          <Link href={'#'} className={styles.link}>View all salons
+        <div className={styles.linkDiv}>
+          <Link href='/salons' className={styles.link}>View all salons
             <ArrowForwardIcon className={styles.arrow} />
           </Link>
-        </div> */}
+        </div>
       </div>
 
       <div className={styles.content}>

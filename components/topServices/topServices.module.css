@@ -54,18 +54,30 @@
 .paper {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 300px;
+    border: 2px solid #D9D9D9;
+    position: relative;
     scroll-snap-align: center;
+    height: 310px;
 }
 
 .type {
-    padding: 23px 20px;
+    padding: 40px 20px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bolder;
 }
-
+.lastPaperArrow {
+    position: absolute;
+    position: fixed;
+    bottom: 422px;
+    color: white;
+    background: black;
+    right: 10px;
+    margin-right: 163px;
+    cursor: pointer;
+  }
 .image img {
-    width: 200px;
+    width: 265px;
 }
 
 .scrollbtn {
@@ -92,7 +104,7 @@
 }
 @media screen and (max-width:1200px) {
     .container{
-        padding: 30px 57px;
+        /* padding: 30px 57px; */
         gap: 15px;
     }
 
@@ -116,11 +128,15 @@
 }
 @media screen and (max-width:576px) {
     .container{
-        padding: 30px 25px;
-        gap: 14px;
+        padding: 16px 28px;
+        gap: 18px;
     }
     .content{
         gap: 16px;
+    }
+    .paper{
+        height: 200px;
+        width: 220px;
     }
     .heading{
         font-size: 11px;
@@ -132,7 +148,7 @@
         font-size: 14px;
     }
     .image img {
-        width: 120px;
+        width: 160px;
         height: 120px;
     }
 

@@ -47,7 +47,7 @@ function NearSalons({ data }) {
                 </div>
                 <div className={styles.details}>
                   <div className={styles.nameContainer}>
-                    <h2>{salon.name}</h2>
+                    <p className={styles.user_name}>{salon.name}</p>
                     <div className={styles.wishlist}>
                       <FavoriteBorderIcon className={styles.wishlistIcon} />
                       <p>wishlist</p>

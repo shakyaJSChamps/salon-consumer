@@ -63,7 +63,7 @@ function TopServices() {
         </div>
       </div>
       <div className={styles.content}>
-        {services.map((service) => (
+        {services.map((service,index) => (
           <Paper
             key={service.id}
             elevation={3}
@@ -78,7 +78,11 @@ function TopServices() {
                 width={200}
                 height={200}
               />
+              {/* {index === services.length - 1 && (
+              <ArrowForwardIcon className={styles.lastPaperArrow} />
+            )} */}
             </div>
+            
           </Paper>
         ))}
       </div>

@@ -107,7 +107,7 @@ const Appointments = () => {
         ([value, label]) =>
           `<div style="margin-bottom: 10px; display: flex; justify-content: space-between;">
             <label for="${value}" style="margin-right: 10px;">${label}</label>
-            <input type="radio" id="${value}" name="cancelReason" value="${value}">
+            <input type="radio" id="${value}" name="cancelReason" value="${value}" style="cursor: pointer;">
           </div>`
       )
       .join("");
@@ -169,9 +169,10 @@ const Appointments = () => {
         cancelReason,
       };
       const res = await deleteAppointment(data, appointment.id);
+      Notify.success(res.data.message)
       fetchAppointments();
     } catch (error) {
-      Notify.log(error.message);
+      Notify.error(error.message);
     }
   };
 
@@ -293,10 +294,27 @@ const Appointments = () => {
                     Services-{" "}
                     {data.services.map((item) => item.serviceName).join(", ")}
                   </p>
-                  <p>
+                  {/* <p>
                     Status-<span className={styles.circles}></span>
                     {data.status}
-                  </p>
+                  </p> */}
+ <p>
+          Status-
+          <span
+            className={`${styles.circles} ${
+              data.status === "COMPLETED"
+                ? styles.completed
+                : data.status === "CANCELLED" || data.status === "REJECTED"
+                ? styles.cancelled
+                : styles.pending
+            }`}
+          ></span>
+          {data.status === "COMPLETED"
+            ? "COMPLETED"
+            : data.status === "CANCELLED" || data.status === "REJECTED"
+            ? "CANCELLED BY YOU"
+            : "PENDING"}
+        </p>
                 </div>
                 <div className={styles.buttons}>
                   {data.status === "PENDING" && (
