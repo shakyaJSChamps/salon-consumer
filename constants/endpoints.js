@@ -58,3 +58,6 @@ export const __endpoint_otpVerify =  endpoint+"b2b/account/email/otp/verify";
 
 //invoice
 export const __endpoint_invoice =  endpoint+"consumer/appointments";
+
+//signature verify
+export const __endpoint_signatureVerify =  endpoint+"consumer/appointments";

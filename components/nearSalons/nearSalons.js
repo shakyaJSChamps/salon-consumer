@@ -39,7 +39,7 @@ function NearSalons({ data }) {
       <div className={styles.salons}>
         <Grid container spacing={2}>
           {data?.data?.nearBySalons?.map((salon, index) => (
-            <Grid item xs={12} md={6} key={index}>
+            <Grid item sm={6} xs={12} md={6} key={index}>
               <Paper elevation={3} className={styles.paper}>
                 <div className={styles.image}>
                   {/* Assuming salon has an imageUrl property */}

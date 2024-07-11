@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Session from "@/service/session";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getDetails, payments } from "@/api/account.api";
+import { getDetails, payments, verifySignature } from "@/api/account.api";
 import Notify from "@/utils/notify";
 function Payment() {
   const [totalCount, setTotalCount] = useState(1);
@@ -78,9 +78,31 @@ function Payment() {
     //  description: "Test Transaction",
       handler: async function (response) {
         //alert(response.razorpay_payment_id);
-       // console.log("res razorpay", response);
-       // console.log('options',options)
-        router.push("/appointment");
+        // console.log("res payment", response.razorpay_payment_id);
+        // console.log("res signature", response.razorpay_signature);
+        // console.log("res order", response.razorpay_order_id);
+
+        console.log('options',options)
+        try {
+          const verificationPayload = {
+            razorpay_order_id: response.razorpay_order_id,            
+
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+          const verifyRes = await verifySignature(verificationPayload,id);
+     
+          if (verifyRes?.data?.message) {
+            Notify.success(verifyRes.data.data);
+            router.push("/appointment");
+          } else {
+            Notify.error("Payment verification failed.");
+          }
+        } catch (error) {
+          Notify.error(error.message);
+        }
+
+      //  router.push("/appointment");
       },
       prefill: {
       //  name: "Your Name",
@@ -101,7 +123,7 @@ function Payment() {
 
 
   useEffect(() => {
-  }, []);
+  }, [id]);
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
