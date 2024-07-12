@@ -46,6 +46,15 @@ export const authSlice = createSlice({
       Session.remove("authToken");
       Session.remove("profile");
       Session.remove("isLoggedIn");
+      Session.remove("city");
+      Session.remove("state");
+      Session.remove("country");
+      Session.remove("filteredSalon");
+      Session.remove("salonList");
+      Session.remove("salonService");
+      Session.remove("selectedBannerCity")
+      Session.remove("selectedBannerSalons")
+      Session.remove("appointmentId");
     },
     setUserLocation: (state, action) => {
       const { city, state: region, country } = action.payload;

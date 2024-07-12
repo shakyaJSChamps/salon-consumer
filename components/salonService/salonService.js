@@ -13,6 +13,7 @@ import {
 } from "@/app/Redux/selectedServiceSlice";
 import Session from "@/service/session";
 import { selectUser } from "@/app/Redux/Authslice";
+import LoginFormPopup from "../loginFormPopup/LoginFormPopup";
 
 function SalonService({ id, homeService }) {
   const [activeCategory, setActiveCategory] = useState(""); // Set default active category
@@ -26,6 +27,7 @@ function SalonService({ id, homeService }) {
   const [filteredServices, setFilteredServices] = useState([]); // Add state for filtered services
   const [showMaleButton, setShowMaleButton] = useState(true);
   const [showFemaleButton, setShowFemaleButton] = useState(true);
+  const [modalShow, setModalShow] = useState(false);
 
   const token = Session.get("authToken");
   const profile = useSelector(selectUser);
@@ -107,7 +109,7 @@ function SalonService({ id, homeService }) {
 
   const handleSalonClick = () => {
     if (!token) {
-      router.push("/login");
+      setModalShow(true)
       return;
     }
     if (!profile) {
@@ -247,6 +249,9 @@ function SalonService({ id, homeService }) {
           )}
         </div>
       </div>
+      <LoginFormPopup
+      show={modalShow}
+      onHide={() => setModalShow(false)}/>
     </div>
   );
 }

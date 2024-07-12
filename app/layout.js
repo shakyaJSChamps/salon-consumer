@@ -27,11 +27,8 @@ export default function RootLayout({ children }) {
         <Providers>
         <Navbar />
         <div className="contentWrapper">
-            <Suspense fallback={<Loading />}>
               {children}
               <ToastContainer />
-
-            </Suspense>
           </div>
 
           <Footer />
