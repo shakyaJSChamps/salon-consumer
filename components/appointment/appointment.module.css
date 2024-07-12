@@ -6,6 +6,11 @@
 .inVoiceBtn{
     cursor: pointer;
 }
+.skeletonContent{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 .userInputs {
     display: flex;
     align-items: center;

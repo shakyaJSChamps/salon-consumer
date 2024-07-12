@@ -161,7 +161,8 @@
     grid-template-columns: repeat(6, 1fr);
 
   }
-.specialist .noStaff{
+.noStaff{
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;

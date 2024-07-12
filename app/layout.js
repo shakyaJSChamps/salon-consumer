@@ -6,7 +6,6 @@ import { Providers } from "./Redux/providers";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import { Suspense } from "react";
-import Loading from "./loading";
 import "react-toastify/dist/ReactToastify.css";
 
 import { ToastContainer } from "react-toastify";

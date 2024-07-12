@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react';
 import { Paper } from '@mui/material';
 import styles from './topSalons.module.css';

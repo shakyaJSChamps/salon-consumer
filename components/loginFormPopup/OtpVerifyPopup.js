@@ -22,7 +22,7 @@ function OtpVerifyPopup({ phoneNumber, timer, setTimer, isTimerActive, setIsTime
 
     const [submitting, setSubmitting] = useState(false);
     const [showProfilePopup, setShowProfilePopup] = useState(false);
-
+    
     const onSubmit = async (values) => {
         try {
             setSubmitting(true);
@@ -46,22 +46,20 @@ function OtpVerifyPopup({ phoneNumber, timer, setTimer, isTimerActive, setIsTime
 
             // Check if the profile is incomplete
             const profile = userInfo.profile;
-            const isProfileIncomplete = profile.name==="" || profile.email==="";
-            console.log("isProfile::>",isProfileIncomplete)
+            const isProfileIncomplete = !profile.name || !profile.email;
+            console.log("isProfileIncomplete::>", isProfileIncomplete);
 
             if (isProfileIncomplete) {
                 setShowProfilePopup(true);
-                onHide();
             } else {
-                onHide();
+                onHide(); // Hide the OTP popup if profile is complete
             }
         } catch (error) {
-            Notify.error(error.message)
+            Notify.error(error.message);
         } finally {
             setSubmitting(false);
         }
     };
-
 
     useEffect(() => {
         let interval;
@@ -88,7 +86,8 @@ function OtpVerifyPopup({ phoneNumber, timer, setTimer, isTimerActive, setIsTime
         } catch (error) {
             Notify.error(error.message);
         }
-    }
+    };
+
     const handleKeyDown = (e, index, props) => {
         if (e.key === "Backspace" && props.values.otp[index] === "") {
             if (index > 0) {
@@ -163,9 +162,13 @@ function OtpVerifyPopup({ phoneNumber, timer, setTimer, isTimerActive, setIsTime
                     </Form>
                 )}
             </Formik>
-            <UserProfilePopup
-                show={showProfilePopup}
-                onProfileHide={() => setShowProfilePopup(false)} />
+            {showProfilePopup && (
+                <UserProfilePopup
+                    show={showProfilePopup} // Display UserProfilePopup based on showProfilePopup state
+                    onProfileHide={() => setShowProfilePopup(false)}
+                    onHide={onHide}
+                />
+            )}
         </>
     );
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -7,46 +7,49 @@ import RescheduleAppointment from "../resheduleAppointMent/rescheduleAppointMent
 import Ratings from "../rating&review/rating";
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
-import { deleteAppointment, getAppointment, getInvoice } from "@/api/account.api";
+import {
+  deleteAppointment,
+  getAppointment,
+  getInvoice,
+} from "@/api/account.api";
 import { MdOutlineFileDownload } from "react-icons/md";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import Session from "@/service/session";
 import Notify from "@/utils/notify";
 import styles from "./appointment.module.css";
+import { Skeleton } from "@mui/material";
 
 const Appointments = () => {
   const [appointmentShow, setShowAppointment] = useState(true);
   const [rescheduleShow, setRescheduleShow] = useState(false);
   const [ratingShow, setRatingShow] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [appointments, setAppointments] = useState([]);
-  const [filteredAppointments, setFilteredAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(null);
+  const [filteredAppointments, setFilteredAppointments] = useState(null);
   const [statusFilter, setStatusFilter] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
-  const [loading, setLoading] = useState(false);
   const [menuVisible, setMenuVisible] = useState(true);
   const [scheduleShowVisible, setShowScheduleVisible] = useState(false);
+  const [loading, setLoading] = useState(true); // State to manage loading state
 
   useEffect(() => {
     fetchAppointments();
   }, [statusFilter]);
 
   const fetchAppointments = async () => {
-    setLoading(true);
     try {
       const res = await getAppointment(statusFilter);
       setAppointments(res.data.data);
       setLoading(false);
     } catch (error) {
-      setLoading(false);
       Notify.error(error.message);
     }
   };
 
   useEffect(() => {
     const filterAppointments = () => {
-      const filtered = appointments.filter((appointment) => {
+      const filtered = appointments?.filter((appointment) => {
         const isStatusMatch =
           statusFilter === "cancelled"
             ? ["cancelled", "rejected"].includes(
@@ -67,6 +70,7 @@ const Appointments = () => {
 
   const handleStatusChange = (e) => {
     setStatusFilter(e.target.value);
+    setLoading(true);
   };
 
   const handleShowReschedule = (appointment) => {
@@ -124,29 +128,44 @@ const Appointments = () => {
         <button id="confirmButton" class="${styles.confirmButton}">Confirm</button>
       </div>
     `,
-    showConfirmButton: false,
-    customClass: {
-      popup: styles.swalPopup,
-      container: styles.swalContainer, 
-    },
+      showConfirmButton: false,
+      customClass: {
+        popup: styles.swalPopup,
+        container: styles.swalContainer,
+      },
       didOpen: () => {
         const confirmButton = document.getElementById("confirmButton");
         const cancelButton = document.getElementById("cancelButton");
-        const customReasonTextarea = document.getElementById("customReasonTextarea");
-        document.querySelectorAll('input[name="cancelReason"]').forEach((input) => {
-          input.addEventListener("change", () => {
-            if (input.value === "Reason not here, Type here") {
-              customReasonTextarea.style.display = "block";
-            } else {
-              customReasonTextarea.style.display = "none";
-            }
+        const customReasonTextarea = document.getElementById(
+          "customReasonTextarea"
+        );
+        document
+          .querySelectorAll('input[name="cancelReason"]')
+          .forEach((input) => {
+            input.addEventListener("change", () => {
+              if (input.value === "Reason not here, Type here") {
+                customReasonTextarea.style.display = "block";
+              } else {
+                customReasonTextarea.style.display = "none";
+              }
+            });
           });
-        });
         confirmButton.addEventListener("click", async () => {
-          const selectedReason = document.querySelector('input[name="cancelReason"]:checked');
-          const finalReason = selectedReason.value === "Reason not here, Type here" ? customReasonTextarea.value : selectedReason.value;
-          if (!selectedReason || (selectedReason.value === "Reason not here, Type here" && !customReasonTextarea.value)) {
-            Swal.showValidationMessage("You need to choose a reason or type one!");
+          const selectedReason = document.querySelector(
+            'input[name="cancelReason"]:checked'
+          );
+          const finalReason =
+            selectedReason.value === "Reason not here, Type here"
+              ? customReasonTextarea.value
+              : selectedReason.value;
+          if (
+            !selectedReason ||
+            (selectedReason.value === "Reason not here, Type here" &&
+              !customReasonTextarea.value)
+          ) {
+            Swal.showValidationMessage(
+              "You need to choose a reason or type one!"
+            );
           } else {
             await cancelAppointment(appointment, finalReason);
             Swal.close();
@@ -156,26 +175,23 @@ const Appointments = () => {
         cancelButton.addEventListener("click", () => {
           Swal.close();
         });
-      }
+      },
     });
   };
 
-  
-  const cancelAppointment = async (appointment,cancelReason) => {
-
+  const cancelAppointment = async (appointment, cancelReason) => {
     try {
       const data = {
         type: "cancel",
         cancelReason,
       };
       const res = await deleteAppointment(data, appointment.id);
-      Notify.success(res.data.message)
+      Notify.success(res.data.message);
       fetchAppointments();
     } catch (error) {
       Notify.error(error.message);
     }
   };
-
 
   const handleDownloadInvoice = async (appointment) => {
     try {
@@ -184,9 +200,9 @@ const Appointments = () => {
         const invoicePath = res.data.data.invoicePath;
 
         // Initiate download
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = invoicePath;
-        link.setAttribute('download', '');
+        link.setAttribute("download", "");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -195,18 +211,25 @@ const Appointments = () => {
       }
     } catch (error) {
       Notify.error(error.message);
-
     }
   };
-  
-  
 
   const formatDate = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
     const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
     const month = monthNames[d.getMonth()];
     const day = String(d.getDate()).padStart(2, "0");
@@ -229,43 +252,63 @@ const Appointments = () => {
     };
   }, []);
 
+  const skeleton = Array.from({ length: 5 }, (_, index) => (
+    <div key={index} className={styles.upcomingSchedule}>
+      <Skeleton variant="rectangular" width={180} height={180} />
+      <div className={styles.skeletonContent}>
+        <Skeleton variant="rectangular" width={230} height={20} />
+        <Skeleton variant="rectangular" width={230} height={20} />
+
+        <Skeleton variant="rectangular" width={230} height={20} />
+        <Skeleton variant="rectangular" width={230} height={20} />
+        <Skeleton variant="rectangular" width={230} height={20} />
+        <Skeleton variant="rectangular" width={230} height={20} />
+      </div>
+      <div className={styles.buttons}>
+        <Skeleton variant="rectangular" width={100} height={40} />
+        <Skeleton variant="rectangular" width={100} height={40} />
+      </div>
+    </div>
+  ));
   return (
     <>
-      {loading && <p className={styles.loadingPage}>Loading...</p>}
-      {!loading && appointmentShow && (
-        <div className={styles.container}>
-          <h3 className={styles.titleAppointment}>My Appointments</h3>
-          {menuVisible ? (
-            <ImCross className={styles.humburgerCross} onClick={handleToggleMenu} />
-          ) : (
-            <ImMenu className={styles.humburger} onClick={handleToggleMenu} />
-          )}
-          {(scheduleShowVisible || menuVisible) && (
-            <div className={styles.userInputs}>
-              <div className={styles.userInput}>
-                <p>Status</p>
-                <select
-                  className={styles.selects}
-                  value={statusFilter}
-                  onChange={handleStatusChange}
-                >
-                  <option value="pending">Upcoming</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-              <div className={styles.userInput}>
-                <p>Date</p>
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                />
-              </div>
+      <div className={styles.container}>
+        <h3 className={styles.titleAppointment}>My Appointments</h3>
+        {menuVisible ? (
+          <ImCross
+            className={styles.humburgerCross}
+            onClick={handleToggleMenu}
+          />
+        ) : (
+          <ImMenu className={styles.humburger} onClick={handleToggleMenu} />
+        )}
+        {(scheduleShowVisible || menuVisible) && (
+          <div className={styles.userInputs}>
+            <div className={styles.userInput}>
+              <p>Status</p>
+              <select
+                className={styles.selects}
+                value={statusFilter}
+                onChange={handleStatusChange}
+              >
+                <option value="pending">Upcoming</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
             </div>
-          )}
+            <div className={styles.userInput}>
+              <p>Date</p>
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+        {!loading ? (
           <div className={styles.upcomingScheduleContainer}>
-            {filteredAppointments.map((data, index) => (
+            {filteredAppointments?.map((data, index) => (
               <div
                 className={`${styles.upcomingSchedule} ${
                   statusFilter === "completed" ? styles.greyBackground : ""
@@ -295,26 +338,28 @@ const Appointments = () => {
                     {data.services.map((item) => item.serviceName).join(", ")}
                   </p>
                   {/* <p>
-                    Status-<span className={styles.circles}></span>
-                    {data.status}
-                  </p> */}
- <p>
-          Status-
-          <span
-            className={`${styles.circles} ${
-              data.status === "COMPLETED"
-                ? styles.completed
-                : data.status === "CANCELLED" || data.status === "REJECTED"
-                ? styles.cancelled
-                : styles.pending
-            }`}
-          ></span>
-          {data.status === "COMPLETED"
-            ? "COMPLETED"
-            : data.status === "CANCELLED" || data.status === "REJECTED"
-            ? "CANCELLED BY YOU"
-            : "PENDING"}
-        </p>
+                  Status-<span className={styles.circles}></span>
+                  {data.status}
+                </p> */}
+                  <p>
+                    Status-
+                    <span
+                      className={`${styles.circles} ${
+                        data.status === "COMPLETED"
+                          ? styles.completed
+                          : data.status === "CANCELLED" ||
+                            data.status === "REJECTED"
+                          ? styles.cancelled
+                          : styles.pending
+                      }`}
+                    ></span>
+                    {data.status === "COMPLETED"
+                      ? "COMPLETED"
+                      : data.status === "CANCELLED" ||
+                        data.status === "REJECTED"
+                      ? "CANCELLED BY YOU"
+                      : "PENDING"}
+                  </p>
                 </div>
                 <div className={styles.buttons}>
                   {data.status === "PENDING" && (
@@ -341,10 +386,12 @@ const Appointments = () => {
                     )}
                   </div>
                 )}
-                {data.status === "COMPLETED" &&(
+                {data.status === "COMPLETED" && (
                   <div className={styles.downloadInvoice}>
                     <div className={styles.load}>
-                    <MdOutlineFileDownload onClick={() => handleDownloadInvoice(data)} />
+                      <MdOutlineFileDownload
+                        onClick={() => handleDownloadInvoice(data)}
+                      />
                     </div>
                     <p
                       onClick={() => handleDownloadInvoice(data)}
@@ -357,8 +404,10 @@ const Appointments = () => {
               </div>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          skeleton
+        )}
+      </div>
       {rescheduleShow && (
         <RescheduleAppointment
           handleShowAppointment={handleShowAppointment}
