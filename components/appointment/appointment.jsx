@@ -5,17 +5,15 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { RxCalendar } from "react-icons/rx";
 import RescheduleAppointment from "../resheduleAppointMent/rescheduleAppointMent";
 import Ratings from "../rating&review/rating";
-import { ImMenu } from "react-icons/im";
-import { ImCross } from "react-icons/im";
+import { ImMenu, ImCross } from "react-icons/im";
+import { MdOutlineFileDownload } from "react-icons/md";
+import Swal from "sweetalert2";
+import Link from "next/link";
 import {
   deleteAppointment,
   getAppointment,
   getInvoice,
 } from "@/api/account.api";
-import { MdOutlineFileDownload } from "react-icons/md";
-import Swal from "sweetalert2";
-import Link from "next/link";
-import Session from "@/service/session";
 import Notify from "@/utils/notify";
 import styles from "./appointment.module.css";
 import { Skeleton } from "@mui/material";
@@ -25,31 +23,33 @@ const Appointments = () => {
   const [rescheduleShow, setRescheduleShow] = useState(false);
   const [ratingShow, setRatingShow] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [appointments, setAppointments] = useState(null);
-  const [filteredAppointments, setFilteredAppointments] = useState(null);
+  const [appointments, setAppointments] = useState([]);
+  const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [statusFilter, setStatusFilter] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
   const [menuVisible, setMenuVisible] = useState(true);
-  const [scheduleShowVisible, setShowScheduleVisible] = useState(false);
-  const [loading, setLoading] = useState(true); // State to manage loading state
+  const [scheduleShowVisible, setShowScheduleVisible] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAppointments();
   }, [statusFilter]);
 
   const fetchAppointments = async () => {
+    setLoading(true);
     try {
       const res = await getAppointment(statusFilter);
       setAppointments(res.data.data);
-      setLoading(false);
     } catch (error) {
       Notify.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     const filterAppointments = () => {
-      const filtered = appointments?.filter((appointment) => {
+      const filtered = appointments.filter((appointment) => {
         const isStatusMatch =
           statusFilter === "cancelled"
             ? ["cancelled", "rejected"].includes(
@@ -70,7 +70,6 @@ const Appointments = () => {
 
   const handleStatusChange = (e) => {
     setStatusFilter(e.target.value);
-    setLoading(true);
   };
 
   const handleShowReschedule = (appointment) => {
@@ -258,7 +257,6 @@ const Appointments = () => {
       <div className={styles.skeletonContent}>
         <Skeleton variant="rectangular" width={230} height={20} />
         <Skeleton variant="rectangular" width={230} height={20} />
-
         <Skeleton variant="rectangular" width={230} height={20} />
         <Skeleton variant="rectangular" width={230} height={20} />
         <Skeleton variant="rectangular" width={230} height={20} />
@@ -270,6 +268,7 @@ const Appointments = () => {
       </div>
     </div>
   ));
+
   return (
     <>
       <div className={styles.container}>
@@ -308,101 +307,101 @@ const Appointments = () => {
         )}
         {!loading ? (
           <div className={styles.upcomingScheduleContainer}>
-            {filteredAppointments?.map((data, index) => (
-              <div
-                className={`${styles.upcomingSchedule} ${
-                  statusFilter === "completed" ? styles.greyBackground : ""
-                }`}
-                key={index}
-              >
-                <div className={styles.images}>
-                  <Image
-                    src={data.salon.mainGateImageUrl}
-                    alt="image"
-                    height={100}
-                    width={100}
-                  />
-                </div>
-                <div className={styles.upcomingDetails}>
-                  <h5>{data.salon.name}</h5>
-                  <p>
-                    <RxCalendar />
-                    <span>{formatDate(data.date)}</span>
-                  </p>
-                  <p>
-                    <HiOutlineLocationMarker />
-                    <span>{data.salon.address}</span>
-                  </p>
-                  <p>
-                    Services-{" "}
-                    {data.services.map((item) => item.serviceName).join(", ")}
-                  </p>
-                  {/* <p>
-                  Status-<span className={styles.circles}></span>
-                  {data.status}
-                </p> */}
-                  <p>
-                    Status-
-                    <span
-                      className={`${styles.circles} ${
-                        data.status === "COMPLETED"
-                          ? styles.completed
-                          : data.status === "CANCELLED" ||
-                            data.status === "REJECTED"
-                          ? styles.cancelled
-                          : styles.pending
-                      }`}
-                    ></span>
-                    {data.status === "COMPLETED"
-                      ? "COMPLETED"
-                      : data.status === "CANCELLED" ||
-                        data.status === "REJECTED"
-                      ? "CANCELLED BY YOU"
-                      : "PENDING"}
-                  </p>
-                </div>
-                <div className={styles.buttons}>
-                  {data.status === "PENDING" && (
-                    <button onClick={() => handleShowReschedule(data)}>
-                      Re-Schedule
-                    </button>
-                  )}
-                  {data.status === "PENDING" && (
-                    <button onClick={() => handleDelete(data)}>Cancel</button>
-                  )}
-                </div>
-                {data.status !== "PENDING" && (
-                  <div className={styles.buttonsPast}>
-                    <Link href={`appointment/${data.id}`}>
-                      <button>View Details</button>
-                    </Link>
-                    {data.status === "COMPLETED" && (
-                      <button
-                        onClick={() => handleShowRating(data)}
-                        className={styles.rating}
-                      >
-                        Rate & Review
-                      </button>
-                    )}
+            {filteredAppointments.length > 0 ? (
+              filteredAppointments.map((data, index) => (
+                <div
+                  className={`${styles.upcomingSchedule} ${
+                    data.status === "completed" ? styles.greyBackground : ""
+                  }`}
+                  key={index}
+                >
+                  <div className={styles.images}>
+                    <Image
+                      src={data.salon.mainGateImageUrl}
+                      alt="image"
+                      height={100}
+                      width={100}
+                    />
                   </div>
-                )}
-                {data.status === "COMPLETED" && (
-                  <div className={styles.downloadInvoice}>
-                    <div className={styles.load}>
-                      <MdOutlineFileDownload
-                        onClick={() => handleDownloadInvoice(data)}
-                      />
-                    </div>
-                    <p
-                      onClick={() => handleDownloadInvoice(data)}
-                      className={styles.inVoiceBtn}
-                    >
-                      Download Invoice
+                  <div className={styles.upcomingDetails}>
+                    <h5>{data.salon.name}</h5>
+                    <p>
+                      <RxCalendar />
+                      <span>{formatDate(data.date)}</span>
+                    </p>
+                    <p>
+                      <HiOutlineLocationMarker />
+                      <span>{data.salon.address}</span>
+                    </p>
+                    <p>
+                      Services-
+                      {data.services.map((item) => item.serviceName).join(", ")}
+                    </p>
+                    <p>
+                      Status-
+                      <span
+                        className={`${styles.circles} ${
+                          data.status === "COMPLETED"
+                            ? styles.completed
+                            : data.status === "CANCELLED" ||
+                              data.status === "REJECTED"
+                            ? styles.cancelled
+                            : styles.pending
+                        }`}
+                      ></span>
+                      {data.status === "COMPLETED"
+                        ? "COMPLETED"
+                        : data.status === "CANCELLED" ||
+                          data.status === "REJECTED"
+                        ? "CANCELLED BY YOU"
+                        : "PENDING"}
                     </p>
                   </div>
-                )}
-              </div>
-            ))}
+                  <div className={styles.buttons}>
+                    {data.status === "PENDING" && (
+                      <button onClick={() => handleShowReschedule(data)}>
+                        Re-Schedule
+                      </button>
+                    )}
+                    {data.status === "PENDING" && (
+                      <button onClick={() => handleDelete(data)}>Cancel</button>
+                    )}
+                  </div>
+                  {data.status !== "PENDING" && (
+                    <div className={styles.buttonsPast}>
+                      <Link href={`appointment/${data.id}`}>
+                        <button>View Details</button>
+                      </Link>
+                      {data.status === "COMPLETED" && (
+                        <button
+                          onClick={() => handleShowRating(data)}
+                          className={styles.rating}
+                        >
+                          Rate & Review
+                        </button>
+                      )}
+                    </div>
+                  )}
+                  {data.status === "COMPLETED" && (
+                    <div className={styles.downloadInvoice}>
+                      <div className={styles.load}>
+                        <MdOutlineFileDownload
+                          onClick={() => handleDownloadInvoice(data)}
+                        />
+                      </div>
+                      <p
+                        onClick={() => handleDownloadInvoice(data)}
+                        className={styles.inVoiceBtn}
+                      >
+                        Download Invoice
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p className={styles.noApp}>No appointments available.</p>
+            )}
           </div>
         ) : (
           skeleton

@@ -3,7 +3,36 @@
   padding: 0px 110px;
   padding-bottom: 30px !important;
 }
-
+.salon{
+  display: flex;
+  gap: 10px;
+}
+.contentSkeleton{
+  display: flex;
+  gap: 20px;
+}
+.skeletonBtn{
+  padding-right: 10px;
+  margin-top: 10px;
+}
+.mainSkeleton{
+  display: flex;
+  flex-direction: column;
+}
+.noWishLists{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  padding: 240px 0px;
+}
+.salonDetail{
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  margin-bottom: 15px;
+  height: 220px;
+}
 .locationIcons {
   position: absolute;
   font-size: 40px;

@@ -113,3 +113,36 @@
 .meetSpan {
   font-weight: 600;
 }
+.heading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.type{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.contactSkeleton{
+  height: 400px;
+  width: 500px;
+  border: 2px solid #D9D9D9;
+  border-radius: 5px;
+  padding-left: 50px;
+}
+.skeletonDiv{
+  display: flex;
+  gap: 10px;
+}
+.mainDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 0px;
+}
+@media (max-width:500px){
+  .contactSkeleton{
+    height: 400px;
+    width: 330px;
+    padding-left: 20px;
+
+}}

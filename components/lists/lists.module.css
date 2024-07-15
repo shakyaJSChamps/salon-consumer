@@ -4,6 +4,7 @@
   padding-bottom: 30px !important;
   position: relative;
 }
+
 .loadMoreBtn{
   float: right;
   background-color: black;
@@ -178,18 +179,40 @@
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
   margin-bottom: 15px;
 }
+.salon {
+  display: flex;
+  height: 220px;
+  gap: 10px;
+  flex-direction: row;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  margin-bottom: 15px;
+}
+
 
 .img img {
   width: 270px;
   height: 220px;
 }
-
-.img img {
-  /* object-fit: cover !important; */
-  /* width: 100%; */
-  /* height: auto; */
+.columnSkeleton{
+  display: flex;
+  height: fit-content;
+  gap: 40px;
 }
-
+.contentSkeleton{
+  display: flex;
+  gap: 20px;
+}
+.noSalonList{
+  padding: 200px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainSkeleton{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .details {
   padding: 20px 35px;
   width: 50%;

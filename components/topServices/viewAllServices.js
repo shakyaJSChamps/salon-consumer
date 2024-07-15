@@ -1,5 +1,5 @@
 'use client'
-import { Paper } from "@mui/material";
+import { Paper, Skeleton } from "@mui/material";
 import styles from "./viewAllServices.module.css";
 import Image from "next/image";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -25,6 +25,16 @@ function ViewAllServices() {
 const handleClick = ()=>{
 router.push('/salonlist');
 }
+
+const skeletons = Array.from({ length: 8 }).map((_, index) => (
+  <Paper key={index} elevation={3} className={styles.paper}>
+    <div className={styles.type}>
+      <Skeleton variant="text" width={200} />
+    </div>
+    <Skeleton variant="rectangular" width="100%" height={200} />
+
+  </Paper>
+));
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>
@@ -37,7 +47,9 @@ router.push('/salonlist');
         </div>
       </div>
       <div className={styles.content} onClick={handleClick}>
-        {services.map((service) => (
+      {services.length > 0 ? (
+
+        services.map((service,index) => (
           <Paper key={service.id} elevation={3} className={styles.paper}>
             <div className={styles.type}>{service.name}</div>
             <div className={styles.image}>
@@ -49,7 +61,10 @@ router.push('/salonlist');
               />
             </div>
           </Paper>
-        ))}
+        ))
+      ) : (
+        skeletons
+      )}
       </div>
     </div>
   );
