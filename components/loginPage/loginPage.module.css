@@ -154,9 +154,11 @@
     display: flex;
     justify-content: center;
 }
-/* Media query for smaller screens */
 
-
+@media screen and (max-width: 991px) {
+    .mobileField{
+        width: 200px !important;
+    }}
 @media screen and (max-width: 768px) {
     .loginForm {
         flex-direction: column;

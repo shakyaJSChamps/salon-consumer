@@ -72,6 +72,7 @@
 
 .specialist p {
   font-size: 10px;
+  margin-top: -15px;
 }
 
 .reviewRating {
@@ -220,6 +221,9 @@
 .specialist{
   grid-template-columns: repeat(4, 1fr);
 
+}
+.specialistDetails{
+  padding: 13px 26px;
 }
   .image img {
     width: 77px;

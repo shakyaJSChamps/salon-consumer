@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '@/components/loginPage/loginPage.module.css'
 import { ErrorMessage, Form, Formik } from 'formik';
 import PhoneInputComponent from '../loginPage/PhoneInputComponent';
 import Link from 'next/link';
-import OtpVerify from '../loginPage/otpVerify';
 import { LoginSchema } from '@/utils/schema';
 import Notify from '@/utils/notify'
 import { doLogin } from '@/api/account.api';
@@ -16,7 +15,7 @@ function LoginFormPopup(props) {
     const [submitting, setSubmitting] = useState(false);
     const [timer, setTimer] = useState(0);
     const [isTimerActive, setIsTimerActive] = useState(false);
-    const [submittingText, setSubmittingText] = useState("Submit");
+
     const initialValues = {
         phoneNumber: "",
     };
@@ -37,12 +36,13 @@ function LoginFormPopup(props) {
             setTimer(30);
             setIsTimerActive(true);
         } catch (error) {
-            // console.log(error);
             Notify.error(error.message);
         } finally {
-            setSubmitting(false); // Reset loading state regardless of success or failure
+            setSubmitting(false);
         }
     };
+
+
     return (
         <Modal
             {...props}

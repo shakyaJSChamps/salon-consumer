@@ -73,7 +73,6 @@ const Lists = (props) => {
   const [facilities, setFacilities] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
 
   const listRef = useRef(null);
 

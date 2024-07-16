@@ -2,7 +2,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { getSalonLists } from '@/api/account.api';
 import { GoLocation } from 'react-icons/go';
-import { ShopsCategory, Rating, Distance, Category } from './data'; // Adjust the path as needed
+import { ShopsCategory, Rating, Distance, Category } from './data'; 
 import Img from '@/assets/images/salonImage.svg';
 import calendraImages from '@/assets/images/Group 1000003690.svg';
 import Lists from '../lists/lists';
@@ -12,7 +12,7 @@ const SalonList = () => {
   const [lists, setLists] = useState([]);
   const [allSalon, setAllSalon] = useState([]);
 
-  const [page, setPage] = useState(1); // Starting from 2 because initial data is already loaded
+  const [page, setPage] = useState(1); 
   const [pageSize, setPageSize] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
@@ -59,10 +59,10 @@ useEffect(() => {
         setHasMoreData(false);
       }
     } catch (error) {
-      console.error('Error fetching salon data:', error);
-    } finally {
-      setIsLoading(false);
-    }
+      Notify.error(error.message);
+      setIsLoading(true);
+
+    } 
   };
 useEffect(()=>{
   fetchSalonLists()

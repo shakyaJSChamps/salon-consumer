@@ -1,10 +1,8 @@
 "use client";
 import styles from "@/components/userProfile/userInformation.module.css";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import Session from "@/service/session";
 import {
   UpdateUserProfile,
   fileUploaders,
@@ -20,7 +18,7 @@ import Images from "@/app/image";
 import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import OTPInput from "react-otp-input";
-import { loginUser, updateUserProfile } from "@/app/Redux/Authslice";
+import { updateUserProfile } from "@/app/Redux/Authslice";
 import { useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 
@@ -252,7 +250,7 @@ function UserProfilePopup({ onProfileHide, onHide, ...props }) {
                     <Field
                       type="text"
                       name="email"
-                      icon={isOTPVerified && <FaCheckCircle />}
+                      icon={isOTPVerified && <FaCheckCircle/>}
                       iconClass="text-success"
                       disable={isOTPVerified}
                       className={`form-control ${
@@ -260,7 +258,7 @@ function UserProfilePopup({ onProfileHide, onHide, ...props }) {
                       }`}
                     />
                     {isEmailVerified && (
-                      <FaCheckCircle className={styles.verifiedIcon} />
+                      <FaCheckCircle className={styles.verifiedEmail} />
                     )}
 
                     {values.email &&
