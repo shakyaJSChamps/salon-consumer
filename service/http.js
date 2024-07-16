@@ -2,6 +2,9 @@ import axios from 'axios';
 import { PUBLIC_URLS } from '../constants/public-endpoints';
 import Session from './session';
 import Notify from '@/utils/notify';
+import { logoutUser } from '@/app/Redux/Authslice';
+import { store } from '@/app/Redux/store';
+import { destroyCookie } from 'nookies';
 
 /*Setting up interceptors with axios*/
 axios.interceptors.request.use(function (config) {
@@ -38,12 +41,14 @@ axios.interceptors.response.use(function (response) {
     return response;
 
 }, function (error) {
+    console.log("errorHTTP::>",error)
 
     if (!error.response && error.message === 'Network Error') {
         return Promise.reject("Couldn't connect to server. Please try again later.");
     } else if (error.response && error.response.status === 401) { // Assuming 401 is the unauthorized status
         // Dispatch removeToken action if response status is 401
-        // store.dispatch(removeToken());
+        store.dispatch(logoutUser());
+        destroyCookie(null, "token", { path: "/" });
     } else if (error.response && error.response.data) {
         return Promise.reject(error.response.data);
     } else {

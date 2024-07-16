@@ -1,41 +1,42 @@
-"use client";
-import styles from "../userInformation.module.css";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import Session from "@/service/session";
+"use client"
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import Image from 'next/image';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { FaCheckCircle } from 'react-icons/fa';
+import OTPInput from 'react-otp-input';
+import { Paper, Skeleton } from '@mui/material';
+import styles from '../userInformation.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from 'next/navigation';
+import Notify from '@/utils/notify';
 import {
   UpdateUserProfile,
   fileUploaders,
   getUserProfile,
   otpSend,
   otpVerify,
-} from "@/api/account.api";
-import Notify from "@/utils/notify";
-import { AiOutlineEdit } from "react-icons/ai";
-import PhoneInputComponent from "@/components/loginPage/PhoneInputComponent";
-import { userProfileSchema } from "@/utils/schema";
-import Images from "@/app/image";
-import { useRouter } from "next/navigation";
-import { FaCheckCircle } from "react-icons/fa";
-import OTPInput from "react-otp-input";
-import { loginUser, updateUserProfile } from "@/app/Redux/Authslice";
-import { useDispatch } from "react-redux";
+} from '@/api/account.api';
+import Images from '@/app/image';
+import { userProfileSchema } from '@/utils/schema';
+import Session from '@/service/session';
+import PhoneInputComponent from '@/components/loginPage/PhoneInputComponent';
+import { useDispatch } from 'react-redux';
+import { updateUserProfile } from '@/app/Redux/Authslice';
 
 function UserProfile() {
   const [userInfo, setUserInfo] = useState(null);
   const [editModes, setEditModes] = useState(true);
   const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
+  const [imagePreview, setImagePreview] = useState('');
   const [isOTPVerified, setIsOTPVerified] = useState(false);
   const [verified, setVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-
   const [showOTP, setShowOTP] = useState(false);
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('');
   const router = useRouter();
   const dispatch = useDispatch();
+
   const fetchUserDetails = async () => {
     try {
       const userDetails = await getUserProfile();
@@ -58,18 +59,11 @@ function UserProfile() {
       pattern="[0-9]*"
       inputMode="numeric"
       onInput={(e) => {
-        e.target.value = e.target.value.replace(/[^0-9]/g, "");
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
       }}
       onKeyDown={(e) => {
         // Allow backspace, tab, enter, and numbers
-        if (
-          !(
-            e.key === "Backspace" ||
-            e.key === "Tab" ||
-            e.key === "Enter" ||
-            /^\d$/.test(e.key)
-          )
-        ) {
+        if (!(e.key === 'Backspace' || e.key === 'Tab' || e.key === 'Enter' || /^\d$/.test(e.key))) {
           e.preventDefault();
         }
       }}
@@ -77,12 +71,12 @@ function UserProfile() {
   );
 
   const initialValues = {
-    profileImageUrl: userInfo?.profileImageUrl || "",
-    name: userInfo?.name || "",
-    email: userInfo?.email || "",
-    gender: userInfo?.gender || "",
-    address: userInfo?.address || "",
-    phoneNumber: userInfo?.phoneNumber || "",
+    profileImageUrl: userInfo?.profileImageUrl || '',
+    name: userInfo?.name || '',
+    email: userInfo?.email || '',
+    gender: userInfo?.gender || '',
+    address: userInfo?.address || '',
+    phoneNumber: userInfo?.phoneNumber || '',
   };
 
   const handleImageChange = async (e) => {
@@ -124,7 +118,7 @@ function UserProfile() {
         // const id = Session.get("selectedSalonId");
         // router.push(`/salonlist/${id}`);
       } else {
-        router.push("/");
+        router.push('/');
       }
     } catch (error) {
       Notify.error(error.message);
@@ -135,10 +129,10 @@ function UserProfile() {
     try {
       const response = await fileUploaders({ fileName: file.name });
       const requestOptions = {
-        method: "PUT",
+        method: 'PUT',
         body: file,
         headers: {
-          "Content-Type": file.type,
+          'Content-Type': file.type,
         },
       };
       await fetch(response.data.data.url, requestOptions);
@@ -173,15 +167,43 @@ function UserProfile() {
       setShowOTP(false);
       setIsEmailVerified(true);
       setIsOTPVerified(true);
-      setOtp("");
+      setOtp('');
     } catch (error) {
       Notify.error(error.message);
     }
   };
 
+  // Skeletons for loading state
+  const skeletons = (
+    <div className={styles.skeleton}>
+      <div className={styles.imageRow}>
+        <div className={styles.userImageDiv}>
+          <Skeleton variant="circular" width={80} height={80} />
+        </div>
+      </div>
+      <div  style={{display:'flex',flexDirection:'column',}}>
+        <div className={styles.name}>
+          <Skeleton variant="text" width="70%" height={60} />
+        </div>
+        <div className={styles.email}>
+          <Skeleton variant="text" width="70%" height={60} />
+        </div>
+        <div className={styles.genders}>
+          <Skeleton variant="text" width="70%" height={60} />
+        </div>
+        <div className={styles.phoneNumber}>
+          <Skeleton variant="text" width="70%" height={60} />
+        </div>
+      </div>
+      <div className={styles.btn}>
+        <Skeleton variant="text" width="100%" height={60} />
+      </div>
+    </div>
+  );
+
   return (
     <div className={styles.profileDetails}>
-      {userInfo && (
+      {userInfo ? (
         <Formik
           initialValues={initialValues}
           enableReinitialize={true}
@@ -203,7 +225,7 @@ function UserProfile() {
                     <div
                       className={styles.editImageIcon}
                       onClick={() =>
-                        document.getElementById("imageUpload").click()
+                        document.getElementById('imageUpload').click()
                       }
                     >
                       <AiOutlineEdit />
@@ -226,7 +248,7 @@ function UserProfile() {
                     name="name"
                     onKeyPress={handleKeyPress}
                     className={`form-control ${
-                      touched.name && errors.name ? "is-invalid" : ""
+                      touched.name && errors.name ? 'is-invalid' : ''
                     }`}
                   />
                   <ErrorMessage
@@ -245,28 +267,22 @@ function UserProfile() {
                   iconClass="text-success"
                   disable={isOTPVerified}
                   className={`form-control ${
-                    touched.email && errors.email ? "is-invalid" : ""
+                    touched.email && errors.email ? 'is-invalid' : ''
                   }`}
                 />
-                {isEmailVerified && (
-                  <FaCheckCircle className={styles.verifiedIcon} />
-                )}
+                {isEmailVerified && <FaCheckCircle className={styles.verifiedIcon} />}
 
-                {values.email &&
-                  !showOTP &&
-                  !isEmailVerified &&
-                  !verified &&
-                  !userInfo?.verified && (
-                    <div className="pt-3">
-                      <button
-                        type="button"
-                        className={styles.verify__email_button}
-                        onClick={() => handleVerifyEmailClick(values)}
-                      >
-                        Verify Email
-                      </button>
-                    </div>
-                  )}
+                {values.email && !showOTP && !isEmailVerified && !verified && !userInfo?.verified && (
+                  <div className="pt-3">
+                    <button
+                      type="button"
+                      className={styles.verify__email_button}
+                      onClick={() => handleVerifyEmailClick(values)}
+                    >
+                      Verify Email
+                    </button>
+                  </div>
+                )}
 
                 {showOTP && (
                   <>
@@ -303,7 +319,7 @@ function UserProfile() {
                     as="select"
                     name="gender"
                     className={`form-control ${
-                      touched.gender && errors.gender ? "is-invalid" : ""
+                      touched.gender && errors.gender ? 'is-invalid' : ''
                     } ${styles.gender}`}
                   >
                     <option value="" disabled hidden>
@@ -327,12 +343,12 @@ function UserProfile() {
                     name="phoneNumber"
                     value={values.phoneNumber}
                     style={{
-                      boxShadow: "none",
-                      outlineColor: "none",
-                      width: "250px",
-                      height: "6vh",
-                      fontSize: "20px",
-                      backgroundColor: "#e9ecef",
+                      boxShadow: 'none',
+                      outlineColor: 'none',
+                      width: '250px',
+                      height: '6vh',
+                      fontSize: '20px',
+                      backgroundColor: '#e9ecef',
                     }}
                     disabled={true}
                   />
@@ -344,6 +360,8 @@ function UserProfile() {
             </Form>
           )}
         </Formik>
+      ) : (
+        skeletons // Display skeletons while data is loading
       )}
     </div>
   );

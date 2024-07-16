@@ -11,14 +11,17 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { CiHeart } from 'react-icons/ci';
 import Images from '@/app/image';
 import Notify from '@/utils/notify';
+import { Skeleton } from '@mui/material';
 const WishLists = () => {
-    const [favouriteSalons, setFavouriteSalons] = useState(null)
+    const [favouriteSalons, setFavouriteSalons] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await getFavouriteSalonList();
-                // console.log("favouriteSalonList::>",res?.data?.data?.items);
-                setFavouriteSalons(res?.data?.data?.items)
+                setFavouriteSalons(res?.data?.data?.items);
+                setLoading(false);
             } catch (error) {
                 Notify.error(error.message)
             }
@@ -27,13 +30,43 @@ const WishLists = () => {
     }, [])
 
     const containerStyle = {
-        height: !favouriteSalons || favouriteSalons.length === 0 ? '360px' : 'auto'
+        height: !favouriteSalons || favouriteSalons.length === 0 ? '390px' : 'auto'
     };
 
+    const skeleton = Array.from({ length: 5 }, (_, index) => (
+        <div key={index} className={styles.salonDetail}>
+          <div className={styles.salon}>
+            <Skeleton variant="rectangular" width={270} height={220} />
+            <div className={styles.mainSkeleton}>
+              <div>
+                <Skeleton variant="text" width={100} height={50} />
+              </div>
+              <div className={styles.contentSkeleton}>
+                <Skeleton variant="text" width={100} height={30} />
+                <Skeleton variant="text" width={100} height={30} />
+              </div>
+              <div className={styles.contentSkeleton}>
+                <Skeleton variant="text" width={100} height={30} />
+                <Skeleton variant="text" width={100} height={30} />
+              </div>
+             
+              <div className={styles.contentSkeleton}>
+                <Skeleton variant="text" width={100} height={30} />
+              </div>
+              <div className={styles.skeletonBtn}>
+                <Skeleton variant="text" width={240} height={60} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ));
     return (
-        <div className={styles.main} style={containerStyle}>
-          {!favouriteSalons || favouriteSalons.length === 0 ? (
-                <p className='fw-bold'>No wishlist items</p>
+        <div className={styles.main}>
+             {loading ? (
+                skeleton
+            ) : (
+          !favouriteSalons || favouriteSalons.length === 0 ? (
+            <p className={styles.noWishLists}>No Wishlist available</p>
             ) : (
             favouriteSalons?.map((salon, index) => (
                <div key={index} className={styles.salonDetails}>
@@ -79,7 +112,8 @@ const WishLists = () => {
                </div>
            </div>
             ))
-            )}
+            )
+        )}
         </div>
     )
 }

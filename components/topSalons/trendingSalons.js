@@ -1,5 +1,5 @@
 "use client";
-import { Paper } from "@mui/material";
+import { Paper, Skeleton } from "@mui/material";
 import styles from "./trendingSalons.module.css";
 import Image from "next/image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -24,6 +24,17 @@ function TrendingSalons() {
     fetchData();
   }, []);
 
+  const skeletons = Array.from({ length: 5 }).map((_, index) => (
+    <Paper key={index} elevation={3} className={styles.paper}>
+      <Skeleton variant="rectangular" width="100%" height={180} />
+      <div className={styles.details}>
+        <Skeleton variant="text" width={200} />
+        <Skeleton variant="text" width={200} />
+        <Skeleton variant="text" width={200} />
+        <Skeleton variant="text" width={200} />
+      </div>
+    </Paper>
+  ));
   return (
     <div className={styles.container}>
       <div className={styles.headingContainer}>
@@ -31,7 +42,8 @@ function TrendingSalons() {
       </div>
 
       <div className={styles.content}>
-        {data?.data?.mostPopularSalons.map((salon, index) => (
+      {data?.data?.mostPopularSalons ? (
+      data?.data?.mostPopularSalons.map((salon, index) => (
           <Paper elevation={3} key={index} className={styles.paper}>
             <div className={styles.image}>
               <Image src={salon.mainGateImageUrl} alt="salonImage" width={500} height={155}/>
@@ -57,7 +69,10 @@ function TrendingSalons() {
               </button>
             </div>
           </Paper>
-        ))}
+        ))
+      ) : (
+        skeletons 
+      )}
       </div>
     </div>
   );

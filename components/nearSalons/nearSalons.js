@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './nearSalons.module.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Paper from '@mui/material/Paper';
@@ -8,22 +9,82 @@ import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Session from '@/service/session';
+import { Skeleton } from '@mui/material'; // Import Skeleton component
+import { Diversity1 } from '@mui/icons-material';
 
 function NearSalons({ data }) {
+  // Initialize an array for skeletons
+  const skeletons = [1, 2, 3, 4];
 
-  // Ensure that data and nearBySalons are available
-//   if (!data || !data.nearBySalons) {
-//     return null; // or display a loading indicator
-//   }
+  const handleViewAllClick = () => {
+    Session.remove('filteredSalon');
+    Session.remove('salonService');
+    Session.remove('selectedBannerSalons');
+  };
 
- // const { nearBySalons } = data;
- const handleViewAllClick = () => {
-  Session.remove('filteredSalon');
-  Session.remove('salonService');
-  Session.remove('selectedBannerSalons');
+  // Render skeletons in a 2x2 grid if data or data.nearBySalons is not available
+  if (!data || !data?.data?.nearBySalons) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.heading}>
+          <div className={styles.headingIcons}>
+            <LocationOnIcon className={styles.icon} />
+          </div>
+          <div className={styles.text}>
+            <h4>Find your </h4>
+            <span>Salon</span>
+          </div>
+        </div>
 
-};
+        <div className={styles.salons}>
+          <Grid container spacing={2}>
+            {skeletons.map((_, index) => (
+              <Grid item xs={12} md={6} key={index}>
+                <Paper elevation={3} className={styles.paper}>
+                  <Skeleton variant="rectangular" width="100%" height={200} />
+                  <div className={styles.details}>
+                    <div className={styles.nameContainer}>
+                      <h2>
+                        <Skeleton variant="text" width={100} />
+                      </h2>
+                      <div className={styles.wishlist}>
+                        <p>
+                          <Skeleton variant="text" width={80} />
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.location}>
+                      <Skeleton variant="text" width={200} />
+                    </div>
+                    <div className={styles.salonType}>
+                      <div className={styles.rating}>
+                        <Skeleton variant="text" width={50} />
+                      </div>
+                      <div className={styles.type}>
+                        <Skeleton variant="text" width={100} />
+                      </div>
+                    </div>
+                    <div className={styles.skeletonsBtn}>
+                      <Skeleton variant="text" width={100} />
+                    </div>
+                  </div>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
 
+        <div className={styles.linkDiv}>
+          <Link href={'/salonlist'} onClick={handleViewAllClick} className={styles.link}>
+            View all salons
+            <ArrowForwardIcon className={styles.arrow} />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Once data is available, render the actual content
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
@@ -42,8 +103,7 @@ function NearSalons({ data }) {
             <Grid item sm={6} xs={12} md={6} key={index}>
               <Paper elevation={3} className={styles.paper}>
                 <div className={styles.image}>
-                  {/* Assuming salon has an imageUrl property */}
-                  <Image src={salon.mainGateImageUrl} alt='Salon Image' width={270} height={200} className={styles.image}/>
+                  <Image src={salon.mainGateImageUrl} alt='Salon Image' width={270} height={200} className={styles.image} />
                 </div>
                 <div className={styles.details}>
                   <div className={styles.nameContainer}>
@@ -66,7 +126,6 @@ function NearSalons({ data }) {
                       {salon.serviceType}
                     </div>
                   </div>
-                  {/* Add more salon details as needed */}
                   <button className={styles.btn}>
                     <Link href={`/salonlist/${salon.id}`}>
                       View Details
@@ -80,10 +139,7 @@ function NearSalons({ data }) {
       </div>
 
       <div className={styles.linkDiv}>
-        {/* <Link href={'/salonlist'} className={styles.link} >View all salons
-          <ArrowForwardIcon className={styles.arrow} />
-        </Link> */}
-   <Link href={'/salonlist'} onClick={handleViewAllClick} className={styles.link}>
+        <Link href={'/salonlist'} onClick={handleViewAllClick} className={styles.link}>
           View all salons
           <ArrowForwardIcon className={styles.arrow} />
         </Link>
