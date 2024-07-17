@@ -29,7 +29,11 @@ function TrendingSalons() {
 
   const skeletons = Array.from({ length: 5 }).map((_, index) => (
     <Paper key={index} elevation={3} className={styles.paper}>
+      <div className={styles.paperSkeleton}>
       <Skeleton variant="rectangular" width="100%" height={180} />
+
+      </div>
+
       <div className={styles.details}>
         <Skeleton variant="text" width={200} />
         <Skeleton variant="text" width={200} />
@@ -44,7 +48,7 @@ function TrendingSalons() {
           <div className={styles.heading}>Top Salons</div>
         </div>
       <div className={styles.content}>
-        {loading ? (
+        {!loading ? (
           skeletons
         ) : data?.data?.mostPopularSalons?.length > 0 ? (
           data?.data?.mostPopularSalons.map((salon, index) => (
@@ -61,7 +65,9 @@ function TrendingSalons() {
                 <h3>{salon.name}</h3>
                 <div className={styles.location}>
                   <LocationOnIcon className={styles.locIcon} />
-                  {`${salon.address}, ${salon.city}, ${salon.state}`}
+                  {` ${salon.city}, ${salon.state}`}
+                  {/* {`${salon.address}, ${salon.city}, ${salon.state}`} */}
+
                 </div>
                 <div className={styles.salonType}>
                   <div className={styles.rating}>

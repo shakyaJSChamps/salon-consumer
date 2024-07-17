@@ -70,7 +70,7 @@ function Payment() {
 
           if (verifyRes?.data?.message) {
             Notify.success(verifyRes.data.data);
-            router.push("/appointment");
+            router.push(`/appointment/${id}`);
           } else {
             Notify.error("Payment verification failed.");
           }

@@ -64,7 +64,7 @@ function TopSalons() {
                 <h3>{salon.name}</h3>
                 <div className={styles.location}>
                   <LocationOnIcon className={styles.locIcon} />
-                  {`${salon.address}, ${salon.city}, ${salon.state}`}
+                  {`${salon.city}, ${salon.state}`}
                 </div>
                 <div className={styles.salonType}>
                   <div className={styles.rating}>

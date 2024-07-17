@@ -55,7 +55,11 @@ const WishLists = () => {
     </div>
   ));
   return (
-    <div className={styles.main}>
+    <div
+      className={`${styles.main} ${
+        favouriteSalons && favouriteSalons.length === 1 ? styles.singleWishlist : ""
+      }`}
+    >
       {loading ? (
         skeleton
       ) : !favouriteSalons || favouriteSalons.length === 0 ? (

@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./AppointmentDetailPage.module.css";
 import Notify from "@/utils/notify";
 import Session from "@/service/session";
-
+import { IoIosArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation";
 function AppointmentDetailPage({ appointmentId }) {
   const [details, setDetails] = useState(null);
   const id = Session.get("appointmentId");
-
+  const router = useRouter();
   const fetchAppointmentDetails = async () => {
     try {
       const response = await appointmentDetails(appointmentId);
@@ -27,51 +28,45 @@ function AppointmentDetailPage({ appointmentId }) {
     (sum, service) => sum + (service.servicePrice || 0),
     0
   );
-  const formatDate = (date) => {
-    const d = new Date(date);
+  function formatDate(dateString) {
+    const d = new Date(dateString);
     const year = d.getFullYear();
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const month = monthNames[d.getMonth()];
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${day} ${month} ${year}`;
-  };
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    const monthIndex = parseInt(month, 10) - 1; 
+  
+    const formattedDate = `${day}-${months[monthIndex]}-${year}`;
+    return formattedDate;
+  }
 
   const handleDownloadInvoice = async () => {
     try {
-        const res = await getInvoice(appointmentId);
-        const invoicePath = res.data.data.invoicePath;
+      const res = await getInvoice(appointmentId);
+      const invoicePath = res.data.data.invoicePath;
 
-        // Initiate download
-        const link = document.createElement("a");
-        link.href = invoicePath;
-        link.setAttribute("download", "");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-     
+      // Initiate download
+      const link = document.createElement("a");
+      link.href = invoicePath;
+      link.setAttribute("download", "");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
       Notify.error(error.message);
     }
   };
-
+  const gst = details?.paymentStatus?.cgst + details?.paymentStatus?.cgst;
   return (
     <div className={styles.mainDiv}>
       <div elevation={2} className={styles.paper}>
+
         <div className={styles.details}>
+
           <div className={styles.title}>
+          <IoIosArrowBack className={styles.backIcon} onClick={()=>router.push('/appointment')}/>
+
             <h3>Appointment Details</h3>
           </div>
           <div className={styles.appointmentDetails}>
@@ -87,7 +82,7 @@ function AppointmentDetailPage({ appointmentId }) {
 
             <p>
               <span> Appointment Date</span>{" "}
-              <span>{formatDate(details?.date)}</span>
+              <span>{details?.date}</span>
             </p>
             <p>
               <span>Appointment Time</span> <span>{details?.startTime}</span>
@@ -103,8 +98,19 @@ function AppointmentDetailPage({ appointmentId }) {
             <p>
               <span>Salon Address</span> <span>{details?.salon?.address}</span>
             </p>
-
-            {/* <p><span>Total Payment</span> <span>₹{total}</span></p> */}
+            {details?.status === "COMPLETED" && (
+              <div>
+          <p>
+          <span>Service Date</span> <span>{details?.serviceDate}</span>
+        </p><br/>
+         <p>
+         <span>Service Start Time</span> <span>{details?.serviceStartTime}</span>
+       </p><br/>
+        <p>
+        <span>Service End Time</span> <span>{details?.serviceEndTime}</span>
+      </p>
+      </div>
+        )}        
           </div>
         </div>
 
@@ -136,10 +142,17 @@ function AppointmentDetailPage({ appointmentId }) {
                 <span>₹{item.servicePrice}</span>
               </div>
             ))}
+            <div className={styles.serviceDetails}>
+              <div className={styles.serviceItem}>
+                <span>GST</span>
+
+                <span>₹{gst}</span>
+              </div>
+            </div>
           </div>
           <hr />
           <p>
-            <strong>Total</strong> ₹{total}
+            <strong>Total</strong> ₹{total + gst}
           </p>
         </div>
         <div className={styles.details}>
@@ -151,19 +164,16 @@ function AppointmentDetailPage({ appointmentId }) {
               <span>Payment Mode</span>{" "}
               <span>{details?.paymentStatus.paymentMode}</span>
             </p>
+            <p>
+              <span>Payment Status</span>{" "}
+              <span>{details?.paymentStatus.paymentStatus}</span>
+            </p>
           </div>
         </div>
-        {/* <div className={styles.details}> */}
-        <div className={styles.title}>{/* <h3>Payment Summary</h3> */}</div>
-        <div className={styles.paymentSummary}>
-          {/* <p><span>Item Total</span> <span>₹{total}</span></p> */}
-          {/* <p><span>Taxes and Fee</span> <span>₹49</span></p> */}
-          {/* <hr /> */}
-          {/* <p><strong>Grand Total</strong> ₹{total}</p> */}
-        </div>
+        <div className={styles.title}></div>
+        <div className={styles.paymentSummary}></div>
       </div>
     </div>
-    // </div>
   );
 }
 

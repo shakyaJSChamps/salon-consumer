@@ -19,7 +19,7 @@ import styles from "./appointment.module.css";
 import { Skeleton } from "@mui/material";
 
 const Appointments = () => {
-  const [appointmentShow, setShowAppointment] = useState(true);
+  const [showAppointment, setShowAppointment] = useState(true);
   const [rescheduleShow, setRescheduleShow] = useState(false);
   const [ratingShow, setRatingShow] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -27,9 +27,10 @@ const Appointments = () => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [statusFilter, setStatusFilter] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
-  const [menuVisible, setMenuVisible] = useState(true);
+  const [menuVisible, setMenuVisible] = useState(false);
   const [scheduleShowVisible, setShowScheduleVisible] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     fetchAppointments();
@@ -70,15 +71,17 @@ const Appointments = () => {
 
   const handleStatusChange = (e) => {
     setStatusFilter(e.target.value);
+    toggleMenu();
   };
-
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+    toggleMenu();
+  };
   const handleShowReschedule = (appointment) => {
     setSelectedAppointment(appointment);
     setRescheduleShow(true);
     setShowAppointment(false);
     setRatingShow(false);
-    console.log("Reschedule clicked", appointment); // Debug log
-
   };
 
   const handleShowAppointment = () => {
@@ -97,7 +100,12 @@ const Appointments = () => {
   const handleToggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
-
+  const toggleMenu = () => {
+    if (window.innerWidth <= 768) {
+      setShowScheduleVisible(false);
+      setMenuVisible(false);
+    }
+  };
   const handleDelete = (appointment) => {
     const inputOptions = {
       "Change of plan": "Change of plan",
@@ -215,38 +223,28 @@ const Appointments = () => {
     }
   };
 
-  const formatDate = (date) => {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const month = monthNames[d.getMonth()];
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${day} ${month} ${year}`;
-  };
+  function formatDate(dateString) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    const [day, month, year] = dateString.split('-');
+    const monthIndex = parseInt(month, 10) - 1; // Convert month to 0-based index
+  
+    const formattedDate = `${day}-${months[monthIndex]}-${year}`;
+    return formattedDate;
+  }
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setShowScheduleVisible(false);
-        setMenuVisible(false);
-      } else {
-        setShowScheduleVisible(true);
+      const isMobile = window.innerWidth <= 767;
+      setIsMobileView(isMobile);
+      if (!isMobile) {
         setMenuVisible(true);
+      } else {
+        setMenuVisible(false);
       }
     };
+
+    handleResize(); // Set initial state
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -273,142 +271,163 @@ const Appointments = () => {
 
   return (
     <>
-      <div className={styles.container}>
-        <h3 className={styles.titleAppointment}>My Appointments</h3>
-        {menuVisible ? (
-          <ImCross
-            className={styles.humburgerCross}
-            onClick={handleToggleMenu}
-          />
-        ) : (
-          <ImMenu className={styles.humburger} onClick={handleToggleMenu} />
-        )}
-        {(scheduleShowVisible || menuVisible) && (
-          <div className={styles.userInputs}>
-            <div className={styles.userInput}>
-              <p>Status</p>
-              <select
-                className={styles.selects}
-                value={statusFilter}
-                onChange={handleStatusChange}
-              >
-                <option value="pending">Upcoming</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-            <div className={styles.userInput}>
-              <p>Date</p>
-              <input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-              />
-            </div>
-          </div>
-        )}
-        {!loading ? (
-          <div className={styles.upcomingScheduleContainer}>
-            {filteredAppointments.length > 0 ? (
-              filteredAppointments.map((data, index) => (
-                <div
-                  className={`${styles.upcomingSchedule} ${
-                    data.status === "completed" ? styles.greyBackground : ""
-                  }`}
-                  key={index}
+      {showAppointment && (
+        <div className={styles.container}>
+          <h3 className={styles.titleAppointment}>My Appointments</h3>
+          {menuVisible ? (
+            <ImCross
+              className={styles.humburgerCross}
+              onClick={handleToggleMenu}
+            />
+          ) : (
+            <ImMenu className={styles.humburger} onClick={handleToggleMenu} />
+          )}
+          {(menuVisible || !isMobileView) && (
+            <div className={styles.userInputs}>
+              <div className={styles.userInput}>
+                <p>Status</p>
+                <select
+                  className={styles.selects}
+                  value={statusFilter}
+                  onChange={handleStatusChange}
                 >
-                  <div className={styles.images}>
-                    <Image
-                      src={data.salon.mainGateImageUrl}
-                      alt="image"
-                      height={100}
-                      width={100}
-                    />
-                  </div>
-                  <div className={styles.upcomingDetails}>
-                    <h5>{data.salon.name}</h5>
-                    <p>
-                      <RxCalendar />
-                      <span>{formatDate(data.date)}</span>
-                    </p>
-                    <p>
-                      <HiOutlineLocationMarker />
-                      <span>{data.salon.address}</span>
-                    </p>
-                    <p>
-                      Services-
-                      {data.services.map((item) => item.serviceName).join(", ")}
-                    </p>
-                    <p>
-                      Status-
-                      <span
-                        className={`${styles.circles} ${
-                          data.status === "COMPLETED"
-                            ? styles.completed
-                            : data.status === "CANCELLED" ||
-                              data.status === "REJECTED"
-                            ? styles.cancelled
-                            : styles.pending
-                        }`}
-                      ></span>
-                      {data.status === "COMPLETED"
-                        ? "COMPLETED"
-                        : data.status === "CANCELLED" ||
-                          data.status === "REJECTED"
-                        ? "CANCELLED BY YOU"
-                        : "PENDING"}
-                    </p>
-                  </div>
-                  <div className={styles.buttons}>
-                    {data.status === "PENDING" && (
-                      <button onClick={() => handleShowReschedule(data)}>
-                        Re-Schedule
-                      </button>
-                    )}
-                    {data.status === "PENDING" && (
-                      <button onClick={() => handleDelete(data)}>Cancel</button>
-                    )}
-                  </div>
-                  {data.status !== "PENDING" && (
-                    <div className={styles.buttonsPast}>
-                      <Link href={`appointment/${data.id}`}>
-                        <button>View Details</button>
-                      </Link>
-                      {data.status === "COMPLETED" && (
-                        <button
-                          onClick={() => handleShowRating(data)}
-                          className={styles.rating}
-                        >
-                          Rate & Review
-                        </button>
-                      )}
+                  <option value="pending">Upcoming</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div className={styles.userInput}>
+                <p>Date</p>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  // onChange={(e) => setSelectedDate(e.target.value)}
+                  onChange={handleDateChange}
+                />
+              </div>
+            </div>
+          )}
+          {!loading ? (
+            <div
+              className={`${styles.upcomingScheduleContainer} ${
+                filteredAppointments && filteredAppointments.length === 1
+                  ? styles.singleAppointment
+                  : ""
+              }`}
+            >
+              {filteredAppointments.length > 0 ? (
+                filteredAppointments.map((data, index) => (
+                  <div
+                    className={`${styles.upcomingSchedule} ${
+                      data.status === "completed" ? styles.greyBackground : ""
+                    }`}
+                    key={index}
+                  >
+                    <div className={styles.images}>
+                      <Image
+                        src={data.salon.mainGateImageUrl}
+                        alt="image"
+                        height={100}
+                        width={100}
+                      />
                     </div>
-                  )}
-                  {data.status === "COMPLETED" && (
-                    <div className={styles.downloadInvoice}>
-                      <div className={styles.load}>
-                        <MdOutlineFileDownload
-                          onClick={() => handleDownloadInvoice(data)}
-                        />
-                      </div>
-                      <p
-                        onClick={() => handleDownloadInvoice(data)}
-                        className={styles.inVoiceBtn}
-                      >
-                        Download Invoice
+                    <div className={styles.upcomingDetails}>
+                      <h5>{data.salon.name}</h5>
+                      <p>
+                        <RxCalendar />
+                        <span>{formatDate(data.date)}</span>
+                        {/* <span>{data.date}</span> */}
+                      </p>
+                      <p>
+                        <HiOutlineLocationMarker />
+                        <span>{data.salon.address}</span>
+                      </p>
+                      <p>
+                        Services-
+                        {data.services
+                          .map((item) => item.serviceName)
+                          .join(", ")}
+                      </p>
+                      <p>
+                        Status-
+                        <span
+                          className={`${styles.circles} ${
+                            data.status === "COMPLETED"
+                              ? styles.completed
+                              : data.status === "CANCELLED" ||
+                                data.status === "REJECTED"
+                              ? styles.cancelled
+                              : styles.pending
+                          }`}
+                        ></span>
+                        {data.status === "COMPLETED"
+                          ? "COMPLETED"
+                          : data.status === "CANCELLED" ||
+                            data.status === "REJECTED"
+                          ? "CANCELLED BY YOU"
+                          : "PENDING"}
                       </p>
                     </div>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p className={styles.noApp}>No appointments available.</p>
-            )}
-          </div>
-        ) : (
-          skeleton
-        )}
-      </div>
+                    <div className={styles.buttons}>
+                    {/* {data.status === "PENDING" && (
+
+                    <Link href={`appointment/${data.id}`}>
+                          <button>View Details</button>
+                        </Link>
+                    )} */}
+                      {data.status === "PENDING" && (
+                        <button onClick={() => handleShowReschedule(data)}>
+                          Re-Schedule
+                        </button>
+                      )}
+                      {data.status === "PENDING" && (
+                        <button onClick={() => handleDelete(data)}>
+                          Cancel
+                        </button>
+                      )}
+                     
+                    </div>
+                    {data.status !== "PENDING" && (
+                      <div className={styles.buttonsPast}>
+                        <Link href={`appointment/${data.id}`}>
+                          <button>View Details</button>
+                        </Link>
+                        {data.status === "COMPLETED" && (
+                          <button
+                            onClick={() => handleShowRating(data)}
+                            className={styles.rating}
+                          >
+                            Rate & Review
+                          </button>
+                        )}
+                      </div>
+                    )}
+                    {data.status === "COMPLETED" && (
+                      <div className={styles.downloadInvoice}>
+                        <div className={styles.load}>
+                          <MdOutlineFileDownload
+                            onClick={() => handleDownloadInvoice(data)}
+                          />
+                        </div>
+                        <p
+                          onClick={() => handleDownloadInvoice(data)}
+                          className={styles.inVoiceBtn}
+                        >
+                          Download Invoice
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <p className={styles.noApp}>No appointments available.</p>
+              )}
+            </div>
+          ) : (
+            skeleton
+          )}
+        </div>
+      )}
       {rescheduleShow && (
         <RescheduleAppointment
           handleShowAppointment={handleShowAppointment}
