@@ -5,7 +5,6 @@ import Notify from "@/utils/notify";
 import { Skeleton } from "@mui/material";
 import styles from "../../pages/about-us/aboutUs.module.css";
 const StaticPage = ({ endpoint, className }) => {
-  console.log("endpoint", endpoint);
   const [pageContent, setPageContent] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -21,6 +20,7 @@ const StaticPage = ({ endpoint, className }) => {
       setLoading(false);
     } catch (error) {
       Notify.error(error.message);
+      setLoading(true);
     }
   };
 

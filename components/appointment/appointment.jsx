@@ -40,10 +40,10 @@ const Appointments = () => {
     try {
       const res = await getAppointment(statusFilter);
       setAppointments(res.data.data);
+      setLoading(false);
     } catch (error) {
       Notify.error(error.message);
-    } finally {
-      setLoading(false);
+      setLoading(true);
     }
   };
 
@@ -77,6 +77,8 @@ const Appointments = () => {
     setRescheduleShow(true);
     setShowAppointment(false);
     setRatingShow(false);
+    console.log("Reschedule clicked", appointment); // Debug log
+
   };
 
   const handleShowAppointment = () => {

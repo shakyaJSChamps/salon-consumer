@@ -1,11 +1,13 @@
-.container {}
 
 .salonSlider {
-    /* background-image: url('../../../assets/images/salonBanner.svg'); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* padding: 140px 79px; */
+}
+.skeletonDiv{
+    display: flex;
+    gap: 40px;
+    padding-left: 20px;
 }
 .sliderImage{
     width: 100%;

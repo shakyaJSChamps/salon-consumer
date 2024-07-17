@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 52vh;
+    padding: 77px;
 }
 .notifications{
     display: flex;
