@@ -1,19 +1,15 @@
 "use client";
 import styles from "./payment.module.css";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import Session from "@/service/session";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getDetails, payments, verifySignature } from "@/api/account.api";
+import { payments, verifySignature } from "@/api/account.api";
 import Notify from "@/utils/notify";
 function Payment() {
   const [totalCount, setTotalCount] = useState(1);
-  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
-  const [paymentDetails, setPaymentDetails] = useState([]);
   const [order, setOrder] = useState(null);
   const servicesDetails = Session.getObject("selectedService");
-  const id = Session.get('appointmentId');
+  const id = Session.get("appointmentId");
   const router = useRouter();
 
   const totalAmount = servicesDetails?.reduce(
@@ -21,26 +17,13 @@ function Payment() {
     0
   );
 
-  // Function to handle incrementing count
-  function handleIncrement() {
-    setTotalCount((prevCount) => prevCount * 2);
-  }
-
-  // Function to handle decrementing count
-  function handleDecrement() {
-    if (totalCount > 1) {
-      setTotalCount((prevCount) => prevCount / 2);
-    }
-  }
-
   const handleOrder = async () => {
-
     try {
       const payload = {
         subtotal: totalAmount,
       };
-      const res = await payments(payload,id);
-      
+      const res = await payments(payload, id);
+
       setOrder(res?.data?.data);
     } catch (error) {
       Notify.error(error.message);
@@ -61,7 +44,6 @@ function Payment() {
   };
 
   const handlePayment = async () => {
-
     const res = await loadRazorpayScript();
 
     if (!res) {
@@ -74,24 +56,18 @@ function Payment() {
       amount: order?.subtotal,
       order_id: order?.orderId,
       currency: "INR",
-      name: "STYLRAX",
-    //  description: "Test Transaction",
+      name: "STYLRAX SOLUTIONS INDIA PRIVATE LIMITED",
       handler: async function (response) {
-        //alert(response.razorpay_payment_id);
-        // console.log("res payment", response.razorpay_payment_id);
-        // console.log("res signature", response.razorpay_signature);
-        // console.log("res order", response.razorpay_order_id);
-
-        console.log('options',options)
+        console.log("options", options);
         try {
           const verificationPayload = {
-            razorpay_order_id: response.razorpay_order_id,            
+            razorpay_order_id: response.razorpay_order_id,
 
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
           };
-          const verifyRes = await verifySignature(verificationPayload,id);
-     
+          const verifyRes = await verifySignature(verificationPayload, id);
+
           if (verifyRes?.data?.message) {
             Notify.success(verifyRes.data.data);
             router.push("/appointment");
@@ -102,16 +78,14 @@ function Payment() {
           Notify.error(error.message);
         }
 
-      //  router.push("/appointment");
+        //  router.push("/appointment");
       },
       prefill: {
-      //  name: "Your Name",
-      //   email: "Your Email",
-      //   contact: "Your Phone Number",
+        //  name: "Your Name",
+        //   email: "Your Email",
+        //   contact: "Your Phone Number",
       },
-      notes: {
-        address: "Your Address",
-      },
+
       theme: {
         color: "#000000",
       },
@@ -121,9 +95,7 @@ function Payment() {
     paymentObject.open();
   };
 
-
-  useEffect(() => {
-  }, [id]);
+  useEffect(() => {}, [id]);
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -132,19 +104,7 @@ function Payment() {
             <div>
               <h3>Grooming Essentials</h3>
             </div>
-            {/* <div className={styles.count}>
-              <RemoveIcon
-                className={styles.countIcon}
-                style={{ fontSize: "12px" }}
-                onClick={handleDecrement}
-              />
-              <span>{totalCount}</span>
-              <AddIcon
-                className={styles.countIcon}
-                style={{ fontSize: "12px" }}
-                onClick={handleIncrement}
-              />
-            </div> */}
+
             <div className={styles.totalPrice}>
               <p>
                 ₹
@@ -173,15 +133,7 @@ function Payment() {
             </div>
           </div>
         ))}
-        {/* <div className={styles.offers}>
-          <h3>Coupons and offers</h3>
-          <div className={styles.offerlist}>
-            <ul>
-              <li>Flat 20% off On Payment Through Axis Bank</li>
-              <li>Flat 20% off On Payment Through Axis Bank</li>
-            </ul>
-          </div>
-        </div> */}
+
         <div className={styles.paymentSummary}>
           <h3>Payment summary</h3>
           {servicesDetails?.map((service, index) => (
@@ -204,21 +156,21 @@ function Payment() {
         </div>
       </div>
       <div className={styles.payment}>
-        {/* {!order && <button onClick={handleOrder}>Confirm Payment</button> }
-         {order && <button onClick={handlePayment}>Pay</button>}  */}
-
         {!order && (
           <button
             onClick={() => {
               handleOrder();
             }}
             className={styles.btn}
-
           >
             Confirm Payment
           </button>
         )}
-        {order && <button onClick={handlePayment} className={styles.btn}>Pay</button>}
+        {order && (
+          <button onClick={handlePayment} className={styles.btn}>
+            Pay
+          </button>
+        )}
       </div>
     </div>
   );
