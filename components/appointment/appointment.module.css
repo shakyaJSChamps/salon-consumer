@@ -6,12 +6,19 @@
 .inVoiceBtn{
     cursor: pointer;
 }
+.images img{
+    height: 100px;
+    width: 100px;
+}
 .noApp{
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    padding-bottom: 176px;
+    padding: 80.2px;
+}
+.singleAppointment{
+    padding: 5px;
 }
 .skeletonContent{
     display: flex;
@@ -313,7 +320,7 @@
         width: 650px;
     }
 
-    .userInput input {
+    .userInput {
         padding: 6px 2px;
     }
 
@@ -334,11 +341,25 @@
     .humbargor {
         display: block;
     }
-
-
+   .upcomingSchedule{
+    flex-direction: column;
+   }
+   .images{
+    width: 100px;
+   }
+  .buttons{
+    padding-top: 10px;
+  }
 
 }
-
+@media screen and (max-width:1200px) {
+    .singleAppointment {
+        padding: 12.5px;
+    }}
+    @media screen and (max-width:991px) {
+        .singleAppointment {
+            padding: 27.7px;
+        }}
 @media screen and (max-width:768px) {
     .container {
         position: relative;

@@ -11,6 +11,9 @@
   display: flex;
   gap: 20px;
 }
+.singleWishlist {
+ padding: 90px !important;
+}
 .skeletonBtn{
   padding-right: 10px;
   margin-top: 10px;
@@ -151,7 +154,7 @@
   gap: 20px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
   margin-bottom: 15px;
-  height: 285px;
+  height: 235px;
 }
 .main{
     padding: 20px 0px;
