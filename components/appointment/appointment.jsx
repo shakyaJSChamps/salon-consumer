@@ -7,6 +7,7 @@ import RescheduleAppointment from "../resheduleAppointMent/rescheduleAppointMent
 import Ratings from "../rating&review/rating";
 import { ImMenu, ImCross } from "react-icons/im";
 import { MdOutlineFileDownload } from "react-icons/md";
+import { MdOutlineWatchLater } from "react-icons/md";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import {
@@ -224,11 +225,24 @@ const Appointments = () => {
   };
 
   function formatDate(dateString) {
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    
-    const [day, month, year] = dateString.split('-');
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const [day, month, year] = dateString.split("-");
     const monthIndex = parseInt(month, 10) - 1; // Convert month to 0-based index
-  
+
     const formattedDate = `${day}-${months[monthIndex]}-${year}`;
     return formattedDate;
   }
@@ -338,6 +352,15 @@ const Appointments = () => {
                         <span>{formatDate(data.date)}</span>
                         {/* <span>{data.date}</span> */}
                       </p>
+
+                      {data.status === "PENDING" && (
+                        <p>
+                          <MdOutlineWatchLater />
+
+                          <span>{data.startTime}</span>
+                        </p>
+                      )}
+
                       <p>
                         <HiOutlineLocationMarker />
                         <span>{data.salon.address}</span>
@@ -368,24 +391,26 @@ const Appointments = () => {
                           : "PENDING"}
                       </p>
                     </div>
-                    <div className={styles.buttons}>
-                    {/* {data.status === "PENDING" && (
-
-                    <Link href={`appointment/${data.id}`}>
-                          <button>View Details</button>
-                        </Link>
-                    )} */}
+                    <div className={styles.containerBtn}>
+                      <div className={styles.buttons}>
+                        {data.status === "PENDING" && (
+                          <button onClick={() => handleShowReschedule(data)}>
+                            Re-Schedule
+                          </button>
+                        )}
+                        {data.status === "PENDING" && (
+                          <button onClick={() => handleDelete(data)}>
+                            Cancel
+                          </button>
+                        )}
+                      </div>
                       {data.status === "PENDING" && (
-                        <button onClick={() => handleShowReschedule(data)}>
-                          Re-Schedule
-                        </button>
+                        <div className={styles.buttonDetail}>
+                          <Link href={`appointment/${data.id}`}>
+                            View Details
+                          </Link>
+                        </div>
                       )}
-                      {data.status === "PENDING" && (
-                        <button onClick={() => handleDelete(data)}>
-                          Cancel
-                        </button>
-                      )}
-                     
                     </div>
                     {data.status !== "PENDING" && (
                       <div className={styles.buttonsPast}>

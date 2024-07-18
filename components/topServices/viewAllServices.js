@@ -30,7 +30,7 @@ function ViewAllServices() {
 
   const skeletons = Array.from({ length: 8 }).map((_, index) => (
     <Paper key={index} elevation={3} className={styles.paper}>
-      <div className={styles.type}>
+      <div className={styles.image}>
         <Skeleton variant="text" width={200} />
       </div>
       <Skeleton variant="rectangular" width="100%" height={200} />
@@ -45,6 +45,7 @@ function ViewAllServices() {
       <div className={styles.content} onClick={handleClick}>
         {loading ? (
           skeletons
+
         ) : services.length > 0 ? (
           services.map((service, index) => (
             <Paper key={service.id} elevation={3} className={styles.paper}>

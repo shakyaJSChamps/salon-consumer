@@ -47,6 +47,7 @@ const UserInformation = () => {
     const handleManageAddressClick = () => {
         setShowProfileInfo(false);
         setShowProfileInfo(false)
+        setShowWishLists(false);
         setShowManageAddress(true);
 
     };

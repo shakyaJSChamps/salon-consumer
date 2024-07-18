@@ -166,21 +166,24 @@
 }
 
 .details {
-  padding: 20px 35px;
-  width: 450px;
+  padding: 10px 18px;
+  width: 270px;
   height: 100%;
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-evenly;
 }
 
 .details button {
   background-color: black;
   color: white;
-  padding: 10px 82px;
+  padding: 8px 77px;
   cursor: pointer;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 3px;
   font-weight: 600;
   margin-top: 10px;
@@ -330,7 +333,7 @@
 }
 .img {
   height: 100%;
-  width: 450px;
+  width: 270px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -339,7 +342,7 @@
 }
 
 .doorBuddyBtn {
-  padding: 13px 180px !important;
+  /* padding: 13px 180px !important; */
 }
 
 .showMoreButton {
@@ -359,17 +362,7 @@
   color: blue;
 }
 
-@media (max-width: 1200px) {
-  .img {
-    width: 350px;
-  }
-  .details {
-    width: 350px;
-  }
-  .doorBuddyBtn {
-    padding: 13px 132px !important;
-  }
-}
+
 
 @media screen and (max-width: 991px) {
   .img {
@@ -382,39 +375,28 @@
     padding: 8px 80px !important;
   }
 }@media screen and (max-width: 575px) {
-    .img {
-      width: 300px;
-      height: 200px;
-
-    }
-    .details {
-      width: 150px;
-      height: 50%;
-    }
+   
     .salonDetails{
         flex-direction: column;
         height: 400px;
-        width: 300px;
     }
     .doorBuddyBtn {
         font-size: 15px;
-      padding: 4px 100px !important;
+    }
+    .details{
+      height: 400px;
     }
     .btnDiv{
         margin-top: -25px;
     }
     .wishlists{
-        margin-left: 100px;
         margin-top: -60px;
     }
     .titles{
-        margin-top: -35px;
+        margin-top: -55px;
         font-size: 15px;
     }
-    .locations{
-        margin-top: -15px;
-        
-    }
+   
     .ratings{
         margin-top: -15px;
     }

@@ -10,6 +10,22 @@
     height: 100px;
     width: 100px;
 }
+.containerBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
+  .buttonDetail {
+    padding-top: 10px;
+    text-decoration: underline;
+    color: #7A7A7A;
+
+  }
+  .buttonDetail a{
+    color: #7A7A7A;
+  }
+  
+  
 .noApp{
     display: flex;
     justify-content: center;
@@ -355,11 +371,20 @@
 @media screen and (max-width:1200px) {
     .singleAppointment {
         padding: 12.5px;
-    }}
-    @media screen and (max-width:991px) {
+    }
+    .noApp{
+        padding: 88px;
+    }
+}
+    
+    @media screen and (max-width:992px) {
         .singleAppointment {
             padding: 27.7px;
-        }}
+        }
+        .noApp{
+            padding: 103.5px;
+        }
+    }
 @media screen and (max-width:768px) {
     .container {
         position: relative;

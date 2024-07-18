@@ -182,6 +182,12 @@ const CustomTimePicker = styled(TimePicker)({
     outline: "none",
     borderRadius: "13px",
     height: "6px",
+    "@media (max-width: 500px)": {
+      width: "270px" 
+    },
+    "@media (max-width: 400px)": {
+      width: "220px" 
+    },
   },
 });
 export default RescheduleAppointment;
