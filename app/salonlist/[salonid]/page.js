@@ -175,7 +175,7 @@ function SalonDetail({ params }) {
         </>
       ) : (
         <>
-          <Skeleton variant="rectangular" width={1500} height={350} />
+          <Skeleton variant="rectangular" width="100%" height={375} />
           <Skeleton variant="text" width="40%" height={50} />
           <Skeleton variant="text" width="40%" height={50} />
           <div className={styles.skeletonDiv}>

@@ -206,7 +206,7 @@ const Lists = (props) => {
   ));
   const isEmptyListt = lists.length === 0;
 
-  if (isEmptyListt && !isLoading) {
+  if (isEmptyListt && isLoading) {
     return <div className={styles.noSalonList}>No Salonlist available</div>;
   }
   return (
@@ -315,7 +315,7 @@ const Lists = (props) => {
             />
           </div>
         </div>
-        {!isLoading ? (
+        {isLoading ? (
           <div className={styles.salonList}>
             {listFilter.length > 0
               ? listFilter?.map((salon, index) => (

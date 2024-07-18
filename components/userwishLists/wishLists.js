@@ -96,8 +96,7 @@ const WishLists = () => {
                       onClick={() => handleSelecteFavourites(salon.id, false)}
                     ></div>
                   ) : (
-                    // <CiHeart className={`${styles.heart} ${salon.isFavorite ? styles.favorite : styles.nonFavorite}`}
-                    //     onClick={() => handleSelecteFavourites(salon.id, false)} />
+                   
                     <CiHeart
                       onClick={() => handleSelecteFavourites(salon.id, true)}
                     />
@@ -107,7 +106,7 @@ const WishLists = () => {
               </div>
               <div className={styles.ratings}>
                 <p className={styles.locations}>
-                  <StarIcon /> {salon.rating}.0
+                  <StarIcon /> {salon.rating}
                 </p>
                 <p>{salon.serviceType}</p>
               </div>
