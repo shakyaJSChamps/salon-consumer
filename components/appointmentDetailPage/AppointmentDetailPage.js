@@ -6,6 +6,8 @@ import Notify from "@/utils/notify";
 import Session from "@/service/session";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { format ,parse} from 'date-fns';
+import { enUS, enGB } from 'date-fns/locale';
 function AppointmentDetailPage({ appointmentId }) {
   const [details, setDetails] = useState(null);
   const id = Session.get("appointmentId");
@@ -28,19 +30,39 @@ function AppointmentDetailPage({ appointmentId }) {
     (sum, service) => sum + (service.servicePrice || 0),
     0
   );
-  function formatDate(dateString) {
-    const d = new Date(dateString);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    
-    const monthIndex = parseInt(month, 10) - 1; 
+  const formatDate = (dateString) => {
+    const formats = [
+      'yyyy-MM-dd',
+      'dd-MM-yyyy',
+      'MM-dd-yyyy',
+      'yyyy/MM/dd',
+      'dd/MM/yyyy',
+      'MM/dd/yyyy',
+      'dd-MMM-yyyy',
+      'MMM dd, yyyy'
+    ];
   
-    const formattedDate = `${day}-${months[monthIndex]}-${year}`;
-    return formattedDate;
-  }
-
+    let parsedDate;
+    let isValidDate = false;
+  
+    for (let fmt of formats) {
+      try {
+        parsedDate = parse(dateString, fmt, new Date(), { locale: enUS });
+        if (!isNaN(parsedDate)) {
+          isValidDate = true;
+          break;
+        }
+      } catch (error) {
+        continue;
+      }
+    }
+  
+    if (!isValidDate) {
+      return 'Invalid Date Format';
+    }
+  
+    return format(parsedDate, 'dd-MMM-yyyy', { locale: enGB });
+  };
   const handleDownloadInvoice = async () => {
     try {
       const res = await getInvoice(appointmentId);
@@ -81,14 +103,14 @@ function AppointmentDetailPage({ appointmentId }) {
             </p>
 
             <p>
-              <span> Appointment Date</span>{" "}
-              <span>{details?.date}</span>
+              <span> Booking Date</span>{" "}
+              <span>{formatDate(details?.date)}</span>
             </p>
             <p>
-              <span>Appointment Time</span> <span>{details?.startTime}</span>
+              <span>Booking Time</span> <span>{details?.startTime}</span>
             </p>
             <p>
-              <span>Appointment For</span> <span>{details?.serviceType}</span>
+              <span>Booking For</span> <span>{details?.serviceType}</span>
             </p>
 
             <p>
@@ -101,7 +123,7 @@ function AppointmentDetailPage({ appointmentId }) {
             {details?.status === "COMPLETED" && (
               <div>
           <p>
-          <span>Service Date</span> <span>{details?.serviceDate}</span>
+          <span>Service Date</span> <span>{formatDate(details?.serviceDate)}</span>
         </p><br/>
          <p>
          <span>Service Start Time</span> <span>{details?.serviceStartTime}</span>

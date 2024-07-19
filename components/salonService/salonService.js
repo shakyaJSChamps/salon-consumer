@@ -16,15 +16,15 @@ import { selectUser } from "@/app/Redux/Authslice";
 import LoginFormPopup from "../loginFormPopup/LoginFormPopup";
 
 function SalonService({ id, homeService }) {
-  const [activeCategory, setActiveCategory] = useState(""); // Set default active category
-  const [activeServiceIndexes, setActiveServiceIndexes] = useState([]); // Indexes of the selected services
+  const [activeCategory, setActiveCategory] = useState("");
+  const [activeServiceIndexes, setActiveServiceIndexes] = useState([]);
   const [serviceData, setServiceData] = useState([]);
   const [selectedCategoryServices, setSelectedCategoryServices] = useState([]);
   const [selectedServicesDetails, setSelectedServicesDetails] = useState([]);
   const [bookingLocation, setBookingLocation] = useState("");
   const [userInfo, setUserInfo] = useState(null);
-  const [gender, setGender] = useState("Male"); // Add state for gender
-  const [filteredServices, setFilteredServices] = useState([]); // Add state for filtered services
+  const [gender, setGender] = useState("Male");
+  const [filteredServices, setFilteredServices] = useState([]);
   const [showMaleButton, setShowMaleButton] = useState(true);
   const [showFemaleButton, setShowFemaleButton] = useState(true);
   const [modalShow, setModalShow] = useState(false);
@@ -42,28 +42,26 @@ function SalonService({ id, homeService }) {
         const data = res?.data?.data;
         if (data && data.length > 0) {
           dispatch(storeSelectedSalonId(id));
-          setActiveCategory(data[0].name); // Set first service as default active category
+          setActiveCategory(data[0].name);
           setSelectedCategoryServices(data[0].services);
           setServiceData(data);
 
-           // Determine available genders
-           const maleServices = data.some(category => 
-            category.services.some(service => service.type === "Male")
+          // Determine available genders
+          const maleServices = data.some((category) =>
+            category.services.some((service) => service.type === "Male")
           );
-          const femaleServices = data.some(category => 
-            category.services.some(service => service.type === "Female")
+          const femaleServices = data.some((category) =>
+            category.services.some((service) => service.type === "Female")
           );
 
-          setShowMaleButton(maleServices); // Show Male button if male services are available
-          setShowFemaleButton(femaleServices); // Show Female button if female services are available
+          setShowMaleButton(maleServices);
+          setShowFemaleButton(femaleServices);
 
-          // Set default gender
           if (maleServices) {
             setGender("Male");
           } else if (femaleServices) {
             setGender("Female");
           }
-        
         }
       } catch (error) {
         Notify.error(error.message);
@@ -107,9 +105,9 @@ function SalonService({ id, homeService }) {
     fetchUserDetails();
   }, []);
 
-  const handleSalonClick = () => {
+  const handleSalonClick = (location) => {
     if (!token) {
-      setModalShow(true)
+      setModalShow(true);
       return;
     }
     if (!profile) {
@@ -120,13 +118,13 @@ function SalonService({ id, homeService }) {
     if (isProfileIncomplete) {
       router.push("/profile");
     } else {
-      router.push(`${id}/${bookingLocation}`);
+      router.push(`${id}/${location}`);
     }
   };
 
   const handleBookingLocationChange = (location) => {
     setBookingLocation(location);
-    handleSalonClick();
+    handleSalonClick(location);
   };
 
   useEffect(() => {}, [profile, bookingLocation]);
@@ -142,13 +140,16 @@ function SalonService({ id, homeService }) {
       newSelectedServicesDetails.splice(selectedIndex, 1);
     }
     setSelectedServicesDetails(newSelectedServicesDetails);
-    dispatch(storeSelectedService({
-      services: newSelectedServicesDetails,
-      type: gender // Include the type (gender) when dispatching the action
-    }));
+    dispatch(
+      storeSelectedService({
+        services: newSelectedServicesDetails,
+        type: gender,
+      })
+    );
 
-    // Determine if we need to show or hide gender buttons based on the selected services
-    const selectedTypes = newSelectedServicesDetails.map((service) => service.type);
+    const selectedTypes = newSelectedServicesDetails.map(
+      (service) => service.type
+    );
     const isMaleServiceSelected = selectedTypes.includes("Male");
     const isFemaleServiceSelected = selectedTypes.includes("Female");
 
@@ -198,7 +199,6 @@ function SalonService({ id, homeService }) {
         </Paper>
       </div>
       <div className={styles.bestSeller}>
-        {/* <h3>BestSeller Haircut</h3> */}
         <div className={styles.serviceTypeDetails}>
           {filteredServices.map((item, index) => (
             <div className={styles.details} key={index}>
@@ -215,7 +215,6 @@ function SalonService({ id, homeService }) {
                   </span>
                 </p>
                 <hr />
-                {/* <p>Professional {item.serviceName.toLowerCase()} service</p> */}
               </div>
               <div className={styles.image}>
                 <button
@@ -249,9 +248,7 @@ function SalonService({ id, homeService }) {
           )}
         </div>
       </div>
-      <LoginFormPopup
-      show={modalShow}
-      onHide={() => setModalShow(false)}/>
+      <LoginFormPopup show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 }
