@@ -5,7 +5,7 @@ import styles from "./searchInput.module.css";
 import { searchService, searchText } from "../../api/account.api";
 import Session from "@/service/session";
 import { useDispatch } from "react-redux";
-import { setFilteredSalon } from "../../app/Redux/Authslice"; // Update the import path accordingly
+import { setFilteredSalon } from "../../app/Redux/Authslice";
 import { useRouter } from "next/navigation";
 import Notify from "@/utils/notify";
 function useDebounce(callback, delay) {
@@ -51,10 +51,6 @@ function SearchInput() {
 
   const debounceFetchServices = useDebounce(async (query) => {
     if (query) {
-      // let requestUrl = '';
-      // if (city) {
-      //   requestUrl = `?search=${city}`;
-      // }
       try {
         const res = await searchService(query);
         const services = res?.data?.data || [];
@@ -74,8 +70,8 @@ function SearchInput() {
     try {
       const res = await searchText(query, 1, 10);
       setText(res?.data?.data || []);
-      setFilteredServices([]); // Clear suggestions when search results are fetched
-      return res?.data?.data; // Return the response data
+      setFilteredServices([]); 
+      return res?.data?.data;
     } catch (error) {
       Notify.error(error.message);
     }
@@ -94,21 +90,21 @@ function SearchInput() {
     setInputValue(suggestion);
     if (source === "input") {
       const data = await handleSearch(suggestion);
-      dispatch(setFilteredSalon(data)); // Dispatch action to store the data
+      dispatch(setFilteredSalon(data)); 
       Session.remove("salonService");
       Session.remove("selectedBannerSalons");
 
-      router.push("/salonlist"); // Navigate to salonlist page
+      router.push("/salonlist");
     } else if (source === "icon") {
       try {
         const res = await searchText(suggestion, 1, 10);
         setText(res?.data?.data || []);
-        setFilteredServices([]); // Clear suggestions when search results are fetched
-        dispatch(setFilteredSalon(res?.data?.data)); // Dispatch action to store the data
+        setFilteredServices([]); 
+        dispatch(setFilteredSalon(res?.data?.data));
         Session.remove("salonService");
         Session.remove("selectedBannerSalons");
 
-        router.push("/salonlist"); // Navigate to salonlist page
+        router.push("/salonlist"); 
       } catch (error) {
         console.error("Error searching text:", error);
       }
@@ -118,23 +114,18 @@ function SearchInput() {
   const renderDropdown = () => (
     <ul
       className={styles.dropdown}
-      style={{
-        top: inputRect ? inputRect.bottom + window.scrollY + 4 : 0,
-        left: inputRect ? inputRect.left + window.scrollX : 0,
-        width: inputRect ? inputRect.width : "auto",
-      }}
     >
       {filteredServices.map((item, index) => (
         <li
           key={index}
           className={styles.dropdownItem}
-          onClick={() => handleSuggestionClick(item, "input")} // Pass "input" as source
+          onClick={() => handleSuggestionClick(item, "input")}
         >
           <span
             className={styles.searchIcon}
             onClick={(e) => {
               e.stopPropagation();
-              handleSuggestionClick(item, "icon"); // Pass "icon" as source
+              handleSuggestionClick(item, "icon"); 
             }}
           >
             <IoSearchSharp className={styles.icon} />
@@ -151,7 +142,7 @@ function SearchInput() {
       Session.remove("salonService");
       Session.remove("selectedBannerSalons");
 
-      router.push("/salonlist"); // Navigate to salonlist page
+      router.push("/salonlist");
     }
   };
 

@@ -68,7 +68,7 @@ function AboutSalon({ id }) {
                   </div>
                 ))
               ) : (
-                <p className={styles.noStaff}>No staff data available</p>
+                <div className={styles.noStaff}>No staff data available</div>
               )}
             </div>
           </div>

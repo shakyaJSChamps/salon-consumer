@@ -1,51 +1,65 @@
-.mainDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 77px;
+.mainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 77px;
 }
-.notifications{
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    border: 1px solid grey;
-    padding: 10px;
-    border-radius: 5px;
-    width: 600px;
-    height: fit-content;
+.notifications {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid grey;
+  padding: 10px;
+  border-radius: 5px;
+  width: 600px;
+  height: fit-content;
 }
-.noNotifications{
-    text-align: center;
-    padding: 100px;
+.noNotifications {
+  text-align: center;
+  padding: 100px;
 }
-.message p{
-    border: 2px solid grey;
-    padding: 6px;
-    border-radius: 10px;
+.message p {
+  border: 2px solid grey;
+  padding: 6px;
+  border-radius: 10px;
 }
-.message .time{
-    float: right;
+.message .time {
+  float: right;
 }
 .iconWrapper {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #ddd;
-    margin-right: 10px;
-  }
-  
-  .icon {
-    color: #555;
-  }
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin-right: 10px;
+}
 
-  @media (max-width:575px){
-    .notifications{
-        border: none;
+.icon {
+  color: #555;
+}
+@media (max-width: 1200px) {
+  .mainDiv {
+    padding: 81px;
+  }
+  @media (max-width: 992px) {
+    .mainDiv {
+      padding: 97px;
     }
-    .mainDiv{
-        height: 40vh;
+    @media (max-width: 575px) {
+      .mainDiv {
+        padding: 40px;
+      }
+      .contentSkeleton {
+        width: 430px !important;
+      }
+      @media (max-width: 500px) {
+        .contentSkeleton {
+          width: 350px !important;
+        }
+      }
     }
   }
+}

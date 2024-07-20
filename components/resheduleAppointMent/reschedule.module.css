@@ -4,7 +4,7 @@
 }
 
 .schedule {
-  padding: 50px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -19,13 +19,14 @@
   font-size: 15px;
   padding: 15px 0px;
 }
-.timeSlot {
-  width: 100%;
-}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  border: 2px solid #a1acb0;
+  padding: 20px;
+  border-radius: 7px;
 }
 
 .schedule input {
@@ -44,14 +45,6 @@
   display: flex;
   flex-direction: column;
 }
-.timeSlot{
-  box-shadow:
-  -3px 0 5px -3px rgba(0, 0, 0, 0.5),
-  3px 0 5px -3px rgba(0, 0, 0, 0.5),
-  0 5px 5px -3px rgba(0, 0, 0, 0.5);
-  width: 225px;  
-  border-radius: 8px;
-}
 .backIcon{
   background-color: black;
   color: white;
@@ -63,10 +56,10 @@
 .reschedule input {
   color: black !important;
   padding: 8px 20px;
-  width: 340px;
+  width: 345px;
   border-radius: 7px;
-  border: 2px solid grey;
-  box-shadow: 2px 3px 7px #a1acb0;
+  border: 2px solid #a1acb0;
+  /* box-shadow: 2px 3px 7px #a1acb0; */
   outline: none;
 }
 
@@ -102,6 +95,11 @@
   background-color: black;
   color: white;
 }
+@media screen and (max-width: 1287px) {
+  .reschedule input{
+      width: 362px;
+  }
+}
 @media screen and (max-width: 992px) {
     .schedule {
         height: 440px;
@@ -113,8 +111,15 @@
     width: 400px;
     margin: auto;
   }
+  .reschedule input{
+    width: 260px;
 }
-
+}
+@media screen and (max-width: 490px) {
+  .reschedule input{
+    width: 210px;
+}
+}
 @media screen and (max-width: 450px) {
   .container {
     width: 350px;

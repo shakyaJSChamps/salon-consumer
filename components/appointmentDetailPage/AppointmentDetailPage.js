@@ -117,7 +117,7 @@ function AppointmentDetailPage({ appointmentId }) {
               <span>Salon Name</span> <span>{details?.salon?.name}</span>
             </p>
 
-            <p>
+            <p className={styles.salonAddress}>
               <span>Salon Address</span> <span>{details?.salon?.address}</span>
             </p>
             {details?.status === "COMPLETED" && (

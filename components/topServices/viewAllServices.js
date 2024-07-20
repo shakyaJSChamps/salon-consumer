@@ -30,22 +30,22 @@ function ViewAllServices() {
 
   const skeletons = Array.from({ length: 8 }).map((_, index) => (
     <Paper key={index} elevation={3} className={styles.paper}>
+      <Skeleton variant="text" width={200} className={styles.skeletonImage} />
+
       <div className={styles.image}>
-        <Skeleton variant="text" width={200} />
+        <Skeleton variant="rectangular" width="100%" height={200} />
       </div>
-      <Skeleton variant="rectangular" width="100%" height={200} />
     </Paper>
   ));
   return (
     <div className={styles.container}>
-        <div className={styles.headingContainer}>
-          <div className={styles.heading}>Signature Services</div>
-          <div className={styles.linkDiv}></div>
-        </div>
+      <div className={styles.headingContainer}>
+        <div className={styles.heading}>Signature Services</div>
+        <div className={styles.linkDiv}></div>
+      </div>
       <div className={styles.content} onClick={handleClick}>
         {loading ? (
           skeletons
-
         ) : services.length > 0 ? (
           services.map((service, index) => (
             <Paper key={service.id} elevation={3} className={styles.paper}>

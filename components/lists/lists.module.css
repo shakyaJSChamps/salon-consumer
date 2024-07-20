@@ -427,7 +427,7 @@
   color: blue;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1399px) {
   .container {
     padding: 0px 50px;
   }
@@ -443,7 +443,7 @@
   }
 
   .findsSalon {
-    padding-left: 155px;
+    padding-left: 220px;
   }
 
   .doorBuddyBtn {

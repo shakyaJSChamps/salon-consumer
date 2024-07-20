@@ -214,7 +214,6 @@ function SalonService({ id, homeService }) {
                     &bull; {item.serviceDuration} mins
                   </span>
                 </p>
-                <hr />
               </div>
               <div className={styles.image}>
                 <button
