@@ -52,6 +52,13 @@
   width: 225px;  
   border-radius: 8px;
 }
+.backIcon{
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  padding: 5px;
+  font-size: 30px;
+}
 .enterInput input,
 .reschedule input {
   color: black !important;
