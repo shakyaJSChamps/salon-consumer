@@ -90,10 +90,12 @@ const RescheduleAppointment = ({
               <Form>
                 <div className={styles.form}>
                   <div className={styles.reschedule}>
-                    {/* <IoIosArrowBack
+                    <IoIosArrowBack
                       className={styles.backIcon}
-                      onClick={() => router.push("/appointment")}
-                    /> */}
+                      onClick={() =>handleShowAppointment()
+
+                      }
+                    />
 
                     <h4>Booking date</h4>
                     <div>
