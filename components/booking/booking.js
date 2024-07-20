@@ -1,7 +1,5 @@
 "use client";
 import styles from "./booking.module.css";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
 import Session from "@/service/session";
 import { useState } from "react";
@@ -17,7 +15,28 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { styled } from "@mui/system";
 import dayjs from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { TextField } from "@mui/material";
 
+function TimePickerViewRenderers({ value, onChange }) {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <CustomDemoContainer components={["TimePicker"]}>
+        <CustomTimePicker
+          value={value}
+          onChange={onChange}
+          viewRenderers={{
+            hours: renderTimeViewClock,
+            minutes: renderTimeViewClock,
+            seconds: renderTimeViewClock,
+          }}
+        />
+      </CustomDemoContainer>
+    </LocalizationProvider>
+  );
+}
 function Booking(props) {
   const servicesDetails = Array.isArray(Session.getObject("selectedService"))
     ? Session.getObject("selectedService")
@@ -35,23 +54,16 @@ function Booking(props) {
     (total, service) => total + service.serviceDuration,
     0
   );
-  const formatDate = (date) => {
-    const [year, month, day] = date.split("-");
-    return `${day}-${month}-${year}`;
-  };
 
   const salonId = Session.get("selectedSalonId");
-  const today = new Date().toISOString().split("T")[0];
-  const tenDaysAhead = new Date();
-  tenDaysAhead.setDate(tenDaysAhead.getDate() + 10);
-  const maxDate = tenDaysAhead.toISOString().split("T")[0];
-  // Formik initial values
+  const today = dayjs().startOf("day");
+  const maxDate = dayjs().add(10, "day").endOf("day");
   const initialValues = {
     salonId: parseInt(salonId),
-    date: "",
+    date: today,
     startTime: "",
     serviceType: gender,
-    duration: totalServiceDuration, // Duration in seconds
+    duration: totalServiceDuration,
     homeService: props.serviceAt === "Home",
     serviceIds: serviceIds,
   };
@@ -62,46 +74,29 @@ function Booking(props) {
 
   const handleAddressSelection = (address) => {
     setSelectedAddress(address);
-    setShowAddress(false); // Close the address popup after selection
+    setShowAddress(false);
   };
 
-  // Formik validation schema
   const validationSchema = Yup.object().shape({
     date: Yup.date()
-      .required("Date is required")
+      // .required("Date is required")
       .min(today, "Date cannot be in the past"),
     startTime: Yup.string().required("Start time is required"),
-    //serviceType: Yup.string().required("ServiceType is required"),
   });
-
-  // Function to handle incrementing count
-  function handleIncrement() {
-    setTotalCount((prevCount) => prevCount * 2);
-  }
-
-  // Function to handle decrementing count
-  function handleDecrement() {
-    if (totalCount > 1) {
-      setTotalCount((prevCount) => prevCount / 2);
-    }
-  }
 
   const calculateEndTime = (startTime, duration) => {
     if (startTime && duration) {
       const start = dayjs(startTime, "hh:mm A");
       const end = start.add(duration, "minute");
-
-      // Format end time in hh:mm A format
       return end.format("hh:mm A");
     }
     return "";
   };
 
-  // Function to handle booking
   function handleSubmit(values) {
     // Convert startTime to the required format
-    const formattedStartTime = dayjs(values.startTime).format('hh:mm A');
-    const formattedDate = formatDate(values.date);
+    const formattedStartTime = dayjs(values.startTime).format("hh:mm A");
+    const formattedDate = dayjs(values.date).format("DD-MM-YYYY");
 
     const data = {
       ...(props.serviceAt === "Home"
@@ -149,29 +144,8 @@ function Booking(props) {
                     <div>
                       <h3>Grooming Essentials</h3>
                     </div>
-                    {/* <div className={styles.count}>
-                      <RemoveIcon
-                        className={styles.countIcon}
-                        style={{ fontSize: "12px" }}
-                        onClick={handleDecrement}
-                      />
-                      <span>{totalCount}</span>
-                      <AddIcon
-                        className={styles.countIcon}
-                        style={{ fontSize: "12px" }}
-                        onClick={handleIncrement}
-                      />
-                    </div> */}
-                    <div className={styles.totalPrice}>
-                      {/* <p>
-                        ₹
-                        {servicesDetails.reduce(
-                          (total, service) =>
-                            total + service.servicePrice * totalCount,
-                          0
-                        )}
-                      </p> */}
-                    </div>
+
+                    <div className={styles.totalPrice}></div>
                   </div>
                 </div>
 
@@ -181,7 +155,8 @@ function Booking(props) {
                       <div className={styles.serviceList}>
                         <ul>
                           <li>
-                            {service.serviceName} for {service.type} x{totalCount}
+                            {service.serviceName} for {service.type} x
+                            {totalCount}
                           </li>
                         </ul>
                       </div>
@@ -195,32 +170,47 @@ function Booking(props) {
                 <div className={styles.bookingDate}>
                   <h3>Booking date</h3>
                   <div className={styles.dateContainer}>
-                    <Field type="date" name="date" min={today} max={maxDate} />
-                    <ErrorMessage name="date" component="div" className="error" />
+                    <Field name="date">
+                      {({ field, form }) => (
+                        <CustomDatePicker
+                          {...field}
+                          value={
+                            field.value
+                              ? dayjs(field.value, "DD-MM-YYYY")
+                              : null
+                          }
+                          onChange={(date) => {
+                            setFieldValue("date", date);
+                          }}
+                          minDate={today}
+                          maxDate={maxDate}
+                          format="DD-MM-YYYY"
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="date"
+                      component="div"
+                      className="error"
+                    />
                   </div>
                 </div>
 
                 <div className={styles.timeContainer}>
                   <h3>Select time slot</h3>
-                  <div className={styles.timeslot}>
+                  <div className={styles.timePicker}>
                     <Field name="startTime">
                       {({ field }) => (
-                        <CustomTimePicker
-                          {...field}
+                        <TimePickerViewRenderers
                           value={field.value || null}
                           onChange={(value) => {
                             setFieldValue("startTime", value);
-                            setEndTime(calculateEndTime(value, values.duration));
+                            setEndTime(
+                              calculateEndTime(value, values.duration)
+                            );
                           }}
-                          renderInput={(params) => (
-                            <input
-                              type="text"
-                              {...params}
-                              className={`${styles.timeSlot} timePickerInput`}
-                            />
-                          )}
-                          // disabled={isSubmitting}
-                          ampm={true}
+                          className={styles.timeSlot}
                         />
                       )}
                     </Field>
@@ -244,24 +234,22 @@ function Booking(props) {
                   </div>
                 </div>
                 <div className={styles.address}>
-                <h3>Service Type</h3>
-                <div className={styles.inputContainer}>
-                  <Field
-                   // as="select"
-                    type="text"
-                    name="serviceType"
-                    placeholder="serviceType"
-                    value={gender}
-                  >
-                  </Field>
+                  <h3>Service Type</h3>
+                  <div className={styles.inputContainer}>
+                    <Field
+                      type="text"
+                      name="serviceType"
+                      placeholder="serviceType"
+                      value={gender}
+                    ></Field>
 
-                  <ErrorMessage
-                    name="serviceType"
-                    component="div"
-                    className="error"
-                  />
+                    <ErrorMessage
+                      name="serviceType"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
                 </div>
-              </div>
                 {props.serviceAt === "Home" && (
                   <div className={styles.address}>
                     <h3>Address</h3>
@@ -314,10 +302,9 @@ function Booking(props) {
 
 const CustomTimePicker = styled(TimePicker)({
   "& .MuiInputBase-root": {
-    border: "2px solid white",
-    boxShadow: "2px 3px 7px #a1acb0",
     width: "100%",
   },
+
   "& .MuiOutlinedInput-root": {
     "&:focus, &:focus-within": {
       boxShadow: "2px 3px 7px #a1acb0",
@@ -349,5 +336,26 @@ const CustomTimePicker = styled(TimePicker)({
     },
   },
 });
-
+const CustomDatePicker = styled(DatePicker)({
+  "& .MuiOutlinedInput-root": {
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "transparent",
+    },
+  },
+  "& .MuiInputAdornment-root": {
+    marginLeft: "-50px",
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+});
+const CustomDemoContainer = styled(DemoContainer)({
+  "& .MuiTimeClock-root": {
+    "&:focus": {
+      outline: "none",
+      boxShadow: "none",
+      borderColor: "transparent",
+    },
+  },
+});
 export default Booking;

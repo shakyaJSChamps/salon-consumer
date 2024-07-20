@@ -10,6 +10,13 @@ function Payment() {
   const [order, setOrder] = useState(null);
   const servicesDetails = Session.getObject("selectedService");
   const id = Session.get("appointmentId");
+  const profileString = Session.get('profile');
+  
+  // Parse the JSON string to an object
+  const profile = JSON.parse(profileString);
+  
+  // Access the phoneNumber field
+  const phoneNumber = profile.phoneNumber;
   const router = useRouter();
 
   const totalAmount = servicesDetails?.reduce(
@@ -77,13 +84,9 @@ function Payment() {
         } catch (error) {
           Notify.error(error.message);
         }
-
-        //  router.push("/appointment");
       },
       prefill: {
-        //  name: "Your Name",
-        //   email: "Your Email",
-        //   contact: "Your Phone Number",
+           contact: phoneNumber,
       },
 
       theme: {
