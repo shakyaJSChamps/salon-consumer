@@ -15,7 +15,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 5px;
+    border-radius: 15px;
+    padding: 10px;
+}
+.skeletonHeading{
+    padding-left: 20px;
 }
 .sliderImage img {
     width: 100%;
@@ -228,10 +232,18 @@
     .button {
         gap: 16px;
     }
-
+    .skeletonContent{
+        width: 120px !important;
+    }
+    .skeletonMain{
+        width: 320px !important;  
+    }
     .button button {
         padding: 5px 13px;
         font-size: 11px;
     }
-
+    .main{
+        padding-left: 137px;
+        margin-top: -21px;
+    }
 }

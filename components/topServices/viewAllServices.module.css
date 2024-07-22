@@ -188,4 +188,13 @@
         margin-left: -118px;
         padding: 80px;
       }
+      .paper{
+        width: 170px;
+      }
+      .image img{
+        width: 170px;
+      }
+     .skeletonImage{
+        width: 170px !important;
+     }
 }

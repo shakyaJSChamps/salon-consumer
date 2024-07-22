@@ -371,7 +371,7 @@ const Lists = (props) => {
                           {salon.serviceType}
                         </p>
                       </div>
-                      <p className={styles.description}>{salon.address}</p>
+                      <p className={styles.description}>{`${salon.city} ${salon.state}`}</p>
                       <Link
                         href={`/salonlist/${salon.id}`}
                         className={styles.btnDiv}

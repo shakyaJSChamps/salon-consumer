@@ -12,7 +12,7 @@
 .wrapper {
     border: 2px solid grey;
     border-radius: 8px;
-    padding: 40px 40px;
+    padding: 65px 70px;
     font-size: 25px;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .serviceType h3 {
-    font-size: 12px;
+    font-size: 20px;
 }
 
 .price {
@@ -62,7 +62,7 @@
 
 .serviceList ul,.offerlist ul {
     padding: 5px 13px;
-    font-size: 10px;
+    font-size: 15px;
     color: grey;
     line-height: 16px;
 }
@@ -78,7 +78,7 @@
     padding: 23px 0px;
 }
 .offers h3,.paymentSummary h3{
-    font-size: 12px;
+    font-size: 15px;
 }
 .paymentSummary{
     display: flex;
@@ -86,7 +86,7 @@
     gap: 10px;
 }
 .total,.tax,.grandTotal{
-    font-size: 9px;
+    font-size: 13px;
     color: grey;
     display: flex;
     gap: 25px;
@@ -124,4 +124,9 @@
     font-weight: bold;
     border: none;
     border-radius: 7px;
+}
+@media (max-width:575px) {
+    .wrapper{
+        padding: 60px 40px;
+    }
 }

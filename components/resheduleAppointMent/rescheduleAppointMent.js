@@ -124,14 +124,13 @@ const RescheduleAppointment = ({
 
                   <div className={styles.rescheduleTime}>
                     <h4>Select time slot</h4>
-                    <Field name="timeSlot" className={styles.timeSlot}>
+                    <Field name="timeSlot" className={styles.timeSlotDiv}>
                       {({ field }) => (
                         <TimePickerViewRenderers
                         value={field.value ? dayjs(field.value) : null}
                         onChange={(newValue) => {
                           setFieldValue("timeSlot", newValue);
                         }}
-                          className={styles.timeSlot}
                         />
                       )}
                     </Field>
@@ -161,17 +160,13 @@ const RescheduleAppointment = ({
 
 const CustomTimePicker = styled(TimePicker)({
   "& .MuiInputBase-root": {
-    border: "2px solid grey",
-    boxShadow: "2px 3px 7px #a1acb0",
-
-    width: "100%",
+    border: "2px solid #a1acb0",
+    borderRadius: "7px",
     "&:focus": {
       borderColor: "transparent",
-      boxShadow: "none",
+    //  boxShadow: "none",
     },
     "& .MuiOutlinedInput-root": {
-      "&:focus, &:focus-within": {
-      },
       "&:hover .MuiOutlinedInput-notchedOutline": {
         borderColor: "transparent",
       },
@@ -188,12 +183,14 @@ const CustomTimePicker = styled(TimePicker)({
   },
   "& .MuiInputBase-input": {
     border: "none",
-    width: "340px",
+    width: "320px",
     outline: "none",
-    borderRadius: "13px",
-    height: "6px",
-    "@media (max-width: 500px)": {
-      width: "270px",
+   // boxShadow: "2px 3px 7px #a1acb0",
+
+   borderRadius: "7px",
+   height: "6px",
+    "@media (max-width: 1287px)": {
+      width: "367px !important",
     },
     "@media (max-width: 400px)": {
       width: "220px",

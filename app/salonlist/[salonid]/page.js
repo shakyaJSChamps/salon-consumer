@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SalonService from "@/components/salonService/salonService";
 import SalonGallery from "@/components/salonGallery/salonGallery";
-import dummyBanner from '../../../assets/images/dummyBanner.jpeg';
+import dummyBanner from "../../../assets/images/dummyBanner.jpeg";
 import AboutSalon from "@/components/aboutSalon/aboutSalon";
 import { getDetailPageData } from "@/api/account.api";
 import { FaHeart } from "react-icons/fa";
@@ -33,7 +33,7 @@ function SalonDetail({ params }) {
   const [activeButton, setActiveButton] = useState("about");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
   };
@@ -105,7 +105,10 @@ function SalonDetail({ params }) {
                 <div className={styles.wishlistIcon}>
                   <ShareIcon className={styles.wIcon} />
                   {data?.isFavorite ? (
-                    <FaHeart className={styles.wIcon} style={{ color: "red" }} />
+                    <FaHeart
+                      className={styles.wIcon}
+                      style={{ color: "red" }}
+                    />
                   ) : (
                     <FavoriteBorderIcon className={styles.wIcon} />
                   )}
@@ -121,12 +124,16 @@ function SalonDetail({ params }) {
               <div className={styles.timing}>
                 <Col>
                   {daysOfWeek.map((day, index) => {
-                    const workingDay = workingHours.find((wd) => wd.day === day);
+                    const workingDay = workingHours.find(
+                      (wd) => wd.day === day
+                    );
                     return (
                       <Row key={index}>
                         <Col md={6}>{day}</Col>
                         <Col className={styles.main} md={6}>
-                          {workingDay && workingDay.openTime && workingDay.closeTime
+                          {workingDay &&
+                          workingDay.openTime &&
+                          workingDay.closeTime
                             ? `${workingDay.openTime} - ${workingDay.closeTime}`
                             : "Closed"}
                         </Col>
@@ -175,32 +182,39 @@ function SalonDetail({ params }) {
         </>
       ) : (
         <>
-          <Skeleton variant="rectangular" width="100%" height={375} />
-          <Skeleton variant="text" width="40%" height={50} />
-          <Skeleton variant="text" width="40%" height={50} />
-          <div className={styles.skeletonDiv}>
-          <Skeleton variant="text" width="20%" height={50} />
-          <Skeleton variant="text" width="20%" height={50} />
+          <div className={styles.sliderImage}>
+            <Skeleton
+              variant="rectangular"
+              style={{ width: "100%", height: "335px", borderRadius: "15px" }}
+            />
+          </div>
+          <div className={styles.skeletonHeading}>
+          <Skeleton variant="text" width="40%" height={50} className={styles.skeletonMain}/>
+          <Skeleton variant="text" width="40%" height={50} className={styles.skeletonMain}/>
           </div>
           <div className={styles.skeletonDiv}>
-          <Skeleton variant="text" width="20%" height={50} />
-          <Skeleton variant="text" width="20%" height={50} />
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
           </div>
           <div className={styles.skeletonDiv}>
-          <Skeleton variant="text" width="20%" height={50} />
-          <Skeleton variant="text" width="20%" height={50} />
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
           </div>
           <div className={styles.skeletonDiv}>
-          <Skeleton variant="text" width="20%" height={50} />
-          <Skeleton variant="text" width="20%" height={50} />
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
           </div>
           <div className={styles.skeletonDiv}>
-          <Skeleton variant="text" width="20%" height={50} />
-          <Skeleton variant="text" width="20%" height={50} />
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
           </div>
           <div className={styles.skeletonDiv}>
-          <Skeleton variant="text" width="20%" height={50} />
-          <Skeleton variant="text" width="20%" height={50} />
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+          </div>
+          <div className={styles.skeletonDiv}>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
+            <Skeleton variant="text" width="20%" height={50} className={styles.skeletonContent}/>
           </div>
         </>
       )}

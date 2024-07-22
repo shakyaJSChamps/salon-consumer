@@ -26,8 +26,8 @@ function Notification() {
   
   const skeleton = Array.from({ length: 8 }, (_, index) => (
     <div key={index} className={styles.salonDetail}>
-       <div className={styles.contentSkeleton}>
-            <Skeleton variant="text" width={500} height={33} />
+       <div >
+            <Skeleton variant="text" width={560} height={33} className={styles.contentSkeleton}/>
           </div>
           </div>
   ));

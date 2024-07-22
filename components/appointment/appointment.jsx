@@ -25,6 +25,8 @@ const Appointments = () => {
   const [ratingShow, setRatingShow] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [appointments, setAppointments] = useState([]);
+  console.log('set appointment',appointments)
+
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [statusFilter, setStatusFilter] = useState("pending");
   const [selectedDate, setSelectedDate] = useState("");
