@@ -1,14 +1,13 @@
 'use client'
 import { useEffect, useState, useMemo } from 'react';
-import { getSalonLists } from '@/api/account.api';
 import { GoLocation } from 'react-icons/go';
-import { ShopsCategory, Rating, Distance, Category } from './data'; 
+import { Distance} from './data'; 
 import Img from '@/assets/images/salonImage.svg';
 import calendraImages from '@/assets/images/Group 1000003690.svg';
 import Lists from '../lists/lists';
 import Session from '@/service/session';
 
-const SalonList = () => {
+const SalonList = ({initialLists}) => {
   const [lists, setLists] = useState([]);
   const [allSalon, setAllSalon] = useState([]);
 
@@ -21,6 +20,7 @@ const SalonList = () => {
   const filteredSalon = useMemo(() => Session.getObject('filteredSalon'), []);
   const salonService = useMemo(() => Session.getObject('salonService'), []);
   const selectedBannerSalons = useMemo(() => Session.getObject('selectedBannerSalons'), []);
+ 
  
 useEffect(() => {
 
@@ -44,18 +44,13 @@ useEffect(() => {
 
     setIsLoading(true);
     try {
-      const response = await getSalonLists(page, pageSize);
-      const responseData = response?.data?.data?.items || [];
-
-      if (responseData.length > 0) {
-        const filteredData = responseData.filter(item => !lists.some(existingItem => existingItem.id === item.id));
+      if (initialLists.length > 0) {
+        const filteredData = initialLists.filter(item => !lists.some(existingItem => existingItem.id === item.id));
         setPage(page + 1);
         const updatedLists = [...lists, ...filteredData];
         setAllSalon(updatedLists);
         Session.setObject('salonList', { items: updatedLists });
-  
-        //setLists(prevLists => [...prevLists, ...filteredData]);
-      } else {
+        } else {
         setHasMoreData(false);
       }
     } catch (error) {
@@ -79,10 +74,7 @@ useEffect(()=>{
       buttonLabel="View Details"
       imageSrc={Img}
       lists={lists}
-      // ShopsCategory={ShopsCategory}
-      // Rating={Rating}
       Distance={Distance}
-      // Category={Category}
       GoLocation={GoLocation}
       calendraImages={calendraImages}
       detailsLinkBase="/salonlist"
@@ -93,7 +85,6 @@ useEffect(()=>{
       setPageSize={setPageSize}
       isLoading={isLoading}
       loadMoreItems={loadMoreItems}
-    //   lazyLoadingThreshold={0.5}
       hasMoreData={hasMoreData}
     />
   );

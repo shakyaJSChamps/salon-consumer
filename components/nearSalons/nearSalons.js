@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import styles from './nearSalons.module.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -9,8 +10,7 @@ import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Session from '@/service/session';
-import { Skeleton } from '@mui/material'; // Import Skeleton component
-import { Diversity1 } from '@mui/icons-material';
+import { Skeleton } from '@mui/material'; 
 
 function NearSalons({ data }) {
   // Initialize an array for skeletons
@@ -22,8 +22,7 @@ function NearSalons({ data }) {
     Session.remove('selectedBannerSalons');
   };
 
-  // Render skeletons in a 2x2 grid if data or data.nearBySalons is not available
-  if (!data || !data?.data?.nearBySalons) {
+  if (!data || !data?.nearBySalons) {
     return (
       <div className={styles.container}>
         <div className={styles.heading}>
@@ -99,7 +98,7 @@ function NearSalons({ data }) {
 
       <div className={styles.salons}>
         <Grid container spacing={2}>
-          {data?.data?.nearBySalons?.map((salon, index) => (
+          {data?.nearBySalons?.map((salon, index) => (
             <Grid item sm={6} xs={12} md={6} key={index}>
               <Paper elevation={3} className={styles.paper}>
                 <div className={styles.image}>

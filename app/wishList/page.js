@@ -1,9 +1,9 @@
-import WishLists from '@/components/userwishLists/wishLists'
+import WishListServer from '@/components/userwishLists/wishListServer'
 
 function WishList() {
   return (
     <div>
-      <WishLists />
+      <WishListServer />
     </div>
   )
 }

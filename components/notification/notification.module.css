@@ -4,11 +4,23 @@
   align-items: center;
   padding: 77px;
 }
+.notificationItem{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 5px;
+  border: 1px solid grey; 
+  border-radius: 8px;
+}
+.notificationsHeader{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
 .notifications {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  border: 1px solid grey;
+  gap: 15px;
   padding: 10px;
   border-radius: 5px;
   width: 600px;
@@ -19,12 +31,11 @@
   padding: 100px;
 }
 .message p {
-  border: 2px solid grey;
-  padding: 6px;
-  border-radius: 10px;
+ 
 }
-.message .time {
-  float: right;
+.time {
+text-align: right;  
+font-size: 10px;
 }
 .iconWrapper {
   display: inline-flex;

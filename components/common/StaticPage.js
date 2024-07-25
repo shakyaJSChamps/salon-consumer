@@ -1,28 +1,40 @@
-"use client";
-import { useState, useEffect } from "react";
+//"use client";
+//import { useState, useEffect } from "react";
 import { staticPageUrl } from "@/api/staticPage.api";
 import Notify from "@/utils/notify";
 import { Skeleton } from "@mui/material";
 import styles from "../../pages/about-us/aboutUs.module.css";
-const StaticPage = ({ endpoint, className }) => {
-  const [pageContent, setPageContent] = useState("");
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetchPageContent();
-  });
 
-  const fetchPageContent = async () => {
-    try {
-      const response = await staticPageUrl(endpoint);
-      const htmlResponse = await fetch(response.data.data.filePath);
-      const htmlContent = await htmlResponse.text();
-      setPageContent(htmlContent);
-      setLoading(false);
-    } catch (error) {
-      Notify.error(error.message);
-      setLoading(true);
-    }
-  };
+async function fetchingStaticData(endpoint){
+  const response = await staticPageUrl(endpoint);
+  const htmlResponse = await fetch(response.data.data.filePath);
+  const htmlContent = await htmlResponse.text();
+  return htmlContent;
+}
+
+
+const StaticPage = async({ endpoint, className }) => {
+  const pageContent = await fetchingStaticData(endpoint);
+  //const [pageContent, setPageContent] = useState("");
+  //const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   fetchPageContent();
+  // });
+
+  // const fetchPageContent = async () => {
+  //   try {
+  //     const response = await staticPageUrl(endpoint);
+  //     const htmlResponse = await fetch(response.data.data.filePath);
+  //     const htmlContent = await htmlResponse.text();
+  //     setPageContent(htmlContent);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     Notify.error(error.message);
+  //     setLoading(true);
+  //   }
+  // };
+
+
 
   const skeletons = endpoint !== 'contactUs' ? (
     <>
@@ -68,7 +80,7 @@ const StaticPage = ({ endpoint, className }) => {
           </div>
         )));
 
-  return !loading ? (
+  return pageContent ?(
     <div
       className={`${className} additional-class`}
       dangerouslySetInnerHTML={{ __html: pageContent }}

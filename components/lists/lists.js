@@ -1,13 +1,11 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import styles from "./lists.module.css";
 import Image from "next/image";
-import { CiHeart, CiUser } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Link from "next/link";
-import CircularProgress from "@mui/material/CircularProgress";
 import { favoriteSalon } from "@/api/account.api";
 import Images from "@/app/image";
 import { ImMenu, ImCross } from "react-icons/im";
@@ -25,6 +23,22 @@ const FilterServices = ({
     onChange(option);
     if (window.innerWidth < 767) {
       closeMenu();
+    }
+  };
+  const handleLoadMore = async () => {
+    if (loadingMore || !hasMoreData) return;
+
+    setLoadingMore(true);
+    const nextPage = currentPage + 1;
+
+    try {
+      const response = await fetchSalonList(nextPage, pageSize);
+      setLists((prevLists) => [...prevLists, ...response]);
+      setCurrentPage(nextPage);
+    } catch (error) {
+      Notify.error("Failed to load more items.");
+    } finally {
+      setLoadingMore(false);
     }
   };
   return (
@@ -53,22 +67,19 @@ const Lists = (props) => {
   const {
     title,
     buttonLabel,
-    imageSrc,
     lists,
-    Distance,
-    ShopsCategory,
     calendraImages,
     doorBuddyBtn,
     doorBuddyFind,
     doorbuddy,
-    page,
     isLoading,
     loadMoreItems,
     lazyLoadingThreshold,
     hasMoreData,
     setLists,
+    page,
+    pageSize,
   } = props;
-
   const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
   const [facilities, setFacilities] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState({});
@@ -79,21 +90,21 @@ const Lists = (props) => {
   const handleFilterChange = (option, type) => {
     switch (type) {
       case "serviceType":
-        setSelectedServiceTypes((prevServiceTypes) => ({
-          ...prevServiceTypes,
-          [option]: !prevServiceTypes[option],
+        setSelectedServiceTypes((prev) => ({
+          ...prev,
+          [option]: !prev[option],
         }));
         break;
       case "facility":
-        setFacilities((prevFacilities) => ({
-          ...prevFacilities,
-          [option]: !prevFacilities[option],
+        setFacilities((prev) => ({
+          ...prev,
+          [option]: !prev[option],
         }));
         break;
       case "rating":
-        setSelectedRatings((prevSelectedRatings) => ({
-          ...prevSelectedRatings,
-          [option]: !prevSelectedRatings[option],
+        setSelectedRatings((prev) => ({
+          ...prev,
+          [option]: !prev[option],
         }));
         break;
       default:
@@ -143,16 +154,14 @@ const Lists = (props) => {
   ]);
 
   const listFilter = lists?.filter((item) => {
-    const ratingMatch = Object.values(selectedRatings).some(
-      (val) => val === true
-    )
+    const ratingMatch = Object.keys(selectedRatings).length
       ? selectedRatings[item.rating]
       : true;
-    const serviceTypeMatch = Object.values(selectedServiceTypes).some(
-      (val) => val === true
-    )
+
+    const serviceTypeMatch = Object.keys(selectedServiceTypes).length
       ? selectedServiceTypes[item.serviceType]
       : true;
+
     return ratingMatch && serviceTypeMatch;
   });
 
@@ -209,6 +218,25 @@ const Lists = (props) => {
   if (isEmptyListt && isLoading) {
     return <div className={styles.noSalonList}>No Salonlist available</div>;
   }
+ 
+  const handleLoadMore = async () => {
+    if (loadingMore || !hasMoreData) return;
+
+    setLoadingMore(true);
+    const nextPage = currentPage + 1;
+
+    try {
+      const response = await loadMoreItems(nextPage, pageSize);
+      setLists((prevLists) => [...prevLists, ...response]);
+      setCurrentPage(nextPage);
+    } catch (error) {
+      Notify.error("Failed to load more items.");
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+
+
   return (
     <div
       className={`${styles.container} ${
@@ -315,89 +343,86 @@ const Lists = (props) => {
             />
           </div>
         </div>
-        {isLoading ? (
-          <div className={styles.salonList}>
-            {listFilter.length > 0
-              ? listFilter?.map((salon, index) => (
-                  <div key={index} className={styles.salonDetails}>
-                    <div className={styles.img}>
-                      <Images
-                        imageUrl={salon.mainGateImageUrl}
-                        alt="Salon image"
-                      />
-                    </div>
-                    <div className={styles.details}>
-                      <div className={styles.titlesDetails}>
-                        <div className={styles.titles}>
-                          <h2>
-                            {salon.title ||
-                              salon.name ||
-                              `${salon.firstName} ${salon.lastName}`}
-                          </h2>
-                          <p className={styles.buddyType}>
-                            {salon.specialization}
-                          </p>
-                          <p className={styles.locations}>
-                            <LocationOnIcon /> {salon.city}
-                          </p>
-                        </div>
-                        <div className={styles.wishlists}>
-                          {salon.isFavorite ? (
-                            <div
-                              className={`${styles.heart} ${
-                                salon.isFavorite
-                                  ? styles.favorite
-                                  : styles.nonFavorite
-                              }`}
-                              onClick={() =>
-                                handleSelectFavorites(salon.id, false)
-                              }
-                            ></div>
-                          ) : (
-                            <CiHeart
-                              onClick={() =>
-                                handleSelectFavorites(salon.id, true)
-                              }
-                            />
-                          )}
-                          <p>wishList</p>
-                        </div>
-                      </div>
-                      <div className={styles.ratings}>
-                        <p className={styles.locations}>
-                          <StarIcon /> {salon.rating}
-                        </p>
-                        <p className={styles.serviceType}>
-                          {salon.serviceType}
-                        </p>
-                      </div>
-                      <p className={styles.description}>{`${salon.city} ${salon.state}`}</p>
-                      <Link
-                        href={`/salonlist/${salon.id}`}
-                        className={styles.btnDiv}
-                      >
-                        <button
-                          className={doorBuddyBtn ? styles.doorBuddyBtn : ""}
-                        >
-                          {buttonLabel}
-                        </button>
-                      </Link>
-                    </div>
+        <div className={styles.salonList}>
+          {lists.length > 0
+            ? lists &&
+              listFilter.map((salon, index) => (
+                <div key={index} className={styles.salonDetails}>
+                  <div className={styles.img}>
+                    <Images
+                      imageUrl={salon.mainGateImageUrl}
+                      alt="Salon image"
+                    />
                   </div>
-                ))
-              : skeleton}
-          </div>
-        ) : (
-          skeleton
-        )}
+                  <div className={styles.details}>
+                    <div className={styles.titlesDetails}>
+                      <div className={styles.titles}>
+                        <h2>
+                          {salon.title ||
+                            salon.name ||
+                            `${salon.firstName} ${salon.lastName}`}
+                        </h2>
+                        <p className={styles.buddyType}>
+                          {salon.specialization}
+                        </p>
+                        <p className={styles.locations}>
+                          <LocationOnIcon /> {salon.city}
+                        </p>
+                      </div>
+                      <div className={styles.wishlists}>
+                        {salon.isFavorite ? (
+                          <div
+                            className={`${styles.heart} ${
+                              salon.isFavorite
+                                ? styles.favorite
+                                : styles.nonFavorite
+                            }`}
+                            onClick={() =>
+                              handleSelectFavorites(salon.id, false)
+                            }
+                          ></div>
+                        ) : (
+                          <CiHeart
+                            onClick={() =>
+                              handleSelectFavorites(salon.id, true)
+                            }
+                          />
+                        )}
+                        <p>wishList</p>
+                      </div>
+                    </div>
+                    <div className={styles.ratings}>
+                      <p className={styles.locations}>
+                        <StarIcon /> {salon.rating}
+                      </p>
+                      <p className={styles.serviceType}>{salon.serviceType}</p>
+                    </div>
+                    <p
+                      className={styles.description}
+                    >{`${salon.city} ${salon.state}`}</p>
+                    <Link
+                      href={`/salonlist/${salon.id}`}
+                      className={styles.btnDiv}
+                    >
+                      <button
+                        className={doorBuddyBtn ? styles.doorBuddyBtn : ""}
+                      >
+                        {buttonLabel}
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            : skeleton}
+        </div>
         <div ref={listRef} className={styles.listBottomMarker}></div>
       </div>
+      {/* {hasMoreData && (
+        <button onClick={handleLoadMore} className={styles.loadMoreBtn}>
+          View More
+        </button>
+      )} */}
     </div>
-    //  {hasMoreData && !isLoading && (
-    //   <button onClick={loadMoreItems} className={styles.loadMoreBtn}>
-    //     View More
-    //   </button>
-    // )}
   );
 };
 

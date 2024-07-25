@@ -1,47 +1,38 @@
-"use client"
-import Banner from '@/components/banner/banner'
-import BookAppointment from '@/components/bookAppointment/bookAppointment'
-import Offers from '@/components/offers/offers'
-import ServiceMenu from '@/components/serviceMenu/serviceMenu'
-import TopSalons from '@/components/topSalons/topSalons'
-import TopServices from '@/components/topServices/topServices'
-import DownloadApp from '@/components/downloadApp/downloadApp'
-import Support from '@/components/support/support'
-import NearDoorBuddy from '@/components/nearDoorBuddy/nearDoorBuddy'
-import NearSalons from '@/components/nearSalons/nearSalons'
-import { homePage } from '@/api/account.api'
-import { useEffect, useState } from 'react'
-import Notify from '@/utils/notify'
-function HomePage() {
-  const [data, setData] = useState([]);
+import React from "react";
+import Offers from "@/components/offers/offers";
+import ServiceMenu from "@/components/serviceMenu/serviceMenu";
+import TopSalons from "@/components/topSalons/topSalons";
+import Support from "@/components/support/support";
+import NearSalons from "@/components/nearSalons/nearSalons";
+import { homePage } from "@/api/account.api";
+//import Notify from "@/utils/notify";
+import TopServicesServer from "@/components/topServices/topServicesServer";
+import BannerServer from "@/components/banner/bannerServer";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await homePage(); 
-        const responseData= res.data;
-        setData(responseData);
-      } catch (error) {
-        Notify.error(error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
-  return (
-    <div>
-      <Offers/>
-      <Banner/>
-      <ServiceMenu/>
-      <NearSalons data={data}/>
-      {/* <NearDoorBuddy/> */}
-      {/* <BookAppointment/> */}
-      <TopServices />
-      <TopSalons data={data}/>
-      {/* <DownloadApp/> */}
-      <Support/>
-    </div>
-  )
+async function fetchingData() {
+  try {
+    const resData = await homePage();
+    return resData.data.data;
+  } catch (error) {
+    //Notify.error(error.message);
+    return null;
+  }
 }
 
-export default HomePage
+async function HomePage() {
+  const data = await fetchingData();
+ // console.log("fetch data", data);
+  return (
+    <div>
+      <Offers />
+      <BannerServer />
+      <ServiceMenu />
+      <NearSalons data={data} />
+      <TopServicesServer />
+      <TopSalons data={data} />
+      <Support />
+    </div>
+  );
+}
+
+export default HomePage;

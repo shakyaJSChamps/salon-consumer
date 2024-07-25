@@ -1,6 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getFavouriteSalonList } from "@/api/account.api";
 import Link from "next/link";
 import styles from "./wishlist.module.css";
 import StarIcon from "@mui/icons-material/Star";
@@ -9,24 +7,9 @@ import { CiHeart } from "react-icons/ci";
 import Images from "@/app/image";
 import Notify from "@/utils/notify";
 import { Skeleton } from "@mui/material";
-const WishLists = () => {
-  const [favouriteSalons, setFavouriteSalons] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getFavouriteSalonList();
-        setFavouriteSalons(res?.data?.data?.items);
-        setLoading(false);
-      } catch (error) {
-        Notify.error(error.message);
-        setLoading(true);
-      }
-    };
-    fetchData();
-  }, []);
-
+import { favoriteSalon } from "@/api/account.api";
+import { fetchingData } from "./wishListServer";
+const WishLists = ({ favouriteSalons }) => {
   const skeleton = Array.from({ length: 5 }, (_, index) => (
     <div key={index} className={styles.salonDetail}>
       <div className={styles.salon}>
@@ -54,13 +37,24 @@ const WishLists = () => {
       </div>
     </div>
   ));
+
+  const handleSelectFavorites = async (salonId, isFavorite) => {
+    try {
+      await favoriteSalon(salonId, isFavorite);
+      await fetchingData();
+    } catch (error) {
+      Notify.error(error.message);
+    }
+  };
   return (
     <div
       className={`${styles.main} ${
-        favouriteSalons && favouriteSalons.length === 1 ? styles.singleWishlist : ""
+        favouriteSalons && favouriteSalons.length === 1
+          ? styles.singleWishlist
+          : ""
       }`}
     >
-      {loading ? (
+      {!favouriteSalons ? (
         skeleton
       ) : !favouriteSalons || favouriteSalons.length === 0 ? (
         <p className={styles.noWishLists}>No Wishlist available</p>
@@ -93,12 +87,11 @@ const WishLists = () => {
                       className={`${styles.heart} ${
                         salon.isFavorite ? styles.favorite : styles.nonFavorite
                       }`}
-                      onClick={() => handleSelecteFavourites(salon.id, false)}
+                      onClick={() => handleSelectFavorites(salon.id, false)}
                     ></div>
                   ) : (
-                   
                     <CiHeart
-                      onClick={() => handleSelecteFavourites(salon.id, true)}
+                      onClick={() => handleSelectFavorites(salon.id, true)}
                     />
                   )}
                   <p>wishList</p>

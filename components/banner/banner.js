@@ -1,19 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
+'use client';
+
+import React, { useState, useRef } from 'react';
 import styles from "./banner.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrNext } from "react-icons/gr";
-import { getBanners, searchText } from "@/api/account.api";
+import { searchText } from "@/api/account.api";
 import Notify from "@/utils/notify";
 import Session from "@/service/session";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Skeleton } from "@mui/material";
+import { useRouter } from 'next/navigation';
 
-function Banner() {
+const Banner = ({ banners }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [banners, setBanners] = useState(null); // Initialize banners as null
   const [backgroundImage, setBackgroundImage] = useState("");
   const sliderRef = useRef(null);
   const router = useRouter();
@@ -27,22 +28,6 @@ function Banner() {
     dots: true,
     autoplaySpeed: 3000,
   };
-
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const res = await getBanners();
-        setBanners(res?.data?.data.items);
-        if (res?.data?.data.items.length > 0) {
-          setBackgroundImage(res.data.data.items[0]?.mediaUrl || "");
-        }
-      } catch (error) {
-        Notify.error(error.message);
-        setBanners([]); // Handle error by setting banners to an empty array
-      }
-    };
-    fetchBanners();
-  }, []);
 
   const handleClick = async (slide) => {
     Session.set("selectedBannerCity", slide.city);
@@ -60,10 +45,10 @@ function Banner() {
 
   return (
     <>
-      {banners !== null ? (
+      {banners.length > 0 ? (
         <div className={styles.container}>
           <div className={styles.bannerSlider}>
-            <Slider {...settings} ref={sliderRef}>
+            <Slider {...settings}>
               {banners.map((slide, index) => (
                 <div key={index} onClick={() => handleClick(slide)}>
                   <Image
@@ -88,6 +73,6 @@ function Banner() {
       )}
     </>
   );
-}
+};
 
 export default Banner;
