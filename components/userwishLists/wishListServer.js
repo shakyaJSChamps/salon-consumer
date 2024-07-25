@@ -4,6 +4,7 @@ import WishLists from "./wishLists";
 export async function fetchingData() {
     try {
       const resData = await getFavouriteSalonList();
+    //  console.log("resdata",resData.data.data.items)
       return resData.data.data.items;
     } catch (error) {
       Notify.error(error.message);
@@ -12,6 +13,7 @@ export async function fetchingData() {
   }
 const WishListServer = async() => {
     const  favouriteSalons = await fetchingData();
+   // console.log('wisglist',favouriteSalons)
   return (
     <div>
         <WishLists  favouriteSalons={ favouriteSalons}/>

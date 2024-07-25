@@ -1,5 +1,5 @@
-import ContactUs from '@/pages/contactUs/contactUs'
-import styles from '@/pages/contactUs/contactUs.module.css'
+import ContactUs from '@/internalPages/contactUs/contactUs'
+import styles from '@/internalPages/contactUs/contactUs.module.css'
 
 function Page() {
   return (

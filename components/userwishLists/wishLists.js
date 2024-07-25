@@ -7,9 +7,13 @@ import { CiHeart } from "react-icons/ci";
 import Images from "@/app/image";
 import Notify from "@/utils/notify";
 import { Skeleton } from "@mui/material";
-import { favoriteSalon } from "@/api/account.api";
+import { favoriteSalon, getFavouriteSalonList } from "@/api/account.api";
 import { fetchingData } from "./wishListServer";
+import { useEffect, useState } from "react";
 const WishLists = ({ favouriteSalons }) => {
+  const [wishList,setWishList] = useState([]);
+  const [loading,setLoading] = useState(true);
+
   const skeleton = Array.from({ length: 5 }, (_, index) => (
     <div key={index} className={styles.salonDetail}>
       <div className={styles.salon}>
@@ -37,11 +41,23 @@ const WishLists = ({ favouriteSalons }) => {
       </div>
     </div>
   ));
-
+  async function fetchingData() {
+    try {
+      const resData = await getFavouriteSalonList();
+      setWishList(resData.data.data.items);
+      setLoading(false);
+    } catch (error) {
+      Notify.error(error.message);
+    }
+  }
+useEffect(()=>{
+ 
+  fetchingData();
+},[])
   const handleSelectFavorites = async (salonId, isFavorite) => {
     try {
       await favoriteSalon(salonId, isFavorite);
-      await fetchingData();
+       fetchingData();
     } catch (error) {
       Notify.error(error.message);
     }
@@ -49,17 +65,17 @@ const WishLists = ({ favouriteSalons }) => {
   return (
     <div
       className={`${styles.main} ${
-        favouriteSalons && favouriteSalons.length === 1
+        wishList && wishList.length === 1
           ? styles.singleWishlist
           : ""
       }`}
     >
-      {!favouriteSalons ? (
+      {loading ? (
         skeleton
-      ) : !favouriteSalons || favouriteSalons.length === 0 ? (
+      ) : !wishList || wishList.length === 0 ? (
         <p className={styles.noWishLists}>No Wishlist available</p>
       ) : (
-        favouriteSalons?.map((salon, index) => (
+        wishList?.map((salon, index) => (
           <div key={index} className={styles.salonDetails}>
             <div className="">
               <Images

@@ -1,4 +1,4 @@
-import TermsOfUse from '@/pages/termsOfUse/termsOfUse'
+import TermsOfUse from '@/internalPages/termsOfUse/termsOfUse'
 import React from 'react'
 
 function page() {

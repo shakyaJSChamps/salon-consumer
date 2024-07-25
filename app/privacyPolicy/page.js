@@ -1,4 +1,4 @@
-import PrivacyPolicy from '@/pages/privacyPolicy/privacyPolicy'
+import PrivacyPolicy from '@/internalPages/privacyPolicy/privacyPolicy'
 import React from 'react'
 
 function page() {
