@@ -3,33 +3,37 @@
   padding: 0px 110px;
   padding-bottom: 30px !important;
 }
-.salon{
+.salon {
   display: flex;
   gap: 10px;
 }
-.contentSkeleton{
+.contentSkeleton {
   display: flex;
   gap: 20px;
 }
 .singleWishlist {
- padding: 90px !important;
+  padding: 90px !important;
 }
-.skeletonBtn{
+.headingSkeleton {
+  width: 100px !important;
+  height: 50px !important;
+}
+.skeletonBtn {
   padding-right: 10px;
   margin-top: 10px;
 }
-.mainSkeleton{
+.mainSkeleton {
   display: flex;
   flex-direction: column;
 }
-.noWishLists{
+.noWishLists {
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 600;
   padding: 160px 0px;
 }
-.salonDetail{
+.salonDetail {
   display: flex;
   gap: 20px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
@@ -156,8 +160,8 @@
   margin-bottom: 15px;
   height: 235px;
 }
-.main{
-    padding: 20px 0px;
+.main {
+  padding: 20px 0px;
 }
 .img img {
   /* object-fit: cover !important; */
@@ -362,8 +366,6 @@
   color: blue;
 }
 
-
-
 @media screen and (max-width: 991px) {
   .img {
     width: 250px;
@@ -374,37 +376,53 @@
   .doorBuddyBtn {
     padding: 8px 80px !important;
   }
-}@media screen and (max-width: 575px) {
-   
-    .salonDetails{
-        flex-direction: column;
-        height: 400px;
-    }
-    .doorBuddyBtn {
-        font-size: 15px;
-    }
-    .details{
-      height: 400px;
-    }
-    .btnDiv{
-        margin-top: -25px;
-    }
-    .wishlists{
-        margin-top: -60px;
-    }
-    .titles{
-        margin-top: -55px;
-        font-size: 15px;
-    }
-   
-    .ratings{
-        margin-top: -15px;
-    }
-    .ratings p{
-        margin-top: -5px;
-    }
-    .description{
-        margin-top: -15px;
-        display: flex;
-    }
+}
+@media screen and (max-width: 575px) {
+  .salonDetails {
+    flex-direction: column;
+    height: 400px;
   }
+  .doorBuddyBtn {
+    font-size: 15px;
+  }
+  .details {
+    height: 400px;
+  }
+  .btnDiv {
+    margin-top: -25px;
+  }
+  .wishlists {
+    margin-top: -60px;
+  }
+  .img {
+    width: 250px;
+    height: 200px;
+  }
+  .titles {
+    margin-top: -55px;
+    font-size: 15px;
+  }
+
+  .ratings {
+    margin-top: -15px;
+  }
+  .ratings p {
+    margin-top: -5px;
+  }
+  .description {
+    margin-top: -15px;
+    display: flex;
+  }
+  .salonDetail {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    height: 350px;
+    justify-content: center;
+  }
+  .headingSkeleton {
+    width: 240px !important;
+    height: 200px !important;
+    margin-top: -55px;
+  }
+}

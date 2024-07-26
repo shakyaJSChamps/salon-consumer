@@ -80,6 +80,8 @@ const Lists = (props) => {
     page,
     pageSize,
   } = props;
+ 
+
   const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
   const [facilities, setFacilities] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState({});
@@ -193,7 +195,7 @@ const Lists = (props) => {
   const skeleton = Array.from({ length: 1 }, (_, index) => (
     <div key={index} className={styles.columnSkeleton}>
       <div className={styles.salon}>
-        <Skeleton variant="rectangular" width={270} height={220} />
+        <Skeleton variant="rectangular" width={270} height={220} className={styles.skeletonImage}/>
         <div className={styles.mainSkeleton}>
           <div>
             <Skeleton variant="text" width={100} height={50} />
@@ -316,7 +318,6 @@ const Lists = (props) => {
             </div>
           </div>
         )}
-        ;
         <div className={styles.listFilter}>
           <div className={styles.conditions}>
             <p>Search Filter</p>
@@ -366,7 +367,7 @@ const Lists = (props) => {
                           {salon.specialization}
                         </p>
                         <p className={styles.locations}>
-                          <LocationOnIcon /> {salon.city}
+                          <LocationOnIcon /> {`${salon.city} ${salon.state}`.slice(0,10)}...
                         </p>
                       </div>
                       <div className={styles.wishlists}>
@@ -397,9 +398,9 @@ const Lists = (props) => {
                       </p>
                       <p className={styles.serviceType}>{salon.serviceType}</p>
                     </div>
-                    <p
+                    {/* <p
                       className={styles.description}
-                    >{`${salon.city} ${salon.state}`}</p>
+                    >{`${salon.city} ${salon.state}`}</p> */}
                     <Link
                       href={`/salonlist/${salon.id}`}
                       className={styles.btnDiv}
@@ -418,7 +419,7 @@ const Lists = (props) => {
         <div ref={listRef} className={styles.listBottomMarker}></div>
       </div>
       {/* {hasMoreData && (
-        <button onClick={handleLoadMore} className={styles.loadMoreBtn}>
+        <button onClick={loadMoreItems} className={styles.loadMoreBtn}>
           View More
         </button>
       )} */}

@@ -114,7 +114,7 @@ function NearSalons({ data }) {
                   </div>
                   <div className={styles.location}>
                     <LocationOnIcon className={styles.locIcon} />
-                    {`${salon.address}, ${salon.city}, ${salon.state}`}
+                    {`${salon.address}, ${salon.city}, ${salon.state}`.slice(0,40)}...
                   </div>
                   <div className={styles.salonType}>
                     <div className={styles.rating}>

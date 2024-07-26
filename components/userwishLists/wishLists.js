@@ -17,10 +17,10 @@ const WishLists = ({ favouriteSalons }) => {
   const skeleton = Array.from({ length: 5 }, (_, index) => (
     <div key={index} className={styles.salonDetail}>
       <div className={styles.salon}>
-        <Skeleton variant="rectangular" width={270} height={220} />
+        <Skeleton variant="rectangular" width={270} height={220} className={styles.skeletonImage} />
         <div className={styles.mainSkeleton}>
           <div>
-            <Skeleton variant="text" width={100} height={50} />
+            <Skeleton variant="text"  className={styles.headingSkeleton}/>
           </div>
           <div className={styles.contentSkeleton}>
             <Skeleton variant="text" width={100} height={30} />

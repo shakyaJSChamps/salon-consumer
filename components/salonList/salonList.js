@@ -7,12 +7,12 @@ import calendraImages from '@/assets/images/Group 1000003690.svg';
 import Lists from '../lists/lists';
 import Session from '@/service/session';
 
-const SalonList = ({initialLists}) => {
+const SalonList = ({initialLists, page: initialPage, pageSize: initialPageSize}) => {
   const [lists, setLists] = useState([]);
   const [allSalon, setAllSalon] = useState([]);
 
-  const [page, setPage] = useState(1); 
-  const [pageSize, setPageSize] = useState(10);
+  const [page, setPage] = useState(initialPage); 
+  const [pageSize, setPageSize] = useState(initialPageSize);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
   
@@ -47,6 +47,8 @@ useEffect(() => {
       if (initialLists.length > 0) {
         const filteredData = initialLists.filter(item => !lists.some(existingItem => existingItem.id === item.id));
         setPage(page + 1);
+        setPageSize(page + 10);
+
         const updatedLists = [...lists, ...filteredData];
         setAllSalon(updatedLists);
         Session.setObject('salonList', { items: updatedLists });
@@ -67,7 +69,8 @@ useEffect(()=>{
       fetchSalonLists();
     }
   };
-
+  console.log('page',setPage)
+  console.log('set pageSize',setPageSize)
   return (
     <Lists
       title="Salon"
