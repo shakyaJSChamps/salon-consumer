@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setFilteredSalon } from "../../app/Redux/Authslice";
 import { useRouter } from "next/navigation";
 import Notify from "@/utils/notify";
+import Cookies from "js-cookie";
 function useDebounce(callback, delay) {
   const debounceTimeout = useRef(null);
 
@@ -30,7 +31,11 @@ function SearchInput() {
   const dispatch = useDispatch();
   const city = Session.get("city");
   const router = useRouter();
+  const latitude = Cookies.get('latitude') || '';
+  const longitude = Cookies.get('longitude') || '';
 
+  // console.log("Latitude:", latitude);
+  // console.log("Longitude:", longitude);
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -52,7 +57,11 @@ function SearchInput() {
   const debounceFetchServices = useDebounce(async (query) => {
     if (query) {
       try {
-        const res = await searchService(query);
+        const requestUrl =
+        latitude !== "" && longitude !== ""
+          ? `latitude=${latitude}&longitude=${longitude}`
+          : "";  
+        const res = await searchService(query,requestUrl);
         const services = res?.data?.data || [];
         const filtered = services.filter((s) =>
           s.toLowerCase().includes(query.toLowerCase())
@@ -67,8 +76,14 @@ function SearchInput() {
   }, 300);
 
   const handleSearch = useCallback(async (query) => {
+    const requestUrl =
+      latitude !== "" && longitude !== ""
+        ? `latitude=${latitude}&longitude=${longitude}`
+        : "";  
     try {
-      const res = await searchText(query, 1, 10);
+       
+        console.log('reqUrl',requestUrl)   
+      const res = await searchText(query,requestUrl);
       setText(res?.data?.data || []);
       setFilteredServices([]); 
       return res?.data?.data;
@@ -97,7 +112,7 @@ function SearchInput() {
       router.push("/salonlist");
     } else if (source === "icon") {
       try {
-        const res = await searchText(suggestion, 1, 10);
+        const res = await searchText(suggestion);
         setText(res?.data?.data || []);
         setFilteredServices([]); 
         dispatch(setFilteredSalon(res?.data?.data));

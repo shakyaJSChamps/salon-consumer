@@ -8,10 +8,17 @@ import { homePage } from "@/api/account.api";
 //import Notify from "@/utils/notify";
 import TopServicesServer from "@/components/topServices/topServicesServer";
 import BannerServer from "@/components/banner/bannerServer";
+import { cookies } from "next/headers";
 
-async function fetchingData() {
+async function fetchingData(latitude, longitude) {
   try {
-    const resData = await homePage();
+    const requestUrl =
+      latitude !== "" && longitude !== ""
+        ? `latitude=${latitude}&longitude=${longitude}`
+        : "";
+
+     //console.log("Request URL:", requestUrl);
+    const resData = await homePage(requestUrl);
     return resData.data.data;
   } catch (error) {
     //Notify.error(error.message);
@@ -20,8 +27,15 @@ async function fetchingData() {
 }
 
 async function HomePage() {
-  const data = await fetchingData();
- // console.log("fetch data", data);
+  const cookieStore = cookies();
+  const latitudeCookie = cookieStore.get("latitude");
+  const longitudeCookie = cookieStore.get("longitude");
+
+  const latitude = latitudeCookie?.value || "";
+  const longitude = longitudeCookie?.value || "";
+
+  const data = await fetchingData(latitude, longitude);
+   console.log("fetch data", data);
   return (
     <div>
       <Offers />

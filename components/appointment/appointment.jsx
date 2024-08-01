@@ -387,9 +387,9 @@ const Appointments = () => {
                         ></span>
                         {data.status === "COMPLETED"
                           ? "COMPLETED"
-                          : data.status === "CANCELLED" ||
-                            data.status === "REJECTED"
-                          ? "CANCELLED BY YOU"
+                          : data.status === "CANCELLED"
+                            //data.status === "REJECTED"
+                          ?`Cancelled by ${data.cancelledBy}`
                           : "PENDING"}
                       </p>
                     </div>

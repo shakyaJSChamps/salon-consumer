@@ -98,6 +98,11 @@ function AppointmentDetailPage({ appointmentId }) {
             <p>
               <span>Status</span> <span>{details?.status}</span>
             </p>
+            {details?.status === 'CANCELLED' &&
+             <p>
+             <span>Cancel Reason</span> <span>{details?.cancelReason}</span>
+           </p>
+            }
             <p>
               <span>Service Type</span> <span>{data}</span>
             </p>

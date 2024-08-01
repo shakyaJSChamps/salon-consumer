@@ -1,28 +1,29 @@
-// 'use client'
-import { Paper } from "@mui/material";
-import styles from "./topServices.module.css";
-import Image from "next/image";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Link from "next/link";
-import { serviceDetails, signatureServices } from "@/api/account.api";
-import Session from "@/service/session";
-//import Notify from "@/utils/notify";
-import { Skeleton } from "@mui/material";
+import { signatureServices } from "@/api/account.api";
 import TopServicesClient from "./topServices";
+import { cookies } from "next/headers";
 
 // Fetch services on the server side
-export async function fetchServices() {
+export async function fetchServices(latitude,longitude) {
   try {
-    const serviceData = await signatureServices();
+    const requestUrl =
+    latitude !== "" && longitude !== ""
+      ? `latitude=${latitude}&longitude=${longitude}`
+      : "";
+    const serviceData = await signatureServices(requestUrl);
     return serviceData.data.data;
   } catch (error) {
-   // Notify.error(error.message);
     return [];
   }
 }
 
 export default async function TopServicesServer() {
-  const services = await fetchServices();
+  const cookieStore = cookies();
+  const latitudeCookie = cookieStore.get("latitude");
+  const longitudeCookie = cookieStore.get("longitude");
 
+  const latitude = latitudeCookie?.value || "";
+  const longitude = longitudeCookie?.value || "";
+  const services = await fetchServices(latitude,longitude);
+  //console.log('services',services)
   return <TopServicesClient services={services} />;
 }

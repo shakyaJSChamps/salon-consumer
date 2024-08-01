@@ -25,22 +25,22 @@ const FilterServices = ({
       closeMenu();
     }
   };
-  const handleLoadMore = async () => {
-    if (loadingMore || !hasMoreData) return;
+  // const handleLoadMore = async () => {
+  //   if (loadingMore || !hasMoreData) return;
 
-    setLoadingMore(true);
-    const nextPage = currentPage + 1;
+  //   setLoadingMore(true);
+  //   const nextPage = currentPage + 1;
 
-    try {
-      const response = await fetchSalonList(nextPage, pageSize);
-      setLists((prevLists) => [...prevLists, ...response]);
-      setCurrentPage(nextPage);
-    } catch (error) {
-      Notify.error("Failed to load more items.");
-    } finally {
-      setLoadingMore(false);
-    }
-  };
+  //   try {
+  //     const response = await fetchSalonList(nextPage, pageSize);
+  //     setLists((prevLists) => [...prevLists, ...response]);
+  //     setCurrentPage(nextPage);
+  //   } catch (error) {
+  //     Notify.error("Failed to load more items.");
+  //   } finally {
+  //     setLoadingMore(false);
+  //   }
+  // };
   return (
     <div className={styles.shopCategory}>
       <h5>{title}</h5>
@@ -219,26 +219,22 @@ const Lists = (props) => {
 
   if (isEmptyListt && isLoading) {
     return <div className={styles.noSalonList}>No Salonlist available</div>;
-  }
- 
-  const handleLoadMore = async () => {
-    if (loadingMore || !hasMoreData) return;
+   }
+  //  const handleLoadMore = async () => {
+  //   //if (loadingMore || !hasMoreData) return;
 
-    setLoadingMore(true);
-    const nextPage = currentPage + 1;
-
-    try {
-      const response = await loadMoreItems(nextPage, pageSize);
-      setLists((prevLists) => [...prevLists, ...response]);
-      setCurrentPage(nextPage);
-    } catch (error) {
-      Notify.error("Failed to load more items.");
-    } finally {
-      setLoadingMore(false);
-    }
-  };
-
-
+  //   setLoadingMore(true);
+  //   try {
+  //     const nextPage = currentPage + 1;
+  //     const response = await fetchSalonList(nextPage, pageSize);
+  //     setLists((prevLists) => [...prevLists, ...response]);
+  //     setCurrentPage(nextPage);
+  //   } catch (error) {
+  //     Notify.error("Failed to load more items.");
+  //   } finally {
+  //     setLoadingMore(false);
+  //   }
+  // };
   return (
     <div
       className={`${styles.container} ${
@@ -418,11 +414,11 @@ const Lists = (props) => {
         </div>
         <div ref={listRef} className={styles.listBottomMarker}></div>
       </div>
-      {/* {hasMoreData && (
+      {hasMoreData && !isLoading &&(
         <button onClick={loadMoreItems} className={styles.loadMoreBtn}>
           View More
         </button>
-      )} */}
+      )}
     </div>
   );
 };
