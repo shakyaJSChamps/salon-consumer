@@ -1,235 +1,240 @@
 .container {
-    padding: 30px 185px;
-    display: flex;
-    flex-direction: column;
-    gap: 37px;
+  padding: 30px 185px;
+  display: flex;
+  flex-direction: column;
+  gap: 37px;
 }
-
+.noSalonsMessage {
+  text-align: center;
+}
+.noSalonsMessageContainer {
+  font-weight: bold;
+  padding: 30px;
+  height: 160px;
+  width: 100%;
+}
 .headingContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .heading {
-    background-color: black;
-    color: white;
-    padding: 8px 10px;
-    font-size: 18px;
-    font-weight: bold;
-    width: fit-content;
-    border-radius: 10px;
+  background-color: black;
+  color: white;
+  padding: 8px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  width: fit-content;
+  border-radius: 10px;
 }
 
 .linkDiv {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.linkDiv a{
-    display: flex;
-    color: black;
-    font-size: 13px;
-    font-weight: 500;
-    color: black;
-    text-decoration: none;
+.linkDiv a {
+  display: flex;
+  color: black;
+  font-size: 13px;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
 }
-.link a{
-    color: black;
+.link a {
+  color: black;
 }
 .arrow {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .content {
-    display: flex;
-    gap: 24px;
-    /* justify-content: center; */
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 24px;
+  /* justify-content: center; */
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
 }
 
 .content::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .paper {
-    display: flex;
-    flex-direction: column;
-    /* scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  /* scroll-snap-align: center;
     flex-wrap: wrap; */
-    border: 2px solid #D9D9D9;
-    height: 300px;
-    width: 300px;
-    border-radius: 5px;
+  border: 2px solid #d9d9d9;
+  height: 300px;
+  width: 300px;
+  border-radius: 5px;
 }
-.details{
-    height: 140px;
+.details {
+  height: 140px;
 }
 .icon {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .image img {
-    width: 265px;
-    height: 155px
+  width: 265px;
+  height: 155px;
 }
 
 .details {
-    display: flex;
-    justify-content: space-evenly;
-    /* flex: 1; */
-    flex-direction: column;
-    gap: 3px;
-    display: flex;
-    justify-content: space-evenly;
-    /* flex: 1; */
-    flex-direction: column;
-    gap: 3px;
-    padding: 8px 15px;
+  display: flex;
+  justify-content: space-evenly;
+  /* flex: 1; */
+  flex-direction: column;
+  gap: 3px;
+  display: flex;
+  justify-content: space-evenly;
+  /* flex: 1; */
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 15px;
 }
 
 .location {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
 }
 
 .locIcon {
-    font-size: 25px;
-    align-items: center;
+  font-size: 25px;
+  align-items: center;
 }
 
 .salonType {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
 }
 
 .rating {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    font-size: 12px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 12px;
 }
 
 .type {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .desc p {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 .btn {
-    background-color: black;
-    color: white;
-    padding: 10px 8px;
-    border-radius: 3px;
-    /* width: fit-content; */
+  background-color: black;
+  color: white;
+  padding: 10px 8px;
+  border-radius: 3px;
+  /* width: fit-content; */
 }
-.btn a{
-    color: white;
+.btn a {
+  color: white;
 }
-@media screen and (max-width:1600px) {
-    .headingContainer{
-margin-left: 0;    }
-}
-
-@media screen and (max-width:1280px) {
-    .container {
-        gap: 15px;
-    }
+@media screen and (max-width: 1600px) {
+  .headingContainer {
+    margin-left: 0;
+  }
 }
 
-/* @media screen and (max-width:1024px) {
-    .container{
-        padding: 30px 57px;
-        gap: 14px;
-    }
+@media screen and (max-width: 1280px) {
+  .container {
+    gap: 15px;
+  }
+}
 
-    .image img {
-        width: 209px;
-        height: 166px;
-    }
-} */
+@media screen and (max-width: 992px) {
+  .container {
+    padding: 30px 66px;
+    gap: 14px;
+  }
 
-@media screen and (max-width:992px) {
-    .container {
-        padding: 30px 66px;
-        gap: 14px;
-    }
-
-    /* .image img {
+  /* .image img {
         width: 205px;
         height: 152px
     } */
 }
 
-@media screen and (max-width:768px) {
-    .container {
-        padding: 21px 54px;
-        gap: 14px;
-    }
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 21px 54px;
+    gap: 14px;
+  }
 }
 
-@media screen and (max-width:576px) {
-    .container {
-        padding: 16px 28px;
-        gap: 18px;
-    }
+@media screen and (max-width: 576px) {
+  .container {
+    padding: 16px 28px;
+    gap: 18px;
+  }
 
-    .heading {
-        font-size: 11px;
-    }
+  .heading {
+    font-size: 11px;
+  }
 
-    .linkDiv a {
-        font-size: 11px;
-    }
+  .linkDiv a {
+    font-size: 11px;
+  }
 
-    .arrow {
-        font-size: 14px;
-    }
+  .arrow {
+    font-size: 14px;
+  }
 
+  .paper {
+    gap: 0px;
+  }
+
+  .image img {
+    width: 157px;
+    height: 117px;
+  }
+  .paper {
+    height: 270px;
+  }
+
+  .details {
+    gap: 6px;
+    padding: 0px 5px 8px 5px;
+  }
+
+  .details h2 {
+    font-size: 17px;
+  }
+
+  .desc {
+    display: none;
+  }
+
+  .salonType {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    font-size: 11px;
+    font-weight: bold;
+  }
+  @media (max-width: 400px) {
     .paper {
-        gap: 0px;
+        width: 220px !important;
     }
-
     .image img {
-        width: 157px;
-        height: 117px;
-    }
-    .paper{
-        height: 270px;
-    }
-
-    .details {
-        gap: 6px;
-        padding: 0px 5px 8px 5px;
-    }
-
-
-    .details h2 {
-        font-size: 17px;
-    }
-
-    .desc {
-        display: none;
-    }
-
-    .salonType {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .btn {
-        font-size: 11px;
-        font-weight: bold;
-    }
-
+        width: 190px;
+      }
+      .details h3{
+        font-size: 15px;
+      }
+}
 }

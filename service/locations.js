@@ -1,6 +1,5 @@
 import axios from "axios";
-import Cookies from 'js-cookie';
-import Notify from "@/utils/notify";
+import Cookies from "js-cookie";
 export async function GetUserLocation() {
   if (navigator.geolocation) {
     try {
@@ -13,38 +12,33 @@ export async function GetUserLocation() {
       const data = response.data;
       console.log("location data", data);
       // const { city, state, country } = data.address;
-      const city = data.address.city || data.address.town || data.address.village;
+      const city =
+        data.address.city || data.address.town || data.address.village;
 
-     // const city = data.address.city;
+      // const city = data.address.city;
       const latitude = data.lat;
       const longitude = data.lon;
-      console.log("city", city);
-      console.log("latitude", latitude);
-      console.log("longitude", longitude);
-      const lat = Cookies.get('latitude');
-      console.log("aradhya", lat);
+      const lat = Cookies.get("latitude");
 
       const { state, country } = data.address;
-     
-      Cookies.set('city', city || '', { expires: 7 });
-      Cookies.set('latitude', latitude || '', { expires: 7 });
-      Cookies.set('longitude', longitude || '', { expires: 7 });
 
-      return { city, state, country, lat: latitude, lon: longitude }; // Return the extracted address fields
+      Cookies.set("city", city || "", { expires: 7 });
+      Cookies.set("latitude", latitude || "", { expires: 7 });
+      Cookies.set("longitude", longitude || "", { expires: 7 });
+
+      return { city, state, country, lat: latitude, lon: longitude };
     } catch (error) {
       // Notify.error(error.message);
-      Cookies.remove('city');
-      Cookies.remove('latitude');
-      Cookies.remove('longitude');
-
+      Cookies.remove("city");
+      Cookies.remove("latitude");
+      Cookies.remove("longitude");
 
       throw error;
     }
   } else {
-    Cookies.remove('city');
-    Cookies.remove('latitude');
-    Cookies.remove('longitude');
-
+    Cookies.remove("city");
+    Cookies.remove("latitude");
+    Cookies.remove("longitude");
 
     return null;
   }
@@ -61,12 +55,8 @@ export async function HandleSelectLocation(location, setDeniedUserLocation) {
         const { city, state, country } = data[0].address;
         const latitude = data[0].lat || "";
         const longitude = data[0].lon || "";
-        // Cookies.set('city', city, { expires: 7 });
-        // Cookies.set('latitude', latitude, { expires: 7 });
-        // Cookies.set('longitude', longitude, { expires: 7 });
-  
-        setDeniedUserLocation({ city, state, country }); // Store the extracted address fields
-        return { city, state, country, lat: latitude, lon: longitude }; // Return the extracted address fields
+        setDeniedUserLocation({ city, state, country });
+        return { city, state, country, lat: latitude, lon: longitude };
       } else {
         return null;
       }

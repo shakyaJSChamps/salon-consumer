@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useRef } from 'react';
 import styles from "./banner.module.css";
 import Slider from "react-slick";
@@ -36,7 +35,6 @@ const Banner = ({ banners }) => {
       Session.setObject("selectedBannerSalons", res?.data?.data);
       Session.remove("filteredSalon");
       Session.remove("salonService");
-
       router.push("/salonlist");
     } catch (error) {
       Notify.error(error.message);

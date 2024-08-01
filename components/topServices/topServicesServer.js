@@ -24,6 +24,6 @@ export default async function TopServicesServer() {
   const latitude = latitudeCookie?.value || "";
   const longitude = longitudeCookie?.value || "";
   const services = await fetchServices(latitude,longitude);
-  //console.log('services',services)
+ // console.log('services',services)
   return <TopServicesClient services={services} />;
 }

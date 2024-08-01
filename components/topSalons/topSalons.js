@@ -26,16 +26,19 @@ function TopSalons({ data }) {
       <div className={styles.headingContainer}>
         <div className={styles.heading}>Trending Salons</div>
         <div className={styles.linkDiv}>
+        {data?.mostPopularSalons && data.mostPopularSalons.length > 0 && (
+
           <Link href="/salons" className={styles.link}>
             View all salons
             <ArrowForwardIcon className={styles.arrow} />
           </Link>
+        )}
         </div>
       </div>
 
       <div className={styles.content}>
-        {data?.mostPopularSalons
-          ? data?.mostPopularSalons.map((salon, index) => (
+      {data?.mostPopularSalons && data.mostPopularSalons.length > 0 ? (
+          data?.mostPopularSalons.map((salon, index) => (
               <Paper elevation={3} key={index} className={styles.paper}>
                 <div className={styles.image}>
                   <Image
@@ -67,8 +70,16 @@ function TopSalons({ data }) {
                 </div>
               </Paper>
             ))
-          : skeletons}
-      </div>
+          ) : data ? (
+            <div className={styles.noSalonsMessageContainer}>
+            <div className={styles.noSalonsMessage}>
+              No top salons available for this location.
+            </div>
+          </div>
+          ) : (
+            skeletons
+          )}
+        </div>
     </div>
   );
 }

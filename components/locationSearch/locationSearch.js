@@ -3,11 +3,9 @@ import styles from "./locationSearch.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLocation } from "@/app/Redux/Authslice";
 import { GetUserLocation, HandleSelectLocation } from "@/service/locations";
-import { getAddress } from "@/api/account.api";
 
 function LocationSearch() {
   const [permissionDenied, setPermissionDenied] = useState(true);
-  const [addresses, setAddresses] = useState([]);
   const dispatch = useDispatch();
   const city = useSelector((state) => state.auth.city);
   const state = useSelector((state) => state.auth.state);
@@ -17,7 +15,7 @@ function LocationSearch() {
     const fetchLocation = async () => {
       try {
         const location = await GetUserLocation();
-        dispatch(setUserLocation(location)); // Dispatch the address fields
+        dispatch(setUserLocation(location)); 
         setPermissionDenied(false);
       } catch (error) {
         setPermissionDenied(true);
@@ -31,7 +29,7 @@ function LocationSearch() {
     if (selectedLocation === "Current Location") {
       try {
         const location = await GetUserLocation();
-        dispatch(setUserLocation(location)); // Dispatch the address fields
+        dispatch(setUserLocation(location));
         setPermissionDenied(false);
       } catch (error) {
         console.error("Failed to fetch user location:", error);
@@ -40,7 +38,7 @@ function LocationSearch() {
     } else {
       const locationData = await HandleSelectLocation(selectedLocation);
       if (locationData) {
-        dispatch(setUserLocation(locationData)); // Dispatch the address fields
+        dispatch(setUserLocation(locationData)); 
       }
     }
   };

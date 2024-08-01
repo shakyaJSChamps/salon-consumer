@@ -380,16 +380,20 @@
 @media screen and (max-width: 575px) {
   .salonDetails {
     flex-direction: column;
-    height: 400px;
+    height: 420px;
   }
   .doorBuddyBtn {
     font-size: 15px;
   }
   .details {
     height: 400px;
+    padding-top: 20px;
   }
   .btnDiv {
     margin-top: -25px;
+  }
+  .doorBuddyBtn{
+    margin-bottom: -25px;
   }
   .wishlists {
     margin-top: -60px;
@@ -398,13 +402,16 @@
     width: 250px;
     height: 200px;
   }
+  /* .salonDetails{
+    height: 400px;
+  } */
   .titles {
     margin-top: -55px;
     font-size: 15px;
   }
 
   .ratings {
-    margin-top: -15px;
+    margin-top: -30px;
   }
   .ratings p {
     margin-top: -5px;
