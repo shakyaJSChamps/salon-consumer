@@ -6,22 +6,12 @@ import Img from "@/assets/images/salonImage.svg";
 import calendraImages from "@/assets/images/Group 1000003690.svg";
 import Lists from "../lists/lists";
 import Session from "@/service/session";
-import { fetchSalonList } from "./salonListServer";
 
-const SalonList = ({
-  initialLists,
-  page: initialPage,
-  pageSize: initialPageSize,
-}) => {
-  const [lists, setLists] = useState([]);
-  const [allSalon, setAllSalon] = useState([]);
-
-  const [page, setPage] = useState(initialPage || 1);
-  const [pageSize, setPageSize] = useState(initialPageSize || 10);
+const SalonList = ({ initialLists }) => {
+  const [lists, setLists] = useState(initialLists.slice(0, 10));
+  const [allSalon, setAllSalon] = useState(initialLists);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMoreData, setHasMoreData] = useState(true);
-
-  // Memoize filteredSalon to prevent unnecessary recalculations
+  const [hasMoreData, setHasMoreData] = useState(initialLists.length > 10);
   const filteredSalon = useMemo(() => Session.getObject("filteredSalon"), []);
   const salonService = useMemo(() => Session.getObject("salonService"), []);
   const selectedBannerSalons = useMemo(
@@ -31,13 +21,13 @@ const SalonList = ({
 
   useEffect(() => {
     if (salonService) {
-      setLists(salonService || []);
+      setLists(salonService.slice(0, 10));
     } else if (filteredSalon) {
-      setLists(filteredSalon.items || []);
+      setLists(filteredSalon.items.slice(0, 10));
     } else if (selectedBannerSalons) {
-      setLists(selectedBannerSalons.items || []);
+      setLists(selectedBannerSalons.items.slice(0, 10));
     } else {
-      setLists(allSalon);
+      setLists(allSalon.slice(0, 10));
     }
   }, [filteredSalon, salonService, allSalon, selectedBannerSalons]);
 
@@ -64,14 +54,19 @@ const SalonList = ({
   };
   useEffect(() => {
     fetchSalonLists();
-  }, [page, pageSize]);
+  }, []);
 
   const loadMoreItems = () => {
-    if (!isLoading && hasMoreData) {
-      setPageSize(pageSize+10);
-      setPage(page + 1);
+    const newItems = allSalon.slice(lists.length, lists.length + 5);
+    if (newItems.length > 0) {
+      setLists((prevLists) => {
+        const updatedLists = [...prevLists, ...newItems];
+        return updatedLists;
+      });
+      setHasMoreData(newItems.length === 5);
+    } else {
+      setHasMoreData(false);
     }
-
   };
 
   return (
@@ -85,10 +80,6 @@ const SalonList = ({
       calendraImages={calendraImages}
       detailsLinkBase="/salonlist"
       setLists={setLists}
-      page={page}
-      setPage={setPage}
-      pageSize={pageSize}
-      setPageSize={setPageSize}
       isLoading={isLoading}
       loadMoreItems={loadMoreItems}
       hasMoreData={hasMoreData}

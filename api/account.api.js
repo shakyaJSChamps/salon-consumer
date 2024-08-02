@@ -46,8 +46,8 @@ export const otpVerify = (payload) =>
 export const getFavouriteSalonList = () =>
   HTTP.Request(methods.GET, `${__endpoint_favoriteSalonList}?favorite=true`);
 
-export const getSalonLists = (page, size,requestUrl) => {
-  const endpointUrl = __endpoint_getSaloonList(page, size,requestUrl);
+export const getSalonLists = (requestUrl) => {
+  const endpointUrl = __endpoint_getSaloonList(requestUrl);
   return HTTP.Request(methods.GET, endpointUrl);
 };
 

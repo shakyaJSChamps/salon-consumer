@@ -25,22 +25,7 @@ const FilterServices = ({
       closeMenu();
     }
   };
-  // const handleLoadMore = async () => {
-  //   if (loadingMore || !hasMoreData) return;
 
-  //   setLoadingMore(true);
-  //   const nextPage = currentPage + 1;
-
-  //   try {
-  //     const response = await fetchSalonList(nextPage, pageSize);
-  //     setLists((prevLists) => [...prevLists, ...response]);
-  //     setCurrentPage(nextPage);
-  //   } catch (error) {
-  //     Notify.error("Failed to load more items.");
-  //   } finally {
-  //     setLoadingMore(false);
-  //   }
-  // };
   return (
     <div className={styles.shopCategory}>
       <h5>{title}</h5>
@@ -77,15 +62,11 @@ const Lists = (props) => {
     lazyLoadingThreshold,
     hasMoreData,
     setLists,
-    page,
-    pageSize,
   } = props;
- 
 
   const [selectedServiceTypes, setSelectedServiceTypes] = useState([]);
   const [facilities, setFacilities] = useState([]);
   const [selectedRatings, setSelectedRatings] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
 
   const listRef = useRef(null);
 
@@ -131,7 +112,7 @@ const Lists = (props) => {
           !isLoading &&
           hasMoreData
         ) {
-          //loadMoreItems();
+          loadMoreItems();
         }
       },
       { threshold: lazyLoadingThreshold }
@@ -195,7 +176,12 @@ const Lists = (props) => {
   const skeleton = Array.from({ length: 1 }, (_, index) => (
     <div key={index} className={styles.columnSkeleton}>
       <div className={styles.salon}>
-        <Skeleton variant="rectangular" width={270} height={220} className={styles.skeletonImage}/>
+        <Skeleton
+          variant="rectangular"
+          width={270}
+          height={220}
+          className={styles.skeletonImage}
+        />
         <div className={styles.mainSkeleton}>
           <div>
             <Skeleton variant="text" width={100} height={50} />
@@ -219,22 +205,8 @@ const Lists = (props) => {
 
   if (isEmptyListt && isLoading) {
     return <div className={styles.noSalonList}>No Salonlist available</div>;
-   }
-  //  const handleLoadMore = async () => {
-  //   //if (loadingMore || !hasMoreData) return;
+  }
 
-  //   setLoadingMore(true);
-  //   try {
-  //     const nextPage = currentPage + 1;
-  //     const response = await fetchSalonList(nextPage, pageSize);
-  //     setLists((prevLists) => [...prevLists, ...response]);
-  //     setCurrentPage(nextPage);
-  //   } catch (error) {
-  //     Notify.error("Failed to load more items.");
-  //   } finally {
-  //     setLoadingMore(false);
-  //   }
-  // };
   return (
     <div
       className={`${styles.container} ${
@@ -363,7 +335,8 @@ const Lists = (props) => {
                           {salon.specialization}
                         </p>
                         <p className={styles.locations}>
-                          <LocationOnIcon /> {`${salon.city} ${salon.state}`.slice(0,10)}...
+                          <LocationOnIcon />{" "}
+                          {`${salon.city} ${salon.state}`.slice(0, 10)}...
                         </p>
                       </div>
                       <div className={styles.wishlists}>
@@ -414,7 +387,7 @@ const Lists = (props) => {
         </div>
         <div ref={listRef} className={styles.listBottomMarker}></div>
       </div>
-      {hasMoreData && !isLoading &&(
+      {hasMoreData && (
         <button onClick={loadMoreItems} className={styles.loadMoreBtn}>
           View More
         </button>

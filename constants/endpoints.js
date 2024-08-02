@@ -5,8 +5,8 @@ export const __endpoint_doLogin = endpoint + "account/otp/login";
 export const __endpoint_verifyUser = endpoint + "account/otp/verify";
 //list api
  export const __endpoint_favoriteSalonList = endpoint + "consumer/salons";
-export const __endpoint_getSaloonList = (page, size,requestUrl) => {
-    return `${endpoint}consumer/salons?page=${page}&size=${size}&${requestUrl}`;
+export const __endpoint_getSaloonList = (requestUrl) => {
+    return `${endpoint}consumer/salons?${requestUrl}`;
 };
 
 export const __endpoint_favoriteSalon = (salonId) => {

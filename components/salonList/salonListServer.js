@@ -1,14 +1,14 @@
 import { getSalonLists } from "@/api/account.api";
 import SalonList from "./salonList";
 
-export async function fetchSalon(page, pageSize, latitude, longitude) {
+export async function fetchSalon( latitude, longitude) {
   try {
     const requestUrl =
       latitude !== "" && longitude !== ""
         ? `latitude=${latitude}&longitude=${longitude}`
         : "";
     console.log("requestUrl", requestUrl);
-    const responseData = await getSalonLists(page, pageSize, requestUrl);
+    const responseData = await getSalonLists(requestUrl);
     return responseData?.data?.data?.items || [];
   } catch (error) {
     console.error("Failed to fetch salon lists:", error.message);
@@ -16,20 +16,17 @@ export async function fetchSalon(page, pageSize, latitude, longitude) {
   }
 }
 const SalonListServer = async ({
-  page = 1,
-  pageSize = 10,
   latitude,
   longitude,
 }) => {
   latitude = latitude || "";
   longitude = longitude || "";
 
-  const lists = await fetchSalon(page, pageSize, latitude, longitude);
- // console.log("List:", lists);
+  const lists = await fetchSalon(latitude, longitude);
 
   return (
     <div>
-      <SalonList initialLists={lists} page={page} pageSize={pageSize} />
+      <SalonList initialLists={lists}  />
     </div>
   );
 };
