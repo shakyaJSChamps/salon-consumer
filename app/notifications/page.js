@@ -1,7 +1,4 @@
-
 import Notification from '@/components/notification/notification'
-
-
 
 function Notifications() {
    

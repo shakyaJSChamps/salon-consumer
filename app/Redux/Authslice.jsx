@@ -91,7 +91,7 @@ export const authSlice = createSlice({
       state.user = { ...state.user, ...updatedProfile };
       Session.setObject("profile", state.user);
     },
-    setAppointmentId: (state, action) => { // Add this action
+    setAppointmentId: (state, action) => { 
       state.appointmentId = action.payload;
       Session.set("appointmentId", action.payload);
 

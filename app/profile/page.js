@@ -3,9 +3,7 @@ import UserInformation from "@/components/userProfile/userInformation"
 
 const Profile = () => {
     return <>
-
-
-        <UserInformation />
+  <UserInformation />
     </>
 }
 

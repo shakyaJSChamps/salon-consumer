@@ -243,7 +243,7 @@ const Appointments = () => {
     ];
 
     const [day, month, year] = dateString.split("-");
-    const monthIndex = parseInt(month, 10) - 1; // Convert month to 0-based index
+    const monthIndex = parseInt(month, 10) - 1; 
 
     const formattedDate = `${day}-${months[monthIndex]}-${year}`;
     return formattedDate;

@@ -91,7 +91,7 @@ function Navbar() {
                     </div>
                 </div>
                 <div className={styles.mobilelocation}>
-                    <MyLocationIcon onClick={() => setActive(!active)} className={styles.icon} />
+                    {/* <MyLocationIcon onClick={() => setActive(!active)} className={styles.iconLoc} /> */}
                     {active && (
                         <div className={styles.locationSearch}>
                             <LocationSearch />
@@ -104,7 +104,7 @@ function Navbar() {
                             <SearchInput />
                         </div>
                     )}
-                    <SearchIcon onClick={() => setActive(!active)} className={styles.icon} />
+                    {/* <SearchIcon onClick={() => setActive(!active)} className={styles.icon} /> */}
                 </div>
             </div>
             {open && (

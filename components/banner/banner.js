@@ -1,10 +1,9 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import styles from "./banner.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { GrNext } from "react-icons/gr";
 import { searchText } from "@/api/account.api";
 import Notify from "@/utils/notify";
 import Session from "@/service/session";
@@ -13,9 +12,6 @@ import { Skeleton } from "@mui/material";
 import { useRouter } from 'next/navigation';
 
 const Banner = ({ banners }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState("");
-  const sliderRef = useRef(null);
   const router = useRouter();
 
   const settings = {

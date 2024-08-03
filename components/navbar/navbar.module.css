@@ -173,9 +173,9 @@
         padding: 0px 10px;
     }
 
-    .location {
+    /* .location {
         display: none;
-    }
+    } */
 
     .locSearchDiv {
         padding: 8px !important;
@@ -191,11 +191,15 @@
     }
 
     .locSearchDiv {
-        gap: 60px;
+        gap: 10px;
         justify-content: space-between;
     }
 
-    .icon {
+    /* .icon {
+        display: none;
+    } */
+
+    .iconLoc{
         display: none;
     }
 }
