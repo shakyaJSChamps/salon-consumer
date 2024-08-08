@@ -29,7 +29,7 @@ const navLinks = [
     },
     {
         name: "Stylrax for Business",
-        url: "https://business.stylrax.in/home",
+        url: "https://business.stylrax.com/home",
         imageUrl: business,
         target: "_blank" 
     },
