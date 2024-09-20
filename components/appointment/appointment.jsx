@@ -167,7 +167,7 @@ const Appointments = () => {
             'input[name="cancelReason"]:checked'
           );
           const finalReason =
-            selectedReason.value === "Reason not here, Type here"
+            selectedReason?.value === "Reason not here, Type here"
               ? customReasonTextarea.value
               : selectedReason.value;
           if (
