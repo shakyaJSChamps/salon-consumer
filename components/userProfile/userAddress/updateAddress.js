@@ -1,5 +1,5 @@
 import { addAddressSchema } from '@/utils/schema';
-import { UpdateAddress, addAddress } from '@/api/account.api';
+import { UpdateAddress} from '@/api/account.api';
 import Notify from '@/utils/notify'
 import FormPopup from '@/components/formPopup/formPopup';
 

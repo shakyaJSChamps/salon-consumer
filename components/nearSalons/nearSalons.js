@@ -153,7 +153,7 @@ function NearSalons({ data }) {
           )}
         
       <div className={styles.linkDiv}>
-      {data?.nearBySalons && data.nearBySalons.length > 0 && (
+      {data?.nearBySalons.length > 0 && (
          <Link
           href={"/salonlist"}
           onClick={handleViewAllClick}

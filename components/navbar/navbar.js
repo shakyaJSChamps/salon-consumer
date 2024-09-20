@@ -8,7 +8,6 @@ import services from "@/assets/images/services.svg";
 import business from "@/assets/images/business.svg";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LocationSearch from '../locationSearch/locationSearch';
-import SearchIcon from '@mui/icons-material/Search';
 import SearchInput from '../searchInput/searchInput';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState, useEffect, useRef } from 'react';

@@ -3,7 +3,6 @@ import { appointmentDetails, getInvoice } from "@/api/account.api";
 import React, { useEffect, useState } from "react";
 import styles from "./AppointmentDetailPage.module.css";
 import Notify from "@/utils/notify";
-import Session from "@/service/session";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { format ,parse} from 'date-fns';
