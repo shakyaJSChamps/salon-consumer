@@ -11,7 +11,6 @@ import {
   __endpoint_getService,
   __endpoint_getSalonStaff,
   __endpoint_appointment,
-  __endpoint_getAddress,
   __endpoint_address,
   __endpoint_UserProfile,
   __endpoint_favoriteSalonList,

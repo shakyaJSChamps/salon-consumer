@@ -136,7 +136,7 @@ const Lists = (props) => {
     hasMoreData,
   ]);
 
-  const listFilter = lists?.filter((item) => {
+  const listFilter = lists.filter((item) => {
     const ratingMatch = Object.keys(selectedRatings).length
       ? selectedRatings[item.rating]
       : true;
@@ -313,8 +313,7 @@ const Lists = (props) => {
           </div>
         </div>
         <div className={styles.salonList}>
-          {lists.length > 0
-            ? lists &&
+          {lists.length > 0 ? lists &&
               listFilter.map((salon, index) => (
                 <div key={index} className={styles.salonDetails}>
                   <div className={styles.img}>

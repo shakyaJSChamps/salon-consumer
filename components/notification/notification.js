@@ -77,7 +77,7 @@ function Notification() {
         </div>
         {loading ? (
           <div className={styles.loadingSkeletons}>{skeleton}</div>
-        ) : notifications.length === 0 ? (
+        ) : notifications?.length === 0 ? (
           <div className={styles.noNotifications}>
             <p>No Notifications</p>
           </div>

@@ -60,18 +60,11 @@ function LocationSearch() {
       {!permissionDenied ? (
         <select
           className={styles.dropdownbtn}
-          value={`${city}, ${state}` || ""}
+          value={`${city}, ${state}`}
           onChange={(e) => handleSelectLocation(e.target.value)}
         >
           <option value={`${city}, ${state}`}>{`${city}, ${state}`}</option>
-          {/* {addresses.map((address) => (
-            <option
-              key={address.id}
-              value={`${address.city}, ${address.state}`}
-            >
-              {`${address.city}, ${address.state}`}
-            </option>
-          ))} */}
+
         </select>
       ) : (
         <select
