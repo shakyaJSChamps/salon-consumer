@@ -18,7 +18,7 @@ export async function GetUserLocation() {
       // const city = data.address.city;
       const latitude = data.lat;
       const longitude = data.lon;
-      const lat = Cookies.get("latitude");
+    
 
       const { state, country } = data.address;
 

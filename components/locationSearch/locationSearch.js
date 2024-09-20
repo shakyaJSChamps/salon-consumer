@@ -9,8 +9,7 @@ function LocationSearch() {
   const dispatch = useDispatch();
   const city = useSelector((state) => state.auth.city);
   const state = useSelector((state) => state.auth.state);
-  const country = useSelector((state) => state.auth.country);
-
+  
   useEffect(() => {
     const fetchLocation = async () => {
       try {

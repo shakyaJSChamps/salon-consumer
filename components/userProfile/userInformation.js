@@ -1,24 +1,17 @@
 "use client"
-import Link from 'next/link';
 import styles from './userInformation.module.css'
 import { CiUser } from "react-icons/ci";
 import { BsWallet2 } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
-import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, selectLocation, selectUser } from '@/app/Redux/Authslice';
-
-import { useEffect, useRef, useState } from 'react';
-import { IoMdAdd } from "react-icons/io";
-import { HiOutlineDotsVertical } from "react-icons/hi";
+import { useDispatch } from 'react-redux';
+import { logoutUser} from '@/app/Redux/Authslice';
+import { useEffect, useState } from 'react';
 import { ImMenu } from "react-icons/im";
 import { ImCross } from "react-icons/im";
-
 import WishLists from '../userwishLists/wishLists';
 import { useRouter } from 'next/navigation';
 import UserAddress from './userAddress/userAddress';
 import UserProfile from './profile/UserProfile';
-import { getFavouriteSalonList } from '@/api/account.api';
 
 
 const UserInformation = () => {

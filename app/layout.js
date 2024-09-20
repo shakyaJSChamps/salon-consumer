@@ -1,11 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import fav from '@/public/favicon.ico';
 
 import { Providers } from "./Redux/providers";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
-import { Suspense } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
 import { ToastContainer } from "react-toastify";

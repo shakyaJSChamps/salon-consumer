@@ -7,7 +7,6 @@ import { getSalonReviews, getSalonStaff } from "@/api/account.api";
 import { useEffect, useState } from "react";
 import male from "../../assets/images/malePlaceholder.png";
 import female from "../../assets/images/femalePlaceholder.svg";
-import Images from "@/app/image";
 import Notify from "@/utils/notify";
 function AboutSalon({ id }) {
   const [staff, setStaff] = useState([]);

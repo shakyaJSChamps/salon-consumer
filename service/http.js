@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { PUBLIC_URLS } from '../constants/public-endpoints';
 import Session from './session';
-import Notify from '@/utils/notify';
 import { logoutUser } from '@/app/Redux/Authslice';
 import { store } from '@/app/Redux/store';
 import { destroyCookie } from 'nookies';

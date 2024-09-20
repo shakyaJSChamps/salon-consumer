@@ -28,12 +28,6 @@ export const __endpoint_appointment=endpoint+"consumer/appointments"
 export const __endpoint_address=endpoint+"users/addresses"
 export const __endpoint_UserProfile=endpoint+"account/user/profile"
 
-
-// export const __endpoint_putServiceType = endpoint + "admin/services/categories";
-// export const __endpoint_getSaloon = endpoint + "admin/salon ";
-// export const __endpoint_getUser = endpoint + "admin/users";
-
-
 // Static Page APIs
 export const __endpoint_staticPageUrl = endpoint + "file/doc/";
 

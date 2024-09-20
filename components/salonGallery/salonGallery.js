@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap'
 import styles from './salonGallery.module.css'
 import Images from '@/app/image'
 

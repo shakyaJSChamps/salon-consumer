@@ -1,13 +1,12 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import { IoStarSharp } from "react-icons/io5";
 import styles from './rating.module.css';
 import { ratingValidationSchema } from '@/utils/schema';
 import { postSalonReviews } from '@/api/account.api';
 import Notify from '@/utils/notify';
 const Ratings = ({  handleShowAppointment,selectedAppointment }) => {
-    const salonId=selectedAppointment?.salon?.id;
+    const salonId=selectedAppointment.salon.id;
     const initialValues={
         appointmentId:selectedAppointment.id,
         rating: 0,

@@ -8,7 +8,6 @@ import Images from "@/app/image";
 import Notify from "@/utils/notify";
 import { Skeleton } from "@mui/material";
 import { favoriteSalon, getFavouriteSalonList } from "@/api/account.api";
-import { fetchingData } from "./wishListServer";
 import { useEffect, useState } from "react";
 const WishLists = ({ favouriteSalons }) => {
   const [wishList,setWishList] = useState([]);

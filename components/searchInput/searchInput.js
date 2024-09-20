@@ -34,8 +34,6 @@ function SearchInput() {
   const latitude = Cookies.get('latitude') || '';
   const longitude = Cookies.get('longitude') || '';
 
-  // console.log("Latitude:", latitude);
-  // console.log("Longitude:", longitude);
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -95,7 +93,7 @@ function SearchInput() {
   const handleKeyDown = useCallback(
     async (e) => {
       if (e.key === "Enter" && inputValue) {
-        const data = await handleSearch(inputValue);
+        await handleSearch(inputValue);
       }
     },
     [inputValue, handleSearch]
@@ -153,7 +151,7 @@ function SearchInput() {
 
   const handleIconClick = async () => {
     if (inputValue) {
-      const data = await handleSearch(inputValue);
+      await handleSearch(inputValue);
       Session.remove("salonService");
       Session.remove("selectedBannerSalons");
 

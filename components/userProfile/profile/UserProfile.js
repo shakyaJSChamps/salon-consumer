@@ -1,11 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Image from 'next/image';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FaCheckCircle } from 'react-icons/fa';
 import OTPInput from 'react-otp-input';
-import { Paper, Skeleton } from '@mui/material';
+import {Skeleton } from '@mui/material';
 import styles from '../userInformation.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from 'next/navigation';
@@ -19,7 +18,6 @@ import {
 } from '@/api/account.api';
 import Images from '@/app/image';
 import { userProfileSchema } from '@/utils/schema';
-import Session from '@/service/session';
 import PhoneInputComponent from '@/components/loginPage/PhoneInputComponent';
 import { useDispatch } from 'react-redux';
 import { updateUserProfile } from '@/app/Redux/Authslice';

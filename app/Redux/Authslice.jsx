@@ -1,4 +1,3 @@
-import { appointment } from "@/api/account.api";
 import Session from "@/service/session";
 import { createSlice } from "@reduxjs/toolkit";
 

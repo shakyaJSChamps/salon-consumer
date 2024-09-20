@@ -39,7 +39,7 @@ function UserAddress() {
 
   const handleSetDefaultAddress = async () => {
     try {
-      const res = await setDefaultAddress(selectedAddress.id);
+      await setDefaultAddress(selectedAddress.id);
       setMenuOpen(false);
       fetchAddress();
     } catch (error) {
@@ -67,7 +67,7 @@ function UserAddress() {
 
   const handleDeleteAddress = async () => {
     try {
-      const res = await deleteAddress(selectedAddress.id);
+      await deleteAddress(selectedAddress.id);
       setMenuOpen(false);
       fetchAddress();
     } catch (error) {

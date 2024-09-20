@@ -2,7 +2,6 @@ import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { getAddress } from '@/api/account.api';
-import { IoMdAdd } from 'react-icons/io';
 import styles from './addressPopUp.module.css'
 import Notify from '@/utils/notify';
 function AddressPopup(props) {

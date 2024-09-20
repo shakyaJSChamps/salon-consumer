@@ -78,7 +78,7 @@ const Resend = async()=>{
       phoneNumber: phoneNumber,
     };
 
-    const res = await resend(resendData);
+    await resend(resendData);
     setTimer(30); // Reset the timer
     setIsTimerActive(true); // Start the timer
   } catch (error) {

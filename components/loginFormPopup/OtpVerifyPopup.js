@@ -3,7 +3,6 @@ import OTPInput from "react-otp-input";
 import styles from "@/components/loginPage/loginPage.module.css";
 import { ErrorMessage, Form, Formik } from "formik";
 import { OtpVerifySchema } from "@/utils/schema";
-import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { resend, verifyUser } from "@/api/account.api";
 import { loginUser } from "@/app/Redux/Authslice";
@@ -18,7 +17,6 @@ const initialValues = {
 
 function OtpVerifyPopup({ phoneNumber, timer, setTimer, isTimerActive, setIsTimerActive, onHide }) {
     const dispatch = useDispatch();
-    const router = useRouter();
 
     const [submitting, setSubmitting] = useState(false);
     const [showProfilePopup, setShowProfilePopup] = useState(false);
@@ -80,7 +78,7 @@ function OtpVerifyPopup({ phoneNumber, timer, setTimer, isTimerActive, setIsTime
                 phoneNumber: phoneNumber,
             };
 
-            const res = await resend(resendData);
+            await resend(resendData);
             setTimer(30); // Reset the timer
             setIsTimerActive(true); // Start the timer
         } catch (error) {

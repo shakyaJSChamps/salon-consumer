@@ -1,7 +1,7 @@
 "use client"
 import { GiComb } from "react-icons/gi";
 import { RiScissors2Line } from "react-icons/ri";
-import { DoorBuddyData, Rating, Distance, Category, } from './data';
+import { Rating, Distance, Category, } from './data';
 import Img from '@/assets/images/Rectangle 25156 (2).svg';
 import Lists from "@/components/lists/lists";
 import doorbuddy from '@/assets/images/doorbuddy.svg'

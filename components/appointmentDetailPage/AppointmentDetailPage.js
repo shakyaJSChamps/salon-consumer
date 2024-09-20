@@ -10,7 +10,6 @@ import { format ,parse} from 'date-fns';
 import { enUS, enGB } from 'date-fns/locale';
 function AppointmentDetailPage({ appointmentId }) {
   const [details, setDetails] = useState(null);
-  const id = Session.get("appointmentId");
   const router = useRouter();
   const fetchAppointmentDetails = async () => {
     try {

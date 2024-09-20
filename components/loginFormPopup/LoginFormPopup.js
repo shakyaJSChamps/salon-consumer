@@ -29,7 +29,7 @@ function LoginFormPopup(props) {
                 deviceType: 1,
                 deviceToken: "fasfsadfsdf",
             };
-            const res = await doLogin(data);
+            await doLogin(data);
             setPhoneNumber(phoneNumber);
             // Notify.success(res.data.message)
             setSendOtp(true);

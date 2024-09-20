@@ -1,14 +1,13 @@
 "use client";
 import styles from "./loginPage.module.css";
 import { useState } from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import { LoginSchema } from "@/utils/schema.js";
 import { doLogin } from "@/api/account.api";
 import OtpVerify from "./otpVerify";
 import Notify from "../../utils/notify";
 import PhoneInputComponent from "./PhoneInputComponent";
 import Link from "next/link";
-import { useRouter } from "next/router";
 const initialValues = {
   phoneNumber: "",
 };
@@ -30,7 +29,7 @@ function LoginPage({setActiveStep}) {
         deviceType: 1,
         deviceToken: "fasfsadfsdf",
       };
-      const res = await doLogin(data);
+      await doLogin(data);
       setPhoneNumber(phoneNumber);
       // Notify.success(res.data.message)
       setSendOtp(true);

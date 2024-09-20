@@ -6,19 +6,12 @@ import authUser from "@/assets/images/loginUser.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { destroyCookie } from "nookies";
-import {
-  loginUser,
-  logoutUser,
-  selectIsLoggedIn,
-  selectLocation,
-  selectUser,
-} from "@/app/Redux/Authslice";
+import { logoutUser} from "@/app/Redux/Authslice";
 import { CiHeart } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { GrNotes } from "react-icons/gr";
-import { FaRegUserCircle } from "react-icons/fa";
 import { getUserProfile } from "@/api/account.api";
 import Images from "@/app/image";
 
@@ -26,12 +19,9 @@ function Authlink() {
   const [menu, setMenu] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const dispatch = useDispatch();
-  const [isMounted, setIsMounted] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const authLinkRef = useRef(null);
    //console.log("user::>",user);
-
-  const userName = user?.name;
 
   useEffect(() => {
     const handleClickOutside = (event) => {

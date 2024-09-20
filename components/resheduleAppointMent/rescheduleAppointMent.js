@@ -13,7 +13,6 @@ import styles from "./reschedule.module.css";
 import { rescheduleAppointment } from "@/api/account.api";
 import Notify from "@/utils/notify";
 import { IoIosArrowBack } from "react-icons/io";
-import { useRouter } from "next/navigation";
 import { TextField } from "@mui/material";
 
 function TimePickerViewRenderers({ value, onChange }) {
@@ -41,7 +40,7 @@ const RescheduleAppointment = ({
 }) => {
   const today = dayjs().startOf("day");
   const maxDate = dayjs().add(10, "day").endOf("day");
-  const router = useRouter();
+
 
   const initialValues = {
     bookingDate: null,
@@ -64,7 +63,7 @@ const RescheduleAppointment = ({
         date: formattedDate,
         startTime: formattedTime,
       };
-      const AppointmentReschedule = await rescheduleAppointment(
+      await rescheduleAppointment(
         data,
         selectedAppointment.id
       );
@@ -92,7 +91,7 @@ const RescheduleAppointment = ({
                   <div className={styles.reschedule}>
                     <IoIosArrowBack
                       className={styles.backIcon}
-                      onClick={() =>handleShowAppointment()
+                      onClick={() => handleShowAppointment()
 
                       }
                     />
@@ -101,12 +100,12 @@ const RescheduleAppointment = ({
                     <div>
                       <Field name="date">
                         {({ field, form }) => (
-                           <CustomDatePicker
-                           {...field}
-                           value={field.value ? dayjs(field.value) : null}
-                           onChange={(date) => {
-                             form.setFieldValue("bookingDate", date);
-                           }}
+                          <CustomDatePicker
+                            {...field}
+                            value={field.value ? dayjs(field.value) : null}
+                            onChange={(date) => {
+                              form.setFieldValue("bookingDate", date);
+                            }}
                             minDate={today}
                             maxDate={maxDate}
                             format="DD-MM-YYYY"
@@ -127,10 +126,10 @@ const RescheduleAppointment = ({
                     <Field name="timeSlot" className={styles.timeSlotDiv}>
                       {({ field }) => (
                         <TimePickerViewRenderers
-                        value={field.value ? dayjs(field.value) : null}
-                        onChange={(newValue) => {
-                          setFieldValue("timeSlot", newValue);
-                        }}
+                          value={field.value ? dayjs(field.value) : null}
+                          onChange={(newValue) => {
+                            setFieldValue("timeSlot", newValue);
+                          }}
                         />
                       )}
                     </Field>
@@ -164,7 +163,7 @@ const CustomTimePicker = styled(TimePicker)({
     borderRadius: "7px",
     "&:focus": {
       borderColor: "transparent",
-    //  boxShadow: "none",
+      //  boxShadow: "none",
     },
     "& .MuiOutlinedInput-root": {
       "&:hover .MuiOutlinedInput-notchedOutline": {
@@ -185,10 +184,10 @@ const CustomTimePicker = styled(TimePicker)({
     border: "none",
     width: "320px",
     outline: "none",
-   // boxShadow: "2px 3px 7px #a1acb0",
+    // boxShadow: "2px 3px 7px #a1acb0",
 
-   borderRadius: "7px",
-   height: "6px",
+    borderRadius: "7px",
+    height: "6px",
     "@media (max-width: 1287px)": {
       width: "367px !important",
     },

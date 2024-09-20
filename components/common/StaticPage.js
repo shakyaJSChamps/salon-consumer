@@ -1,5 +1,4 @@
 import { staticPageUrl } from "@/api/staticPage.api";
-import Notify from "@/utils/notify";
 import { Skeleton } from "@mui/material";
 import styles from "../../internalPages/about-us/aboutUs.module.css";
 

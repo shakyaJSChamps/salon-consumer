@@ -1,7 +1,6 @@
-import { Grid, Paper } from "@mui/material";
+import {Paper } from "@mui/material";
 import styles from "./salonService.module.css";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Divider from "@mui/material/Divider";
 import { useRouter } from "next/navigation";
 import { getSalonService, getUserProfile } from "@/api/account.api";
