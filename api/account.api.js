@@ -105,7 +105,7 @@ export const getUserNotifications = () =>
   HTTP.Request(methods.GET, __endpoint_getNotification);
 export const signatureServices = (requestUrl) =>
   HTTP.Request(methods.GET, `${__endpoint_signatureServices}?${requestUrl}`);
-export const getBanners = () => HTTP.Request(methods.GET, __endpoint_getBanner);
+export const getBanners = (reqUrl) => HTTP.Request(methods.GET, `${__endpoint_getBanner}?${reqUrl}`);
 export const fileUploaders = (payload) =>
   HTTP.Request(methods.GET, __endpoint_fileUploaders, payload);
 
