@@ -99,9 +99,7 @@ useEffect(()=>{
                 <div className={styles.wishlists}>
                   {salon.isFavorite ? (
                     <div
-                      className={`${styles.heart} ${
-                        salon.isFavorite ? styles.favorite : styles.nonFavorite
-                      }`}
+                      className={`${styles.heart} ${styles.favorite}`}
                       onClick={() => handleSelectFavorites(salon.id, false)}
                     ></div>
                   ) : (
