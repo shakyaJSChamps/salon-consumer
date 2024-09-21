@@ -27,7 +27,7 @@ const Banner = ({ banners }) => {
   const handleClick = async (slide) => {
     Session.set("selectedBannerCity", slide.city);
     try {
-      const res = await searchText(slide.city, 1, 10);
+      const res = await searchText(slide.city, 1);
       Session.setObject("selectedBannerSalons", res?.data?.data);
       Session.remove("filteredSalon");
       Session.remove("salonService");

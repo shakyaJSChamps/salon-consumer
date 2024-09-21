@@ -151,7 +151,7 @@ function AppointmentDetailPage({ appointmentId }) {
         </div>
         {details?.status === "COMPLETED" && (
           <div className={styles.downloadInvoice}>
-            <h3 onClick={() => handleDownloadInvoice(data)}>
+            <h3 onClick={() => handleDownloadInvoice()}>
               Download Invoice
             </h3>
           </div>

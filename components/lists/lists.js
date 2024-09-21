@@ -130,13 +130,13 @@ const Lists = (props) => {
   }, [
     listRef,
     loadMoreItems,
-    lists.length,
+    lists?.length,
     lazyLoadingThreshold,
     isLoading,
     hasMoreData,
   ]);
 
-  const listFilter = lists.filter((item) => {
+  const listFilter = (lists?.length > 0 ? lists : []).filter((item) => {
     const ratingMatch = Object.keys(selectedRatings).length
       ? selectedRatings[item.rating]
       : true;
@@ -147,6 +147,7 @@ const Lists = (props) => {
 
     return ratingMatch && serviceTypeMatch;
   });
+
 
   const getUniqueServices = (array, property) => {
     return [...new Set(array?.map((item) => item[property]))];
@@ -171,7 +172,7 @@ const Lists = (props) => {
     setMenuVisible(!menuVisible);
   };
 
-  const isEmptyList = lists.length === 0;
+  const isEmptyList = lists?.length === 0;
 
   const skeleton = Array.from({ length: 1 }, (_, index) => (
     <div key={index} className={styles.columnSkeleton}>
@@ -201,7 +202,7 @@ const Lists = (props) => {
       </div>
     </div>
   ));
-  const isEmptyListt = lists.length === 0;
+  const isEmptyListt = lists?.length === 0;
 
   if (isEmptyListt && isLoading) {
     return <div className={styles.noSalonList}>No Salonlist available</div>;
@@ -209,9 +210,8 @@ const Lists = (props) => {
 
   return (
     <div
-      className={`${styles.container} ${
-        isEmptyList ? styles.emptyContaine : ""
-      }`}
+      className={`${styles.container} ${isEmptyList ? styles.emptyContaine : ""
+        }`}
     >
       <div className={styles.findsSalon}>
         <div className={doorBuddyFind ? styles.doorBuddyFind : styles.find}>
@@ -314,74 +314,70 @@ const Lists = (props) => {
         </div>
         <div className={styles.salonList}>
           {lists.length > 0 ? lists &&
-              listFilter.map((salon, index) => (
-                <div key={index} className={styles.salonDetails}>
-                  <div className={styles.img}>
-                    <Images
-                      imageUrl={salon.mainGateImageUrl}
-                      alt="Salon image"
-                    />
-                  </div>
-                  <div className={styles.details}>
-                    <div className={styles.titlesDetails}>
-                      <div className={styles.titles}>
-                        <h2>
-                          {salon.title ||
-                            salon.name ||
-                            `${salon.firstName} ${salon.lastName}`}
-                        </h2>
-                        <p className={styles.buddyType}>
-                          {salon.specialization}
-                        </p>
-                        <p className={styles.locations}>
-                          <LocationOnIcon />{" "}
-                          {`${salon.city} ${salon.state}`.slice(0, 10)}...
-                        </p>
-                      </div>
-                      <div className={styles.wishlists}>
-                        {salon.isFavorite ? (
-                          <div
-                            className={`${styles.heart} ${
-                              salon.isFavorite
-                                ? styles.favorite
-                                : styles.nonFavorite
-                            }`}
-                            onClick={() =>
-                              handleSelectFavorites(salon.id, false)
-                            }
-                          ></div>
-                        ) : (
-                          <CiHeart
-                            onClick={() =>
-                              handleSelectFavorites(salon.id, true)
-                            }
-                          />
-                        )}
-                        <p>wishList</p>
-                      </div>
-                    </div>
-                    <div className={styles.ratings}>
-                      <p className={styles.locations}>
-                        <StarIcon /> {salon.rating}
+            listFilter.map((salon, index) => (
+              <div key={index} className={styles.salonDetails}>
+                <div className={styles.img}>
+                  <Images
+                    imageUrl={salon.mainGateImageUrl}
+                    alt="Salon image"
+                  />
+                </div>
+                <div className={styles.details}>
+                  <div className={styles.titlesDetails}>
+                    <div className={styles.titles}>
+                      <h2>
+                        {salon.title ||
+                          salon.name ||
+                          `${salon.firstName} ${salon.lastName}`}
+                      </h2>
+                      <p className={styles.buddyType}>
+                        {salon.specialization}
                       </p>
-                      <p className={styles.serviceType}>{salon.serviceType}</p>
+                      <p className={styles.locations}>
+                        <LocationOnIcon />{" "}
+                        {`${salon.city} ${salon.state}`.slice(0, 10)}...
+                      </p>
                     </div>
-                    {/* <p
+                    <div className={styles.wishlists}>
+                      {salon.isFavorite ? (
+                        <div
+                          className={`${styles.heart} ${styles.favorite}`}
+                          onClick={() =>
+                            handleSelectFavorites(salon.id, false)
+                          }
+                        ></div>
+                      ) : (
+                        <CiHeart
+                          onClick={() =>
+                            handleSelectFavorites(salon.id, true)
+                          }
+                        />
+                      )}
+                      <p>wishList</p>
+                    </div>
+                  </div>
+                  <div className={styles.ratings}>
+                    <p className={styles.locations}>
+                      <StarIcon /> {salon.rating}
+                    </p>
+                    <p className={styles.serviceType}>{salon.serviceType}</p>
+                  </div>
+                  {/* <p
                       className={styles.description}
                     >{`${salon.city} ${salon.state}`}</p> */}
-                    <Link
-                      href={`/salonlist/${salon.id}`}
-                      className={styles.btnDiv}
+                  <Link
+                    href={`/salonlist/${salon.id}`}
+                    className={styles.btnDiv}
+                  >
+                    <button
+                      className={doorBuddyBtn ? styles.doorBuddyBtn : ""}
                     >
-                      <button
-                        className={doorBuddyBtn ? styles.doorBuddyBtn : ""}
-                      >
-                        {buttonLabel}
-                      </button>
-                    </Link>
-                  </div>
+                      {buttonLabel}
+                    </button>
+                  </Link>
                 </div>
-              ))
+              </div>
+            ))
             : skeleton}
         </div>
         <div ref={listRef} className={styles.listBottomMarker}></div>
